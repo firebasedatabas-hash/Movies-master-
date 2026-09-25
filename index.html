@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <title>Movie Master Pro - Ultimate Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Movie Master - Live & Favorites</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,159 +12,294 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
 
     <style>
-        :root { 
-            --primary: #e50914; 
-            --primary-hover: #b8060f;
-            --bg: #050505; 
-            --card: #121212; 
-            --text: #fff; 
-            --plyr-color-main: #e50914; 
-            --border: #222; 
-        }
-
-        html, body {
-            touch-action: manipulation;
-            user-select: none;
-            -webkit-user-select: none;
-            width: 100%;
-            height: 100%;
-            overflow-x: hidden;
-        }
-
+        :root { --primary: #e50914; --bg: #000; --card: #121212; --text: #fff; --plyr-color-main: #e50914; --border: #222; }
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 75px; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 75px; overflow-x: hidden; }
         
-        /* SPLASH SCREEN */
-        #splashScreen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050505; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.6s ease, visibility 0.6s; }
-        #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-        .splash-bg { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; filter: blur(6px) brightness(0.2); animation: zoomBg 6s ease infinite alternate; }
-        @keyframes zoomBg { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        .splash-overlay { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, #000000 90%); }
-        .splash-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; animation: popIn 0.8s ease-out; }
-        @keyframes popIn { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        .splash-logo-box { width: 90px; height: 90px; background: linear-gradient(145deg, #e50914, #8b0000); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 35px rgba(229, 9, 20, 0.65); border: 2px solid rgba(255, 255, 255, 0.15); margin-bottom: 18px; }
-        .splash-logo-m { font-size: 56px; font-weight: 900; color: #ffffff; line-height: 1; }
-        .splash-title { font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 3px; margin: 0; text-transform: uppercase; }
-        .splash-title span { color: var(--primary); }
-        .splash-subtitle { font-size: 11px; color: #888; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-weight: 600; }
-        .yt-spinner-box { margin-top: 35px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .yt-spinner { width: 38px; height: 38px; border: 3.5px solid rgba(255, 255, 255, 0.12); border-top: 3.5px solid var(--primary); border-radius: 50%; animation: ytSpin 0.75s linear infinite; }
-        @keyframes ytSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .yt-linear-bar { width: 140px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; position: relative; }
-        .yt-linear-progress { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 10px var(--primary); border-radius: 4px; animation: loadBar 3.5s linear forwards; }
-        @keyframes loadBar { 0% { width: 0%; } 100% { width: 100%; } }
-        .splash-footer { position: absolute; bottom: 25px; z-index: 2; font-size: 11px; color: #666; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; }
-        .splash-footer b { color: var(--primary); font-weight: 700; }
-
-        /* NOTICE & WHATSAPP */
-        #liveNoticeBar { display: none; background: linear-gradient(90deg, #b8060f, #e50914); color: #fff; padding: 7px 12px; font-size: 11px; font-weight: 600; text-align: center; position: sticky; top: 60px; z-index: 999; }
-        #whatsappFloatingBtn { display: none; position: fixed; bottom: 82px; right: 15px; background: #25d366; color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.6); text-decoration: none; }
-        #maintOverlay { display: none; position: fixed; inset: 0; background: #080808; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
-
-        /* HEADER */
-        header { padding: 0 15px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.95); position: sticky; top: 0; z-index: 1000; height: 60px; border-bottom: 1px solid var(--border); }
-        .logo { color: var(--primary); font-weight: 700; font-size: 20px; letter-spacing: 1px; }
-
-        /* SLIDER WITH < > BUTTONS */
-        .slider-container { width: 100%; height: 215px; position: relative; overflow: hidden; background: #000; }
-        .slider-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; }
-        .slide { min-width: 100%; height: 100%; position: relative; cursor: pointer; }
-        .slide img { width: 100%; height: 100%; object-fit: cover; }
-        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; background: rgba(0,0,0,0.65); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; transition: 0.2s; }
-        .slider-btn:active { background: var(--primary); transform: translateY(-50%) scale(0.9); }
-        .slider-btn.prev { left: 10px; }
-        .slider-btn.next { right: 10px; }
-        .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
-        .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 50%; }
-        .dot.active { background: var(--primary); width: 16px; border-radius: 10px; transition: 0.3s; }
-
-        /* ================= NETFLIX PRO VIDEO PLAYER STYLES ================= */
-        .netflix-player-box {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .plyr--video {
-            height: 100%;
-            width: 100%;
-            background: #000;
-        }
-
-        /* Double Tap Skip Overlay Animation */
-        .skip-ripple {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 40%;
+        /* ================= SPLASH SCREEN ================= */
+        #splashScreen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #050505;
+            z-index: 99999;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.12);
-            color: #fff;
-            font-size: 13px;
-            font-weight: 700;
-            z-index: 20;
+            overflow: hidden;
+            transition: opacity 0.6s ease, visibility 0.6s;
+        }
+
+        #splashScreen.hide {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.25s ease;
-        }
-        .skip-left { left: 0; border-top-right-radius: 50%; border-bottom-right-radius: 50%; }
-        .skip-right { right: 0; border-top-left-radius: 50%; border-bottom-left-radius: 50%; }
-        .skip-ripple.show { opacity: 1; }
-
-        /* Landscape Fullscreen Cinema Overrides */
-        .plyr--fullscreen-active {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 999999 !important;
-            background: #000 !important;
+            visibility: hidden;
         }
 
-        @media (orientation: landscape) and (max-height: 520px) {
-            #videoPage { padding-bottom: 0 !important; z-index: 99999 !important; }
-            #videoPage .page-header { display: none !important; }
-            #moviePlayerWrapper {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                z-index: 99999 !important;
-            }
-            #livePage .video-fixed-top {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                width: 100vw !important;
-                height: 100vh !important;
-                z-index: 99999 !important;
-            }
-            .bottom-nav, #liveChannelInfo, #liveScrollContainer, #movieDetailsArea, .adsterra-ad-box, .adsterra-320x50-box {
-                display: none !important;
-            }
+        .splash-bg {
+            position: absolute;
+            top: -10%; left: -10%;
+            width: 120%; height: 120%;
+            background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: blur(6px) brightness(0.2);
+            animation: zoomBg 6s ease infinite alternate;
         }
 
-        /* AD BOXES */
-        .adsterra-ad-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 15px auto; text-align: center; background: #0a0a0a; border-radius: 8px; padding: 8px 0; border: 1px solid #1f1f1f; width: 100%; max-width: 320px; position: relative; min-height: 260px; }
-        .adsterra-tag { font-size: 9px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 8px auto; text-align: center; background: #080808; border-radius: 6px; padding: 3px 0 2px; border: 1px solid #1a1a1a; width: 100%; max-width: 326px; min-height: 65px; overflow: hidden; }
+        @keyframes zoomBg {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
 
-        /* SECTIONS & CARDS */
+        .splash-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, #000000 90%);
+        }
+
+        .splash-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: popIn 0.8s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .splash-logo-box {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(145deg, #e50914, #8b0000);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 35px rgba(229, 9, 20, 0.65), 0 0 10px rgba(255,255,255,0.2) inset;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 18px;
+            animation: pulseGlow 2.5s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 25px rgba(229, 9, 20, 0.4); transform: scale(1); }
+            100% { box-shadow: 0 0 45px rgba(229, 9, 20, 0.85); transform: scale(1.04); }
+        }
+
+        .splash-logo-m {
+            font-size: 56px;
+            font-weight: 900;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-shadow: 2px 3px 10px rgba(0,0,0,0.5);
+            line-height: 1;
+        }
+
+        .splash-title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 3px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .splash-title span {
+            color: var(--primary);
+        }
+
+        .splash-subtitle {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .yt-spinner-box {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .yt-spinner {
+            width: 38px;
+            height: 38px;
+            border: 3.5px solid rgba(255, 255, 255, 0.12);
+            border-top: 3.5px solid var(--primary);
+            border-radius: 50%;
+            animation: ytSpin 0.75s linear infinite;
+        }
+
+        @keyframes ytSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .yt-linear-bar {
+            width: 140px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .yt-linear-progress {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
+            border-radius: 4px;
+            animation: loadBar 3.5s linear forwards;
+        }
+
+        @keyframes loadBar {
+            0% { width: 0%; }
+            50% { width: 60%; }
+            100% { width: 100%; }
+        }
+
+        .splash-footer {
+            position: absolute;
+            bottom: 25px;
+            z-index: 2;
+            font-size: 11px;
+            color: #666;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .splash-footer b {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* ================= LIVE NOTICE BAR ================= */
+        #liveNoticeBar {
+            display: none;
+            background: linear-gradient(90deg, #b8060f, #e50914);
+            color: #fff;
+            padding: 7px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(229,9,20,0.4);
+            position: sticky;
+            top: 60px;
+            z-index: 999;
+        }
+
+        /* ================= FLOATING WHATSAPP BUTTON ================= */
+        #whatsappFloatingBtn {
+            display: none;
+            position: fixed;
+            bottom: 82px;
+            right: 15px;
+            background: #25d366;
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            z-index: 1600;
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.6);
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        #whatsappFloatingBtn:active {
+            transform: scale(0.92);
+        }
+
+        /* ================= MAINTENANCE OVERLAY ================= */
+        #maintOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #080808;
+            z-index: 999999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* ================= APP CORE STYLING ================= */
+        header { padding: 0 15px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.95); position: sticky; top: 0; z-index: 1000; height: 60px; border-bottom: 1px solid var(--border); }
+        .logo { color: var(--primary); font-weight: 700; font-size: 20px; letter-spacing: 1px; }
+
+        /* SLIDER */
+        .slider-container { width: 100%; height: 210px; position: relative; overflow: hidden; background: #000; cursor: pointer; }
+        .slider-track { display: flex; transition: transform 0.6s ease; height: 100%; }
+        .slide { min-width: 100%; height: 100%; position: relative; }
+        .slide img { width: 100%; height: 100%; object-fit: cover; }
+        .slider-dots { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+        .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 50%; }
+        .dot.active { background: var(--primary); width: 16px; border-radius: 10px; transition: 0.3s; }
+
+        /* BADA (300x250) ADSTERRA BANNER */
+        .adsterra-ad-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 15px auto;
+            text-align: center;
+            background: #0a0a0a;
+            border-radius: 8px;
+            padding: 8px 0;
+            border: 1px solid #1f1f1f;
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+            min-height: 260px;
+        }
+        .adsterra-tag {
+            font-size: 9px;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        /* CHOTA (320x50) ADSTERRA BANNER */
+        .adsterra-320x50-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 8px auto;
+            text-align: center;
+            background: #080808;
+            border-radius: 6px;
+            padding: 3px 0 2px;
+            border: 1px solid #1a1a1a;
+            width: 100%;
+            max-width: 326px;
+            min-height: 65px;
+            overflow: hidden;
+        }
+
+        /* SECTIONS */
         .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 15px; margin-top: 20px; }
         .section-title { font-size: 14px; border-left: 3px solid var(--primary); padding-left: 10px; font-weight: 600; text-transform: uppercase; }
         .view-all-btn { font-size: 11px; color: var(--primary); cursor: pointer; font-weight: 600; background: rgba(229, 9, 20, 0.1); padding: 4px 10px; border-radius: 4px; }
         .movie-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 15px; scrollbar-width: none; }
         
+        /* MOVIE CARDS */
         .card-rect { min-width: 115px; width: 115px; border-radius: 8px; overflow: hidden; background: var(--card); border: 1px solid var(--border); cursor: pointer; position: relative; flex-shrink: 0; }
         .card-rect.grid-item { min-width: unset; width: 100%; }
         .card-rect img { width: 100%; height: 160px; object-fit: cover; display: block; }
@@ -172,12 +307,13 @@
         .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.75); border: 1px solid #333; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 12px; cursor: pointer; z-index: 5; }
         .fav-card-btn.active { color: var(--primary); border-color: var(--primary); background: rgba(229, 9, 20, 0.25); }
 
-        /* LIVE PAGE */
+        /* LIVE TV PAGE */
         #livePage { display: none; flex-direction: column; height: calc(100vh - 70px); overflow: hidden; }
         .video-fixed-top { position: relative; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 15px; background: #0c0c0c; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; overflow-y: auto; padding-bottom: 30px; -webkit-overflow-scrolling: touch; }
 
+        /* ROTATING CIRCULAR CHANNELS */
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .live-grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 10px; padding: 15px; }
         .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; }
@@ -194,6 +330,7 @@
         .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: #000; border-bottom: 1px solid #222; height: 60px; position: sticky; top: 0; z-index: 2100; }
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
 
+        /* MOVIE DETAILS */
         .movie-details-box { padding: 18px 15px; background: #0c0c0c; border-bottom: 1px solid #1f1f1f; }
         .movie-header-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
         .movie-details-box h2 { font-size: 18px; margin: 0 0 6px 0; color: #fff; font-weight: 600; line-height: 1.3; }
@@ -202,6 +339,7 @@
         .btn-fav-detail { background: #222; border: 1px solid #333; color: #fff; border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
         .btn-fav-detail.active { background: var(--primary); border-color: var(--primary); }
 
+        /* BOTTOM NAV */
         .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid var(--border); z-index: 1500; height: 70px; }
         .nav-item { text-align: center; color: #666; font-size: 10px; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; }
         .nav-item.active { color: var(--primary); }
@@ -210,31 +348,44 @@
 </head>
 <body>
 
+    <!-- ================= MAINTENANCE OVERLAY ================= -->
     <div id="maintOverlay">
         <i class="fa fa-tools" style="font-size:50px; color:var(--primary); margin-bottom:20px;"></i>
         <h2 style="margin:0 0 10px; color:#fff;">App Under Maintenance</h2>
         <p style="color:#aaa; font-size:13px; max-width:280px; line-height:1.6;">Hum app ko behtar bana rahe hain. Jald hi live streaming aur movies wapas aayengi!</p>
     </div>
 
+    <!-- ================= FLOATING WHATSAPP BUTTON ================= -->
     <a id="whatsappFloatingBtn" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- ================= SPLASH SCREEN ================= -->
     <div id="splashScreen">
         <div class="splash-bg"></div>
         <div class="splash-overlay"></div>
+        
         <div class="splash-content">
-            <div class="splash-logo-box"><span class="splash-logo-m">M</span></div>
+            <div class="splash-logo-box">
+                <span class="splash-logo-m">M</span>
+            </div>
             <h1 class="splash-title">MOVIE <span>MASTER</span></h1>
             <p class="splash-subtitle">Live TV & Movies</p>
+            
             <div class="yt-spinner-box">
                 <div class="yt-spinner"></div>
-                <div class="yt-linear-bar"><div class="yt-linear-progress"></div></div>
+                <div class="yt-linear-bar">
+                    <div class="yt-linear-progress"></div>
+                </div>
             </div>
         </div>
-        <div class="splash-footer">Powered by <b>Hamza</b></div>
+
+        <div class="splash-footer">
+            Powered by <b>Hamza</b>
+        </div>
     </div>
 
+    <!-- AUTO SPLASH SCREEN CLOSER (3.5 Seconds) -->
     <script>
         (function() {
             function hideSplashNow() {
@@ -245,31 +396,41 @@
                 }
             }
             setTimeout(hideSplashNow, 3500);
-            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 3000); });
+            window.addEventListener('DOMContentLoaded', function() {
+                setTimeout(hideSplashNow, 3000);
+            });
         })();
     </script>
 
+    <!-- MAIN APP HEADER -->
     <header>
         <div class="logo">MOVIE MASTER</div>
-        <div onclick="window.showNav('favPage')" style="cursor:pointer; color:var(--primary); font-size:18px;"><i class="fa fa-heart"></i></div>
+        <div onclick="window.showNav('favPage')" style="cursor:pointer; color:var(--primary); font-size:18px;">
+            <i class="fa fa-heart"></i>
+        </div>
     </header>
 
+    <!-- LIVE NOTICE BAR -->
     <div id="liveNoticeBar"></div>
 
-    <!-- 1. HOME -->
+    <!-- 1. HOME PAGE -->
     <div id="homePage" class="page">
-        <!-- SLIDER WITH < > ARROWS -->
         <div class="slider-container" id="sliderClickArea">
-            <div class="slider-btn prev" onclick="window.slideManual(-1, event)"><i class="fa fa-chevron-left"></i></div>
-            <div class="slider-btn next" onclick="window.slideManual(1, event)"><i class="fa fa-chevron-right"></i></div>
             <div class="slider-track" id="sliderTrack"></div>
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
+        <!-- HOME TOP BADA 300x250 BANNER -->
         <div class="adsterra-ad-box">
             <span class="adsterra-tag">Advertisement</span>
             <script type="text/javascript">
-                atOptions = { 'key' : 'c037c9c58dda156ba89c87f9b2034aeb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                atOptions = {
+                    'key' : 'c037c9c58dda156ba89c87f9b2034aeb',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="https://www.highrevenueformat.com/c037c9c58dda156ba89c87f9b2034aeb/invoke.js"></script>
         </div>
@@ -277,7 +438,7 @@
         <div id="homeSections"><p style="text-align:center;padding:30px;color:#888;">Loading movies...</p></div>
     </div>
 
-    <!-- 2. LIVE TV -->
+    <!-- 2. LIVE TV PAGE (CHOTA 320x50 BANNER) -->
     <div id="livePage" class="page">
         <div class="video-fixed-top" id="livePlayerWrapper">
             <div style="height:100%; display:flex; align-items:center; justify-content:center; color:#555; font-size:13px;">Select a channel from list below</div>
@@ -288,13 +449,22 @@
                 <span id="playingChannelTitle" style="font-weight:600; font-size:14px; color:#fff;">Live Channel</span>
                 <div style="color:var(--primary); font-size:10px; font-weight:600; margin-top:2px;"><i class="fa fa-circle" style="font-size:8px;"></i> LIVE BROADCAST</div>
             </div>
-            <button id="livePlayerFavBtn" class="btn-fav-detail" style="padding:6px 12px; font-size:11px;"><i class="fa fa-heart"></i> Favorite</button>
+            <button id="livePlayerFavBtn" class="btn-fav-detail" style="padding:6px 12px; font-size:11px;">
+                <i class="fa fa-heart"></i> Favorite
+            </button>
         </div>
 
+        <!-- CHOTA 320x50 BANNER -->
         <div class="adsterra-320x50-box">
             <span class="adsterra-tag">Sponsored</span>
             <script type="text/javascript">
-                atOptions = { 'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                atOptions = {
+                    'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
@@ -305,7 +475,7 @@
         </div>
     </div>
 
-    <!-- 3. SEARCH -->
+    <!-- 3. SEARCH PAGE -->
     <div id="searchPage" class="full-page">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i>
@@ -315,19 +485,28 @@
             <div class="adsterra-ad-box" style="margin: 0 auto 15px;">
                 <span class="adsterra-tag">Advertisement</span>
                 <script type="text/javascript">
-                    atOptions = { 'key' : 'c037c9c58dda156ba89c87f9b2034aeb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                    atOptions = {
+                        'key' : 'c037c9c58dda156ba89c87f9b2034aeb',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
                 </script>
                 <script type="text/javascript" src="https://www.highrevenueformat.com/c037c9c58dda156ba89c87f9b2034aeb/invoke.js"></script>
             </div>
+
             <div id="searchChannelsTitle" class="section-title" style="display:none; margin-bottom:10px;">Channels</div>
             <div class="live-grid-container" id="searchChannelGrid" style="padding:0 0 20px 0;"></div>
+            
             <div id="searchMoviesTitle" class="section-title" style="display:none; margin-bottom:10px;">Movies</div>
             <div class="movie-grid" id="searchMovieGrid" style="padding:0;"></div>
+            
             <p id="searchEmptyMsg" style="text-align:center; padding:20px; color:#666; font-size:13px;">Search movies and live channels...</p>
         </div>
     </div>
 
-    <!-- 4. FAVORITES -->
+    <!-- 4. FAVORITES PAGE -->
     <div id="favPage" class="full-page">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i> 
@@ -337,18 +516,26 @@
             <div class="adsterra-ad-box" style="margin: 0 auto 15px;">
                 <span class="adsterra-tag">Sponsored</span>
                 <script type="text/javascript">
-                    atOptions = { 'key' : 'c037c9c58dda156ba89c87f9b2034aeb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                    atOptions = {
+                        'key' : 'c037c9c58dda156ba89c87f9b2034aeb',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
                 </script>
                 <script type="text/javascript" src="https://www.highrevenueformat.com/c037c9c58dda156ba89c87f9b2034aeb/invoke.js"></script>
             </div>
+
             <div class="section-title">Favorite Channels</div>
             <div class="live-grid-container" id="favChannelGrid" style="padding: 15px 0 25px;"></div>
+            
             <div class="section-title">Favorite Movies</div>
             <div class="movie-grid" id="favMovieGrid" style="padding: 15px 0;"></div>
         </div>
     </div>
 
-    <!-- 5. VIEW ALL -->
+    <!-- 5. VIEW ALL PAGE -->
     <div id="viewAllPage" class="full-page">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i> 
@@ -357,38 +544,44 @@
         <div class="adsterra-ad-box" style="margin: 10px auto;">
             <span class="adsterra-tag">Advertisement</span>
             <script type="text/javascript">
-                atOptions = { 'key' : 'c037c9c58dda156ba89c87f9b2034aeb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                atOptions = {
+                    'key' : 'c037c9c58dda156ba89c87f9b2034aeb',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="https://www.highrevenueformat.com/c037c9c58dda156ba89c87f9b2034aeb/invoke.js"></script>
         </div>
         <div class="movie-grid" id="viewAllGrid"></div>
     </div>
 
-    <!-- 6. NETFLIX PRO MOVIE PLAYER PAGE -->
+    <!-- 6. MOVIE PLAYER PAGE -->
     <div id="videoPage" class="full-page" style="z-index:3000;">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.closePlayer()" style="cursor:pointer; font-size:18px;"></i> 
-            <span id="playingTitle" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:80%; font-size:14px; font-weight:600;">Playing</span>
+            <span id="playingTitle" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:80%; font-size:14px;">Playing</span>
         </div>
-        
-        <!-- PLAYER BOX WITH 10S DOUBLE TAP RIPPLES -->
-        <div id="moviePlayerWrapper" class="netflix-player-box">
-            <div id="skipLeftRipple" class="skip-ripple skip-left"><i class="fa fa-backward" style="font-size:22px; margin-bottom:4px;"></i> 10s</div>
-            <div id="skipRightRipple" class="skip-ripple skip-right"><i class="fa fa-forward" style="font-size:22px; margin-bottom:4px;"></i> +10s</div>
-        </div>
-        
+        <div id="moviePlayerWrapper" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
         <div id="movieDetailsArea" class="movie-details-box"></div>
-        
+
         <div class="adsterra-ad-box" style="margin: 15px auto;">
             <span class="adsterra-tag">Advertisement</span>
             <script type="text/javascript">
-                atOptions = { 'key' : 'c037c9c58dda156ba89c87f9b2034aeb', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                atOptions = {
+                    'key' : 'c037c9c58dda156ba89c87f9b2034aeb',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="https://www.highrevenueformat.com/c037c9c58dda156ba89c87f9b2034aeb/invoke.js"></script>
         </div>
     </div>
 
-    <!-- BOTTOM NAV -->
+    <!-- BOTTOM NAVIGATION -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
         <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
@@ -396,23 +589,39 @@
         <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
     </div>
 
-    <!-- FIREBASE & NETFLIX PLAYER SCRIPT -->
+    <!-- JAVASCRIPT SYSTEM -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
         import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
+        // ================= ANDROID HARDWARE BACK BUTTON FIX =================
         window.history.replaceState({ page: 'homePage' }, '');
-        window.addEventListener('popstate', () => {
+
+        window.addEventListener('popstate', (e) => {
             const videoPage = document.getElementById('videoPage');
-            if (videoPage && videoPage.style.display === 'block') { window.closePlayer(false); return; }
+            if (videoPage && videoPage.style.display === 'block') {
+                window.closePlayer(false);
+                return;
+            }
+
             const fullPages = ['searchPage', 'favPage', 'viewAllPage'];
             let anyClosed = false;
-            fullPages.forEach(pid => { const el = document.getElementById(pid); if (el && el.style.display === 'block') { el.style.display = 'none'; anyClosed = true; } });
+            fullPages.forEach(pid => {
+                const el = document.getElementById(pid);
+                if (el && el.style.display === 'block') {
+                    el.style.display = 'none';
+                    anyClosed = true;
+                }
+            });
+
             const livePage = document.getElementById('livePage');
-            if (anyClosed || (livePage && livePage.style.display === 'flex')) { window.showNav('homePage', null, false); }
+            if (anyClosed || (livePage && livePage.style.display === 'flex')) {
+                window.showNav('homePage', null, false);
+            }
         });
 
+        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDhdCiM-RmSboLe7KW3rjzdshO5SAA4sBI",
             authDomain: "movies-master-59452.firebaseapp.com",
@@ -428,6 +637,7 @@
         const db = getDatabase(app);
         isSupported().then(supported => { if (supported) getAnalytics(app); });
 
+        // Global State
         window.allMovies = [];
         window.allChannels = [];
         let sliders = [];
@@ -438,25 +648,58 @@
         let currentPlayingChannel = null;
         let searchDebounceTimer = null;
         let activeSliderIndex = 0;
-        let lastTapTime = 0;
 
-        function reportLinkHealth(itemKey, status) {
-            if (!itemKey) return;
-            try { set(ref(db, `link_health/${itemKey}`), { status: status, lastPing: Date.now() }); } catch(e){}
-        }
-
+        // Favorites Storage
         let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
-        window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
-        window.toggleFav = (type, id, event) => {
-            if (event) { event.preventDefault(); event.stopPropagation(); }
-            id = String(id);
-            if (!favorites[type]) favorites[type] = [];
-            const idx = favorites[type].indexOf(id);
-            if (idx > -1) favorites[type].splice(idx, 1); else favorites[type].push(id);
-            localStorage.setItem('user_favorites', JSON.stringify(favorites));
-            renderHome(); initLiveChannels(); renderFavoritesPage();
+
+        window.isFav = (type, id) => {
+            return favorites[type] && favorites[type].includes(String(id));
         };
 
+        window.toggleFav = (type, id, event) => {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            id = String(id);
+            if (!favorites[type]) favorites[type] = [];
+
+            const index = favorites[type].indexOf(id);
+            if (index > -1) {
+                favorites[type].splice(index, 1);
+            } else {
+                favorites[type].push(id);
+            }
+
+            localStorage.setItem('user_favorites', JSON.stringify(favorites));
+            
+            renderHome();
+            initLiveChannels();
+            renderFavoritesPage();
+
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput && searchInput.value.trim()) {
+                window.doSearch(searchInput.value);
+            }
+            
+            const playerFavBtn = document.getElementById(`playerFavBtn_${id}`);
+            if (playerFavBtn) {
+                const active = window.isFav('movies', id);
+                playerFavBtn.className = `btn-fav-detail ${active ? 'active' : ''}`;
+                playerFavBtn.innerHTML = `<i class="fa fa-heart"></i> ${active ? 'Favorited' : 'Add to Favorites'}`;
+            }
+
+            if (currentPlayingChannel && String(currentPlayingChannel.id) === id) {
+                const isChannelFav = window.isFav('channels', id);
+                const liveBtn = document.getElementById('livePlayerFavBtn');
+                if (liveBtn) {
+                    liveBtn.className = `btn-fav-detail ${isChannelFav ? 'active' : ''}`;
+                    liveBtn.innerHTML = `<i class="fa fa-heart"></i> ${isChannelFav ? 'Favorited' : 'Favorite'}`;
+                }
+            }
+        };
+
+        // Firebase Realtime Listener (SYNC WITH ADMIN FEATURES)
         const rootDbRef = ref(db, '/');
         onValue(rootDbRef, (snapshot) => {
             const data = snapshot.val();
@@ -465,21 +708,30 @@
                 window.allChannels = data.channels ? (Array.isArray(data.channels) ? data.channels : Object.values(data.channels)) : [];
                 sliders = data.sliders ? (Array.isArray(data.sliders) ? data.sliders : Object.values(data.sliders)) : [];
                 
+                // Sort categories based on Admin Panel Order
                 const rawCats = data.categories ? (Array.isArray(data.categories) ? data.categories : Object.values(data.categories)) : [];
                 categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
+
                 window.globalLimit = parseInt(data.settings?.limit || 10);
 
+                // 1. Live Notice Bar
                 const noticeBar = document.getElementById('liveNoticeBar');
                 if (noticeBar) {
                     if (data.settings?.notice && data.settings.notice.trim() !== '') {
                         noticeBar.innerText = data.settings.notice;
                         noticeBar.style.display = 'block';
-                    } else noticeBar.style.display = 'none';
+                    } else {
+                        noticeBar.style.display = 'none';
+                    }
                 }
 
+                // 2. Maintenance Overlay
                 const maintOverlay = document.getElementById('maintOverlay');
-                if (maintOverlay) maintOverlay.style.display = data.settings?.maintenance ? 'flex' : 'none';
+                if (maintOverlay) {
+                    maintOverlay.style.display = data.settings?.maintenance ? 'flex' : 'none';
+                }
 
+                // 3. Floating WhatsApp Support Button
                 const waBtn = document.getElementById('whatsappFloatingBtn');
                 if (waBtn) {
                     const waNum = data.settings?.features?.whatsapp;
@@ -488,17 +740,25 @@
                         if (cleanNum.startsWith('0')) cleanNum = '92' + cleanNum.substring(1);
                         waBtn.href = `https://wa.me/${cleanNum}?text=Hello%20Movie%20Master%20Support`;
                         waBtn.style.display = 'flex';
-                    } else waBtn.style.display = 'none';
+                    } else {
+                        waBtn.style.display = 'none';
+                    }
                 }
             }
-            renderHome(); initSlider(); initLiveChannels(); renderFavoritesPage();
+            renderHome();
+            initSlider();
+            initLiveChannels();
+            renderFavoritesPage();
         });
 
+        // HTML Item Renderers
         window.renderMovieCard = (m, isGrid = false) => {
             const fav = window.isFav('movies', m.id);
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''}" onclick="window.playMovie('${m.id}')">
-                    <button class="fav-card-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)"><i class="fa fa-heart"></i></button>
+                    <button class="fav-card-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)">
+                        <i class="fa fa-heart"></i>
+                    </button>
                     <img src="${m.thumb}" alt="${m.title || m.name}">
                     <p>${m.title || m.name}</p>
                 </div>`;
@@ -508,7 +768,9 @@
             const fav = window.isFav('channels', c.id);
             return `
                 <div class="channel-box">
-                    <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
+                    <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)">
+                        <i class="fa fa-heart"></i>
+                    </button>
                     <div class="live-item" onclick="window.playLive('${c.url}', '${(c.title || c.name || 'Live Channel').replace(/'/g, "\\'")}', '${c.id}')">
                         <img src="${c.thumb}" alt="${c.title || c.name}">
                     </div>
@@ -516,21 +778,29 @@
                 </div>`;
         };
 
+        // Render Home
         function renderHome() {
             let html = '';
             if (categories.length === 0 && window.allMovies.length > 0) {
-                html = `<div class="section-header"><div class="section-title">All Movies (${window.allMovies.length})</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
+                html = `
+                    <div class="section-header"><div class="section-title">All Movies (${window.allMovies.length})</div></div>
+                    <div class="movie-scroll">
+                        ${window.allMovies.map(m => window.renderMovieCard(m)).join('')}
+                    </div>`;
             } else {
                 categories.forEach(cat => {
                     const filtered = window.allMovies.filter(m => m.category === cat.name);
                     if (filtered.length > 0) {
-                        const lim = parseInt(cat.limit) || window.globalLimit;
+                        const currentCategoryLimit = parseInt(cat.limit) || window.globalLimit;
+                        const limitedMovies = filtered.slice(0, currentCategoryLimit);
                         html += `
                             <div class="section-header">
-                                <div class="section-title"><i class="fa ${cat.icon || 'fa-film'}" style="color:var(--primary); margin-right:5px;"></i> ${cat.name} (${filtered.slice(0, lim).length})</div>
+                                <div class="section-title"><i class="fa ${cat.icon || 'fa-film'}" style="color:var(--primary); margin-right:5px;"></i> ${cat.name} (${limitedMovies.length})</div>
                                 <div class="view-all-btn" onclick="window.openViewAll('${cat.name}')">View All</div>
                             </div>
-                            <div class="movie-scroll">${filtered.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
+                            <div class="movie-scroll">
+                                ${limitedMovies.map(m => window.renderMovieCard(m)).join('')}
+                            </div>`;
                     }
                 });
             }
@@ -544,9 +814,17 @@
         function renderFavoritesPage() {
             const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
             const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
-            const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
-            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0;">No favorite channels added.</p>';
-            if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0;">No favorite movies added.</p>';
+
+            const chanGrid = document.getElementById('favChannelGrid');
+            const movGrid = document.getElementById('favMovieGrid');
+
+            if (chanGrid) {
+                chanGrid.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0;">No favorite channels added.</p>';
+            }
+
+            if (movGrid) {
+                movGrid.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0;">No favorite movies added.</p>';
+            }
         }
 
         function cleanupPlayer(isLive) {
@@ -559,113 +837,47 @@
             }
         }
 
-        // ================= NETFLIX PRO PLAYER ENGINE =================
-        function startPlayer(wrapperId, url, isLive, itemKey) {
+        function startPlayer(wrapperId, url, isLive) {
             cleanupPlayer(isLive);
             const container = document.getElementById(wrapperId);
+            container.innerHTML = `<video id="${isLive?'l':'m'}Vid" playsinline controls autoplay style="width:100%; height:100%;"></video>`;
+            const video = document.getElementById(`${isLive?'l':'m'}Vid`);
             
-            // Build Video Element
-            const videoEl = document.createElement('video');
-            videoEl.id = `${isLive?'l':'m'}Vid`;
-            videoEl.setAttribute('playsinline', '');
-            videoEl.setAttribute('controls', '');
-            videoEl.setAttribute('autoplay', '');
-            videoEl.style.width = '100%';
-            videoEl.style.height = '100%';
-            
-            // Clear and Append
-            const existingRipples = container.querySelectorAll('.skip-ripple');
-            container.innerHTML = '';
-            container.appendChild(videoEl);
-            existingRipples.forEach(r => container.appendChild(r));
-
-            // Netflix Controls Setup
-            const controlsList = isLive 
-                ? ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen']
-                : ['play-large', 'restart', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'fullscreen'];
-
             const cfg = { 
-                autoplay: true, 
-                hideControls: true, 
-                controls: controlsList,
+                autoplay: true,
+                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'fullscreen'],
                 settings: ['quality', 'speed'],
-                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-                seekTime: 10,
-                fullscreen: { enabled: true, fallback: true, iosNative: true }
+                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] }
             };
 
-            const attachPlayerHandlers = (p) => {
-                // Auto Landscape on Fullscreen
-                p.on('enterfullscreen', () => {
-                    try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch(e) {}
-                });
-                p.on('exitfullscreen', () => {
-                    try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch(e) {}
-                });
-
-                // Double Tap 10s Forward & Rewind System
-                if (!isLive) {
-                    container.onclick = (e) => {
-                        const now = Date.now();
-                        const rect = container.getBoundingClientRect();
-                        const clickX = e.clientX - rect.left;
-                        const width = rect.width;
-
-                        if (now - lastTapTime < 320) {
-                            if (clickX < width * 0.4) {
-                                // Rewind 10s
-                                p.rewind(10);
-                                const lRip = document.getElementById('skipLeftRipple');
-                                if (lRip) { lRip.classList.add('show'); setTimeout(() => lRip.classList.remove('show'), 500); }
-                            } else if (clickX > width * 0.6) {
-                                // Forward 10s
-                                p.forward(10);
-                                const rRip = document.getElementById('skipRightRipple');
-                                if (rRip) { rRip.classList.add('show'); setTimeout(() => rRip.classList.remove('show'), 500); }
-                            }
-                        }
-                        lastTapTime = now;
-                    };
-                }
-            };
-
-            videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
-            videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
-
-            // 1. YouTube Stream
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                const p = new Plyr(videoEl, cfg);
+                const p = new Plyr(video, cfg);
                 p.source = { type: 'video', sources: [{ src: url, provider: 'youtube' }] };
-                reportLinkHealth(itemKey, 'good');
-                attachPlayerHandlers(p);
                 if(isLive) livePlayer = p; else moviePlayer = p;
-            } 
-            // 2. M3U8 HLS Stream
-            else if (url.includes('.m3u8') && Hls.isSupported()) {
-                const hls = new Hls({ enableWorker: false });
+            } else if (url.includes('.m3u8') && Hls.isSupported()) {
+                const hls = new Hls();
                 if(isLive) currentHlsLive = hls; else currentHlsMovie = hls;
                 hls.loadSource(url); 
-                hls.attachMedia(videoEl);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    const p = new Plyr(videoEl, cfg); p.play();
-                    reportLinkHealth(itemKey, 'good');
-                    attachPlayerHandlers(p);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    const qualities = hls.levels.map((l) => l.height);
+                    cfg.quality = {
+                        default: qualities[0], options: qualities, forced: true,
+                        onChange: (e) => { hls.levels.forEach((l, i) => { if (l.height === e) hls.currentLevel = i; }); }
+                    };
+                    const p = new Plyr(video, cfg); 
+                    p.play(); 
                     if(isLive) livePlayer = p; else moviePlayer = p;
                 });
-                hls.on(Hls.Events.ERROR, (e, d) => {
-                    if (d.fatal) reportLinkHealth(itemKey, 'bad');
-                });
-            } 
-            // 3. Direct MP4 / Video Stream
-            else {
-                videoEl.src = url; 
-                const p = new Plyr(videoEl, cfg); 
+            } else {
+                video.src = url; 
+                const p = new Plyr(video, cfg); 
                 p.play(); 
-                attachPlayerHandlers(p);
                 if(isLive) livePlayer = p; else moviePlayer = p;
             }
         }
 
+        // DIRECT LIVE PLAY
         window.playLive = (url, title, id) => {
             window.showNav('livePage');
             window.history.pushState({ page: 'livePlayer' }, '');
@@ -682,11 +894,13 @@
                 btn.onclick = (e) => window.toggleFav('channels', id, e);
             }
 
-            startPlayer('livePlayerWrapper', url, true, id);
+            startPlayer('livePlayerWrapper', url, true);
+
             const scrollBox = document.getElementById('liveScrollContainer');
             if(scrollBox) scrollBox.scrollTo({ top: 0, behavior: 'smooth' });
         };
         
+        // DIRECT MOVIE PLAY
         window.playMovie = (id) => {
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
@@ -706,10 +920,13 @@
                         <i class="fa fa-heart"></i> ${isFavorite ? 'Favorited' : 'Add to Favorites'}
                     </button>
                 </div>
-                <div class="desc-text">${m.desc ? m.desc : 'No detailed description available.'}</div>
+                <div class="desc-text">
+                    <b style="color:#fff; display:block; margin-bottom:4px;"><i class="fa fa-align-left" style="color:var(--primary); margin-right:5px;"></i> Overview / Description:</b>
+                    ${m.desc ? m.desc : 'No detailed description available for this movie.'}
+                </div>
             `;
 
-            startPlayer('moviePlayerWrapper', m.url, false, m.id);
+            startPlayer('moviePlayerWrapper', m.url, false);
         };
 
         window.doSearch = (query) => {
@@ -723,9 +940,12 @@
                 const emptyMsg = document.getElementById('searchEmptyMsg');
 
                 if(!q) {
-                    chanGrid.innerHTML = ""; movGrid.innerHTML = "";
-                    chanTitle.style.display = 'none'; movTitle.style.display = 'none';
-                    emptyMsg.style.display = 'block'; emptyMsg.innerText = 'Search movies and live channels...';
+                    chanGrid.innerHTML = "";
+                    movGrid.innerHTML = "";
+                    chanTitle.style.display = 'none';
+                    movTitle.style.display = 'none';
+                    emptyMsg.style.display = 'block';
+                    emptyMsg.innerText = 'Search movies and live channels...';
                     return;
                 }
 
@@ -735,82 +955,83 @@
                 if(matchedChannels.length > 0) {
                     chanTitle.style.display = 'block';
                     chanGrid.innerHTML = matchedChannels.map(c => window.renderChannelItem(c)).join('');
-                } else { chanTitle.style.display = 'none'; chanGrid.innerHTML = ''; }
+                } else {
+                    chanTitle.style.display = 'none';
+                    chanGrid.innerHTML = '';
+                }
 
                 if(matchedMovies.length > 0) {
                     movTitle.style.display = 'block';
                     movGrid.innerHTML = matchedMovies.map(m => window.renderMovieCard(m, true)).join('');
-                } else { movTitle.style.display = 'none'; movGrid.innerHTML = ''; }
+                } else {
+                    movTitle.style.display = 'none';
+                    movGrid.innerHTML = '';
+                }
 
                 if(matchedChannels.length === 0 && matchedMovies.length === 0) {
-                    emptyMsg.style.display = 'block'; emptyMsg.innerText = 'No matching movies or channels found.';
-                } else emptyMsg.style.display = 'none';
+                    emptyMsg.style.display = 'block';
+                    emptyMsg.innerText = 'No matching movies or channels found.';
+                } else {
+                    emptyMsg.style.display = 'none';
+                }
             }, 200);
         };
 
-        // ================= SLIDER ENGINE WITH < > BUTTONS & TOUCH SWIPE =================
+        // Slider with Video & Link Support
         function initSlider() {
             const track = document.getElementById('sliderTrack'), dots = document.getElementById('sliderDots');
+            const sliderArea = document.getElementById('sliderClickArea');
             if(!sliders.length) return;
 
-            track.innerHTML = sliders.map(s => `<div class="slide" onclick="window.handleSlideClick('${s.url}')"><img src="${s.img}"></div>`).join('');
+            track.innerHTML = sliders.map(s => `<div class="slide"><img src="${s.img}"></div>`).join('');
             dots.innerHTML = sliders.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
             
+            if(sliderArea) {
+                sliderArea.onclick = () => {
+                    const currentSlide = sliders[activeSliderIndex];
+                    if(currentSlide && currentSlide.url) {
+                        const u = currentSlide.url;
+                        if(u.includes('.mp4') || u.includes('.m3u8') || u.includes('youtube') || u.includes('catbox.moe')) {
+                            document.getElementById('videoPage').style.display = 'block';
+                            document.getElementById('playingTitle').innerText = 'Featured Video';
+                            window.history.pushState({ page: 'moviePlayer' }, '');
+                            startPlayer('moviePlayerWrapper', u, false);
+                        } else {
+                            window.open(u, '_blank');
+                        }
+                    }
+                };
+            }
+
             activeSliderIndex = 0; 
-            updateSliderPosition();
-            startAutoSlider();
-        }
-
-        function updateSliderPosition() {
-            const track = document.getElementById('sliderTrack');
-            if (!track) return;
-            track.style.transform = `translateX(-${activeSliderIndex * 100}%)`;
-            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === activeSliderIndex));
-        }
-
-        window.slideManual = (direction, e) => {
-            if (e) e.stopPropagation();
-            if (!sliders.length) return;
-            activeSliderIndex = (activeSliderIndex + direction + sliders.length) % sliders.length;
-            updateSliderPosition();
-            startAutoSlider();
-        };
-
-        function startAutoSlider() {
             if(window.si) clearInterval(window.si);
             window.si = setInterval(() => {
-                if (!sliders.length) return;
                 activeSliderIndex = (activeSliderIndex + 1) % sliders.length;
-                updateSliderPosition();
+                track.style.transform = `translateX(-${activeSliderIndex * 100}%)`;
+                document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === activeSliderIndex));
             }, 4000);
         }
-
-        window.handleSlideClick = (url) => {
-            if(!url) return;
-            if(url.includes('.mp4') || url.includes('.m3u8') || url.includes('youtube') || url.includes('catbox.moe') || url.includes('googleusercontent')) {
-                document.getElementById('videoPage').style.display = 'block';
-                document.getElementById('playingTitle').innerText = 'Featured Video';
-                window.history.pushState({ page: 'moviePlayer' }, '');
-                startPlayer('moviePlayerWrapper', url, false, 'slider_' + activeSliderIndex);
-            } else {
-                window.open(url, '_blank');
-            }
-        };
 
         window.showNav = (id, el, pushState = true) => {
             document.querySelectorAll('.page, .full-page').forEach(p => p.style.display = 'none');
             document.getElementById(id).style.display = id === 'livePage' ? 'flex' : 'block';
             
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            if(el) el.classList.add('active');
-            else {
+            if(el) {
+                el.classList.add('active');
+            } else {
                 const navIndex = id === 'homePage' ? 0 : id === 'livePage' ? 1 : id === 'searchPage' ? 2 : id === 'favPage' ? 3 : -1;
                 if(navIndex >= 0) document.querySelectorAll('.nav-item')[navIndex].classList.add('active');
             }
 
-            if (id !== 'livePage' && livePlayer) { try { livePlayer.pause(); } catch(e){} }
+            if (id !== 'livePage' && livePlayer) {
+                try { livePlayer.pause(); } catch(e){}
+            }
             if (id === 'favPage') renderFavoritesPage();
-            if (pushState && id !== 'homePage') window.history.pushState({ page: id }, '');
+
+            if (pushState && id !== 'homePage') {
+                window.history.pushState({ page: id }, '');
+            }
         };
 
         window.openViewAll = (cat) => {
@@ -824,14 +1045,15 @@
             document.getElementById('videoPage').style.display = 'none'; 
             cleanupPlayer(false);
             const container = document.getElementById('moviePlayerWrapper');
-            if(container) {
-                const vid = container.querySelector('video');
-                if(vid) vid.remove();
+            if(container) container.innerHTML = '';
+            if (fromUserBtn) {
+                window.history.back();
             }
-            if (fromUserBtn) window.history.back();
         };
 
-        window.backToHome = () => window.history.back();
+        window.backToHome = () => {
+            window.history.back();
+        };
     </script>
 </body>
 </html>
