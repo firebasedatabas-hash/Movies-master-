@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <!-- FIX YOUTUBE ERROR 153 REFERRER POLICY -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Movie Master Pro</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -40,8 +42,8 @@
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 85px; }
         
-        /* ================= SPLASH SCREEN WITH POWERED BY HAMZA ================= */
-        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #07080b 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.6s ease, visibility 0.6s; }
+        /* ================= SPLASH SCREEN ================= */
+        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #07080b 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .splash-logo-box { width: 92px; height: 92px; background: linear-gradient(135deg, #e50914, #8b0000); border-radius: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px var(--primary-glow); margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.15); }
         .splash-logo-m { font-size: 54px; font-weight: 900; color: #fff; line-height: 1; }
@@ -59,7 +61,7 @@
         #whatsappFloatingBtn { display: none; position: fixed; bottom: 85px; right: 16px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
         #maintOverlay { display: none; position: fixed; inset: 0; background: #07080b; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
 
-        /* ================= CLEAN SIMPLE HEADER ================= */
+        /* ================= CLEAN HEADER ================= */
         header { 
             padding: 0 16px; 
             display: flex; 
@@ -99,6 +101,22 @@
         .card-rect.grid-item { min-width: unset; width: 100%; }
         .card-img-wrap { position: relative; width: 100%; height: 165px; border-radius: 10px; overflow: hidden; background: #12141c; }
         .card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 10px; }
+        
+        .card-views-badge {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(0,0,0,0.75);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
         .card-rect-info { padding: 6px 2px 0; }
         .card-rect-info p { margin: 0; font-size: 11px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #f0f0f5; font-weight: 600; }
         
@@ -124,6 +142,35 @@
         /* ================= ASLI FULLSCREEN CINEMA LANDSCAPE FLIP ================= */
         .netflix-player-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; border-bottom: 1px solid var(--card-border); }
         .plyr--video { height: 100%; width: 100%; background: #000; }
+
+        /* Clean Controls Styling & Settings Menu Popup Fix */
+        .plyr__controls {
+            padding: 8px 12px !important;
+            gap: 6px !important;
+            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.85)) !important;
+        }
+        .plyr__time {
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            padding: 0 4px !important;
+            white-space: nowrap !important;
+        }
+        .plyr__progress {
+            flex: 1 !important;
+            margin: 0 6px !important;
+        }
+
+        /* Plyr Settings Menu Position Fix (Mobile Friendly) */
+        .plyr__menu__container {
+            bottom: 45px !important;
+            right: 10px !important;
+            max-height: 200px !important;
+            overflow-y: auto !important;
+            background: rgba(18, 20, 28, 0.95) !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+            border-radius: 10px !important;
+        }
+
         .skip-ripple { position: absolute; top: 0; bottom: 0; width: 40%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.12); color: #fff; font-size: 13px; font-weight: 700; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
         .skip-left { left: 0; border-top-right-radius: 50%; border-bottom-right-radius: 50%; }
         .skip-right { right: 0; border-top-left-radius: 50%; border-bottom-left-radius: 50%; }
@@ -141,8 +188,18 @@
             z-index: 99999999 !important;
             background: #000 !important;
         }
+        .force-cinema-landscape .plyr {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .force-cinema-landscape iframe,
+        .force-cinema-landscape video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
 
-        /* 2 ACTION BUTTONS (FAVORITE & SHARE) */
+        /* 2 ACTION BUTTONS */
         .movie-actions-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 16px; }
         .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 11px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; }
         .action-btn i { font-size: 18px; }
@@ -155,7 +212,7 @@
         .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto 8px; text-align: center; background: #0c0e14; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
         .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
 
-        /* ================= DARK MODERN FLOATING BOTTOM NAV (NO YELLOW) ================= */
+        /* FLOATING BOTTOM NAV */
         .bottom-nav { 
             position: fixed; 
             bottom: 12px; 
@@ -216,15 +273,15 @@
                 var s = document.getElementById('splashScreen');
                 if (s && s.style.display !== 'none') {
                     s.classList.add('hide');
-                    setTimeout(function() { s.style.display = 'none'; }, 600);
+                    setTimeout(function() { s.style.display = 'none'; }, 400);
                 }
             }
-            setTimeout(hideSplashNow, 3000);
-            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 2500); });
+            setTimeout(hideSplashNow, 2000);
+            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 1500); });
         })();
     </script>
 
-    <!-- CLEAN HEADER (NO 3 LINES, NO SEARCH, NO HEART) -->
+    <!-- CLEAN HEADER -->
     <header>
         <div class="logo"><i class="fa fa-play-circle" style="color:var(--primary);"></i> MOVIE <span>MASTER</span></div>
     </header>
@@ -340,7 +397,7 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
-        <!-- 8 RELATED MOVIES IN SAME CATEGORY -->
+        <!-- 8 RELATED MOVIES -->
         <div style="padding: 10px 0 20px;">
             <div class="section-header">
                 <div class="section-title">More in this Category</div>
@@ -349,7 +406,7 @@
         </div>
     </div>
 
-    <!-- DARK LUXURY FLOATING BOTTOM NAV -->
+    <!-- DARK MODERN FLOATING BOTTOM NAV -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
         <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
@@ -360,8 +417,7 @@
     <!-- SCRIPT ENGINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getDatabase, ref, onValue, set, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         window.history.replaceState({ page: 'homePage' }, '');
         window.addEventListener('popstate', () => {
@@ -374,21 +430,7 @@
             if (anyClosed || (livePage && livePage.style.display === 'flex')) { window.showNav('homePage', null, false); }
         });
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDhdCiM-RmSboLe7KW3rjzdshO5SAA4sBI",
-            authDomain: "movies-master-59452.firebaseapp.com",
-            databaseURL: "https://movies-master-59452-default-rtdb.firebaseio.com",
-            projectId: "movies-master-59452",
-            storageBucket: "movies-master-59452.firebasestorage.app",
-            messagingSenderId: "814163494909",
-            appId: "1:814163494909:web:49a5ddce403bd06f453b94",
-            measurementId: "G-9XNC9SLSDL"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        isSupported().then(supported => { if (supported) getAnalytics(app); });
-
+        // ================= GLOBAL STATE INITIALIZATION =================
         window.allMovies = [];
         window.allChannels = [];
         let sliders = [];
@@ -400,6 +442,52 @@
         let searchDebounceTimer = null;
         let activeSliderIndex = 0;
         let lastTapTime = 0;
+
+        // FAST LOCAL CACHE LOAD
+        try {
+            const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
+            if (localCache) {
+                window.allMovies = localCache.movies || [];
+                window.allChannels = localCache.channels || [];
+                sliders = localCache.sliders || [];
+                categories = localCache.categories || [];
+                window.globalLimit = localCache.limit || 10;
+                renderHome();
+                initSlider();
+                initLiveChannels();
+            }
+        } catch(e){}
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDhdCiM-RmSboLe7KW3rjzdshO5SAA4sBI",
+            authDomain: "movies-master-59452.firebaseapp.com",
+            databaseURL: "https://movies-master-59452-default-rtdb.firebaseio.com",
+            projectId: "movies-master-59452",
+            storageBucket: "movies-master-59452.firebasestorage.app",
+            messagingSenderId: "814163494909",
+            appId: "1:814163494909:web:49a5ddce403bd06f453b94"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // ================= ASLI REAL PER-DEVICE VIEW COUNTER (NO FAKE SPAM) =================
+        function registerRealDeviceView(movieId) {
+            if (!movieId) return;
+            const viewKey = 'mm_viewed_' + movieId;
+            const lastViewed = localStorage.getItem(viewKey);
+            const now = Date.now();
+
+            // Har mobile device se 24 ghante mein sirf 1 asli view count hoga
+            if (!lastViewed || (now - parseInt(lastViewed)) > 86400000) {
+                localStorage.setItem(viewKey, now.toString());
+                try {
+                    update(ref(db, `movies/${movieId}`), {
+                        views: increment(1)
+                    });
+                } catch(e){}
+            }
+        }
 
         function reportLinkHealth(itemKey, status) {
             if (!itemKey) return;
@@ -437,6 +525,16 @@
                 const rawCats = data.categories ? (Array.isArray(data.categories) ? data.categories : Object.values(data.categories)) : [];
                 categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
                 window.globalLimit = parseInt(data.settings?.limit || 10);
+
+                try {
+                    localStorage.setItem('mm_fast_cache', JSON.stringify({
+                        movies: window.allMovies,
+                        channels: window.allChannels,
+                        sliders: sliders,
+                        categories: categories,
+                        limit: window.globalLimit
+                    }));
+                } catch(e){}
 
                 const noticeBar = document.getElementById('liveNoticeBar');
                 if (noticeBar) {
@@ -479,11 +577,13 @@
 
         window.renderMovieCard = (m, isGrid = false) => {
             const fav = window.isFav('movies', m.id);
+            const viewCount = m.views ? (m.views > 999 ? (m.views/1000).toFixed(1)+'k' : m.views) : '1';
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''}" onclick="window.playMovie('${m.id}')">
                     <div class="card-img-wrap">
                         <button class="fav-card-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)"><i class="fa fa-heart"></i></button>
-                        <img src="${m.thumb}" alt="${m.title || m.name}">
+                        <span class="card-views-badge"><i class="fa fa-eye"></i> ${viewCount}</span>
+                        <img src="${m.thumb}" alt="${m.title || m.name}" loading="lazy">
                     </div>
                     <div class="card-rect-info">
                         <p>${m.title || m.name}</p>
@@ -497,7 +597,7 @@
                 <div class="channel-box">
                     <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
                     <div class="live-item" onclick="window.playLive('${c.url}', '${(c.title || c.name || 'Live Channel').replace(/'/g, "\\'")}', '${c.id}')">
-                        <img src="${c.thumb}" alt="${c.title || c.name}">
+                        <img src="${c.thumb}" alt="${c.title || c.name}" loading="lazy">
                     </div>
                     <div class="channel-title-text">${c.title || c.name}</div>
                 </div>`;
@@ -546,7 +646,7 @@
             }
         }
 
-        // ================= ASLI FULLSCREEN CINEMA ROTATION ENGINE =================
+        // ================= ASLI FULLSCREEN CINEMA ROTATION & CLEAN CONTROLS =================
         function startPlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer(isLive);
             const container = document.getElementById(wrapperId);
@@ -565,8 +665,8 @@
             existingRipples.forEach(r => container.appendChild(r));
 
             const controlsList = isLive 
-                ? ['play-large', 'play', 'live', 'mute', 'volume', 'settings', 'fullscreen']
-                : ['play-large', 'restart', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'fullscreen'];
+                ? ['play-large', 'play', 'live', 'mute', 'settings', 'fullscreen']
+                : ['play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'settings', 'fullscreen'];
 
             const cfg = { 
                 autoplay: true, 
@@ -579,12 +679,13 @@
             };
 
             const attachPlayerHandlers = (p) => {
-                // Asli Cinema Fullscreen Rotate
                 p.on('enterfullscreen', () => {
                     container.classList.add('force-cinema-landscape');
+                    try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch(e) {}
                 });
                 p.on('exitfullscreen', () => {
                     container.classList.remove('force-cinema-landscape');
+                    try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch(e) {}
                 });
 
                 if (!isLive) {
@@ -613,6 +714,7 @@
             videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
             videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
 
+            // 1. YouTube Stream (FIXED ERROR 153)
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
                 const p = new Plyr(videoEl, cfg);
                 p.source = { type: 'video', sources: [{ src: url, provider: 'youtube' }] };
@@ -620,12 +722,17 @@
                 attachPlayerHandlers(p);
                 if(isLive) livePlayer = p; else moviePlayer = p;
             } 
+            // 2. M3U8 HLS
             else if (url.includes('.m3u8') && Hls.isSupported()) {
                 const hls = new Hls({ enableWorker: false });
                 if(isLive) currentHlsLive = hls; else currentHlsMovie = hls;
                 hls.loadSource(url); 
                 hls.attachMedia(videoEl);
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    const qualities = hls.levels.map(l => l.height);
+                    if (qualities.length) {
+                        cfg.quality = { default: qualities[0], options: qualities, forced: true, onChange: (q) => { hls.levels.forEach((l, i) => { if (l.height === q) hls.currentLevel = i; }); } };
+                    }
                     const p = new Plyr(videoEl, cfg); p.play();
                     reportLinkHealth(itemKey, 'good');
                     attachPlayerHandlers(p);
@@ -635,6 +742,7 @@
                     if (d.fatal) reportLinkHealth(itemKey, 'bad');
                 });
             } 
+            // 3. Direct MP4
             else {
                 videoEl.src = url; 
                 const p = new Plyr(videoEl, cfg); 
@@ -665,11 +773,14 @@
             if(scrollBox) scrollBox.scrollTo({ top: 0, behavior: 'smooth' });
         };
         
-        // MOVIE DETAILS WITH 8 RELATED MOVIES IN SAME CATEGORY
+        // MOVIE DETAILS WITH REAL VIEWS & 8 RELATED MOVIES
         window.playMovie = (id) => {
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
             
+            // Register Asli Real View (Per Device)
+            registerRealDeviceView(m.id);
+
             document.getElementById('videoPage').style.display = 'block';
             document.getElementById('playingTitle').innerText = m.title || m.name;
             window.history.pushState({ page: 'moviePlayer' }, '');
@@ -677,12 +788,16 @@
             const isFavorite = window.isFav('movies', m.id);
             const mTitle = (m.title || m.name || 'Movie').replace(/'/g, "\\'");
             const mUrl = (m.url || '').replace(/'/g, "\\'");
+            const viewCount = m.views ? (m.views > 999 ? (m.views/1000).toFixed(1)+'k' : m.views) : '1';
 
             document.getElementById('movieDetailsArea').innerHTML = `
                 <div class="movie-header-row">
                     <div>
                         <h2>${m.title || m.name}</h2>
-                        <span class="meta-tag">${m.category || 'Movie'}</span>
+                        <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                            <span class="meta-tag">${m.category || 'Movie'}</span>
+                            <span style="font-size:11px; color:#888; font-weight:700;"><i class="fa fa-eye" style="color:var(--primary);"></i> ${viewCount} Views</span>
+                        </div>
                     </div>
                 </div>
 
@@ -800,14 +915,10 @@
 
         window.handleSlideClick = (url) => {
             if(!url) return;
-            if(url.includes('.mp4') || url.includes('.m3u8') || url.includes('youtube') || url.includes('catbox.moe') || url.includes('googleusercontent')) {
-                document.getElementById('videoPage').style.display = 'block';
-                document.getElementById('playingTitle').innerText = 'Featured Video';
-                window.history.pushState({ page: 'moviePlayer' }, '');
-                startPlayer('moviePlayerWrapper', url, false, 'slider_' + activeSliderIndex);
-            } else {
-                window.open(url, '_blank');
-            }
+            document.getElementById('videoPage').style.display = 'block';
+            document.getElementById('playingTitle').innerText = 'Featured Video';
+            window.history.pushState({ page: 'moviePlayer' }, '');
+            startPlayer('moviePlayerWrapper', url, false, 'slider_' + activeSliderIndex);
         };
 
         window.showNav = (id, el, pushState = true) => {
