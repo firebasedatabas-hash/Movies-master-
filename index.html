@@ -42,7 +42,7 @@
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 85px; }
         
-        /* ================= SPLASH SCREEN ================= */
+        /* ================= SPLASH SCREEN WITH POWERED BY HAMZA ================= */
         #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #07080b 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .splash-logo-box { width: 92px; height: 92px; background: linear-gradient(135deg, #e50914, #8b0000); border-radius: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px var(--primary-glow); margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.15); }
@@ -149,6 +149,9 @@
             gap: 6px !important;
             background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.85)) !important;
         }
+        .plyr__volume {
+            display: none !important;
+        }
         .plyr__time {
             font-size: 11px !important;
             font-weight: 700 !important;
@@ -160,7 +163,7 @@
             margin: 0 6px !important;
         }
 
-        /* Plyr Settings Menu Position Fix (Mobile Friendly) */
+        /* Plyr Settings Menu Position Fix */
         .plyr__menu__container {
             bottom: 45px !important;
             right: 10px !important;
@@ -176,7 +179,7 @@
         .skip-right { right: 0; border-top-left-radius: 50%; border-bottom-left-radius: 50%; }
         .skip-ripple.show { opacity: 1; }
 
-        /* 90 DEGREE ROTATION FOR WEBVIEW FULLSCREEN */
+        /* 90 DEGREE ROTATION FOR WEBVIEW FULLSCREEN (APPCREATOR24 BYPASS) */
         .force-cinema-landscape {
             position: fixed !important;
             top: 0 !important;
@@ -185,18 +188,19 @@
             height: 100vw !important;
             transform: rotate(90deg) translateY(-100vw) !important;
             transform-origin: top left !important;
-            z-index: 99999999 !important;
+            z-index: 999999999 !important;
+            background: #000000 !important;
+        }
+        .force-cinema-landscape .plyr,
+        .force-cinema-landscape .plyr__video-wrapper,
+        .force-cinema-landscape video,
+        .force-cinema-landscape iframe {
+            width: 100vh !important;
+            height: 100vw !important;
+            max-width: 100vh !important;
+            max-height: 100vw !important;
+            object-fit: contain !important;
             background: #000 !important;
-        }
-        .force-cinema-landscape .plyr {
-            width: 100% !important;
-            height: 100% !important;
-        }
-        .force-cinema-landscape iframe,
-        .force-cinema-landscape video {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
         }
 
         /* 2 ACTION BUTTONS */
@@ -397,7 +401,7 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
-        <!-- 8 RELATED MOVIES -->
+        <!-- 8 RELATED MOVIES IN SAME CATEGORY -->
         <div style="padding: 10px 0 20px;">
             <div class="section-header">
                 <div class="section-title">More in this Category</div>
@@ -406,7 +410,7 @@
         </div>
     </div>
 
-    <!-- DARK MODERN FLOATING BOTTOM NAV -->
+    <!-- DARK LUXURY FLOATING BOTTOM NAV -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
         <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
@@ -478,7 +482,6 @@
             const lastViewed = localStorage.getItem(viewKey);
             const now = Date.now();
 
-            // Har mobile device se 24 ghante mein sirf 1 asli view count hoga
             if (!lastViewed || (now - parseInt(lastViewed)) > 86400000) {
                 localStorage.setItem(viewKey, now.toString());
                 try {
@@ -646,7 +649,7 @@
             }
         }
 
-        // ================= ASLI FULLSCREEN CINEMA ROTATION & CLEAN CONTROLS =================
+        // ================= ASLI FULLSCREEN CINEMA ROTATION ENGINE =================
         function startPlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer(isLive);
             const container = document.getElementById(wrapperId);
@@ -679,6 +682,7 @@
             };
 
             const attachPlayerHandlers = (p) => {
+                // 90 DEGREE ROTATE LOCK FOR APPCREATOR24 WEBVIEWS
                 p.on('enterfullscreen', () => {
                     container.classList.add('force-cinema-landscape');
                     try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch(e) {}
@@ -714,7 +718,7 @@
             videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
             videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
 
-            // 1. YouTube Stream (FIXED ERROR 153)
+            // 1. YouTube Stream (CLEAN - NO ERROR 153)
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
                 const p = new Plyr(videoEl, cfg);
                 p.source = { type: 'video', sources: [{ src: url, provider: 'youtube' }] };
@@ -778,7 +782,6 @@
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
             
-            // Register Asli Real View (Per Device)
             registerRealDeviceView(m.id);
 
             document.getElementById('videoPage').style.display = 'block';
@@ -819,7 +822,6 @@
                 </div>
             `;
 
-            // RENDER 8 RELATED MOVIES IN SAME CATEGORY
             const relatedBox = document.getElementById('relatedCategoryMovies');
             if (relatedBox) {
                 const sameCatMovies = window.allMovies.filter(item => item.category === m.category && String(item.id) !== String(m.id)).slice(0, 8);
