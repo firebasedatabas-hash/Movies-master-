@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Movie Master Pro</title>
     
@@ -13,11 +13,12 @@
 
     <style>
         :root { 
-            --primary: #ffb703; 
-            --primary-accent: #fb8500;
+            --primary: #e50914; 
+            --primary-accent: #b20710;
+            --primary-glow: rgba(229, 9, 20, 0.4);
             --bg: #090a0f; 
             --card-bg: #12141c; 
-            --card-border: rgba(255, 255, 255, 0.06);
+            --card-border: rgba(255, 255, 255, 0.08);
             --text: #ffffff; 
             --text-muted: #8b8f9e;
             --success: #2ecc71;
@@ -33,16 +34,33 @@
             height: 100%;
             overflow-x: hidden;
             background: var(--bg);
+            position: relative;
         }
 
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 85px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 80px; }
         
+        /* WATER RIPPLE EFFECT */
+        .water-ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            animation: waterWave 0.75s ease-out;
+            background: radial-gradient(circle, rgba(229,9,20,0.45) 0%, rgba(255,255,255,0.2) 40%, rgba(229,9,20,0) 70%);
+            border: 1px solid rgba(229,9,20,0.5);
+            z-index: 9999;
+        }
+        @keyframes waterWave {
+            0% { transform: scale(0.1); opacity: 0.9; }
+            100% { transform: scale(3.5); opacity: 0; }
+        }
+
         /* SPLASH SCREEN */
-        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
+        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1b0d10 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-        .splash-logo-box { width: 90px; height: 90px; background: linear-gradient(135deg, #ffb703, #fb8500); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px rgba(255,183,3,0.35); margin-bottom: 16px; }
-        .splash-logo-m { font-size: 52px; font-weight: 900; color: #090a0f; line-height: 1; }
+        .splash-logo-box { width: 90px; height: 90px; background: linear-gradient(135deg, var(--primary), var(--primary-accent)); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px var(--primary-glow); margin-bottom: 16px; }
+        .splash-logo-m { font-size: 52px; font-weight: 900; color: #ffffff; line-height: 1; }
         .splash-title { font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1.5px; margin: 0; text-transform: uppercase; }
         .splash-title span { color: var(--primary); }
         .splash-subtitle { font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-weight: 600; }
@@ -53,7 +71,7 @@
         .splash-footer b { color: var(--primary); font-weight: 800; }
 
         /* NOTICE & WHATSAPP */
-        #liveNoticeBar { display: none; background: #151822; color: #ffb703; padding: 8px 14px; font-size: 11px; font-weight: 700; text-align: center; position: sticky; top: 56px; z-index: 999; border-bottom: 1px solid rgba(255,183,3,0.15); }
+        #liveNoticeBar { display: none; background: #160c0e; color: #ff5252; padding: 8px 14px; font-size: 11px; font-weight: 700; text-align: center; position: sticky; top: 56px; z-index: 999; border-bottom: 1px solid rgba(229,9,20,0.25); }
         #whatsappFloatingBtn { display: none; position: fixed; bottom: 85px; right: 16px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
         #maintOverlay { display: none; position: fixed; inset: 0; background: #090a0f; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
 
@@ -75,52 +93,53 @@
         .logo span { color: var(--primary); }
 
         /* SLIDER */
-        .slider-container { width: 100%; height: 210px; position: relative; overflow: hidden; background: #000; }
-        .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; }
-        .slide { min-width: 100%; height: 100%; position: relative; cursor: pointer; }
+        .slider-container { width: 100%; height: 215px; position: relative; overflow: hidden; background: #000; }
+        .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); height: 100%; width: 100%; }
+        .slide { min-width: 100%; height: 100%; position: relative; cursor: pointer; flex-shrink: 0; }
         .slide img { width: 100%; height: 100%; object-fit: cover; }
         .slide-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 0%, transparent 60%); }
-        .slider-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; z-index: 10; }
-        .dot { width: 5px; height: 5px; background: rgba(255,255,255,0.25); border-radius: 50%; }
-        .dot.active { background: var(--primary); width: 14px; border-radius: 10px; transition: 0.3s; }
+        .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+        .dot { width: 6px; height: 6px; background: rgba(255,255,255,0.3); border-radius: 50%; transition: all 0.3s ease; }
+        .dot.active { background: var(--primary); width: 18px; border-radius: 10px; box-shadow: 0 0 8px var(--primary); }
 
         /* SECTION HEADERS */
         .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 18px; margin-bottom: 2px; }
         .section-title { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.2px; margin: 0; }
         .view-all-btn { font-size: 12px; color: #8b8f9e; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
-        .view-all-btn:active { color: var(--primary); }
+        .view-all-btn:active, .view-all-btn.active { color: var(--primary); }
         .movie-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; }
         .movie-scroll::-webkit-scrollbar { display: none; }
         
         /* MOVIE CARDS */
-        .card-rect { min-width: 120px; width: 120px; border-radius: 10px; overflow: hidden; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+        .card-rect { min-width: 120px; width: 120px; border-radius: 10px; overflow: hidden; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; transition: transform 0.2s; }
+        .card-rect:active { transform: scale(0.96); }
         .card-rect.grid-item { min-width: unset; width: 100%; }
         .card-img-wrap { position: relative; width: 100%; height: 165px; border-radius: 10px; overflow: hidden; background: #12141c; }
         .card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 10px; }
-        .card-views-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.75); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: flex; align-items: center; gap: 3px; }
+        .card-views-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.8); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: flex; align-items: center; gap: 3px; }
         .card-rect-info { padding: 6px 2px 0; }
         .card-rect-info p { margin: 0; font-size: 11px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #f0f0f5; font-weight: 600; }
         
-        .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(9,10,15,0.7); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
-        .fav-card-btn.active { color: var(--primary); background: rgba(255, 183, 3, 0.2); }
+        .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(9,10,15,0.75); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
+        .fav-card-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.25); border-color: var(--primary); }
 
         /* 4 CHANNELS GRID */
-        #livePage { display: none; flex-direction: column; height: calc(100vh - 70px); overflow: hidden; }
-        .video-fixed-top { position: relative; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
+        #livePage { display: none; flex-direction: column; min-height: 100vh; }
+        .video-fixed-top { position: sticky; top: 0; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-        .scrollable-content { flex: 1; overflow-y: auto; padding-bottom: 30px; -webkit-overflow-scrolling: touch; }
+        .scrollable-content { flex: 1; padding-bottom: 30px; }
 
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .live-grid-container-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 6px; padding: 16px 10px; }
         .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; }
         .live-item { position: relative; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; }
-        .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(#ffb703, #fb8500, #00b4d8, #2ecc71, #ffb703); animation: rotateBorder 3s linear infinite; }
-        .live-item img { width: 90%; height: 90%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
+        .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(var(--primary), var(--primary-accent), #ff5252, #ffffff, var(--primary)); animation: rotateBorder 3s linear infinite; }
+        .live-item img { width: 88%; height: 88%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
         .channel-title-text { font-size: 10px; margin-top: 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; color: #eee; font-weight: 600; }
         .fav-channel-btn { position: absolute; top: -3px; right: -2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
-        .fav-channel-btn.active { color: var(--primary); background: rgba(255, 183, 3, 0.25); }
+        .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
 
-        /* ================= CHROME NATIVE DEFAULT PLAYER CONTAINER ================= */
+        /* PLAYER CONTAINER */
         .native-chrome-player-box {
             position: relative;
             width: 100%;
@@ -132,25 +151,25 @@
             justify-content: center;
         }
 
-        .native-chrome-player-box video {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+        .native-chrome-player-box video, .video-fixed-top video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
             background: #000;
         }
 
-        .native-chrome-player-box iframe {
-            width: 100%;
-            height: 100%;
+        .native-chrome-player-box iframe, .video-fixed-top iframe {
+            width: 100% !important;
+            height: 100% !important;
             border: none;
             background: #000;
         }
 
         /* 2 ACTION BUTTONS */
         .movie-actions-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0 16px; }
-        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; }
+        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; transition: 0.2s; }
         .action-btn i { font-size: 17px; }
-        .action-btn.active { background: rgba(255, 183, 3, 0.15); border-color: var(--primary); color: var(--primary); }
+        .action-btn.active { background: rgba(229, 9, 20, 0.18); border-color: var(--primary); color: var(--primary); }
         .action-btn.active i { color: var(--primary); }
         .action-btn.share-btn { background: rgba(46, 204, 113, 0.12); border-color: rgba(46, 204, 113, 0.3); color: var(--success); }
         .action-btn.share-btn i { color: var(--success); }
@@ -159,36 +178,47 @@
         .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto 8px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
         .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
 
-        /* FLOATING BOTTOM NAV */
+        /* GLASS FLOATING BOTTOM NAV (VISIBLE ON ALL PAGES) */
         .bottom-nav { 
             position: fixed; 
             bottom: 12px; 
-            left: 16px; 
-            right: 16px; 
-            background: rgba(18, 20, 28, 0.92); 
-            backdrop-filter: blur(18px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            left: 14px; 
+            right: 14px; 
+            background: rgba(18, 20, 28, 0.75); 
+            backdrop-filter: blur(24px) saturate(180%); 
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.12); 
             display: flex; 
             justify-content: space-around; 
             padding: 6px; 
-            border-radius: 24px; 
-            z-index: 1500; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+            border-radius: 22px; 
+            z-index: 2500; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.1); 
             height: 58px;
         }
-        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 18px; transition: 0.2s; }
-        .nav-item.active { color: #ffffff; background: rgba(255, 183, 3, 0.15); }
+        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 16px; transition: 0.25s; }
+        .nav-item.active { color: #ffffff; background: rgba(229, 9, 20, 0.22); border: 1px solid rgba(229,9,20,0.3); }
         .nav-item.active i { color: var(--primary); }
         .nav-item i { font-size: 16px; margin-bottom: 3px; }
 
         /* Full Pages */
-        .full-page { position: fixed; inset: 0; background: var(--bg); z-index: 2000; display: none; overflow-y: auto; padding-bottom: 85px; }
-        .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(14,16,24,0.95); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 2100; }
+        .full-page { position: fixed; inset: 0; background: var(--bg); z-index: 1200; display: none; overflow-y: auto; padding-bottom: 85px; }
+        .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(14,16,24,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 1250; }
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
         .movie-details-box { padding: 16px; background: #0c0e14; border-bottom: 1px solid var(--card-border); }
         .movie-details-box h2 { font-size: 18px; margin: 0 0 6px 0; color: #fff; font-weight: 800; }
-        .meta-tag { display: inline-block; background: rgba(255, 183, 3, 0.12); color: var(--primary); font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(255,183,3,0.25); }
+        .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: #ff5252; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(229, 9, 20, 0.3); }
         .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
+
+        /* ================= LANDSCAPE OPTIMIZATION ================= */
+        @media screen and (orientation: landscape) {
+            body { padding-bottom: 75px; }
+            .slider-container { height: 260px; max-width: 800px; margin: 0 auto; border-radius: 12px; }
+            .live-grid-container-4 { grid-template-columns: repeat(6, 1fr) !important; max-width: 900px; margin: 0 auto; }
+            .movie-grid { grid-template-columns: repeat(5, 1fr) !important; max-width: 950px; margin: 0 auto; }
+            .video-fixed-top, .native-chrome-player-box { max-height: 75vh; }
+            .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); bottom: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -249,9 +279,17 @@
         </div>
 
         <div id="homeSections"><p style="text-align:center;padding:30px;color:#888;">Loading content...</p></div>
+        
+        <div class="adsterra-320x50-box">
+            <span class="adsterra-tag">Sponsored</span>
+            <script type="text/javascript">
+                atOptions = { 'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+            </script>
+            <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
+        </div>
     </div>
 
-    <!-- 2. LIVE TV (4 CHANNELS PER ROW) -->
+    <!-- 2. LIVE TV -->
     <div id="livePage" class="page">
         <div class="video-fixed-top" id="livePlayerWrapper">
             <div style="height:100%; display:flex; align-items:center; justify-content:center; color:#555; font-size:13px;">Select a channel from list below</div>
@@ -320,14 +358,13 @@
         <div class="movie-grid" id="viewAllGrid"></div>
     </div>
 
-    <!-- 6. CHROME NATIVE DEFAULT PLAYER PAGE -->
+    <!-- 6. PLAYER PAGE -->
     <div id="videoPage" class="full-page" style="z-index:3000;">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.closePlayer()" style="cursor:pointer; font-size:18px;"></i> 
             <span id="playingTitle" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:80%; font-size:14px; font-weight:700;">Playing</span>
         </div>
         
-        <!-- CHROME DEFAULT NATIVE VIDEO CONTAINER -->
         <div id="moviePlayerWrapper" class="native-chrome-player-box"></div>
         
         <div id="movieDetailsArea" class="movie-details-box"></div>
@@ -340,7 +377,6 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
-        <!-- 8 RELATED MOVIES IN SAME CATEGORY -->
         <div style="padding: 10px 0 20px;">
             <div class="section-header">
                 <div class="section-title">More in this Category</div>
@@ -349,7 +385,7 @@
         </div>
     </div>
 
-    <!-- FLOATING BOTTOM NAV -->
+    <!-- FLOATING GLASS BOTTOM NAV -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
         <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
@@ -361,6 +397,20 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // WATER RIPPLE ON TOUCH
+        document.addEventListener('touchstart', function(e) {
+            const touch = e.touches[0];
+            const ripple = document.createElement('div');
+            ripple.className = 'water-ripple';
+            const size = 60;
+            ripple.style.width = size + 'px';
+            ripple.style.height = size + 'px';
+            ripple.style.left = (touch.pageX - size / 2) + 'px';
+            ripple.style.top = (touch.pageY - size / 2) + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => { ripple.remove(); }, 750);
+        }, { passive: true });
 
         window.history.replaceState({ page: 'homePage' }, '');
         window.addEventListener('popstate', () => {
@@ -563,7 +613,7 @@
             const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
             const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
             const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
-            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
+            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
             if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite movies.</p>';
         }
 
@@ -571,13 +621,11 @@
             if (currentHls) { try { currentHls.destroy(); } catch(e){} currentHls = null; }
         }
 
-        // ================= 100% ASLI CHROME NATIVE DEFAULT PLAYER ENGINE =================
         function startNativePlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer();
             const container = document.getElementById(wrapperId);
             container.innerHTML = '';
 
-            // 1. YouTube Native IFrame Player (NO ERROR 153)
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
                 let vid = '';
                 if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
@@ -591,7 +639,6 @@
                 container.appendChild(iframe);
                 reportLinkHealth(itemKey, 'good');
             } 
-            // 2. M3U8 HLS Native Stream
             else if (url.includes('.m3u8')) {
                 const videoEl = document.createElement('video');
                 videoEl.setAttribute('controls', '');
@@ -617,7 +664,6 @@
                     reportLinkHealth(itemKey, 'good');
                 }
             } 
-            // 3. Direct MP4 Video File
             else {
                 const videoEl = document.createElement('video');
                 videoEl.setAttribute('controls', '');
@@ -648,8 +694,7 @@
             }
 
             startNativePlayer('livePlayerWrapper', url, true, id);
-            const scrollBox = document.getElementById('liveScrollContainer');
-            if(scrollBox) scrollBox.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         };
         
         window.playMovie = (id) => {
