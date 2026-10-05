@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-    <!-- FIX YOUTUBE ERROR 153 REFERRER POLICY -->
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Movie Master Pro</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <!-- LIGHTWEIGHT HLS STREAM ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
 
     <style>
         :root { 
-            --primary: #e50914; 
-            --primary-glow: rgba(229, 9, 20, 0.4);
-            --bg: #07080b; 
-            --card-bg: #11131a; 
-            --card-border: rgba(255, 255, 255, 0.07);
+            --primary: #ffb703; 
+            --primary-accent: #fb8500;
+            --bg: #090a0f; 
+            --card-bg: #12141c; 
+            --card-border: rgba(255, 255, 255, 0.06);
             --text: #ffffff; 
             --text-muted: #8b8f9e;
-            --plyr-color-main: #e50914; 
             --success: #2ecc71;
             --wa-green: #25d366;
-            --nav-bg: rgba(14, 16, 22, 0.95);
-            --nav-active: rgba(255, 255, 255, 0.1);
+            --blue: #00b4d8;
         }
 
         html, body {
@@ -42,11 +38,11 @@
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 85px; }
         
-        /* ================= SPLASH SCREEN WITH POWERED BY HAMZA ================= */
-        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #07080b 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
+        /* SPLASH SCREEN */
+        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #151824 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
-        .splash-logo-box { width: 92px; height: 92px; background: linear-gradient(135deg, #e50914, #8b0000); border-radius: 26px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px var(--primary-glow); margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.15); }
-        .splash-logo-m { font-size: 54px; font-weight: 900; color: #fff; line-height: 1; }
+        .splash-logo-box { width: 90px; height: 90px; background: linear-gradient(135deg, #ffb703, #fb8500); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px rgba(255,183,3,0.35); margin-bottom: 16px; }
+        .splash-logo-m { font-size: 52px; font-weight: 900; color: #090a0f; line-height: 1; }
         .splash-title { font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: 1.5px; margin: 0; text-transform: uppercase; }
         .splash-title span { color: var(--primary); }
         .splash-subtitle { font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; font-weight: 600; }
@@ -56,26 +52,26 @@
         .splash-footer { position: absolute; bottom: 25px; z-index: 2; font-size: 11px; color: #777; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
         .splash-footer b { color: var(--primary); font-weight: 800; }
 
-        /* NOTICE & WHATSAPP BUTTON */
-        #liveNoticeBar { display: none; background: #13151f; color: #fff; padding: 8px 14px; font-size: 11px; font-weight: 700; text-align: center; position: sticky; top: 58px; z-index: 999; border-bottom: 1px solid rgba(229,9,20,0.3); }
+        /* NOTICE & WHATSAPP */
+        #liveNoticeBar { display: none; background: #151822; color: #ffb703; padding: 8px 14px; font-size: 11px; font-weight: 700; text-align: center; position: sticky; top: 56px; z-index: 999; border-bottom: 1px solid rgba(255,183,3,0.15); }
         #whatsappFloatingBtn { display: none; position: fixed; bottom: 85px; right: 16px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
-        #maintOverlay { display: none; position: fixed; inset: 0; background: #07080b; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
+        #maintOverlay { display: none; position: fixed; inset: 0; background: #090a0f; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
 
-        /* ================= CLEAN HEADER ================= */
+        /* HEADER */
         header { 
             padding: 0 16px; 
             display: flex; 
             align-items: center; 
             justify-content: flex-start; 
-            background: rgba(7, 8, 11, 0.95); 
+            background: rgba(9, 10, 15, 0.95); 
             backdrop-filter: blur(16px); 
             position: sticky; 
             top: 0; 
             z-index: 1000; 
-            height: 58px; 
+            height: 56px; 
             border-bottom: 1px solid var(--card-border); 
         }
-        .logo { color: #fff; font-weight: 900; font-size: 20px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 7px; }
+        .logo { color: #fff; font-weight: 900; font-size: 19px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 6px; }
         .logo span { color: var(--primary); }
 
         /* SLIDER */
@@ -88,132 +84,79 @@
         .dot { width: 5px; height: 5px; background: rgba(255,255,255,0.25); border-radius: 50%; }
         .dot.active { background: var(--primary); width: 14px; border-radius: 10px; transition: 0.3s; }
 
-        /* SECTIONS */
-        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 20px; margin-bottom: 2px; }
-        .section-title { font-size: 15px; font-weight: 800; color: #ffffff; margin: 0; }
-        .view-all-btn { font-size: 12px; color: var(--text-muted); cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
+        /* SECTION HEADERS */
+        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 18px; margin-bottom: 2px; }
+        .section-title { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.2px; margin: 0; }
+        .view-all-btn { font-size: 12px; color: #8b8f9e; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
         .view-all-btn:active { color: var(--primary); }
         .movie-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; }
         .movie-scroll::-webkit-scrollbar { display: none; }
         
-        /* BORDERLESS MOVIE CARDS */
-        .card-rect { min-width: 118px; width: 118px; border-radius: 10px; overflow: hidden; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+        /* MOVIE CARDS */
+        .card-rect { min-width: 120px; width: 120px; border-radius: 10px; overflow: hidden; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
         .card-rect.grid-item { min-width: unset; width: 100%; }
         .card-img-wrap { position: relative; width: 100%; height: 165px; border-radius: 10px; overflow: hidden; background: #12141c; }
         .card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 10px; }
-        
-        .card-views-badge {
-            position: absolute;
-            bottom: 6px;
-            left: 6px;
-            background: rgba(0,0,0,0.75);
-            color: #fff;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-
+        .card-views-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.75); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; display: flex; align-items: center; gap: 3px; }
         .card-rect-info { padding: 6px 2px 0; }
         .card-rect-info p { margin: 0; font-size: 11px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #f0f0f5; font-weight: 600; }
         
-        .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(7,8,11,0.7); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
-        .fav-card-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.25); }
+        .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(9,10,15,0.7); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
+        .fav-card-btn.active { color: var(--primary); background: rgba(255, 183, 3, 0.2); }
 
-        /* ================= 4 CHANNELS PER ROW GRID ================= */
+        /* 4 CHANNELS GRID */
         #livePage { display: none; flex-direction: column; height: calc(100vh - 70px); overflow: hidden; }
         .video-fixed-top { position: relative; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
-        .live-channel-bar { padding: 10px 16px; background: #11131a; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; overflow-y: auto; padding-bottom: 30px; -webkit-overflow-scrolling: touch; }
 
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .live-grid-container-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 6px; padding: 14px 10px; }
+        .live-grid-container-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 6px; padding: 16px 10px; }
         .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; }
-        .live-item { position: relative; width: 62px; height: 62px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; }
-        .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(#e50914, #ffb703, #00b4d8, #2ecc71, #e50914); animation: rotateBorder 3s linear infinite; }
+        .live-item { position: relative; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; }
+        .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(#ffb703, #fb8500, #00b4d8, #2ecc71, #ffb703); animation: rotateBorder 3s linear infinite; }
         .live-item img { width: 90%; height: 90%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
         .channel-title-text { font-size: 10px; margin-top: 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; color: #eee; font-weight: 600; }
         .fav-channel-btn { position: absolute; top: -3px; right: -2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
-        .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.25); }
+        .fav-channel-btn.active { color: var(--primary); background: rgba(255, 183, 3, 0.25); }
 
-        /* ================= ASLI FULLSCREEN CINEMA LANDSCAPE FLIP ================= */
-        .netflix-player-box { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; overflow: hidden; border-bottom: 1px solid var(--card-border); }
-        .plyr--video { height: 100%; width: 100%; background: #000; }
-
-        /* Clean Controls Styling & Settings Menu Popup Fix */
-        .plyr__controls {
-            padding: 8px 12px !important;
-            gap: 6px !important;
-            background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.85)) !important;
-        }
-        .plyr__volume {
-            display: none !important;
-        }
-        .plyr__time {
-            font-size: 11px !important;
-            font-weight: 700 !important;
-            padding: 0 4px !important;
-            white-space: nowrap !important;
-        }
-        .plyr__progress {
-            flex: 1 !important;
-            margin: 0 6px !important;
+        /* ================= CHROME NATIVE DEFAULT PLAYER CONTAINER ================= */
+        .native-chrome-player-box {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000000;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Plyr Settings Menu Position Fix */
-        .plyr__menu__container {
-            bottom: 45px !important;
-            right: 10px !important;
-            max-height: 200px !important;
-            overflow-y: auto !important;
-            background: rgba(18, 20, 28, 0.95) !important;
-            border: 1px solid rgba(255,255,255,0.15) !important;
-            border-radius: 10px !important;
+        .native-chrome-player-box video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
         }
 
-        .skip-ripple { position: absolute; top: 0; bottom: 0; width: 40%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.12); color: #fff; font-size: 13px; font-weight: 700; z-index: 20; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-        .skip-left { left: 0; border-top-right-radius: 50%; border-bottom-right-radius: 50%; }
-        .skip-right { right: 0; border-top-left-radius: 50%; border-bottom-left-radius: 50%; }
-        .skip-ripple.show { opacity: 1; }
-
-        /* 90 DEGREE ROTATION FOR WEBVIEW FULLSCREEN (APPCREATOR24 BYPASS) */
-        .force-cinema-landscape {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vh !important;
-            height: 100vw !important;
-            transform: rotate(90deg) translateY(-100vw) !important;
-            transform-origin: top left !important;
-            z-index: 999999999 !important;
-            background: #000000 !important;
-        }
-        .force-cinema-landscape .plyr,
-        .force-cinema-landscape .plyr__video-wrapper,
-        .force-cinema-landscape video,
-        .force-cinema-landscape iframe {
-            width: 100vh !important;
-            height: 100vw !important;
-            max-width: 100vh !important;
-            max-height: 100vw !important;
-            object-fit: contain !important;
-            background: #000 !important;
+        .native-chrome-player-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #000;
         }
 
         /* 2 ACTION BUTTONS */
-        .movie-actions-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0 16px; }
-        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 11px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; }
-        .action-btn i { font-size: 18px; }
-        .action-btn.active { background: rgba(229, 9, 20, 0.15); border-color: var(--primary); color: var(--primary); }
+        .movie-actions-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0 16px; }
+        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; }
+        .action-btn i { font-size: 17px; }
+        .action-btn.active { background: rgba(255, 183, 3, 0.15); border-color: var(--primary); color: var(--primary); }
         .action-btn.active i { color: var(--primary); }
-        .action-btn.share-btn { background: rgba(37, 211, 102, 0.12); border-color: rgba(37, 211, 102, 0.3); color: var(--wa-green); }
-        .action-btn.share-btn i { color: var(--wa-green); }
+        .action-btn.share-btn { background: rgba(46, 204, 113, 0.12); border-color: rgba(46, 204, 113, 0.3); color: var(--success); }
+        .action-btn.share-btn i { color: var(--success); }
 
         /* AD BOX */
-        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto 8px; text-align: center; background: #0c0e14; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
+        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto 8px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
         .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
 
         /* FLOATING BOTTOM NAV */
@@ -222,30 +165,30 @@
             bottom: 12px; 
             left: 16px; 
             right: 16px; 
-            background: var(--nav-bg); 
-            backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            background: rgba(18, 20, 28, 0.92); 
+            backdrop-filter: blur(18px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
             display: flex; 
             justify-content: space-around; 
             padding: 6px; 
             border-radius: 24px; 
             z-index: 1500; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
             height: 58px;
         }
-        .nav-item { text-align: center; color: #7a7f8e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 18px; transition: 0.2s; }
-        .nav-item.active { color: #ffffff; background: var(--nav-active); font-weight: 700; }
-        .nav-item.active i { color: #ffffff; }
+        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 18px; transition: 0.2s; }
+        .nav-item.active { color: #ffffff; background: rgba(255, 183, 3, 0.15); }
+        .nav-item.active i { color: var(--primary); }
         .nav-item i { font-size: 16px; margin-bottom: 3px; }
 
         /* Full Pages */
         .full-page { position: fixed; inset: 0; background: var(--bg); z-index: 2000; display: none; overflow-y: auto; padding-bottom: 85px; }
-        .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(11,13,18,0.95); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 2100; }
+        .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(14,16,24,0.95); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 2100; }
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
-        .movie-details-box { padding: 16px; background: #0a0b10; border-bottom: 1px solid var(--card-border); }
+        .movie-details-box { padding: 16px; background: #0c0e14; border-bottom: 1px solid var(--card-border); }
         .movie-details-box h2 { font-size: 18px; margin: 0 0 6px 0; color: #fff; font-weight: 800; }
-        .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: var(--primary); font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; }
-        .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #11131a; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
+        .meta-tag { display: inline-block; background: rgba(255, 183, 3, 0.12); color: var(--primary); font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(255,183,3,0.25); }
+        .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
     </style>
 </head>
 <body>
@@ -265,9 +208,7 @@
         <div class="splash-logo-box"><span class="splash-logo-m">M</span></div>
         <h1 class="splash-title">MOVIE <span>MASTER</span></h1>
         <p class="splash-subtitle">Live TV & Movies</p>
-        <div class="yt-spinner-box">
-            <div class="yt-spinner"></div>
-        </div>
+        <div class="yt-spinner-box"><div class="yt-spinner"></div></div>
         <div class="splash-footer">Powered by <b>Hamza</b></div>
     </div>
 
@@ -285,7 +226,7 @@
         })();
     </script>
 
-    <!-- CLEAN HEADER -->
+    <!-- HEADER -->
     <header>
         <div class="logo"><i class="fa fa-play-circle" style="color:var(--primary);"></i> MOVIE <span>MASTER</span></div>
     </header>
@@ -379,17 +320,15 @@
         <div class="movie-grid" id="viewAllGrid"></div>
     </div>
 
-    <!-- 6. MOVIE PLAYER & 8 RELATED MOVIES -->
+    <!-- 6. CHROME NATIVE DEFAULT PLAYER PAGE -->
     <div id="videoPage" class="full-page" style="z-index:3000;">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.closePlayer()" style="cursor:pointer; font-size:18px;"></i> 
             <span id="playingTitle" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:80%; font-size:14px; font-weight:700;">Playing</span>
         </div>
         
-        <div id="moviePlayerWrapper" class="netflix-player-box">
-            <div id="skipLeftRipple" class="skip-ripple skip-left"><i class="fa fa-backward" style="font-size:22px; margin-bottom:4px;"></i> 10s</div>
-            <div id="skipRightRipple" class="skip-ripple skip-right"><i class="fa fa-forward" style="font-size:22px; margin-bottom:4px;"></i> +10s</div>
-        </div>
+        <!-- CHROME DEFAULT NATIVE VIDEO CONTAINER -->
+        <div id="moviePlayerWrapper" class="native-chrome-player-box"></div>
         
         <div id="movieDetailsArea" class="movie-details-box"></div>
         
@@ -410,7 +349,7 @@
         </div>
     </div>
 
-    <!-- DARK LUXURY FLOATING BOTTOM NAV -->
+    <!-- FLOATING BOTTOM NAV -->
     <div class="bottom-nav">
         <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
         <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
@@ -418,7 +357,7 @@
         <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
     </div>
 
-    <!-- SCRIPT ENGINE -->
+    <!-- CORE SCRIPT ENGINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, set, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -434,20 +373,17 @@
             if (anyClosed || (livePage && livePage.style.display === 'flex')) { window.showNav('homePage', null, false); }
         });
 
-        // ================= GLOBAL STATE INITIALIZATION =================
         window.allMovies = [];
         window.allChannels = [];
         let sliders = [];
         let categories = [];
         window.globalLimit = 10;
-        let livePlayer = null, moviePlayer = null;
-        let currentHlsLive = null, currentHlsMovie = null;
+        let currentHls = null;
         let currentPlayingChannel = null;
         let searchDebounceTimer = null;
         let activeSliderIndex = 0;
-        let lastTapTime = 0;
 
-        // FAST LOCAL CACHE LOAD
+        // FAST CACHE LOAD
         try {
             const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
             if (localCache) {
@@ -456,9 +392,7 @@
                 sliders = localCache.sliders || [];
                 categories = localCache.categories || [];
                 window.globalLimit = localCache.limit || 10;
-                renderHome();
-                initSlider();
-                initLiveChannels();
+                renderHome(); initSlider(); initLiveChannels();
             }
         } catch(e){}
 
@@ -475,20 +409,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // ================= ASLI REAL PER-DEVICE VIEW COUNTER (NO FAKE SPAM) =================
         function registerRealDeviceView(movieId) {
             if (!movieId) return;
             const viewKey = 'mm_viewed_' + movieId;
             const lastViewed = localStorage.getItem(viewKey);
             const now = Date.now();
-
             if (!lastViewed || (now - parseInt(lastViewed)) > 86400000) {
                 localStorage.setItem(viewKey, now.toString());
-                try {
-                    update(ref(db, `movies/${movieId}`), {
-                        views: increment(1)
-                    });
-                } catch(e){}
+                try { update(ref(db, `movies/${movieId}`), { views: increment(1) }); } catch(e){}
             }
         }
 
@@ -609,7 +537,7 @@
         function renderHome() {
             let html = '';
             if (categories.length === 0 && window.allMovies.length > 0) {
-                html = `<div class="section-header"><div class="section-title">Trending Movies</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
+                html = `<div class="section-header"><div class="section-title">Trending in Pakistan</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
             } else {
                 categories.forEach(cat => {
                     const filtered = window.allMovies.filter(m => m.category === cat.name);
@@ -635,124 +563,71 @@
             const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
             const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
             const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
-            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
+            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
             if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite movies.</p>';
         }
 
-        function cleanupPlayer(isLive) {
-            if (isLive) {
-                if (currentHlsLive) { try { currentHlsLive.destroy(); } catch(e){} currentHlsLive = null; }
-                if (livePlayer) { try { livePlayer.destroy(); } catch(e){} livePlayer = null; }
-            } else {
-                if (currentHlsMovie) { try { currentHlsMovie.destroy(); } catch(e){} currentHlsMovie = null; }
-                if (moviePlayer) { try { moviePlayer.destroy(); } catch(e){} moviePlayer = null; }
-            }
+        function cleanupPlayer() {
+            if (currentHls) { try { currentHls.destroy(); } catch(e){} currentHls = null; }
         }
 
-        // ================= ASLI FULLSCREEN CINEMA ROTATION ENGINE =================
-        function startPlayer(wrapperId, url, isLive, itemKey) {
-            cleanupPlayer(isLive);
+        // ================= 100% ASLI CHROME NATIVE DEFAULT PLAYER ENGINE =================
+        function startNativePlayer(wrapperId, url, isLive, itemKey) {
+            cleanupPlayer();
             const container = document.getElementById(wrapperId);
-            
-            const videoEl = document.createElement('video');
-            videoEl.id = `${isLive?'l':'m'}Vid`;
-            videoEl.setAttribute('playsinline', '');
-            videoEl.setAttribute('controls', '');
-            videoEl.setAttribute('autoplay', '');
-            videoEl.style.width = '100%';
-            videoEl.style.height = '100%';
-            
-            const existingRipples = container.querySelectorAll('.skip-ripple');
             container.innerHTML = '';
-            container.appendChild(videoEl);
-            existingRipples.forEach(r => container.appendChild(r));
 
-            const controlsList = isLive 
-                ? ['play-large', 'play', 'live', 'mute', 'settings', 'fullscreen']
-                : ['play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'duration', 'mute', 'settings', 'fullscreen'];
-
-            const cfg = { 
-                autoplay: true, 
-                hideControls: true, 
-                controls: controlsList,
-                settings: ['quality', 'speed'],
-                speed: { selected: 1, options: [0.5, 0.75, 1, 1.25, 1.5, 2] },
-                seekTime: 10,
-                fullscreen: { enabled: true, fallback: true, iosNative: true }
-            };
-
-            const attachPlayerHandlers = (p) => {
-                // 90 DEGREE ROTATE LOCK FOR APPCREATOR24 WEBVIEWS
-                p.on('enterfullscreen', () => {
-                    container.classList.add('force-cinema-landscape');
-                    try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(() => {}); } catch(e) {}
-                });
-                p.on('exitfullscreen', () => {
-                    container.classList.remove('force-cinema-landscape');
-                    try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch(e) {}
-                });
-
-                if (!isLive) {
-                    container.onclick = (e) => {
-                        const now = Date.now();
-                        const rect = container.getBoundingClientRect();
-                        const clickX = e.clientX - rect.left;
-                        const width = rect.width;
-
-                        if (now - lastTapTime < 320) {
-                            if (clickX < width * 0.4) {
-                                p.rewind(10);
-                                const lRip = document.getElementById('skipLeftRipple');
-                                if (lRip) { lRip.classList.add('show'); setTimeout(() => lRip.classList.remove('show'), 500); }
-                            } else if (clickX > width * 0.6) {
-                                p.forward(10);
-                                const rRip = document.getElementById('skipRightRipple');
-                                if (rRip) { rRip.classList.add('show'); setTimeout(() => rRip.classList.remove('show'), 500); }
-                            }
-                        }
-                        lastTapTime = now;
-                    };
-                }
-            };
-
-            videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
-            videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
-
-            // 1. YouTube Stream (CLEAN - NO ERROR 153)
+            // 1. YouTube Native IFrame Player (NO ERROR 153)
             if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                const p = new Plyr(videoEl, cfg);
-                p.source = { type: 'video', sources: [{ src: url, provider: 'youtube' }] };
+                let vid = '';
+                if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
+                else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
+                else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
+
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+                iframe.setAttribute('allowfullscreen', 'true');
+                container.appendChild(iframe);
                 reportLinkHealth(itemKey, 'good');
-                attachPlayerHandlers(p);
-                if(isLive) livePlayer = p; else moviePlayer = p;
             } 
-            // 2. M3U8 HLS
-            else if (url.includes('.m3u8') && Hls.isSupported()) {
-                const hls = new Hls({ enableWorker: false });
-                if(isLive) currentHlsLive = hls; else currentHlsMovie = hls;
-                hls.loadSource(url); 
-                hls.attachMedia(videoEl);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    const qualities = hls.levels.map(l => l.height);
-                    if (qualities.length) {
-                        cfg.quality = { default: qualities[0], options: qualities, forced: true, onChange: (q) => { hls.levels.forEach((l, i) => { if (l.height === q) hls.currentLevel = i; }); } };
-                    }
-                    const p = new Plyr(videoEl, cfg); p.play();
+            // 2. M3U8 HLS Native Stream
+            else if (url.includes('.m3u8')) {
+                const videoEl = document.createElement('video');
+                videoEl.setAttribute('controls', '');
+                videoEl.setAttribute('autoplay', '');
+                videoEl.setAttribute('playsinline', '');
+                container.appendChild(videoEl);
+
+                if (Hls.isSupported()) {
+                    const hls = new Hls({ enableWorker: true });
+                    currentHls = hls;
+                    hls.loadSource(url);
+                    hls.attachMedia(videoEl);
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                        videoEl.play();
+                        reportLinkHealth(itemKey, 'good');
+                    });
+                    hls.on(Hls.Events.ERROR, (e, data) => {
+                        if (data.fatal) reportLinkHealth(itemKey, 'bad');
+                    });
+                } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
+                    videoEl.src = url;
+                    videoEl.play();
                     reportLinkHealth(itemKey, 'good');
-                    attachPlayerHandlers(p);
-                    if(isLive) livePlayer = p; else moviePlayer = p;
-                });
-                hls.on(Hls.Events.ERROR, (e, d) => {
-                    if (d.fatal) reportLinkHealth(itemKey, 'bad');
-                });
+                }
             } 
-            // 3. Direct MP4
+            // 3. Direct MP4 Video File
             else {
-                videoEl.src = url; 
-                const p = new Plyr(videoEl, cfg); 
-                p.play(); 
-                attachPlayerHandlers(p);
-                if(isLive) livePlayer = p; else moviePlayer = p;
+                const videoEl = document.createElement('video');
+                videoEl.setAttribute('controls', '');
+                videoEl.setAttribute('autoplay', '');
+                videoEl.setAttribute('playsinline', '');
+                videoEl.src = url;
+                container.appendChild(videoEl);
+                videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
+                videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
+                videoEl.play();
             }
         }
 
@@ -772,12 +647,11 @@
                 btn.onclick = (e) => window.toggleFav('channels', id, e);
             }
 
-            startPlayer('livePlayerWrapper', url, true, id);
+            startNativePlayer('livePlayerWrapper', url, true, id);
             const scrollBox = document.getElementById('liveScrollContainer');
             if(scrollBox) scrollBox.scrollTo({ top: 0, behavior: 'smooth' });
         };
         
-        // MOVIE DETAILS WITH REAL VIEWS & 8 RELATED MOVIES
         window.playMovie = (id) => {
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
@@ -829,7 +703,7 @@
                 relatedBox.innerHTML = fallbackMovies.map(item => window.renderMovieCard(item)).join('') || '<p style="color:#666; font-size:11px; padding:10px;">No more movies in this category.</p>';
             }
 
-            startPlayer('moviePlayerWrapper', m.url, false, m.id);
+            startNativePlayer('moviePlayerWrapper', m.url, false, m.id);
         };
 
         window.doSearch = (query) => {
@@ -920,7 +794,7 @@
             document.getElementById('videoPage').style.display = 'block';
             document.getElementById('playingTitle').innerText = 'Featured Video';
             window.history.pushState({ page: 'moviePlayer' }, '');
-            startPlayer('moviePlayerWrapper', url, false, 'slider_' + activeSliderIndex);
+            startNativePlayer('moviePlayerWrapper', url, false, 'slider_' + activeSliderIndex);
         };
 
         window.showNav = (id, el, pushState = true) => {
@@ -935,7 +809,6 @@
                 if(navIndex >= 0) document.querySelectorAll('.nav-item')[navIndex].classList.add('active');
             }
 
-            if (id !== 'livePage' && livePlayer) { try { livePlayer.pause(); } catch(e){} }
             if (id === 'favPage') renderFavoritesPage();
             if (pushState && id !== 'homePage') window.history.pushState({ page: id }, '');
         };
@@ -949,13 +822,9 @@
 
         window.closePlayer = (fromUserBtn = true) => { 
             document.getElementById('videoPage').style.display = 'none'; 
-            cleanupPlayer(false);
+            cleanupPlayer();
             const container = document.getElementById('moviePlayerWrapper');
-            if(container) {
-                container.classList.remove('force-cinema-landscape');
-                const vid = container.querySelector('video');
-                if(vid) vid.remove();
-            }
+            if(container) container.innerHTML = '';
             if (fromUserBtn) window.history.back();
         };
 
