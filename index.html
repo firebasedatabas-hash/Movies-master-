@@ -38,22 +38,22 @@
         }
 
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 80px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 75px; }
         
-        /* WATER RIPPLE EFFECT */
+        /* FAST WATER RIPPLE EFFECT */
         .water-ripple {
-            position: absolute;
+            position: fixed;
             border-radius: 50%;
             transform: scale(0);
             pointer-events: none;
-            animation: waterWave 0.75s ease-out;
-            background: radial-gradient(circle, rgba(229,9,20,0.45) 0%, rgba(255,255,255,0.2) 40%, rgba(229,9,20,0) 70%);
-            border: 1px solid rgba(229,9,20,0.5);
-            z-index: 9999;
+            animation: waterWave 0.5s ease-out forwards;
+            background: radial-gradient(circle, rgba(229,9,20,0.35) 0%, rgba(255,255,255,0.15) 30%, transparent 70%);
+            border: 1px solid rgba(229,9,20,0.4);
+            z-index: 999999;
         }
         @keyframes waterWave {
-            0% { transform: scale(0.1); opacity: 0.9; }
-            100% { transform: scale(3.5); opacity: 0; }
+            0% { transform: scale(0.2); opacity: 0.8; }
+            100% { transform: scale(2.5); opacity: 0; }
         }
 
         /* SPLASH SCREEN */
@@ -123,20 +123,27 @@
         .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(9,10,15,0.75); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
         .fav-card-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.25); border-color: var(--primary); }
 
-        /* 4 CHANNELS GRID */
+        /* 4 CHANNELS GRID (PERFECT FIT 0% CUTOFF) */
         #livePage { display: none; flex-direction: column; min-height: 100vh; }
         .video-fixed-top { position: sticky; top: 0; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; padding-bottom: 30px; }
 
         @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .live-grid-container-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 6px; padding: 16px 10px; }
-        .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; }
-        .live-item { position: relative; width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; }
+        .live-grid-container-4 { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 12px 4px; 
+            padding: 14px 6px; 
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
+        .live-item { position: relative; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; flex-shrink: 0; }
         .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(var(--primary), var(--primary-accent), #ff5252, #ffffff, var(--primary)); animation: rotateBorder 3s linear infinite; }
         .live-item img { width: 88%; height: 88%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
-        .channel-title-text { font-size: 10px; margin-top: 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; color: #eee; font-weight: 600; }
-        .fav-channel-btn { position: absolute; top: -3px; right: -2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
+        .channel-title-text { font-size: 10px; margin-top: 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; color: #eee; font-weight: 600; padding: 0 2px; }
+        .fav-channel-btn { position: absolute; top: -3px; right: 2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
         .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
 
         /* PLAYER CONTAINER */
@@ -175,34 +182,34 @@
         .action-btn.share-btn i { color: var(--success); }
 
         /* AD BOX */
-        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 12px auto 8px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
+        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px auto 6px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
         .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
 
-        /* GLASS FLOATING BOTTOM NAV (VISIBLE ON ALL PAGES) */
+        /* GLASS FLOATING BOTTOM NAV */
         .bottom-nav { 
             position: fixed; 
-            bottom: 12px; 
-            left: 14px; 
-            right: 14px; 
-            background: rgba(18, 20, 28, 0.75); 
+            bottom: 10px; 
+            left: 12px; 
+            right: 12px; 
+            background: rgba(18, 20, 28, 0.78); 
             backdrop-filter: blur(24px) saturate(180%); 
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.12); 
             display: flex; 
             justify-content: space-around; 
-            padding: 6px; 
-            border-radius: 22px; 
+            padding: 4px; 
+            border-radius: 20px; 
             z-index: 2500; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.1); 
-            height: 58px;
+            height: 56px;
         }
-        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 16px; transition: 0.25s; }
+        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 14px; transition: 0.2s; padding: 4px 2px; white-space: nowrap; }
         .nav-item.active { color: #ffffff; background: rgba(229, 9, 20, 0.22); border: 1px solid rgba(229,9,20,0.3); }
         .nav-item.active i { color: var(--primary); }
         .nav-item i { font-size: 16px; margin-bottom: 3px; }
 
         /* Full Pages */
-        .full-page { position: fixed; inset: 0; background: var(--bg); z-index: 1200; display: none; overflow-y: auto; padding-bottom: 85px; }
+        .full-page { position: fixed; inset: 0; background: var(--bg); z-index: 1200; display: none; overflow-y: auto; padding-bottom: 80px; }
         .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(14,16,24,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 1250; }
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
         .movie-details-box { padding: 16px; background: #0c0e14; border-bottom: 1px solid var(--card-border); }
@@ -212,7 +219,7 @@
 
         /* ================= LANDSCAPE OPTIMIZATION ================= */
         @media screen and (orientation: landscape) {
-            body { padding-bottom: 75px; }
+            body { padding-bottom: 70px; }
             .slider-container { height: 260px; max-width: 800px; margin: 0 auto; border-radius: 12px; }
             .live-grid-container-4 { grid-template-columns: repeat(6, 1fr) !important; max-width: 900px; margin: 0 auto; }
             .movie-grid { grid-template-columns: repeat(5, 1fr) !important; max-width: 950px; margin: 0 auto; }
@@ -251,8 +258,8 @@
                     setTimeout(function() { s.style.display = 'none'; }, 400);
                 }
             }
-            setTimeout(hideSplashNow, 2000);
-            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 1500); });
+            setTimeout(hideSplashNow, 1600);
+            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 1200); });
         })();
     </script>
 
@@ -278,7 +285,7 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
-        <div id="homeSections"><p style="text-align:center;padding:30px;color:#888;">Loading content...</p></div>
+        <div id="homeSections"></div>
         
         <div class="adsterra-320x50-box">
             <span class="adsterra-tag">Sponsored</span>
@@ -396,20 +403,20 @@
     <!-- CORE SCRIPT ENGINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, set, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // WATER RIPPLE ON TOUCH
+        // WATER RIPPLE ON TOUCH (AUTO DESTROY 0.5s)
         document.addEventListener('touchstart', function(e) {
             const touch = e.touches[0];
             const ripple = document.createElement('div');
             ripple.className = 'water-ripple';
-            const size = 60;
+            const size = 50;
             ripple.style.width = size + 'px';
             ripple.style.height = size + 'px';
-            ripple.style.left = (touch.pageX - size / 2) + 'px';
-            ripple.style.top = (touch.pageY - size / 2) + 'px';
+            ripple.style.left = (touch.clientX - size / 2) + 'px';
+            ripple.style.top = (touch.clientY - size / 2) + 'px';
             document.body.appendChild(ripple);
-            setTimeout(() => { ripple.remove(); }, 750);
+            setTimeout(() => { ripple.remove(); }, 500);
         }, { passive: true });
 
         window.history.replaceState({ page: 'homePage' }, '');
@@ -433,7 +440,7 @@
         let searchDebounceTimer = null;
         let activeSliderIndex = 0;
 
-        // FAST CACHE LOAD
+        // ⚡ INSTANT ZERO-DELAY LOCAL CACHE LOAD
         try {
             const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
             if (localCache) {
@@ -442,7 +449,9 @@
                 sliders = localCache.sliders || [];
                 categories = localCache.categories || [];
                 window.globalLimit = localCache.limit || 10;
-                renderHome(); initSlider(); initLiveChannels();
+                renderHome(); 
+                initSlider(); 
+                initLiveChannels();
             }
         } catch(e){}
 
@@ -470,11 +479,6 @@
             }
         }
 
-        function reportLinkHealth(itemKey, status) {
-            if (!itemKey) return;
-            try { set(ref(db, `link_health/${itemKey}`), { status: status, lastPing: Date.now() }); } catch(e){}
-        }
-
         let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
         window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
         
@@ -495,51 +499,75 @@
             }
         };
 
-        const rootDbRef = ref(db, '/');
-        onValue(rootDbRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                window.allMovies = data.movies ? (Array.isArray(data.movies) ? data.movies : Object.values(data.movies)) : [];
-                window.allChannels = data.channels ? (Array.isArray(data.channels) ? data.channels : Object.values(data.channels)) : [];
-                sliders = data.sliders ? (Array.isArray(data.sliders) ? data.sliders : Object.values(data.sliders)) : [];
-                
-                const rawCats = data.categories ? (Array.isArray(data.categories) ? data.categories : Object.values(data.categories)) : [];
-                categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
-                window.globalLimit = parseInt(data.settings?.limit || 10);
+        function saveFastCache() {
+            try {
+                localStorage.setItem('mm_fast_cache', JSON.stringify({
+                    movies: window.allMovies,
+                    channels: window.allChannels,
+                    sliders: sliders,
+                    categories: categories,
+                    limit: window.globalLimit
+                }));
+            } catch(e){}
+        }
 
-                try {
-                    localStorage.setItem('mm_fast_cache', JSON.stringify({
-                        movies: window.allMovies,
-                        channels: window.allChannels,
-                        sliders: sliders,
-                        categories: categories,
-                        limit: window.globalLimit
-                    }));
-                } catch(e){}
+        // ⚡ SUPER FAST SEPARATE FIREBASE SYNC
+        onValue(ref(db, 'settings'), (snap) => {
+            const data = snap.val() || {};
+            window.globalLimit = parseInt(data.limit || 10);
 
-                const noticeBar = document.getElementById('liveNoticeBar');
-                if (noticeBar) {
-                    if (data.settings?.notice && data.settings.notice.trim() !== '') {
-                        noticeBar.innerText = data.settings.notice;
-                        noticeBar.style.display = 'block';
-                    } else noticeBar.style.display = 'none';
-                }
-
-                const maintOverlay = document.getElementById('maintOverlay');
-                if (maintOverlay) maintOverlay.style.display = data.settings?.maintenance ? 'flex' : 'none';
-
-                const waBtn = document.getElementById('whatsappFloatingBtn');
-                if (waBtn) {
-                    const waNum = data.settings?.features?.whatsapp;
-                    if (waNum && String(waNum).trim() !== '') {
-                        let cleanNum = String(waNum).trim().replace(/[^0-9]/g, '');
-                        if (cleanNum.startsWith('0')) cleanNum = '92' + cleanNum.substring(1);
-                        waBtn.href = `https://wa.me/${cleanNum}?text=Hello%20Movie%20Master%20Support`;
-                        waBtn.style.display = 'flex';
-                    } else waBtn.style.display = 'none';
-                }
+            const noticeBar = document.getElementById('liveNoticeBar');
+            if (noticeBar) {
+                if (data.notice && data.notice.trim() !== '') {
+                    noticeBar.innerText = data.notice;
+                    noticeBar.style.display = 'block';
+                } else noticeBar.style.display = 'none';
             }
-            renderHome(); initSlider(); initLiveChannels(); renderFavoritesPage();
+
+            const maintOverlay = document.getElementById('maintOverlay');
+            if (maintOverlay) maintOverlay.style.display = data.maintenance ? 'flex' : 'none';
+
+            const waBtn = document.getElementById('whatsappFloatingBtn');
+            if (waBtn) {
+                const waNum = data.features?.whatsapp;
+                if (waNum && String(waNum).trim() !== '') {
+                    let cleanNum = String(waNum).trim().replace(/[^0-9]/g, '');
+                    if (cleanNum.startsWith('0')) cleanNum = '92' + cleanNum.substring(1);
+                    waBtn.href = `https://wa.me/${cleanNum}?text=Hello%20Movie%20Master%20Support`;
+                    waBtn.style.display = 'flex';
+                } else waBtn.style.display = 'none';
+            }
+        });
+
+        onValue(ref(db, 'sliders'), (snap) => {
+            const data = snap.val();
+            sliders = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            saveFastCache();
+            initSlider();
+        });
+
+        onValue(ref(db, 'categories'), (snap) => {
+            const data = snap.val();
+            const rawCats = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
+            saveFastCache();
+            renderHome();
+        });
+
+        onValue(ref(db, 'channels'), (snap) => {
+            const data = snap.val();
+            window.allChannels = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            saveFastCache();
+            initLiveChannels();
+            renderFavoritesPage();
+        });
+
+        onValue(ref(db, 'movies'), (snap) => {
+            const data = snap.val();
+            window.allMovies = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            saveFastCache();
+            renderHome();
+            renderFavoritesPage();
         });
 
         window.handleNativeSystemShare = async (url, title) => {
@@ -602,11 +630,13 @@
                     }
                 });
             }
-            document.getElementById('homeSections').innerHTML = html || '<p style="text-align:center;color:#666;padding:30px;">No content available.</p>';
+            const sec = document.getElementById('homeSections');
+            if (sec) sec.innerHTML = html;
         }
 
         function initLiveChannels() {
-            document.getElementById('liveChannelGrid').innerHTML = window.allChannels.map(c => window.renderChannelItem(c)).join('');
+            const grid = document.getElementById('liveChannelGrid');
+            if (grid) grid.innerHTML = window.allChannels.map(c => window.renderChannelItem(c)).join('');
         }
 
         function renderFavoritesPage() {
@@ -637,7 +667,6 @@
                 iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
                 iframe.setAttribute('allowfullscreen', 'true');
                 container.appendChild(iframe);
-                reportLinkHealth(itemKey, 'good');
             } 
             else if (url.includes('.m3u8')) {
                 const videoEl = document.createElement('video');
@@ -651,17 +680,10 @@
                     currentHls = hls;
                     hls.loadSource(url);
                     hls.attachMedia(videoEl);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                        videoEl.play();
-                        reportLinkHealth(itemKey, 'good');
-                    });
-                    hls.on(Hls.Events.ERROR, (e, data) => {
-                        if (data.fatal) reportLinkHealth(itemKey, 'bad');
-                    });
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => { videoEl.play(); });
                 } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
                     videoEl.src = url;
                     videoEl.play();
-                    reportLinkHealth(itemKey, 'good');
                 }
             } 
             else {
@@ -671,8 +693,6 @@
                 videoEl.setAttribute('playsinline', '');
                 videoEl.src = url;
                 container.appendChild(videoEl);
-                videoEl.onplaying = () => reportLinkHealth(itemKey, 'good');
-                videoEl.onerror = () => reportLinkHealth(itemKey, 'bad');
                 videoEl.play();
             }
         }
