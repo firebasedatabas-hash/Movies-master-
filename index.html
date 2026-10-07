@@ -46,7 +46,7 @@
             border-radius: 50%;
             transform: scale(0);
             pointer-events: none;
-            animation: waterWave 0.5s ease-out forwards;
+            animation: waterWave 0.45s ease-out forwards;
             background: radial-gradient(circle, rgba(229,9,20,0.35) 0%, rgba(255,255,255,0.15) 30%, transparent 70%);
             border: 1px solid rgba(229,9,20,0.4);
             z-index: 999999;
@@ -57,7 +57,7 @@
         }
 
         /* SPLASH SCREEN */
-        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1b0d10 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.5s ease, visibility 0.5s; }
+        #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1b0d10 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.4s ease, visibility 0.4s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
         .splash-logo-box { width: 90px; height: 90px; background: linear-gradient(135deg, var(--primary), var(--primary-accent)); border-radius: 24px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 35px var(--primary-glow); margin-bottom: 16px; }
         .splash-logo-m { font-size: 52px; font-weight: 900; color: #ffffff; line-height: 1; }
@@ -70,8 +70,33 @@
         .splash-footer { position: absolute; bottom: 25px; z-index: 2; font-size: 11px; color: #777; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
         .splash-footer b { color: var(--primary); font-weight: 800; }
 
-        /* NOTICE & WHATSAPP */
-        #liveNoticeBar { display: none; background: #160c0e; color: #ff5252; padding: 8px 14px; font-size: 11px; font-weight: 700; text-align: center; position: sticky; top: 56px; z-index: 999; border-bottom: 1px solid rgba(229,9,20,0.25); }
+        /* TOP SCROLLING MARQUEE NOTICE BAR */
+        #liveNoticeBar { 
+            display: none; 
+            background: linear-gradient(90deg, #b20710, #e50914, #b20710); 
+            color: #ffffff; 
+            padding: 6px 12px; 
+            font-size: 11px; 
+            font-weight: 700; 
+            position: sticky; 
+            top: 56px; 
+            z-index: 999; 
+            border-bottom: 1px solid rgba(229,9,20,0.35); 
+            overflow: hidden; 
+            white-space: nowrap; 
+        }
+        .marquee-inner { 
+            display: inline-block; 
+            white-space: nowrap; 
+            padding-left: 100%; 
+            animation: marqueeScroll 30s linear infinite; 
+        }
+        .marquee-inner:hover { animation-play-state: paused; }
+        @keyframes marqueeScroll { 
+            0% { transform: translate(0, 0); } 
+            100% { transform: translate(-100%, 0); } 
+        }
+
         #whatsappFloatingBtn { display: none; position: fixed; bottom: 85px; right: 16px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
         #maintOverlay { display: none; position: fixed; inset: 0; background: #090a0f; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
 
@@ -103,16 +128,16 @@
         .dot.active { background: var(--primary); width: 18px; border-radius: 10px; box-shadow: 0 0 8px var(--primary); }
 
         /* SECTION HEADERS */
-        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 18px; margin-bottom: 2px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 16px; margin-bottom: 2px; }
         .section-title { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.2px; margin: 0; }
         .view-all-btn { font-size: 12px; color: #8b8f9e; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
         .view-all-btn:active, .view-all-btn.active { color: var(--primary); }
-        .movie-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; }
+        .movie-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; min-height: 190px; }
         .movie-scroll::-webkit-scrollbar { display: none; }
         
         /* MOVIE CARDS */
         .card-rect { min-width: 120px; width: 120px; border-radius: 10px; overflow: hidden; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; transition: transform 0.2s; }
-        .card-rect:active { transform: scale(0.96); }
+        .card-rect:active { transform: scale(0.95); }
         .card-rect.grid-item { min-width: unset; width: 100%; }
         .card-img-wrap { position: relative; width: 100%; height: 165px; border-radius: 10px; overflow: hidden; background: #12141c; }
         .card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 10px; }
@@ -123,7 +148,7 @@
         .fav-card-btn { position: absolute; top: 6px; right: 6px; background: rgba(9,10,15,0.75); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 11px; cursor: pointer; z-index: 5; }
         .fav-card-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.25); border-color: var(--primary); }
 
-        /* 4 CHANNELS GRID (PERFECT FIT 0% CUTOFF) */
+        /* 4 CHANNELS GRID (7 RAINBOW COLORS & TAP ANIMATION) */
         #livePage { display: none; flex-direction: column; min-height: 100vh; }
         .video-fixed-top { position: sticky; top: 0; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
@@ -139,9 +164,36 @@
             box-sizing: border-box; 
         }
         .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
-        .live-item { position: relative; width: 58px; height: 58px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #000; overflow: hidden; cursor: pointer; flex-shrink: 0; }
-        .live-item::before { content: ""; position: absolute; width: 150%; height: 150%; background: conic-gradient(var(--primary), var(--primary-accent), #ff5252, #ffffff, var(--primary)); animation: rotateBorder 3s linear infinite; }
+        
+        /* 7 COLORS ROTATING CONIC GRADIENT */
+        .live-item { 
+            position: relative; 
+            width: 58px; 
+            height: 58px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: #000; 
+            overflow: hidden; 
+            cursor: pointer; 
+            flex-shrink: 0; 
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .live-item:active { 
+            transform: scale(0.85); 
+            box-shadow: 0 0 16px var(--primary-glow); 
+        }
+        .live-item::before { 
+            content: ""; 
+            position: absolute; 
+            width: 150%; 
+            height: 150%; 
+            background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000); 
+            animation: rotateBorder 2.2s linear infinite; 
+        }
         .live-item img { width: 88%; height: 88%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
+        
         .channel-title-text { font-size: 10px; margin-top: 5px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; color: #eee; font-weight: 600; padding: 0 2px; }
         .fav-channel-btn { position: absolute; top: -3px; right: 2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
         .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
@@ -217,7 +269,7 @@
         .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: #ff5252; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(229, 9, 20, 0.3); }
         .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
 
-        /* ================= LANDSCAPE OPTIMIZATION ================= */
+        /* LANDSCAPE OPTIMIZATION */
         @media screen and (orientation: landscape) {
             body { padding-bottom: 70px; }
             .slider-container { height: 260px; max-width: 800px; margin: 0 auto; border-radius: 12px; }
@@ -255,11 +307,11 @@
                 var s = document.getElementById('splashScreen');
                 if (s && s.style.display !== 'none') {
                     s.classList.add('hide');
-                    setTimeout(function() { s.style.display = 'none'; }, 400);
+                    setTimeout(function() { s.style.display = 'none'; }, 350);
                 }
             }
-            setTimeout(hideSplashNow, 1600);
-            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 1200); });
+            setTimeout(hideSplashNow, 1200);
+            window.addEventListener('DOMContentLoaded', function() { setTimeout(hideSplashNow, 800); });
         })();
     </script>
 
@@ -268,7 +320,10 @@
         <div class="logo"><i class="fa fa-play-circle" style="color:var(--primary);"></i> MOVIE <span>MASTER</span></div>
     </header>
 
-    <div id="liveNoticeBar"></div>
+    <!-- TOP SCROLLING TICKER NOTICE -->
+    <div id="liveNoticeBar">
+        <div class="marquee-inner" id="noticeTextContainer"></div>
+    </div>
 
     <!-- 1. HOME PAGE -->
     <div id="homePage" class="page">
@@ -285,6 +340,7 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
+        <!-- INSTANT RENDER SECTIONS -->
         <div id="homeSections"></div>
         
         <div class="adsterra-320x50-box">
@@ -400,12 +456,111 @@
         <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
     </div>
 
+    <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE RESTORATION -->
+    <script>
+        window.allMovies = [];
+        window.allChannels = [];
+        window.sliders = [];
+        window.categories = [];
+        window.globalLimit = 10;
+        let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
+
+        window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
+
+        window.renderMovieCard = (m, isGrid = false) => {
+            const fav = window.isFav('movies', m.id);
+            const viewCount = m.views ? (m.views > 999 ? (m.views/1000).toFixed(1)+'k' : m.views) : '1';
+            return `
+                <div class="card-rect ${isGrid ? 'grid-item' : ''}" onclick="window.playMovie('${m.id}')">
+                    <div class="card-img-wrap">
+                        <button class="fav-card-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)"><i class="fa fa-heart"></i></button>
+                        <span class="card-views-badge"><i class="fa fa-eye"></i> ${viewCount}</span>
+                        <img src="${m.thumb}" alt="${m.title || m.name}" loading="eager" decoding="async">
+                    </div>
+                    <div class="card-rect-info">
+                        <p>${m.title || m.name}</p>
+                    </div>
+                </div>`;
+        };
+
+        window.renderChannelItem = (c) => {
+            const fav = window.isFav('channels', c.id);
+            return `
+                <div class="channel-box">
+                    <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
+                    <div class="live-item" onclick="window.playLive('${c.url}', '${(c.title || c.name || 'Live Channel').replace(/'/g, "\\'")}', '${c.id}')">
+                        <img src="${c.thumb}" alt="${c.title || c.name}" loading="eager" decoding="async">
+                    </div>
+                    <div class="channel-title-text">${c.title || c.name}</div>
+                </div>`;
+        };
+
+        window.renderHome = () => {
+            let html = '';
+            if (window.categories && window.categories.length > 0) {
+                window.categories.forEach(cat => {
+                    const filtered = window.allMovies.filter(m => (m.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase());
+                    if (filtered.length > 0) {
+                        const lim = parseInt(cat.limit) || window.globalLimit;
+                        html += `
+                            <div class="section-header">
+                                <div class="section-title">${cat.name}</div>
+                                <div class="view-all-btn" onclick="window.openViewAll('${cat.name.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                            </div>
+                            <div class="movie-scroll">${filtered.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
+                    }
+                });
+            }
+            if (!html && window.allMovies && window.allMovies.length > 0) {
+                html = `<div class="section-header"><div class="section-title">Trending in Pakistan</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
+            }
+            const sec = document.getElementById('homeSections');
+            if (sec && html) {
+                sec.innerHTML = html;
+                try { localStorage.setItem('mm_cached_home_html', html); } catch(e){}
+            }
+        };
+
+        window.initLiveChannels = () => {
+            const grid = document.getElementById('liveChannelGrid');
+            if (grid && window.allChannels.length) grid.innerHTML = window.allChannels.map(c => window.renderChannelItem(c)).join('');
+        };
+
+        window.renderFavoritesPage = () => {
+            const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
+            const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
+            const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
+            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
+            if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite movies.</p>';
+        };
+
+        // ⚡ INSTANT RESTORE ON 0ms (NO WAITING)
+        try {
+            const cachedHtml = localStorage.getItem('mm_cached_home_html');
+            if (cachedHtml) {
+                const sec = document.getElementById('homeSections');
+                if (sec) sec.innerHTML = cachedHtml;
+            }
+
+            const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
+            if (localCache) {
+                window.allMovies = localCache.movies || [];
+                window.allChannels = localCache.channels || [];
+                window.sliders = localCache.sliders || [];
+                window.categories = localCache.categories || [];
+                window.globalLimit = localCache.limit || 10;
+                window.renderHome();
+                window.initLiveChannels();
+            }
+        } catch(e){}
+    </script>
+
     <!-- CORE SCRIPT ENGINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // WATER RIPPLE ON TOUCH (AUTO DESTROY 0.5s)
+        // WATER RIPPLE ON TOUCH
         document.addEventListener('touchstart', function(e) {
             const touch = e.touches[0];
             const ripple = document.createElement('div');
@@ -416,7 +571,7 @@
             ripple.style.left = (touch.clientX - size / 2) + 'px';
             ripple.style.top = (touch.clientY - size / 2) + 'px';
             document.body.appendChild(ripple);
-            setTimeout(() => { ripple.remove(); }, 500);
+            setTimeout(() => { ripple.remove(); }, 450);
         }, { passive: true });
 
         window.history.replaceState({ page: 'homePage' }, '');
@@ -430,30 +585,10 @@
             if (anyClosed || (livePage && livePage.style.display === 'flex')) { window.showNav('homePage', null, false); }
         });
 
-        window.allMovies = [];
-        window.allChannels = [];
-        let sliders = [];
-        let categories = [];
-        window.globalLimit = 10;
         let currentHls = null;
         let currentPlayingChannel = null;
         let searchDebounceTimer = null;
         let activeSliderIndex = 0;
-
-        // ⚡ INSTANT ZERO-DELAY LOCAL CACHE LOAD
-        try {
-            const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
-            if (localCache) {
-                window.allMovies = localCache.movies || [];
-                window.allChannels = localCache.channels || [];
-                sliders = localCache.sliders || [];
-                categories = localCache.categories || [];
-                window.globalLimit = localCache.limit || 10;
-                renderHome(); 
-                initSlider(); 
-                initLiveChannels();
-            }
-        } catch(e){}
 
         const firebaseConfig = {
             apiKey: "AIzaSyDhdCiM-RmSboLe7KW3rjzdshO5SAA4sBI",
@@ -479,9 +614,6 @@
             }
         }
 
-        let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
-        window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
-        
         window.toggleFav = (type, id, event) => {
             if (event) { event.preventDefault(); event.stopPropagation(); }
             id = String(id);
@@ -489,7 +621,7 @@
             const idx = favorites[type].indexOf(id);
             if (idx > -1) favorites[type].splice(idx, 1); else favorites[type].push(id);
             localStorage.setItem('user_favorites', JSON.stringify(favorites));
-            renderHome(); initLiveChannels(); renderFavoritesPage();
+            window.renderHome(); window.initLiveChannels(); window.renderFavoritesPage();
             
             const btn = document.getElementById(`playerFavBtn_${id}`);
             if (btn) {
@@ -504,24 +636,27 @@
                 localStorage.setItem('mm_fast_cache', JSON.stringify({
                     movies: window.allMovies,
                     channels: window.allChannels,
-                    sliders: sliders,
-                    categories: categories,
+                    sliders: window.sliders,
+                    categories: window.categories,
                     limit: window.globalLimit
                 }));
             } catch(e){}
         }
 
-        // ⚡ SUPER FAST SEPARATE FIREBASE SYNC
+        // ⚡ REALTIME SYNC ENGINE (SEPARATE & INSTANT)
         onValue(ref(db, 'settings'), (snap) => {
             const data = snap.val() || {};
             window.globalLimit = parseInt(data.limit || 10);
 
             const noticeBar = document.getElementById('liveNoticeBar');
-            if (noticeBar) {
+            const noticeText = document.getElementById('noticeTextContainer');
+            if (noticeBar && noticeText) {
                 if (data.notice && data.notice.trim() !== '') {
-                    noticeBar.innerText = data.notice;
+                    noticeText.innerText = data.notice;
                     noticeBar.style.display = 'block';
-                } else noticeBar.style.display = 'none';
+                } else {
+                    noticeBar.style.display = 'none';
+                }
             }
 
             const maintOverlay = document.getElementById('maintOverlay');
@@ -541,7 +676,7 @@
 
         onValue(ref(db, 'sliders'), (snap) => {
             const data = snap.val();
-            sliders = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            window.sliders = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
             saveFastCache();
             initSlider();
         });
@@ -549,25 +684,25 @@
         onValue(ref(db, 'categories'), (snap) => {
             const data = snap.val();
             const rawCats = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
-            categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
+            window.categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
             saveFastCache();
-            renderHome();
+            window.renderHome();
         });
 
         onValue(ref(db, 'channels'), (snap) => {
             const data = snap.val();
             window.allChannels = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
             saveFastCache();
-            initLiveChannels();
-            renderFavoritesPage();
+            window.initLiveChannels();
+            window.renderFavoritesPage();
         });
 
         onValue(ref(db, 'movies'), (snap) => {
             const data = snap.val();
             window.allMovies = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
             saveFastCache();
-            renderHome();
-            renderFavoritesPage();
+            window.renderHome();
+            window.renderFavoritesPage();
         });
 
         window.handleNativeSystemShare = async (url, title) => {
@@ -583,69 +718,6 @@
                 window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
             }
         };
-
-        window.renderMovieCard = (m, isGrid = false) => {
-            const fav = window.isFav('movies', m.id);
-            const viewCount = m.views ? (m.views > 999 ? (m.views/1000).toFixed(1)+'k' : m.views) : '1';
-            return `
-                <div class="card-rect ${isGrid ? 'grid-item' : ''}" onclick="window.playMovie('${m.id}')">
-                    <div class="card-img-wrap">
-                        <button class="fav-card-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)"><i class="fa fa-heart"></i></button>
-                        <span class="card-views-badge"><i class="fa fa-eye"></i> ${viewCount}</span>
-                        <img src="${m.thumb}" alt="${m.title || m.name}" loading="lazy">
-                    </div>
-                    <div class="card-rect-info">
-                        <p>${m.title || m.name}</p>
-                    </div>
-                </div>`;
-        };
-
-        window.renderChannelItem = (c) => {
-            const fav = window.isFav('channels', c.id);
-            return `
-                <div class="channel-box">
-                    <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
-                    <div class="live-item" onclick="window.playLive('${c.url}', '${(c.title || c.name || 'Live Channel').replace(/'/g, "\\'")}', '${c.id}')">
-                        <img src="${c.thumb}" alt="${c.title || c.name}" loading="lazy">
-                    </div>
-                    <div class="channel-title-text">${c.title || c.name}</div>
-                </div>`;
-        };
-
-        function renderHome() {
-            let html = '';
-            if (categories.length === 0 && window.allMovies.length > 0) {
-                html = `<div class="section-header"><div class="section-title">Trending in Pakistan</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
-            } else {
-                categories.forEach(cat => {
-                    const filtered = window.allMovies.filter(m => m.category === cat.name);
-                    if (filtered.length > 0) {
-                        const lim = parseInt(cat.limit) || window.globalLimit;
-                        html += `
-                            <div class="section-header">
-                                <div class="section-title">${cat.name}</div>
-                                <div class="view-all-btn" onclick="window.openViewAll('${cat.name}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
-                            </div>
-                            <div class="movie-scroll">${filtered.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
-                    }
-                });
-            }
-            const sec = document.getElementById('homeSections');
-            if (sec) sec.innerHTML = html;
-        }
-
-        function initLiveChannels() {
-            const grid = document.getElementById('liveChannelGrid');
-            if (grid) grid.innerHTML = window.allChannels.map(c => window.renderChannelItem(c)).join('');
-        }
-
-        function renderFavoritesPage() {
-            const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
-            const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
-            const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
-            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
-            if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite movies.</p>';
-        }
 
         function cleanupPlayer() {
             if (currentHls) { try { currentHls.destroy(); } catch(e){} currentHls = null; }
@@ -763,7 +835,7 @@
 
             const relatedBox = document.getElementById('relatedCategoryMovies');
             if (relatedBox) {
-                const sameCatMovies = window.allMovies.filter(item => item.category === m.category && String(item.id) !== String(m.id)).slice(0, 8);
+                const sameCatMovies = window.allMovies.filter(item => (item.category || '').trim() === (m.category || '').trim() && String(item.id) !== String(m.id)).slice(0, 8);
                 const fallbackMovies = sameCatMovies.length ? sameCatMovies : window.allMovies.filter(item => String(item.id) !== String(m.id)).slice(0, 8);
                 relatedBox.innerHTML = fallbackMovies.map(item => window.renderMovieCard(item)).join('') || '<p style="color:#666; font-size:11px; padding:10px;">No more movies in this category.</p>';
             }
@@ -813,10 +885,10 @@
         function initSlider() {
             const track = document.getElementById('sliderTrack'), dots = document.getElementById('sliderDots');
             const sliderArea = document.getElementById('sliderClickArea');
-            if(!sliders.length) return;
+            if(!window.sliders.length) return;
 
-            track.innerHTML = sliders.map(s => `<div class="slide" onclick="window.handleSlideClick('${s.url}')"><img src="${s.img}"><div class="slide-overlay"></div></div>`).join('');
-            dots.innerHTML = sliders.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
+            track.innerHTML = window.sliders.map(s => `<div class="slide" onclick="window.handleSlideClick('${s.url}')"><img src="${s.img}"><div class="slide-overlay"></div></div>`).join('');
+            dots.innerHTML = window.sliders.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
             
             sliderArea.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
             sliderArea.ontouchend = (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); };
@@ -839,8 +911,8 @@
         }
 
         function slideManual(direction) {
-            if (!sliders.length) return;
-            activeSliderIndex = (activeSliderIndex + direction + sliders.length) % sliders.length;
+            if (!window.sliders.length) return;
+            activeSliderIndex = (activeSliderIndex + direction + window.sliders.length) % window.sliders.length;
             updateSliderPosition();
             startAutoSlider();
         }
@@ -848,8 +920,8 @@
         function startAutoSlider() {
             if(window.si) clearInterval(window.si);
             window.si = setInterval(() => {
-                if (!sliders.length) return;
-                activeSliderIndex = (activeSliderIndex + 1) % sliders.length;
+                if (!window.sliders.length) return;
+                activeSliderIndex = (activeSliderIndex + 1) % window.sliders.length;
                 updateSliderPosition();
             }, 4000);
         }
@@ -874,7 +946,7 @@
                 if(navIndex >= 0) document.querySelectorAll('.nav-item')[navIndex].classList.add('active');
             }
 
-            if (id === 'favPage') renderFavoritesPage();
+            if (id === 'favPage') window.renderFavoritesPage();
             if (pushState && id !== 'homePage') window.history.pushState({ page: id }, '');
         };
 
@@ -882,7 +954,7 @@
             window.showNav('viewAllPage');
             window.history.pushState({ page: 'viewAll' }, '');
             document.getElementById('viewAllTitle').innerText = cat;
-            document.getElementById('viewAllGrid').innerHTML = window.allMovies.filter(m => m.category === cat).map(m => window.renderMovieCard(m, true)).join('');
+            document.getElementById('viewAllGrid').innerHTML = window.allMovies.filter(m => (m.category || '').trim() === cat.trim()).map(m => window.renderMovieCard(m, true)).join('');
         };
 
         window.closePlayer = (fromUserBtn = true) => { 
@@ -894,6 +966,9 @@
         };
 
         window.backToHome = () => window.history.back();
+
+        // RUN SLIDER AT START
+        initSlider();
     </script>
 </body>
 </html>
