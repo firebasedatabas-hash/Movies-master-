@@ -38,7 +38,7 @@
         }
 
         * { box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 75px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); margin: 0; padding-bottom: 78px; }
         
         /* FAST WATER RIPPLE EFFECT */
         .water-ripple {
@@ -54,6 +54,12 @@
         @keyframes waterWave {
             0% { transform: scale(0.2); opacity: 0.8; }
             100% { transform: scale(2.5); opacity: 0; }
+        }
+
+        /* 7-COLOR ROTATING RAINBOW BORDER ANIMATION */
+        @keyframes rotateRainbowBorder { 
+            0% { transform: rotate(0deg); } 
+            100% { transform: rotate(360deg); } 
         }
 
         /* SPLASH SCREEN */
@@ -75,13 +81,14 @@
             display: none; 
             background: linear-gradient(90deg, #b20710, #e50914, #b20710); 
             color: #ffffff; 
-            padding: 6px 12px; 
+            padding: 7px 12px; 
             font-size: 11px; 
             font-weight: 700; 
+            letter-spacing: 0.3px;
             position: sticky; 
             top: 56px; 
             z-index: 999; 
-            border-bottom: 1px solid rgba(229,9,20,0.35); 
+            border-bottom: 1px solid rgba(255,255,255,0.2); 
             overflow: hidden; 
             white-space: nowrap; 
         }
@@ -89,7 +96,7 @@
             display: inline-block; 
             white-space: nowrap; 
             padding-left: 100%; 
-            animation: marqueeScroll 30s linear infinite; 
+            animation: marqueeScroll 28s linear infinite; 
         }
         .marquee-inner:hover { animation-play-state: paused; }
         @keyframes marqueeScroll { 
@@ -97,15 +104,15 @@
             100% { transform: translate(-100%, 0); } 
         }
 
-        #whatsappFloatingBtn { display: none; position: fixed; bottom: 85px; right: 16px; background: linear-gradient(135deg, #25d366, #128c7e); color: #fff; width: 48px; height: 48px; border-radius: 50%; align-items: center; justify-content: center; font-size: 24px; z-index: 1600; box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
+        #whatsappFloatingBtn { display: none; }
         #maintOverlay { display: none; position: fixed; inset: 0; background: #090a0f; z-index: 999999; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px; }
 
-        /* HEADER */
+        /* HEADER WITH WHATSAPP BUTTON */
         header { 
             padding: 0 16px; 
             display: flex; 
             align-items: center; 
-            justify-content: flex-start; 
+            justify-content: space-between; 
             background: rgba(9, 10, 15, 0.95); 
             backdrop-filter: blur(16px); 
             position: sticky; 
@@ -116,6 +123,25 @@
         }
         .logo { color: #fff; font-weight: 900; font-size: 19px; letter-spacing: -0.5px; display: flex; align-items: center; gap: 6px; }
         .logo span { color: var(--primary); }
+
+        /* 📲 WHATSAPP BUTTON IN TOP HEADER */
+        .header-whatsapp-btn {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 18px;
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: transform 0.2s;
+        }
+        .header-whatsapp-btn:active { transform: scale(0.92); }
+        .header-whatsapp-btn i { font-size: 15px; }
 
         /* SLIDER */
         .slider-container { width: 100%; height: 215px; position: relative; overflow: hidden; background: #000; }
@@ -128,11 +154,11 @@
         .dot.active { background: var(--primary); width: 18px; border-radius: 10px; box-shadow: 0 0 8px var(--primary); }
 
         /* SECTION HEADERS */
-        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 16px; margin-bottom: 2px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 18px; margin-bottom: 4px; }
         .section-title { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.2px; margin: 0; }
         .view-all-btn { font-size: 12px; color: #8b8f9e; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
         .view-all-btn:active, .view-all-btn.active { color: var(--primary); }
-        .movie-scroll { display: flex; gap: 10px; overflow-x: auto; padding: 8px 16px 14px; scrollbar-width: none; min-height: 190px; }
+        .movie-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 6px 16px 14px; scrollbar-width: none; min-height: 195px; }
         .movie-scroll::-webkit-scrollbar { display: none; }
         
         /* MOVIE CARDS */
@@ -154,7 +180,6 @@
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; padding-bottom: 30px; }
 
-        @keyframes rotateBorder { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .live-grid-container-4 { 
             display: grid; 
             grid-template-columns: repeat(4, 1fr); 
@@ -165,7 +190,6 @@
         }
         .channel-box { position: relative; display: flex; flex-direction: column; align-items: center; width: 100%; min-width: 0; }
         
-        /* 7 COLORS ROTATING CONIC GRADIENT */
         .live-item { 
             position: relative; 
             width: 58px; 
@@ -190,7 +214,7 @@
             width: 150%; 
             height: 150%; 
             background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000); 
-            animation: rotateBorder 2.2s linear infinite; 
+            animation: rotateRainbowBorder 2.2s linear infinite; 
         }
         .live-item img { width: 88%; height: 88%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
         
@@ -224,40 +248,86 @@
             background: #000;
         }
 
-        /* 2 ACTION BUTTONS */
-        .movie-actions-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0 16px; }
-        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 10px 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 11px; font-weight: 700; transition: 0.2s; }
-        .action-btn i { font-size: 17px; }
+        /* 3 ACTION BUTTONS */
+        .movie-actions-bar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0 16px; }
+        .action-btn { background: #13151f; border: 1px solid var(--card-border); color: #ccc; border-radius: 12px; padding: 10px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; font-size: 10px; font-weight: 700; transition: 0.2s; }
+        .action-btn i { font-size: 16px; }
         .action-btn.active { background: rgba(229, 9, 20, 0.18); border-color: var(--primary); color: var(--primary); }
         .action-btn.active i { color: var(--primary); }
         .action-btn.share-btn { background: rgba(46, 204, 113, 0.12); border-color: rgba(46, 204, 113, 0.3); color: var(--success); }
         .action-btn.share-btn i { color: var(--success); }
+        .action-btn.fs-btn { background: rgba(0, 180, 216, 0.12); border-color: rgba(0, 180, 216, 0.3); color: var(--blue); }
+        .action-btn.fs-btn i { color: var(--blue); }
 
         /* AD BOX */
         .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px auto 6px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
         .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
 
-        /* GLASS FLOATING BOTTOM NAV */
+        /* 🌈 100% FIXED HORIZONTAL BOTTOM NAV WITH 7-COLOR ROTATING BORDER */
+        .bottom-nav-container {
+            position: fixed;
+            bottom: 10px;
+            left: 12px;
+            right: 12px;
+            height: 58px;
+            border-radius: 22px;
+            padding: 2px;
+            overflow: hidden;
+            z-index: 2500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+        }
+        /* ONLY THIS ROTATES IN THE BACKGROUND - THE CONTAINER STAYS FIXED */
+        .bottom-nav-container::before {
+            content: "";
+            position: absolute;
+            width: 250%;
+            height: 500%;
+            background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
+            animation: rotateRainbowBorder 3.5s linear infinite;
+            z-index: 1;
+        }
         .bottom-nav { 
-            position: fixed; 
-            bottom: 10px; 
-            left: 12px; 
-            right: 12px; 
-            background: rgba(18, 20, 28, 0.78); 
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background: rgba(14, 16, 24, 0.95); 
             backdrop-filter: blur(24px) saturate(180%); 
             -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.12); 
+            border-radius: 20px;
             display: flex; 
             justify-content: space-around; 
-            padding: 4px; 
-            border-radius: 20px; 
-            z-index: 2500; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.7), inset 0 1px 1px rgba(255,255,255,0.1); 
-            height: 56px;
+            align-items: center;
+            padding: 3px; 
         }
-        .nav-item { text-align: center; color: #8b8f9e; font-size: 10px; font-weight: 600; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; border-radius: 14px; transition: 0.2s; padding: 4px 2px; white-space: nowrap; }
-        .nav-item.active { color: #ffffff; background: rgba(229, 9, 20, 0.22); border: 1px solid rgba(229,9,20,0.3); }
-        .nav-item.active i { color: var(--primary); }
+        .nav-item { 
+            text-align: center; 
+            color: #8b8f9e; 
+            font-size: 10px; 
+            font-weight: 600; 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            border-radius: 14px; 
+            transition: 0.25s; 
+            padding: 5px 2px; 
+            white-space: nowrap; 
+        }
+        .nav-item.active { 
+            color: #ffffff; 
+            background: rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
+        }
+        .nav-item.active i { 
+            color: #00ffcc; 
+            filter: drop-shadow(0 0 6px rgba(0,255,204,0.6)); 
+        }
         .nav-item i { font-size: 16px; margin-bottom: 3px; }
 
         /* Full Pages */
@@ -276,7 +346,7 @@
             .live-grid-container-4 { grid-template-columns: repeat(6, 1fr) !important; max-width: 900px; margin: 0 auto; }
             .movie-grid { grid-template-columns: repeat(5, 1fr) !important; max-width: 950px; margin: 0 auto; }
             .video-fixed-top, .native-chrome-player-box { max-height: 75vh; }
-            .bottom-nav { max-width: 480px; left: 50%; transform: translateX(-50%); bottom: 8px; }
+            .bottom-nav-container { max-width: 480px; left: 50%; transform: translateX(-50%); bottom: 8px; }
         }
     </style>
 </head>
@@ -287,10 +357,6 @@
         <h2 style="margin:0 0 10px; color:#fff; font-weight:900;">App Under Maintenance</h2>
         <p style="color:#aaa; font-size:13px; max-width:280px; line-height:1.6;">Hum app ko behtar bana rahe hain. Jald hi live streaming aur movies wapas aayengi!</p>
     </div>
-
-    <a id="whatsappFloatingBtn" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <!-- SPLASH SCREEN -->
     <div id="splashScreen">
@@ -315,9 +381,13 @@
         })();
     </script>
 
-    <!-- HEADER -->
+    <!-- HEADER WITH WHATSAPP BUTTON -->
     <header>
         <div class="logo"><i class="fa fa-play-circle" style="color:var(--primary);"></i> MOVIE <span>MASTER</span></div>
+        <!-- 📲 WHATSAPP SHARE APP BUTTON IN HEADER -->
+        <div class="header-whatsapp-btn" onclick="window.shareAppViaWhatsApp()">
+            <i class="fab fa-whatsapp"></i> <span>Share App</span>
+        </div>
     </header>
 
     <!-- TOP SCROLLING TICKER NOTICE -->
@@ -340,7 +410,7 @@
             <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
         </div>
 
-        <!-- INSTANT RENDER SECTIONS -->
+        <!-- ⚡ 100% INSTANT RENDER SECTIONS -->
         <div id="homeSections"></div>
         
         <div class="adsterra-320x50-box">
@@ -448,15 +518,17 @@
         </div>
     </div>
 
-    <!-- FLOATING GLASS BOTTOM NAV -->
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
-        <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
-        <div class="nav-item" onclick="window.showNav('searchPage', this)"><i class="fa fa-search"></i>Search</div>
-        <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
+    <!-- 🌈 7-COLOR RAINBOW GLOWING BOTTOM NAV (100% FIXED & STABLE) -->
+    <div class="bottom-nav-container">
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
+            <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
+            <div class="nav-item" onclick="window.showNav('searchPage', this)"><i class="fa fa-search"></i>Search</div>
+            <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
+        </div>
     </div>
 
-    <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE RESTORATION -->
+    <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE & ENGINE -->
     <script>
         window.allMovies = [];
         window.allChannels = [];
@@ -466,6 +538,12 @@
         let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
 
         window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
+
+        window.shareAppViaWhatsApp = () => {
+            const appDownloadLink = "https://firebasedatabas-hash.github.io/Movies-master-website-/";
+            const shareMsg = encodeURIComponent(`🎬 *Movie Master Pro - All Live TV & HD Movies App*\n\n🔥 Watch All Pakistani Live TV Channels, Bollywood, Hollywood & HD Movies 100% Free!\n\n📥 *Download App Now:*\n👉 ${appDownloadLink}`);
+            window.open(`https://api.whatsapp.com/send?text=${shareMsg}`, '_blank');
+        };
 
         window.renderMovieCard = (m, isGrid = false) => {
             const fav = window.isFav('movies', m.id);
@@ -495,25 +573,50 @@
                 </div>`;
         };
 
+        // ⚡ INSTANT MOVIE CATEGORY GROUPING ENGINE (NO DELAY)
         window.renderHome = () => {
+            if (!window.allMovies || window.allMovies.length === 0) return;
+
             let html = '';
+            let catMap = {};
+
+            // 1. First add defined categories
             if (window.categories && window.categories.length > 0) {
-                window.categories.forEach(cat => {
-                    const filtered = window.allMovies.filter(m => (m.category || '').trim().toLowerCase() === (cat.name || '').trim().toLowerCase());
-                    if (filtered.length > 0) {
-                        const lim = parseInt(cat.limit) || window.globalLimit;
-                        html += `
-                            <div class="section-header">
-                                <div class="section-title">${cat.name}</div>
-                                <div class="view-all-btn" onclick="window.openViewAll('${cat.name.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
-                            </div>
-                            <div class="movie-scroll">${filtered.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
-                    }
+                window.categories.forEach(c => {
+                    const cName = (typeof c === 'object' ? c.name : c) || '';
+                    if (cName.trim()) catMap[cName.trim().toLowerCase()] = { name: cName.trim(), limit: c.limit || window.globalLimit, movies: [] };
                 });
             }
-            if (!html && window.allMovies && window.allMovies.length > 0) {
+
+            // 2. Put movies into category buckets
+            window.allMovies.forEach(m => {
+                const cName = (m.category || 'Trending Movies').trim();
+                const cKey = cName.toLowerCase();
+                if (!catMap[cKey]) {
+                    catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
+                }
+                catMap[cKey].movies.push(m);
+            });
+
+            // 3. Render categories immediately
+            let renderedAny = false;
+            Object.values(catMap).forEach(cat => {
+                if (cat.movies.length > 0) {
+                    const lim = parseInt(cat.limit) || window.globalLimit;
+                    html += `
+                        <div class="section-header">
+                            <div class="section-title">${cat.name}</div>
+                            <div class="view-all-btn" onclick="window.openViewAll('${cat.name.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                        </div>
+                        <div class="movie-scroll">${cat.movies.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
+                    renderedAny = true;
+                }
+            });
+
+            if (!renderedAny) {
                 html = `<div class="section-header"><div class="section-title">Trending in Pakistan</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
             }
+
             const sec = document.getElementById('homeSections');
             if (sec && html) {
                 sec.innerHTML = html;
@@ -603,6 +706,36 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // 🔄 APPCREATOR24 FORCED LANDSCAPE ORIENTATION HELPER
+        window.toggleLandscapePlayer = async () => {
+            const container = document.getElementById('moviePlayerWrapper') || document.getElementById('livePlayerWrapper');
+            if (!container) return;
+
+            try {
+                if (!document.fullscreenElement) {
+                    if (container.requestFullscreen) {
+                        await container.requestFullscreen();
+                    } else if (container.webkitRequestFullscreen) {
+                        await container.webkitRequestFullscreen();
+                    }
+                    if (screen.orientation && screen.orientation.lock) {
+                        await screen.orientation.lock('landscape').catch(() => {});
+                    }
+                } else {
+                    if (document.exitFullscreen) await document.exitFullscreen();
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                }
+            } catch(e){}
+        };
+
+        document.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(()=>{});
+            } else {
+                if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+            }
+        });
+
         function registerRealDeviceView(movieId) {
             if (!movieId) return;
             const viewKey = 'mm_viewed_' + movieId;
@@ -643,7 +776,7 @@
             } catch(e){}
         }
 
-        // ⚡ REALTIME SYNC ENGINE (SEPARATE & INSTANT)
+        // ⚡ FIREBASE SEPARATE FAST SYNC
         onValue(ref(db, 'settings'), (snap) => {
             const data = snap.val() || {};
             window.globalLimit = parseInt(data.limit || 10);
@@ -661,17 +794,6 @@
 
             const maintOverlay = document.getElementById('maintOverlay');
             if (maintOverlay) maintOverlay.style.display = data.maintenance ? 'flex' : 'none';
-
-            const waBtn = document.getElementById('whatsappFloatingBtn');
-            if (waBtn) {
-                const waNum = data.features?.whatsapp;
-                if (waNum && String(waNum).trim() !== '') {
-                    let cleanNum = String(waNum).trim().replace(/[^0-9]/g, '');
-                    if (cleanNum.startsWith('0')) cleanNum = '92' + cleanNum.substring(1);
-                    waBtn.href = `https://wa.me/${cleanNum}?text=Hello%20Movie%20Master%20Support`;
-                    waBtn.style.display = 'flex';
-                } else waBtn.style.display = 'none';
-            }
         });
 
         onValue(ref(db, 'sliders'), (snap) => {
@@ -707,7 +829,7 @@
 
         window.handleNativeSystemShare = async (url, title) => {
             const isYouTube = url && (url.includes('youtube.com') || url.includes('youtu.be'));
-            const appDownloadLink = "https://firebasedatabas-hash.github.io/Movies-master-/download.html";
+            const appDownloadLink = "https://firebasedatabas-hash.github.io/Movies-master-website-/";
             const targetUrl = isYouTube ? url : appDownloadLink;
             const shareText = isYouTube ? `Watch "${title}" on Movie Master App!` : `🔥 Watch "${title}" in Full HD on Movie Master App!\n📥 Download App:\n👉 ${appDownloadLink}`;
 
@@ -823,7 +945,12 @@
                     
                     <button class="action-btn share-btn" onclick="window.handleNativeSystemShare('${mUrl}', '${mTitle}')">
                         <i class="fa fa-share-alt"></i>
-                        <span>Share / Apps</span>
+                        <span>Share</span>
+                    </button>
+
+                    <button class="action-btn fs-btn" onclick="window.toggleLandscapePlayer()">
+                        <i class="fa fa-expand"></i>
+                        <span>Full Screen</span>
                     </button>
                 </div>
 
@@ -835,7 +962,7 @@
 
             const relatedBox = document.getElementById('relatedCategoryMovies');
             if (relatedBox) {
-                const sameCatMovies = window.allMovies.filter(item => (item.category || '').trim() === (m.category || '').trim() && String(item.id) !== String(m.id)).slice(0, 8);
+                const sameCatMovies = window.allMovies.filter(item => (item.category || '').trim().toLowerCase() === (m.category || '').trim().toLowerCase() && String(item.id) !== String(m.id)).slice(0, 8);
                 const fallbackMovies = sameCatMovies.length ? sameCatMovies : window.allMovies.filter(item => String(item.id) !== String(m.id)).slice(0, 8);
                 relatedBox.innerHTML = fallbackMovies.map(item => window.renderMovieCard(item)).join('') || '<p style="color:#666; font-size:11px; padding:10px;">No more movies in this category.</p>';
             }
@@ -954,7 +1081,7 @@
             window.showNav('viewAllPage');
             window.history.pushState({ page: 'viewAll' }, '');
             document.getElementById('viewAllTitle').innerText = cat;
-            document.getElementById('viewAllGrid').innerHTML = window.allMovies.filter(m => (m.category || '').trim() === cat.trim()).map(m => window.renderMovieCard(m, true)).join('');
+            document.getElementById('viewAllGrid').innerHTML = window.allMovies.filter(m => (m.category || '').trim().toLowerCase() === cat.trim().toLowerCase()).map(m => window.renderMovieCard(m, true)).join('');
         };
 
         window.closePlayer = (fromUserBtn = true) => { 
