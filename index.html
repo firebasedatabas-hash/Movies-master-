@@ -211,8 +211,8 @@
         .live-item::before { 
             content: ""; 
             position: absolute; 
-            width: 150%; 
-            height: 150%; 
+            width: 250vw; 
+            height: 250vw; 
             background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000); 
             animation: rotateRainbowBorder 2.2s linear infinite; 
         }
@@ -281,15 +281,19 @@
         }
         /* ONLY THIS ROTATES IN THE BACKGROUND - THE CONTAINER STAYS FIXED */
         .bottom-nav-container::before {
-            content: "";
-            position: absolute;
-            width: 250%;
-            height: 500%;
-            background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
-            animation: rotateRainbowBorder 3.5s linear infinite;
-            z-index: 1;
-        }
-        .bottom-nav { 
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120vw;
+    height: 120vw;
+    margin-top: -60vw;
+    margin-left: -60vw;
+    background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
+    animation: rotateRainbowBorder 3.5s linear infinite;
+    z-index: 1;
+}
+                .bottom-nav { 
             position: relative;
             z-index: 2;
             width: 100%;
