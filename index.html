@@ -77,21 +77,30 @@
         .splash-footer b { color: var(--primary); font-weight: 800; }
 
         /* TOP SCROLLING MARQUEE NOTICE BAR */
-        #liveNoticeBar { 
-            display: none; 
-            background: linear-gradient(90deg, #b20710, #e50914, #b20710); 
-            color: #ffffff; 
-            padding: 7px 12px; 
-            font-size: 11px; 
-            font-weight: 700; 
-            letter-spacing: 0.3px;
-            position: sticky; 
-            top: 56px; 
-            z-index: 999; 
-            border-bottom: 1px solid rgba(255,255,255,0.2); 
-            overflow: hidden; 
-            white-space: nowrap; 
-        }
+        #liveNoticeBar {
+    display: none;
+    background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #00ffd5, #002bff, #7a00ff, #ff0000);
+    background-size: 300% 100%;
+    animation: moveNoticeRainbow 15s linear infinite;
+    color: #000000;
+    padding: 7px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    position: sticky;
+    top: 56px;
+    z-index: 999;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    overflow: hidden;
+    white-space: nowrap;
+    border-radius: 25px;
+    margin: 6px 12px;
+}
+
+@keyframes moveNoticeRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
         .marquee-inner { 
             display: inline-block; 
             white-space: nowrap; 
