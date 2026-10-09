@@ -921,18 +921,23 @@
             const container = document.getElementById(wrapperId);
             container.innerHTML = '';
 
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                let vid = '';
-                if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
-                else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
-                else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
-
+            if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/')) {
                 const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
-                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    let vid = '';
+                    if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
+                    else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
+                    else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
+                    iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+                } else {
+                    let autoUrl = url.includes('?') ? (url + '&autoplay=1') : (url + '?autoplay=1');
+                    iframe.src = autoUrl;
+                }
+                iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
+                iframe.setAttribute('allow', 'autoplay *; encrypted-media *; fullscreen *');
                 iframe.setAttribute('allowfullscreen', 'true');
                 container.appendChild(iframe);
-            } 
+            }
             else if (url.includes('.m3u8')) {
                 const videoEl = document.createElement('video');
                 videoEl.setAttribute('controls', '');
