@@ -61,7 +61,58 @@
             0% { transform: rotate(0deg); } 
             100% { transform: rotate(360deg); } 
         }
-
+/* 🌈 LEFT-TO-RIGHT 7-COLOR ANIMATED LINE */
+        .rainbow-line {
+            height: 3px;
+            width: 100%;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
+            background-size: 200% 100%;
+            animation: flowRainbow 3s linear infinite;
+            will-change: background-position;
+            transform: translateZ(0);
+        }
+        @keyframes flowRainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        /* 🌈 SEARCH BOX 7-COLOR ROTATING BORDER (PERFECT CENTER) */
+.search-box-rainbow {
+    flex: 1;
+    position: relative;
+    border-radius: 22px;
+    padding: 2px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #000;
+}
+.search-box-rainbow::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250vw;
+    height: 250vw;
+    background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
+    animation: rotateSearchRainbow 3.5s linear infinite;
+    z-index: 1;
+}
+@keyframes rotateSearchRainbow {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.search-box-rainbow input {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    background: #12141c;
+    border: none !important;
+    outline: none !important;
+    color: white;
+    padding: 9px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+}
         /* SPLASH SCREEN */
         #splashScreen { position: fixed; inset: 0; background: radial-gradient(circle at center, #1b0d10 0%, #090a0f 85%); z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; transition: opacity 0.4s ease, visibility 0.4s; }
         #splashScreen.hide { opacity: 0; pointer-events: none; visibility: hidden; }
@@ -220,10 +271,12 @@
         .live-item::before { 
             content: ""; 
             position: absolute; 
-            width: 250vw; 
-            height: 250vw; 
+            width: 150%; 
+            height: 150%;
             background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000); 
             animation: rotateRainbowBorder 2.2s linear infinite; 
+            will-change: transform;
+            transform: translateZ(0);
         }
         .live-item img { width: 88%; height: 88%; object-fit: cover; border-radius: 50%; z-index: 1; background: #000; }
         
@@ -400,21 +453,24 @@
         <!-- 📲 WHATSAPP SHARE APP BUTTON IN HEADER -->
         <div class="header-whatsapp-btn" onclick="window.shareAppViaWhatsApp()">
             <i class="fab fa-whatsapp"></i> <span>Share App</span>
-        </div>
+        </div>      
     </header>
 
     <!-- TOP SCROLLING TICKER NOTICE -->
     <div id="liveNoticeBar">
         <div class="marquee-inner" id="noticeTextContainer"></div>
     </div>
-
+</div>
+    <div class="rainbow-line"></div>
+    
     <!-- 1. HOME PAGE -->
     <div id="homePage" class="page">
         <div class="slider-container" id="sliderClickArea">
             <div class="slider-track" id="sliderTrack"></div>
             <div class="slider-dots" id="sliderDots"></div>
         </div>
-
+</header>
+    <div class="rainbow-line"></div>
         <div class="adsterra-320x50-box">
             <span class="adsterra-tag">Sponsored</span>
             <script type="text/javascript">
@@ -440,7 +496,7 @@
         <div class="video-fixed-top" id="livePlayerWrapper">
             <div style="height:100%; display:flex; align-items:center; justify-content:center; color:#555; font-size:13px;">Select a channel from list below</div>
         </div>
-        
+        <div class="rainbow-line"></div>
         <div id="liveChannelInfo" class="live-channel-bar" style="display:none;">
             <div>
                 <span id="playingChannelTitle" style="font-weight:700; font-size:14px; color:#fff;">Live Channel</span>
@@ -467,7 +523,9 @@
     <div id="searchPage" class="full-page">
         <div class="page-header">
             <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i>
-            <input type="text" id="searchInput" placeholder="Search movies or channels..." style="flex:1; background:#12141c; border:1px solid var(--card-border); color:white; padding:10px 16px; border-radius:20px; font-size:13px;" oninput="window.doSearch(this.value)">
+            <div class="search-box-rainbow">
+                <input type="text" id="searchInput" placeholder="Search movies or channels..." oninput="window.doSearch(this.value)">
+            </div>
         </div>
         <div style="padding: 15px;">
             <div id="searchChannelsTitle" class="section-title" style="display:none; margin-bottom:12px;">Channels</div>
@@ -531,7 +589,7 @@
         </div>
     </div>
 
-    <!-- 🌈 7-COLOR RAINBOW GLOWING BOTTOM NAV (100% FIXED & STABLE) -->
+    <!-- 🌈 100% FIXED HORIZONTAL BOTTOM NAV WITH 7-COLOR ROTATING BORDER -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
             <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
