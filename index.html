@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Movie Master Pro</title>
-    
+    <!-- 📲 PWA APP MANIFEST LINK -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#090a0f">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- LIGHTWEIGHT HLS STREAM ENGINE -->
@@ -447,6 +451,53 @@ header {
     overflow: hidden; 
     background: #12141c; 
 }
+
+/* 🔴 2026 NEXT-GEN LIVE STREAM BADGE WITH PULSING GREEN DOT */
+.card-live-badge {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    background: linear-gradient(135deg, #e50914, #b20710);
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 5;
+    box-shadow: 0 2px 12px rgba(229, 9, 20, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+/* 🟢 CHAMAKTA HUA REAL-TIME GREEN DOT */
+.live-pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff66;
+    animation: livePulseGreen 1s infinite alternate ease-in-out;
+    flex-shrink: 0;
+}
+
+@keyframes livePulseGreen {
+    0% { 
+        opacity: 0.4; 
+        transform: scale(0.8); 
+        box-shadow: 0 0 4px #00ff66;
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1.3); 
+        box-shadow: 0 0 10px #00ff66, 0 0 16px #2ecc71;
+    }
+}
+
 .card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; }
 .card-views-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.8); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 8px; display: flex; align-items: center; gap: 3px; z-index: 3; }
 .card-rect-info { padding: 6px 2px 0; }
@@ -484,6 +535,57 @@ header {
         .video-fixed-top { position: sticky; top: 0; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; padding-bottom: 30px; }
+
+/* 🌟 2026 CYBER-GLASS LIVE TV CATEGORY PILLS */
+.live-cat-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 14px 6px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.live-cat-scroll::-webkit-scrollbar { display: none; }
+
+.live-cat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(18, 20, 28, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: #8b8f9e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.live-cat-pill svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.25s;
+}
+.live-cat-pill:active { transform: scale(0.93); }
+.live-cat-pill.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05)) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 16px var(--primary-glow);
+}
+.live-cat-pill.active svg {
+    stroke: var(--primary) !important;
+}
 
         .live-grid-container-4 { 
             display: grid; 
@@ -634,80 +736,122 @@ header {
         .action-btn.fs-btn { background: rgba(0, 180, 216, 0.12); border-color: rgba(0, 180, 216, 0.3); color: var(--blue); }
         .action-btn.fs-btn i { color: var(--blue); }
 
-        /* AD BOX */
-        .adsterra-320x50-box { display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 10px auto 6px; text-align: center; background: #0e1017; border-radius: 8px; padding: 4px 0; border: 1px solid var(--card-border); width: 100%; max-width: 326px; min-height: 60px; overflow: hidden; }
-        .adsterra-tag { font-size: 8px; color: #777; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+        /* 🚫 ALL ADS COMPLETELY REMOVED */
+        .adsterra-320x50-box { 
+            display: none !important; 
+        }
 
-        /* 🌈 100% FIXED HORIZONTAL BOTTOM NAV WITH 7-COLOR ROTATING BORDER */
+        /* 💎 2026 CLEAN LUXURY BOTTOM NAV (NO 7 COLORS - LOCKED AT BOTTOM) */
         .bottom-nav-container {
-            position: fixed;
-            bottom: 10px;
-            left: 12px;
-            right: 12px;
-            height: 58px;
-            border-radius: 22px;
-            padding: 2px;
-            overflow: hidden;
-            z-index: 2500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            position: fixed !important;
+            bottom: 10px !important;
+            top: auto !important; /* 👈 Upar chadhna bilkul band */
+            left: 14px !important;
+            right: 14px !important;
+            height: 54px !important;
+            border-radius: 20px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+            z-index: 99999 !important; /* 👈 Hamesha screen ke sabse aage rahega */
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: rgba(14, 16, 24, 0.94) !important;
+            backdrop-filter: blur(28px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important; /* 👈 Clean Luxury Border (7 Colors Khatam) */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85) !important;
         }
-        /* ONLY THIS ROTATES IN THE BACKGROUND - THE CONTAINER STAYS FIXED */
+
+        /* 🚫 7-COLOR RAINBOW BORDER MUKAMMAL DELETE */
         .bottom-nav-container::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120vw;
-    height: 120vw;
-    margin-top: -60vw;
-    margin-left: -60vw;
-    background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
-    animation: rotateRainbowBorder 3.5s linear infinite;
-    z-index: 1;
-}
-                .bottom-nav { 
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            background: rgba(14, 16, 24, 0.95); 
-            backdrop-filter: blur(24px) saturate(180%); 
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-radius: 20px;
-            display: flex; 
-            justify-content: space-around; 
-            align-items: center;
-            padding: 3px; 
+            display: none !important;
+            content: none !important;
         }
+
+        .bottom-nav { 
+            position: relative !important;
+            z-index: 2 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: transparent !important; 
+            display: flex !important; 
+            justify-content: space-around !important; 
+            align-items: center !important;
+            padding: 0 4px !important; 
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            border: none !important;
+        }
+
         .nav-item { 
-            text-align: center; 
-            color: #8b8f9e; 
-            font-size: 10px; 
-            font-weight: 600; 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            cursor: pointer; 
-            border-radius: 14px; 
-            transition: 0.25s; 
-            padding: 5px 2px; 
-            white-space: nowrap; 
+            text-align: center !important; 
+            color: #8b8f9e !important; 
+            font-size: 9px !important; 
+            font-weight: 700 !important; 
+            flex: 1 !important; 
+            display: flex !important; 
+            flex-direction: column !important; 
+            align-items: center !important; 
+            justify-content: center !important; 
+            cursor: pointer !important; 
+            border-radius: 12px !important; 
+            padding: 4px 0 !important; 
+            margin: 0 !important;
+            white-space: nowrap !important; 
+            transition: all 0.2s ease !important;
+            user-select: none !important;
+            background: transparent !important;
+            border: none !important;
         }
+
+        .nav-item span {
+            line-height: 1 !important;
+            margin-top: 2px !important;
+        }
+
+        .nav-svg {
+            width: 18px !important;
+            height: 18px !important;
+            max-width: 18px !important;
+            max-height: 18px !important;
+            stroke: currentColor !important;
+            fill: none !important;
+            stroke-width: 2.2 !important;
+            stroke-linecap: round !important;
+            stroke-linejoin: round !important;
+            display: block !important;
+            transition: stroke 0.2s, transform 0.2s !important;
+        }
+
+        .nav-item:active { 
+            transform: scale(0.88) !important; 
+        }
+
+        /* Active Item Glow */
         .nav-item.active { 
-            color: #ffffff; 
-            background: rgba(255, 255, 255, 0.08); 
-            border: 1px solid rgba(255, 255, 255, 0.15); 
+            color: #ffffff !important; 
+            background: transparent !important; 
+            border: none !important; 
+            box-shadow: none !important;
         }
-        .nav-item.active i { 
-            color: #00ffcc; 
-            filter: drop-shadow(0 0 6px rgba(0,255,204,0.6)); 
+
+        .nav-item.active .nav-svg { 
+            stroke: var(--primary) !important; 
+            filter: drop-shadow(0 0 6px var(--primary-glow)) !important; 
+            transform: translateY(-2px) !important;
         }
-        .nav-item i { font-size: 16px; margin-bottom: 3px; }
+
+        .nav-item.active span {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
+
+        .nav-item.active #navAvatarBox {
+            border-color: var(--primary) !important;
+            box-shadow: 0 0 8px var(--primary-glow) !important;
+        }
 
 /* 🎬 ULTRA-MODERN LUXURY PROFILE (NO RED RING - NO 7 COLORS) */
 .profile-page-container {
@@ -783,6 +927,161 @@ header {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* 🗑️ PROFILE PHOTO RESET BUTTON */
+.profile-remove-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(229, 9, 20, 0.9);
+    border: 2px solid #090a0f;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    z-index: 5;
+    transition: transform 0.2s;
+}
+.profile-remove-badge:active { transform: scale(0.9); }
+.profile-remove-badge svg {
+    width: 12px;
+    height: 12px;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2.2;
+}
+
+/* ✂️ 2026 WHATSAPP-STYLE DP CROP MODAL */
+#dpCropModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 12, 0.96);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    z-index: 9999999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 14px 24px;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: none;
+}
+
+.dp-crop-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+/* 🎯 CROP VIEWPORT WITH CIRCLE MASK */
+.dp-crop-stage {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.78), 0 0 25px rgba(0, 229, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: #000;
+    cursor: grab;
+}
+.dp-crop-stage:active { cursor: grabbing; }
+
+#dpCropImg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    pointer-events: none;
+    max-width: none;
+}
+
+/* 🔍 ZOOM CONTROLS ROW */
+.dp-crop-controls {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.dp-zoom-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(18, 20, 28, 0.7);
+    padding: 8px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.dp-zoom-bar svg {
+    width: 16px;
+    height: 16px;
+    stroke: #8b8f9e;
+    fill: none;
+    stroke-width: 2.2;
+    flex-shrink: 0;
+}
+.dp-zoom-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 5px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    outline: none;
+}
+.dp-zoom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.dp-actions-row {
+    width: 100%;
+    display: flex;
+    gap: 12px;
+}
+.dp-btn-cancel {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+.dp-btn-done {
+    flex: 1.4;
+    background: linear-gradient(135deg, var(--primary), var(--primary-accent));
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px var(--primary-glow);
 }
 
 .profile-camera-badge svg {
@@ -1266,6 +1565,351 @@ header {
         .page-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: rgba(14,16,24,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--card-border); height: 56px; position: sticky; top: 0; z-index: 1250; }
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
         .movie-details-box { padding: 16px; background: #0c0e14; border-bottom: 1px solid var(--card-border); }
+        
+        /* 🎬 TAMASHA APP STYLE EPISODES & TABS SYSTEM */
+.card-ep-count-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(9, 10, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #00ffcc;
+    font-size: 8.5px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    z-index: 4;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    text-transform: uppercase;
+}
+
+/* 🏷️ SINGLE EPISODE BADGE (EP 1, EP 2, EP 3...) */
+.card-ep-single-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: rgba(9, 10, 15, 0.9);
+    border: 1px solid #00e5ff;
+    color: #00e5ff;
+    font-size: 8.5px;
+    font-weight: 900;
+    padding: 2.5px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.6px;
+    z-index: 4;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.8);
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+/* 📱 Tamasha Style Info / UpNext Tabs */
+.tamasha-tabs-bar {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: #0c0e14;
+    margin-top: 10px;
+}
+.tamasha-tab-btn {
+    flex: 1;
+    padding: 12px 10px;
+    background: transparent;
+    border: none;
+    color: #8b8f9e;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: color 0.2s;
+}
+.tamasha-tab-btn.active {
+    color: #ffffff;
+}
+.tamasha-tab-btn.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 15%;
+    right: 15%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* 📜 Tamasha Episode List Item */
+.tamasha-ep-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 16px 25px;
+}
+.tamasha-ep-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(18, 20, 28, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.tamasha-ep-card:active {
+    transform: scale(0.97);
+    background: rgba(255, 255, 255, 0.08);
+}
+.tamasha-ep-card.active {
+    border-color: var(--primary);
+    background: rgba(229, 9, 20, 0.12);
+}
+.tamasha-ep-thumb-wrap {
+    width: 86px;
+    height: 52px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #000;
+}
+.tamasha-ep-thumb-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.tamasha-ep-badge {
+    position: absolute;
+    bottom: 3px;
+    left: 3px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+    font-size: 7.5px;
+    font-weight: 900;
+    padding: 1px 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-transform: uppercase;
+}
+.tamasha-ep-info {
+    flex: 1;
+    min-width: 0;
+}
+.tamasha-ep-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 0 4px;
+}
+.tamasha-ep-card.active .tamasha-ep-title {
+    color: var(--primary);
+}
+.tamasha-ep-sub {
+    font-size: 10px;
+    color: #8b8f9e;
+    font-weight: 600;
+    margin: 0;
+}
+.tamasha-play-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.tamasha-ep-card.active .tamasha-play-icon {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+.tamasha-play-icon svg {
+    width: 12px;
+    height: 12px;
+    fill: #ffffff;
+    margin-left: 2px;
+}
+             
+        /* 💖 2026 ULTRA-LUXURY FAVORITES VAULT STYLES */
+.fav-container-box {
+    padding: 14px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* 📱 2026 TABS SWITCHER */
+.fav-tabs-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(14, 16, 24, 0.75);
+    padding: 6px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.fav-tab-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #8b8f9e;
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    white-space: nowrap;
+}
+.fav-tab-btn:active { transform: scale(0.93); }
+.fav-tab-btn.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05)) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+.fav-tab-btn.active svg {
+    stroke: var(--primary);
+}
+.fav-tab-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+}
+.fav-count-pill {
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+.fav-tab-btn.active .fav-count-pill {
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* 🌟 SECTION HEADERS WITH GLOWING BADGES */
+.fav-section-wrap {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+}
+.fav-sec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 2px 10px;
+}
+.fav-sec-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.2px;
+}
+.fav-sec-title svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--primary);
+    fill: none;
+    stroke-width: 2.2;
+}
+.fav-sec-badge {
+    font-size: 10px;
+    font-weight: 800;
+    color: #8b8f9e;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3px 9px;
+    border-radius: 12px;
+}
+
+/* 🤍 2026 LUXURY EMPTY STATE CARD */
+.fav-empty-card {
+    width: 100%;
+    margin-top: 25px;
+    background: rgba(14, 16, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    border-radius: 24px;
+    padding: 36px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+.fav-empty-icon-wrap {
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(229, 9, 20, 0.2), rgba(229, 9, 20, 0.05));
+    border: 1px solid rgba(229, 9, 20, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 25px var(--primary-glow);
+    animation: heartGlowPulse 2s infinite alternate ease-in-out;
+}
+@keyframes heartGlowPulse {
+    0% { transform: scale(0.96); box-shadow: 0 4px 15px var(--primary-glow); }
+    100% { transform: scale(1.05); box-shadow: 0 8px 30px var(--primary-glow); }
+}
+.fav-empty-icon-wrap svg {
+    width: 32px;
+    height: 32px;
+    fill: var(--primary);
+}
+.fav-empty-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    margin: 0 0 6px;
+    letter-spacing: 0.3px;
+}
+.fav-empty-sub {
+    font-size: 11.5px;
+    color: #8b8f9e;
+    line-height: 1.5;
+    max-width: 250px;
+    margin: 0 0 20px;
+}
+.fav-explore-btn {
+    background: linear-gradient(135deg, var(--primary), var(--primary-accent));
+    border: none;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 10px 22px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px var(--primary-glow);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: transform 0.2s;
+}
+.fav-explore-btn:active { transform: scale(0.93); }
+        
         .movie-details-box h2 { font-size: 18px; margin: 0 0 6px 0; color: #fff; font-weight: 800; }
         .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: #ff5252; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(229, 9, 20, 0.3); }
         .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
@@ -1315,39 +1959,22 @@ header {
     <!-- HEADER (CENTERED LOGO) -->
     <header>
         <div class="logo">
-            <svg style="height:36px; width:auto; overflow:visible;" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+            <!-- 🌟 CLEAN TEXT LOGO (NO ICON - RED MASTER) -->
+            <svg style="height:34px; width:auto; overflow:visible;" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <linearGradient id="mmBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#00f2fe" />
-                        <stop offset="100%" stop-color="#0072ff" />
+                    <linearGradient id="mmRedTextGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ff1a40" />
+                        <stop offset="100%" stop-color="#e50914" />
                     </linearGradient>
-                    <linearGradient id="mmRedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ff0844" />
-                        <stop offset="100%" stop-color="#ff4e50" />
-                    </linearGradient>
-                    <linearGradient id="mmGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#f6d365" />
-                        <stop offset="100%" stop-color="#fda085" />
-                    </linearGradient>
-                    <filter id="mmLogoGlow" x="-20%" y="-20%" width="140%" height="140%">
-                        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00f2fe" flood-opacity="0.35"/>
-                        <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#ffffff" flood-opacity="0.2"/>
+                    <filter id="mmTextGlow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#e50914" flood-opacity="0.5"/>
                     </filter>
                 </defs>
-                <g filter="url(#mmLogoGlow)">
-                    <g transform="translate(6, 6)">
-                        <rect x="0" y="0" width="48" height="48" rx="14" fill="#121624" stroke="url(#mmBlueGrad)" stroke-width="1.8"/>
-                        <path d="M 10 14 L 18 14 L 14 20 L 6 20 Z" fill="url(#mmRedGrad)"/>
-                        <path d="M 22 14 L 30 14 L 26 20 L 18 20 Z" fill="#ffffff" opacity="0.9"/>
-                        <path d="M 34 14 L 42 14 L 38 20 L 30 20 Z" fill="url(#mmBlueGrad)"/>
-                        <path d="M 20 25 L 34 33 L 20 41 Z" fill="url(#mmBlueGrad)"/>
-                    </g>
-                    <text x="66" y="38" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="24" letter-spacing="0.5">MOVIE</text>
-                    <text x="156" y="38" fill="url(#mmBlueGrad)" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="24" letter-spacing="0.5">MASTER</text>
-                    <g transform="translate(250, 20)">
-                        <rect x="0" y="0" width="28" height="15" rx="4" fill="url(#mmGoldGrad)"/>
-                        <text x="14" y="11" text-anchor="middle" fill="#090a0f" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="8.5" letter-spacing="0.5">PRO</text>
-                    </g>
+                <g filter="url(#mmTextGlow)" text-anchor="middle">
+                    <text x="110" y="28" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="24" letter-spacing="1.5">
+                        <tspan fill="#ffffff">MOVIE </tspan>
+                        <tspan fill="url(#mmRedTextGrad)">MASTER</tspan>
+                    </text>
                 </g>
             </svg>
         </div>
@@ -1372,26 +1999,23 @@ header {
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
-    <div class="adsterra-320x50-box">
-            <span class="adsterra-tag">Sponsored</span>
-            <script type="text/javascript">
-                atOptions = { 'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-            </script>
-            <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
-        </div>
-
         <!-- ⚡ 100% INSTANT RENDER SECTIONS -->
         <div id="homeSections"></div>
-        
-        <div class="adsterra-320x50-box">
-            <span class="adsterra-tag">Sponsored</span>
-            <script type="text/javascript">
-                atOptions = { 'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-            </script>
-            <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
-        </div>
     </div>
-
+    
+    <!-- ⚡ 0ms INSTANT RESTORE (APP KHULTE HI MOVIES DIKHANE KE LIYE) -->
+        <script>
+            (function() {
+                try {
+                    var cachedHtml = localStorage.getItem('mm_instant_home_html');
+                    if (cachedHtml) {
+                        var sec = document.getElementById('homeSections');
+                        if (sec) sec.innerHTML = cachedHtml;
+                    }
+                } catch(e){}
+            })();
+        </script>
+    
     <!-- 2. LIVE TV -->
     <div id="livePage" class="page">
         <div class="rainbow-line"></div>
@@ -1416,7 +2040,41 @@ header {
         </div>
 
         <div class="scrollable-content" id="liveScrollContainer">
-            <div class="section-header"><div class="section-title">All Live Channels</div></div>
+            <!-- 🌟 2026 NEXT-GEN LIVE TV CATEGORY CAPSULES -->
+            <div class="live-cat-scroll">
+                <!-- 1. All -->
+                <div class="live-cat-pill active" onclick="window.filterLiveCategory('all', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                    <span>All Broadcasts</span>
+                </div>
+                <!-- 2. Sports -->
+                <div class="live-cat-pill" onclick="window.filterLiveCategory('sports', this)">
+                    <svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34M7 4h10v6a5 5 0 0 1-10 0V4z"/></svg>
+                    <span>Live Sports</span>
+                </div>
+                <!-- 3. News -->
+                <div class="live-cat-pill" onclick="window.filterLiveCategory('news', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+                    <span>News 24/7</span>
+                </div>
+                <!-- 4. Entertainment -->
+                <div class="live-cat-pill" onclick="window.filterLiveCategory('entertainment', this)">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    <span>Dramas & Cinema</span>
+                </div>
+                <!-- 5. Islamic -->
+                <div class="live-cat-pill" onclick="window.filterLiveCategory('islamic', this)">
+                    <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M19 5l1 2 2 1-2 1-1 2-1-2-2-1 2-1z" fill="currentColor"/></svg>
+                    <span>Islamic World</span>
+                </div>
+                <!-- 6. Kids -->
+                <div class="live-cat-pill" onclick="window.filterLiveCategory('kids', this)">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="6"/><line x1="6" y1="12" x2="10" y2="12"/><line x1="8" y1="10" x2="8" y2="14"/><circle cx="15" cy="11" r="1" fill="currentColor"/><circle cx="17" cy="13" r="1" fill="currentColor"/></svg>
+                    <span>Kids & Toons</span>
+                </div>
+            </div>
+
+            <!-- 📺 Missing Channels Grid & Closing Brackets -->
             <div class="live-grid-container-4" id="liveChannelGrid"></div>
         </div>
     </div>
@@ -1440,18 +2098,75 @@ header {
         </div>
     </div>
 
-    <!-- 4. FAVORITES PAGE -->
+    <!-- 💖 4. 2026 ULTRA-LUXURY FAVORITES VAULT -->
     <div id="favPage" class="full-page">
+        <!-- Header -->
         <div class="page-header">
-            <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i> 
-            <span style="font-weight:800;"><i class="fa fa-heart" style="color:var(--primary); margin-right:6px;"></i> My Favorites</span>
+            <svg viewBox="0 0 24 24" onclick="window.backToHome()" style="width:20px; height:20px; cursor:pointer; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span style="font-weight:800; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px;">
+                <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:var(--primary); stroke:var(--primary);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                My Favorites Vault
+            </span>
         </div>
-        <div style="padding: 15px;">
-            <div class="section-title" style="margin-bottom:10px;">Favorite Channels</div>
-            <div class="live-grid-container-4" id="favChannelGrid" style="padding: 0 0 25px;"></div>
+
+        <div class="fav-container-box">
             
-            <div class="section-title" style="margin-bottom:10px;">Favorite Movies</div>
-            <div class="movie-grid" id="favMovieGrid" style="padding: 0;"></div>
+            <!-- 📱 TABS SWITCHER -->
+            <div class="fav-tabs-row">
+                <button class="fav-tab-btn active" id="favTabAll" onclick="window.switchFavTab('all', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                    <span>All</span>
+                    <span class="fav-count-pill" id="favCountAll">0</span>
+                </button>
+                <button class="fav-tab-btn" id="favTabMovies" onclick="window.switchFavTab('movies', this)">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg>
+                    <span>Movies</span>
+                    <span class="fav-count-pill" id="favCountMovies">0</span>
+                </button>
+                <button class="fav-tab-btn" id="favTabChannels" onclick="window.switchFavTab('channels', this)">
+                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                    <span>Live TV</span>
+                    <span class="fav-count-pill" id="favCountChannels">0</span>
+                </button>
+            </div>
+
+            <!-- 1. Favorite Channels Section -->
+            <div class="fav-section-wrap" id="favChannelsSection">
+                <div class="fav-sec-header">
+                    <span class="fav-sec-title">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+                        Saved Channels
+                    </span>
+                    <span class="fav-sec-badge" id="favBadgeChannels">0 Channels</span>
+                </div>
+                <div class="live-grid-container-4" id="favChannelGrid" style="padding:0 0 10px;"></div>
+            </div>
+
+            <!-- 2. Favorite Movies Section -->
+            <div class="fav-section-wrap" id="favMoviesSection">
+                <div class="fav-sec-header">
+                    <span class="fav-sec-title">
+                        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Saved Movies
+                    </span>
+                    <span class="fav-sec-badge" id="favBadgeMovies">0 Movies</span>
+                </div>
+                <div class="movie-grid" id="favMovieGrid" style="padding:0;"></div>
+            </div>
+
+            <!-- 🤍 3. Futuristic Empty State (Agar Kuch Save Na Ho) -->
+            <div class="fav-empty-card" id="favEmptyState" style="display:none;">
+                <div class="fav-empty-icon-wrap">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <h3 class="fav-empty-title">Your Vault is Empty</h3>
+                <p class="fav-empty-sub">Kisi bhi movie ya channel par Dil (Heart) icon tap karein taake wo yahan mehfooz ho jaye!</p>
+                <button class="fav-explore-btn" onclick="window.backToHome()">
+                    <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:none; stroke:#fff; stroke-width:2.5;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+                    <span>Explore Movies Now</span>
+                </button>
+            </div>
+
         </div>
     </div>
 
@@ -1487,6 +2202,10 @@ header {
                     <!-- Minimalist Camera Badge -->
                     <div class="profile-camera-badge">
                         <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                    </div>
+                    <!-- 🗑️ Profile Photo Reset / Delete Button -->
+                    <div class="profile-remove-badge" id="profileRemoveBtn" onclick="window.removeProfilePhoto(event)" title="Remove Photo">
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                     </div>
                 </div>
 
@@ -1772,37 +2491,59 @@ header {
         <!-- 1. Title, Views & Buttons -->
         <div id="movieDetailsArea" class="movie-details-box"></div>
         
-        <!-- 2. More in this Category -->
-        <div style="padding: 4px 0 10px;">
+        <!-- 📱 TAMASHA APP TABS (INFO & EPISODES) -->
+        <div id="tamashaTabsArea" style="display:none;">
+            <div class="tamasha-tabs-bar">
+                <button class="tamasha-tab-btn active" id="tabBtnEpisodes" onclick="window.switchTamashaTab('episodes', this)">EPISODES</button>
+                <button class="tamasha-tab-btn" id="tabBtnInfo" onclick="window.switchTamashaTab('info', this)">INFO</button>
+            </div>
+            
+            <!-- Episodes List -->
+            <div id="tamashaEpisodesContainer" class="tamasha-ep-list"></div>
+        </div>
+        
+        <!-- 📝 Overview Description Box (Ab Upar Aa Gaya) -->
+        <div id="movieDescArea" style="padding: 10px 16px 8px;"></div>
+        
+        <!-- 2. More in this Category (Ab Description Ke Neechay Aayega) -->
+        <div style="padding: 6px 0 30px;">
             <div class="section-header">
                 <div class="section-title">More in this Category</div>
             </div>
             <div class="movie-scroll" id="relatedCategoryMovies"></div>
         </div>
-
-        <!-- 3. Sponsored Ad -->
-        <div class="adsterra-320x50-box" style="margin: 10px auto 4px;">
-            <span class="adsterra-tag">Sponsored</span>
-            <script type="text/javascript">
-                atOptions = { 'key' : '1b2b85c3bc9de39e1cdc2aa3d57ac9d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-            </script>
-            <script type="text/javascript" src="https://www.highrevenueformat.com/1b2b85c3bc9de39e1cdc2aa3d57ac9d7/invoke.js"></script>
-        </div>
-
-        <!-- 4. Overview Description Box -->
-        <div id="movieDescArea" style="padding: 10px 16px 25px;"></div>
-    </div>
-
-    <!-- 🌈 100% FIXED HORIZONTAL BOTTOM NAV WITH 7-COLOR ROTATING BORDER -->
+</div>
+    <!-- 💎 2026 CLEAN LUXURY BOTTOM NAV (FIXED AT BOTTOM - NO 7 COLORS) -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
-            <div class="nav-item active" onclick="window.showNav('homePage', this)"><i class="fa fa-home"></i>Home</div>
-            <div class="nav-item" onclick="window.showNav('livePage', this)"><i class="fa fa-tv"></i>Live TV</div>
-            <div class="nav-item" onclick="window.showNav('searchPage', this)"><i class="fa fa-search"></i>Search</div>
-            <div class="nav-item" onclick="window.showNav('favPage', this)"><i class="fa fa-heart"></i>Favorites</div>
+            <!-- 1. Home -->
+            <div class="nav-item active" onclick="window.showNav('homePage', this)">
+                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><path d="M3 10.5L12 3l9 7.5v9.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Home</span>
+            </div>
+
+            <!-- 2. Live TV -->
+            <div class="nav-item" onclick="window.showNav('livePage', this)">
+                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><rect x="2" y="7" width="20" height="14" rx="3"/><polyline points="17 2 12 7 7 2"/><circle cx="12" cy="14" r="2.5"/></svg>
+                <span>Live TV</span>
+            </div>
+
+            <!-- 3. Search -->
+            <div class="nav-item" onclick="window.showNav('searchPage', this)">
+                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><circle cx="11" cy="11" r="7.5"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                <span>Search</span>
+            </div>
+
+            <!-- 4. Favorites -->
+            <div class="nav-item" onclick="window.showNav('favPage', this)">
+                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span>Favorites</span>
+            </div>
+
+            <!-- 5. Profile -->
             <div class="nav-item" id="navProfileBtn" onclick="window.showNav('profilePage', this)">
-                <div id="navAvatarBox" style="width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:2px;">
-                    <i class="fa fa-user" style="font-size:15px;"></i>
+                <div id="navAvatarBox" style="width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:1px; border:1px solid rgba(255,255,255,0.2);">
+                    <svg width="12" height="12" viewBox="0 0 24 24" style="stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </div>
                 <span>Profile</span>
             </div>
@@ -1838,20 +2579,38 @@ header {
         };
 
         window.renderMovieCard = (m, isGrid = false) => {
-            // 👁️ Real Views Formatting (1000 par 1k, 999 par 999)
             const rawViews = parseInt(m.views) || 1;
             const viewCount = rawViews >= 1000 ? (rawViews / 1000).toFixed(1).replace('.0', '') + 'k' : rawViews;
             const isYt = m.thumb && (m.thumb.includes('ytimg') || m.thumb.includes('youtube') || m.thumb.includes('hqdefault'));
+
+            const rawTitle = m.title || m.name || '';
             
+            // 🔴 Sirf aur sirf tab LIVE badge aayega jab aapne naam mein "Live" likha ho
+            const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle);
+
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''} ${isYt ? 'is-landscape' : ''}" onclick="window.playMovie('${m.id}')">
                     <div class="card-img-wrap">
-                        <img src="${m.thumb}" alt="${m.title || m.name}" loading="eager" decoding="async" onload="window.checkCardRatio(this)">
+                        <img src="${m.thumb}" alt="${rawTitle}" loading="eager" decoding="async" onload="window.checkCardRatio(this)">
+                        ${isLive ? `
+                            <div class="card-live-badge">
+                                <span class="live-pulse-dot"></span>
+                                <span>LIVE</span>
+                            </div>
+                        ` : ''}
+                        ${m.episodes && m.episodes.length > 1 ? `
+                            <div class="card-ep-count-badge">${m.episodes.length} EPISODES</div>
+                        ` : (rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i) ? `
+                            <div class="card-ep-single-badge">EP ${rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i)[1]}</div>
+                        ` : '')}
                     </div>
                     <div class="card-rect-info" style="padding-top:4px; text-align:center;">
-                        <p style="font-size:11px; font-weight:700; color:#888; text-align:center; letter-spacing:0.5px; margin:0;">
-    ${viewCount} Views
-</p>
+                        <p style="font-size:11px; font-weight:700; color:#f0f0f5; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin:0 0 2px;">
+                            ${rawTitle}
+                        </p>
+                        <p style="font-size:10px; font-weight:600; color:#888; text-align:center; letter-spacing:0.3px; margin:0;">
+                            ${viewCount} Views
+                        </p>
                     </div>
                 </div>`;
         };
@@ -1868,14 +2627,55 @@ header {
                 </div>`;
         };
 
-        // ⚡ INSTANT MOVIE CATEGORY GROUPING ENGINE (NO DELAY)
+        // 🧠 SMART SERIES & EPISODE DETECTOR (TAMASHA STYLE)
+        window.parseSeriesData = (title) => {
+            const raw = title || '';
+            const match = raw.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i);
+            if (match) {
+                const cleanSeriesName = raw.replace(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*\d+[\)\]]?/i, '').trim();
+                return { isSeries: true, seriesName: cleanSeriesName || raw, epNum: parseInt(match[1]) };
+            }
+            return { isSeries: false, seriesName: raw, epNum: 1 };
+        };
+
+        // Group Movies into Series on Home (1 Poster per Series)
+        window.groupMoviesBySeries = (movieList) => {
+            const grouped = [];
+            const seriesTracker = {};
+
+            movieList.forEach(m => {
+                const info = window.parseSeriesData(m.title || m.name);
+                if (info.isSeries) {
+                    const key = (m.category || '') + '_' + info.seriesName.toLowerCase();
+                    if (!seriesTracker[key]) {
+                        seriesTracker[key] = {
+                            ...m,
+                            title: info.seriesName,
+                            isSeriesRoot: true,
+                            episodes: []
+                        };
+                        grouped.push(seriesTracker[key]);
+                    }
+                    seriesTracker[key].episodes.push({ ...m, epNum: info.epNum });
+                } else {
+                    grouped.push(m);
+                }
+            });
+
+            Object.values(seriesTracker).forEach(s => {
+                s.episodes.sort((a, b) => a.epNum - b.epNum);
+            });
+
+            return grouped;
+        };
+
+        // ⚡ CRASH-PROOF RENDER HOME (MOVIES 100% WAPAS LAANE KE LIYE)
         window.renderHome = () => {
             if (!window.allMovies || window.allMovies.length === 0) return;
 
             let html = '';
             let catMap = {};
 
-            // 1. First add defined categories
             if (window.categories && window.categories.length > 0) {
                 window.categories.forEach(c => {
                     const cName = (typeof c === 'object' ? c.name : c) || '';
@@ -1883,33 +2683,31 @@ header {
                 });
             }
 
-            // 2. Put movies into category buckets
             window.allMovies.forEach(m => {
+                if (!m) return;
                 const cName = (m.category || 'Trending Movies').trim();
                 const cKey = cName.toLowerCase();
-                if (!catMap[cKey]) {
-                    catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
-                }
+                if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
                 catMap[cKey].movies.push(m);
             });
 
-            // 3. Render categories immediately
             let renderedAny = false;
             Object.values(catMap).forEach(cat => {
-                if (cat.movies.length > 0) {
+                if (cat.movies && cat.movies.length > 0) {
                     const lim = parseInt(cat.limit) || window.globalLimit;
+                    const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
                     html += `
                         <div class="section-header">
                             <div class="section-title">${cat.name}</div>
-                            <div class="view-all-btn" onclick="window.openViewAll('${cat.name.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                            <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
                         </div>
-                        <div class="movie-scroll">${cat.movies.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
+                        <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
                     renderedAny = true;
                 }
             });
 
             if (!renderedAny) {
-                html = `<div class="section-header"><div class="section-title">Trending in Pakistan</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
+                html = `<div class="section-header"><div class="section-title">Trending Movies</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
             }
 
             const sec = document.getElementById('homeSections');
@@ -1919,25 +2717,143 @@ header {
             }
         };
 
-        window.initLiveChannels = () => {
-            const grid = document.getElementById('liveChannelGrid');
-            if (grid && window.allChannels.length) grid.innerHTML = window.allChannels.map(c => window.renderChannelItem(c)).join('');
+        // Foran Home Screen Ko Render Karo
+        window.renderHome();
+
+        // 🧠 2026 SMART AI AUTO-DETECTION LIVE CHANNELS ENGINE
+        window.currentLiveCategory = 'all';
+
+        window.detectChannelCategory = (channel) => {
+            const title = ((channel.title || channel.name || '') + '').toLowerCase();
+            
+            // 🏏 Sports Detection
+            if (/sports|super|ten|asports|ptv|cricket|football|match|willow|star sports|sony|espn|euro/.test(title)) {
+                return 'sports';
+            }
+            // 📰 News Detection
+            if (/news|samaa|bol|express|dunya|92|dawn|cnn|bbc|khabar|waqt|al jazeera/.test(title)) {
+                return 'news';
+            }
+            // 🌙 Islamic Detection
+            if (/madani|qtv|islam|makkah|madina|pegham|quran|hajj|peace tv/.test(title)) {
+                return 'islamic';
+            }
+            // 🎮 Kids Detection
+            if (/cartoon|pogo|nick|disney|kids|junior|hungama|animax/.test(title)) {
+                return 'kids';
+            }
+            // 🎬 Entertainment / Dramas Default
+            return 'entertainment';
         };
 
+        window.filterLiveCategory = (catKey, btnElement = null) => {
+            window.currentLiveCategory = catKey;
+            
+            // Update Active Pill
+            if (btnElement) {
+                document.querySelectorAll('.live-cat-pill').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
+
+            const grid = document.getElementById('liveChannelGrid');
+            if (!grid) return;
+
+            let filtered = window.allChannels || [];
+            if (catKey !== 'all') {
+                filtered = (window.allChannels || []).filter(c => window.detectChannelCategory(c) === catKey);
+            }
+
+            if (filtered.length > 0) {
+                grid.innerHTML = filtered.map(c => window.renderChannelItem(c)).join('');
+            } else {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 45px 15px; color: #777;">
+                        <svg viewBox="0 0 24 24" style="width:36px; height:36px; fill:none; stroke:#555; stroke-width:1.8; margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                        <p style="margin:0; font-size:12px; font-weight:700; color:#888;">Is category mein koi channel nahi mila</p>
+                    </div>`;
+            }
+        };
+
+        window.initLiveChannels = () => {
+            window.filterLiveCategory(window.currentLiveCategory || 'all');
+        };
+
+        // 💖 2026 FAVORITES VAULT ENGINE & SMART TABS
+        window.activeFavTab = 'all';
+
         window.updateProfileFavCounter = () => {
-            const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
-            const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
+            const favChannels = (window.allChannels || []).filter(c => window.isFav('channels', c.id));
+            const favMovies = (window.allMovies || []).filter(m => window.isFav('movies', m.id));
             const realTotal = favChannels.length + favMovies.length;
             const favCountText = document.getElementById('profileFavCount');
             if (favCountText) favCountText.innerText = `${realTotal} Saved`;
         };
 
+        // 💖 SMART TABS (ALL MEIN 6, LIVE TV MEIN SAARE CHANNELS)
+        window.switchFavTab = (tabName, btn = null) => {
+            window.activeFavTab = tabName;
+            document.querySelectorAll('.fav-tab-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const chanSec = document.getElementById('favChannelsSection');
+            const movSec = document.getElementById('favMoviesSection');
+            const cg = document.getElementById('favChannelGrid');
+            const mg = document.getElementById('favMovieGrid');
+
+            const favChannels = (window.allChannels || []).filter(c => window.isFav('channels', c.id));
+            const favMovies = (window.allMovies || []).filter(m => window.isFav('movies', m.id));
+
+            if (tabName === 'movies') {
+                if (chanSec) chanSec.style.display = 'none';
+                if (movSec) movSec.style.display = 'flex';
+                // 🎬 Movies Tab: SAARE SAVED MOVIES DIKHAO
+                if (mg) mg.innerHTML = favMovies.map(m => window.renderMovieCard(m, true)).join('');
+            } else if (tabName === 'channels') {
+                if (chanSec) chanSec.style.display = 'flex';
+                if (movSec) movSec.style.display = 'none';
+                // 📺 Live TV Tab: SAARE 16 KE 16 CHANNELS DIKHAO
+                if (cg) cg.innerHTML = favChannels.map(c => window.renderChannelItem(c)).join('');
+            } else {
+                // 🌟 All Tab: Dono dikhao magar SIRF 6-6 ITEMS
+                if (chanSec) chanSec.style.display = favChannels.length > 0 ? 'flex' : 'none';
+                if (movSec) movSec.style.display = favMovies.length > 0 ? 'flex' : 'none';
+                if (cg) cg.innerHTML = favChannels.slice(0, 8).map(c => window.renderChannelItem(c)).join('');
+                if (mg) mg.innerHTML = favMovies.slice(0, 8).map(m => window.renderMovieCard(m, true)).join('');
+            }
+        };
+
         window.renderFavoritesPage = () => {
-            const favChannels = window.allChannels.filter(c => window.isFav('channels', c.id));
-            const favMovies = window.allMovies.filter(m => window.isFav('movies', m.id));
-            const cg = document.getElementById('favChannelGrid'); const mg = document.getElementById('favMovieGrid');
-            if (cg) cg.innerHTML = favChannels.length ? favChannels.map(c => window.renderChannelItem(c)).join('') : '<p style="grid-column:span 4; color:#666; font-size:12px; margin:0; text-align:center;">No favorite channels.</p>';
-            if (mg) mg.innerHTML = favMovies.length ? favMovies.map(m => window.renderMovieCard(m, true)).join('') : '<p style="grid-column:span 3; color:#666; font-size:12px; margin:0; text-align:center;">No favorite movies.</p>';
+            const favChannels = (window.allChannels || []).filter(c => window.isFav('channels', c.id));
+            const favMovies = (window.allMovies || []).filter(m => window.isFav('movies', m.id));
+            const total = favChannels.length + favMovies.length;
+
+            const cAll = document.getElementById('favCountAll');
+            const cMov = document.getElementById('favCountMovies');
+            const cChan = document.getElementById('favCountChannels');
+            const bMov = document.getElementById('favBadgeMovies');
+            const bChan = document.getElementById('favBadgeChannels');
+
+            if (cAll) cAll.innerText = total;
+            if (cMov) cMov.innerText = favMovies.length;
+            if (cChan) cChan.innerText = favChannels.length;
+            if (bMov) bMov.innerText = `${favMovies.length} Movies`;
+            if (bChan) bChan.innerText = `${favChannels.length} Channels`;
+
+            const emptyCard = document.getElementById('favEmptyState');
+            const chanSec = document.getElementById('favChannelsSection');
+            const movSec = document.getElementById('favMoviesSection');
+
+            if (total === 0) {
+                if (emptyCard) emptyCard.style.display = 'flex';
+                if (chanSec) chanSec.style.display = 'none';
+                if (movSec) movSec.style.display = 'none';
+            } else {
+                if (emptyCard) emptyCard.style.display = 'none';
+                const activeTab = window.activeFavTab || 'all';
+                const activeBtn = document.querySelector(`.fav-tab-btn[onclick*="${activeTab}"]`);
+                window.switchFavTab(activeTab, activeBtn);
+            }
+
             window.updateProfileFavCounter();
         };
 
@@ -2135,12 +3051,35 @@ header {
             window.renderFavoritesPage();
         });
 
+        // ⚡ 0-SECOND INSTANT MOVIES CACHE ENGINE
+        try {
+            const fastMovies = JSON.parse(localStorage.getItem('mm_cached_movies_list'));
+            if (fastMovies && fastMovies.length > 0) {
+                window.allMovies = fastMovies;
+                window.renderHome();
+            }
+        } catch(e){}
+
         onValue(ref(db, 'movies'), (snap) => {
             const data = snap.val();
             window.allMovies = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            
+            // 💾 Phone ki memory mein movies permanently save karo
+            try {
+                localStorage.setItem('mm_cached_movies_list', JSON.stringify(window.allMovies));
+            } catch(e){}
+
             saveFastCache();
             window.renderHome();
             window.renderFavoritesPage();
+
+            // 💾 Home Page ka bana banaya HTML bhi save karo taake agli baar 0ms mein khulay
+            try {
+                const homeSec = document.getElementById('homeSections');
+                if (homeSec && homeSec.innerHTML.trim() !== '') {
+                    localStorage.setItem('mm_instant_home_html', homeSec.innerHTML);
+                }
+            } catch(e){}
         });
 
         window.handleNativeSystemShare = async (url, title) => {
@@ -2154,6 +3093,41 @@ header {
             } else {
                 const msg = encodeURIComponent(`${shareText}\n${targetUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+            }
+        };
+
+// 📥 SNAPTUBE & ANDROID NATIVE DOWNLOAD ENGINE
+        window.downloadOrShareVideo = async (url, title) => {
+            if (!url) {
+                alert('Is video ka download link mojood nahi hai.');
+                return;
+            }
+
+            // YouTube link ko clean format mein banana taake Snaptube foran pakday
+            let targetUrl = url;
+            if (url.includes('youtu.be/')) {
+                const vid = url.split('youtu.be/')[1].split('?')[0];
+                targetUrl = `https://www.youtube.com/watch?v=${vid}`;
+            } else if (url.includes('/embed/')) {
+                const vid = url.split('/embed/')[1].split('?')[0];
+                targetUrl = `https://www.youtube.com/watch?v=${vid}`;
+            }
+
+            // Android System Share Sheet Open Karega (Jisme Snaptube aayega)
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        url: targetUrl
+                    });
+                } catch (e) {}
+            } else {
+                // Agar browser share support na kare to link copy kar dega
+                try {
+                    await navigator.clipboard.writeText(targetUrl);
+                    alert('Video Link Copy Ho Gaya Hai! Snaptube Khol Kar Download Karein.');
+                } catch(err) {
+                    window.open(targetUrl, '_blank');
+                }
             }
         };
 
@@ -2234,10 +3208,30 @@ header {
         window.playMovie = (id) => {
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
-            
-            registerRealDeviceView(m.id);
 
-            document.getElementById('videoPage').style.display = 'block';
+            // 📺 SMART LIVE TV SWITCHER (Home Page Se Live TV Par Bhejna)
+            const checkTitle = (m.title || m.name || '').toLowerCase();
+            const isLiveTagged = /\b(live)\b|\[live\]|\(live\)/i.test(m.title || m.name || '');
+
+            const matchedChannel = (window.allChannels || []).find(c => 
+                (c.url && m.url && c.url.trim() === m.url.trim()) ||
+                (c.title && m.title && c.title.trim().toLowerCase() === checkTitle)
+            );
+
+            if (matchedChannel || isLiveTagged) {
+                const liveUrl = matchedChannel ? matchedChannel.url : m.url;
+                const rawName = matchedChannel ? (matchedChannel.title || matchedChannel.name) : (m.title || m.name);
+                
+                // 🏷️ "Live" lafz saaf karega taake screen par "Cartoon Network" hi likha aaye
+                const cleanLiveTitle = rawName.replace(/\s*[\(\[\{]?live[\)\]\}]?\s*/gi, ' ').trim() || rawName;
+                const liveId = matchedChannel ? matchedChannel.id : m.id;
+                
+                window.playLive(liveUrl, cleanLiveTitle, liveId);
+                return;
+            }
+
+            registerRealDeviceView(m.id);
+   document.getElementById('videoPage').style.display = 'block';
             document.getElementById('playingTitle').innerText = m.title || m.name;
             window.history.pushState({ page: 'moviePlayer' }, '');
             
@@ -2270,9 +3264,10 @@ header {
                         <span>Share</span>
                     </button>
 
-                    <button class="action-btn" onclick="window.toggleLandscapePlayer()">
-                        <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
-                        <span>Full Screen</span>
+                    <!-- 📥 SNAPTUBE & SYSTEM DOWNLOAD BUTTON -->
+                    <button class="action-btn" onclick="window.downloadOrShareVideo('${mUrl}', '${mTitle}')">
+                        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        <span>Download</span>
                     </button>
                 </div>
             `;
@@ -2457,7 +3452,9 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             window.showNav('viewAllPage');
             window.history.pushState({ page: 'viewAll' }, '');
             document.getElementById('viewAllTitle').innerText = cat;
-            document.getElementById('viewAllGrid').innerHTML = window.allMovies.filter(m => (m.category || '').trim().toLowerCase() === cat.trim().toLowerCase()).map(m => window.renderMovieCard(m, true)).join('');
+            const catMovies = window.allMovies.filter(m => (m.category || '').trim().toLowerCase() === cat.trim().toLowerCase());
+            const groupedList = window.groupMoviesBySeries(catMovies);
+            document.getElementById('viewAllGrid').innerHTML = groupedList.map(m => window.renderMovieCard(m, true)).join('');
         };
 
         window.closePlayer = (fromUserBtn = true) => { 
@@ -2483,18 +3480,150 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
 // 👤 YOUTUBE-STYLE PROFILE SYSTEM (PHOTO & NAME)
         window.tempAvatarData = null;
 
+        // ✂️ 2026 WHATSAPP-STYLE TOUCH DRAG, ZOOM & CROP ENGINE
+        window.cropState = {
+            img: null,
+            scale: 1,
+            posX: 0,
+            posY: 0,
+            startX: 0,
+            startY: 0,
+            isDragging: false,
+            naturalW: 0,
+            naturalH: 0
+        };
+
         window.handleAvatarUpload = (event) => {
             const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    window.tempAvatarData = e.target.result;
-                    const img = document.getElementById('profileAvatarImg');
-                    const icon = document.getElementById('profileAvatarIcon');
-                    if (img) { img.src = window.tempAvatarData; img.style.display = 'block'; }
-                    if (icon) { icon.style.display = 'none'; }
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const modal = document.getElementById('dpCropModal');
+                const cropImg = document.getElementById('dpCropImg');
+                const slider = document.getElementById('dpZoomSlider');
+
+                const image = new Image();
+                image.onload = () => {
+                    window.cropState.img = image;
+                    window.cropState.naturalW = image.naturalWidth;
+                    window.cropState.naturalH = image.naturalHeight;
+                    window.cropState.scale = 1;
+                    window.cropState.posX = 0;
+                    window.cropState.posY = 0;
+                    if (slider) slider.value = 1;
+
+                    cropImg.src = e.target.result;
+                    // Fit base image to 260px stage
+                    const stageSize = 260;
+                    if (image.naturalWidth > image.naturalHeight) {
+                        cropImg.style.height = stageSize + 'px';
+                        cropImg.style.width = 'auto';
+                    } else {
+                        cropImg.style.width = stageSize + 'px';
+                        cropImg.style.height = 'auto';
+                    }
+
+                    window.updateCropTransform();
+                    if (modal) modal.style.display = 'flex';
                 };
-                reader.readAsDataURL(file);
+                image.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = ''; // Reset input
+        };
+
+        window.updateCropTransform = () => {
+            const slider = document.getElementById('dpZoomSlider');
+            const cropImg = document.getElementById('dpCropImg');
+            if (!cropImg) return;
+            const zoom = slider ? parseFloat(slider.value) : 1;
+            window.cropState.scale = zoom;
+            cropImg.style.transform = `translate(calc(-50% + ${window.cropState.posX}px), calc(-50% + ${window.cropState.posY}px)) scale(${zoom})`;
+        };
+
+        // 👆 Touch & Mouse Drag Listeners
+        const stage = document.getElementById('dpCropStage');
+        if (stage) {
+            const onStart = (clientX, clientY) => {
+                window.cropState.isDragging = true;
+                window.cropState.startX = clientX - window.cropState.posX;
+                window.cropState.startY = clientY - window.cropState.posY;
+            };
+            const onMove = (clientX, clientY) => {
+                if (!window.cropState.isDragging) return;
+                window.cropState.posX = clientX - window.cropState.startX;
+                window.cropState.posY = clientY - window.cropState.startY;
+                window.updateCropTransform();
+            };
+            const onEnd = () => { window.cropState.isDragging = false; };
+
+            stage.addEventListener('touchstart', (e) => { onStart(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+            stage.addEventListener('touchmove', (e) => { onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+            stage.addEventListener('touchend', onEnd);
+            stage.addEventListener('mousedown', (e) => onStart(e.clientX, e.clientY));
+            window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
+            window.addEventListener('mouseup', onEnd);
+        }
+
+        window.closeCropModal = () => {
+            const modal = document.getElementById('dpCropModal');
+            if (modal) modal.style.display = 'none';
+        };
+
+        // 💾 Save Cropped Image via Canvas
+        window.saveCroppedAvatar = () => {
+            const cropImg = document.getElementById('dpCropImg');
+            if (!cropImg || !window.cropState.img) return;
+
+            const canvas = document.createElement('canvas');
+            const size = 320; // High Quality Avatar Size
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+
+            const stageSize = 260;
+            const ratio = size / stageSize;
+            const renderedW = cropImg.offsetWidth * window.cropState.scale;
+            const renderedH = cropImg.offsetHeight * window.cropState.scale;
+            const drawX = ((stageSize / 2) - (renderedW / 2) + window.cropState.posX) * ratio;
+            const drawY = ((stageSize / 2) - (renderedH / 2) + window.cropState.posY) * ratio;
+
+            ctx.drawImage(window.cropState.img, drawX, drawY, renderedW * ratio, renderedH * ratio);
+            const croppedBase64 = canvas.toDataURL('image/jpeg', 0.9);
+
+            window.tempAvatarData = croppedBase64;
+            const img = document.getElementById('profileAvatarImg');
+            const icon = document.getElementById('profileAvatarIcon');
+            const removeBtn = document.getElementById('profileRemoveBtn');
+
+            if (img) { img.src = croppedBase64; img.style.display = 'block'; }
+            if (icon) { icon.style.display = 'none'; }
+            if (removeBtn) { removeBtn.style.display = 'flex'; }
+
+            // Auto Save to Profile
+            window.saveUserProfile();
+            window.closeCropModal();
+        };
+
+        // 🗑️ Photo Reset / Remove Function
+        window.removeProfilePhoto = (event) => {
+            if (event) event.stopPropagation();
+            const existing = JSON.parse(localStorage.getItem('mm_user_profile')) || {};
+            existing.photo = '';
+            window.tempAvatarData = null;
+            localStorage.setItem('mm_user_profile', JSON.stringify(existing));
+
+            const img = document.getElementById('profileAvatarImg');
+            const icon = document.getElementById('profileAvatarIcon');
+            const removeBtn = document.getElementById('profileRemoveBtn');
+            const navAvatarBox = document.getElementById('navAvatarBox');
+
+            if (img) { img.src = ''; img.style.display = 'none'; }
+            if (icon) { icon.style.display = 'block'; }
+            if (removeBtn) { removeBtn.style.display = 'none'; }
+            if (navAvatarBox) {
+                navAvatarBox.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" style="stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
             }
         };
 
@@ -2550,10 +3679,14 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             // 2. Photo Updates
             const img = document.getElementById('profileAvatarImg');
             const icon = document.getElementById('profileAvatarIcon');
+            const removeBtn = document.getElementById('profileRemoveBtn');
             if (profile.photo && img && icon) {
                 img.src = profile.photo;
                 img.style.display = 'block';
                 icon.style.display = 'none';
+                if (removeBtn) removeBtn.style.display = 'flex';
+            } else {
+                if (removeBtn) removeBtn.style.display = 'none';
             }
 
             // 3. Navigation Bar Avatar Photo
@@ -2735,5 +3868,75 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
         // RUN SLIDER AT START
         initSlider();
     </script>
+    <!-- 📲 PWA AUTO-INSTALL POPUP SCRIPT -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            
+            // Screen ke upar 1 dafa pyara sa Install Banner aayega
+            if (!localStorage.getItem('mm_pwa_installed')) {
+                const banner = document.createElement('div');
+                banner.id = 'pwaInstallBanner';
+                banner.style.cssText = 'position:fixed; top:12px; left:14px; right:14px; background:rgba(18,20,28,0.95); border:1px solid rgba(255,255,255,0.18); backdrop-filter:blur(24px); border-radius:18px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; z-index:999999; box-shadow:0 12px 35px rgba(0,0,0,0.85);';
+                banner.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2503/2503508.png" style="width:36px; height:36px; border-radius:10px;">
+                        <div>
+                            <div style="font-size:12px; font-weight:800; color:#fff;">Movie Master App</div>
+                            <div style="font-size:10px; color:#888;">Install for Full Screen & HD</div>
+                        </div>
+                    </div>
+                    <button id="pwaInstallBtn" style="background:linear-gradient(135deg, #e50914, #b20710); border:none; color:#fff; font-size:11px; font-weight:800; padding:8px 14px; border-radius:12px; cursor:pointer;">Install</button>
+                `;
+                document.body.appendChild(banner);
+
+                document.getElementById('pwaInstallBtn').onclick = async () => {
+                    banner.remove();
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        if (outcome === 'accepted') {
+                            localStorage.setItem('mm_pwa_installed', 'true');
+                        }
+                        deferredPrompt = null;
+                    }
+                };
+            }
+        });
+    </script>
+    
+<!-- ✂️ 2026 WHATSAPP STYLE DP CROP MODAL -->
+    <div id="dpCropModal">
+        <div class="dp-crop-header">
+            <span>Crop & Adjust Photo</span>
+            <span style="font-size:11px; color:#888; font-weight:600;">Drag to Move • Zoom Below</span>
+        </div>
+
+        <!-- 🎯 CIRCLE MASK STAGE -->
+        <div class="dp-crop-stage" id="dpCropStage">
+            <img id="dpCropImg" src="" alt="Crop Preview">
+        </div>
+
+        <!-- 🔍 ZOOM SLIDER & BUTTONS -->
+        <div class="dp-crop-controls">
+            <div class="dp-zoom-bar">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                <input type="range" min="1" max="3" step="0.02" value="1" id="dpZoomSlider" class="dp-zoom-slider" oninput="window.updateCropTransform()">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            </div>
+
+            <div class="dp-actions-row">
+                <button class="dp-btn-cancel" onclick="window.closeCropModal()">Cancel</button>
+                <button class="dp-btn-done" onclick="window.saveCroppedAvatar()">Done (Set DP)</button>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
