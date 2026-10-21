@@ -474,6 +474,315 @@ header {
     pointer-events: none;
 }
 
+/* 🌟 2026 LUXURY CYBER-GLASS FLOATING NOTIFICATION (NO LOCAL POPUP) */
+.custom-toast-pill {
+    position: fixed;
+    top: 18px;
+    left: 50%;
+    transform: translate(-50%, -60px) scale(0.9);
+    background: rgba(14, 16, 24, 0.96);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 11px 18px;
+    z-index: 999999999;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-sizing: border-box;
+    max-width: 90%;
+    width: max-content;
+}
+.custom-toast-pill.show {
+    transform: translate(-50%, 0) scale(1);
+    opacity: 1;
+}
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* 👑 2026 GOLDEN CROWN VIP BADGE (SCREENSHOT 1 JAISA) */
+.card-vip-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #000000;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 2.5px 6px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    z-index: 6;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.8);
+    border: 1px solid #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.card-vip-badge svg {
+    width: 10px;
+    height: 10px;
+    fill: #000000;
+}
+
+/* 👑 2026 LUXURY VIP DIGITAL HUD TIMER & GOLDEN GLOW CARD */
+.vip-active-card {
+    border-color: rgba(255, 215, 0, 0.4) !important;
+    background: linear-gradient(145deg, rgba(26, 20, 8, 0.85), rgba(14, 16, 24, 0.85)) !important;
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 215, 0, 0.06) !important;
+}
+
+.vip-hud-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 204, 0.35);
+    border-radius: 9px;
+    padding: 3px 6px;
+    margin-top: 4px;
+    box-shadow: 0 2px 10px rgba(0, 255, 204, 0.2);
+}
+
+.vip-hud-val {
+    font-size: 11px;
+    font-weight: 900;
+    color: #00ffcc;
+    font-family: 'Plus Jakarta Sans', monospace, sans-serif;
+    letter-spacing: -0.2px;
+}
+
+.vip-hud-val small {
+    font-size: 7.5px;
+    color: #8b8f9e;
+    font-weight: 700;
+    margin-left: 1px;
+    text-transform: uppercase;
+}
+
+.vip-hud-colon {
+    color: rgba(0, 255, 204, 0.7);
+    font-size: 10px;
+    font-weight: 900;
+    animation: colonPulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes colonPulse {
+    0% { opacity: 0.2; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 6px #00ffcc; }
+}
+
+/* 👑 LIVE TV CHANNEL CIRCLE VIP BADGE */
+.channel-vip-badge {
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+.channel-vip-badge svg {
+    width: 10px;
+    height: 10px;
+    fill: #000000;
+}
+
+/* 👑 2026 ULTRA-LUXURY GOLD VIP BADGES & LOCK MODALS */
+.card-vip-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    color: #000000;
+    font-size: 8.5px;
+    font-weight: 900;
+    padding: 2.5px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.6px;
+    z-index: 5;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
+    border: 1px solid #ffffff;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.card-vip-badge svg {
+    width: 10px;
+    height: 10px;
+    fill: #000000;
+}
+
+/* 🔒 VIP LOCK PAYMENT MODAL (USER KE LIYE) */
+#vipLockModal, #adminSecretModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 7, 12, 0.94);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    z-index: 99999999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.vip-modal-card {
+    width: 100%;
+    max-width: 326px;
+    background: rgba(18, 20, 28, 0.9);
+    border: 1px solid rgba(255, 215, 0, 0.35);
+    border-radius: 26px;
+    padding: 26px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.15);
+    box-sizing: border-box;
+    position: relative;
+    animation: popInVip 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes popInVip {
+    0% { transform: scale(0.85); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.vip-crown-icon-wrap {
+    width: 68px;
+    height: 68px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
+}
+.vip-crown-icon-wrap svg {
+    width: 36px;
+    height: 36px;
+    fill: #000000;
+}
+
+.vip-modal-title {
+    font-size: 19px;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 4px;
+}
+.vip-modal-sub {
+    font-size: 11.5px;
+    color: #ffd700;
+    font-weight: 800;
+    margin: 0 0 14px;
+}
+
+/* 💳 Payment Methods Box */
+.vip-payment-info-box {
+    width: 100%;
+    background: rgba(10, 12, 18, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    box-sizing: border-box;
+}
+.vip-pay-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+}
+.vip-pay-row b {
+    color: #00ffcc;
+    letter-spacing: 0.5px;
+}
+
+/* Activation Code Input Row */
+.vip-code-input-row {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    margin: 12px 0 14px;
+}
+.vip-input-field {
+    flex: 1;
+    background: #090b10;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 14px;
+    padding: 10px 12px;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    outline: none;
+}
+.vip-activate-btn {
+    background: linear-gradient(135deg, #ffd700, #ff8c00);
+    border: none;
+    color: #000;
+    font-size: 11.5px;
+    font-weight: 900;
+    padding: 10px 14px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.4);
+    white-space: nowrap;
+}
+
+.vip-wa-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+    margin-bottom: 8px;
+}
+.vip-close-link {
+    font-size: 11px;
+    color: #888;
+    cursor: pointer;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
 /* 🟢 CHAMAKTA HUA REAL-TIME GREEN DOT */
 .live-pulse-dot {
     width: 6px;
@@ -2211,7 +2520,7 @@ header {
 
                 <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="window.handleAvatarUpload(event)">
                 
-                <h3 id="profileNameDisplay" class="profile-display-name">Profile</h3>
+                <h3 id="profileNameDisplay" class="profile-display-name" onclick="window.triggerSecretAdmin()" style="cursor:pointer;">Profile</h3>
                 
                 <!-- Name Input Box with SVG Icon -->
                 <div class="profile-field-wrap">
@@ -2418,8 +2727,8 @@ header {
                             <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         </div>
                         <div class="profile-menu-text-wrap">
-                            <span class="profile-menu-title">VIP Free</span>
-                            <span class="profile-menu-sub">Lifetime</span>
+                            <span id="profileVipStatusText" class="profile-menu-title">Free Plan</span>
+<span id="profileVipSubText" class="profile-menu-sub">Tap Content to Upgrade</span>
                         </div>
                     </div>
 
@@ -2585,19 +2894,31 @@ header {
 
             const rawTitle = m.title || m.name || '';
             
-            // 🔴 Sirf aur sirf tab LIVE badge aayega jab aapne naam mein "Live" likha ho
+            // 🔴 1. Purana Live Badge Check (Green Dot Wala)
             const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle);
+            
+            // 👑 2. Naya Golden Crown VIP Check
+            const isVip = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip');
 
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''} ${isYt ? 'is-landscape' : ''}" onclick="window.playMovie('${m.id}')">
                     <div class="card-img-wrap">
                         <img src="${m.thumb}" alt="${rawTitle}" loading="eager" decoding="async" onload="window.checkCardRatio(this)">
-                        ${isLive ? `
-                            <div class="card-live-badge">
-                                <span class="live-pulse-dot"></span>
-                                <span>LIVE</span>
+                        
+                        <!-- 👑 Golden Crown VIP Badge -->
+                        ${isVip ? `
+                            <div class="card-vip-badge">
+                                <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                                <span>VIP</span>
                             </div>
                         ` : ''}
+
+                        <!-- 🔴 Purana Live Badge (Green Dot) -->
+                        ${isLive ? `
+                            <div class="card-live-badge"><span class="live-pulse-dot"></span><span>LIVE</span></div>
+                        ` : ''}
+
+                        <!-- 🎬 Purana Episodes Badge (EP 1, EP 2) -->
                         ${m.episodes && m.episodes.length > 1 ? `
                             <div class="card-ep-count-badge">${m.episodes.length} EPISODES</div>
                         ` : (rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i) ? `
@@ -2617,13 +2938,26 @@ header {
         
         window.renderChannelItem = (c) => {
             const fav = window.isFav('channels', c.id);
+            const cName = c.title || c.name || '';
+            
+            // 👑 Channel par VIP Check
+            const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(cName);
+
             return `
                 <div class="channel-box">
                     <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
-                    <div class="live-item" onclick="window.playLive('${c.url}', '${(c.title || c.name || 'Live Channel').replace(/'/g, "\\'")}', '${c.id}')">
-                        <img src="${c.thumb}" alt="${c.title || c.name}" loading="eager" decoding="async">
+                    
+                    <!-- 👑 Channel Ka Golden Crown Badge -->
+                    ${isVipChan ? `
+                        <div class="channel-vip-badge" title="VIP Channel">
+                            <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                        </div>
+                    ` : ''}
+
+                    <div class="live-item" onclick="window.playLive('${c.url}', '${cName.replace(/'/g, "\\'")}', '${c.id}')">
+                        <img src="${c.thumb}" alt="${cName}" loading="eager" decoding="async">
                     </div>
-                    <div class="channel-title-text">${c.title || c.name}</div>
+                    <div class="channel-title-text">${cName}</div>
                 </div>`;
         };
 
@@ -2881,7 +3215,7 @@ header {
     <!-- CORE SCRIPT ENGINE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, onValue, update, increment } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getDatabase, ref, onValue, update, increment, get, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
         // WATER RIPPLE ON TOUCH
         document.addEventListener('touchstart', function(e) {
@@ -3185,7 +3519,30 @@ header {
             }
         }
 
+        // 👑 REAL 30-DAY VIP CHECK ENGINE
+        window.isUserVIPActive = () => {
+            const expiry = localStorage.getItem('mm_vip_expiry');
+            if (!expiry) return false;
+            if (Date.now() > parseInt(expiry)) {
+                localStorage.removeItem('mm_vip_expiry');
+                localStorage.removeItem('mm_vip_code');
+                return false;
+            }
+            return true;
+        };
+
         window.playLive = (url, title, id) => {
+            const rawChannelName = title || '';
+            
+            // 👑 1. Channel Par VIP Check (Agar VIP ho aur user ne na khareeda ho to Lock Screen kholo)
+            const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawChannelName);
+            if (isVipChan && !window.isUserVIPActive()) {
+                document.getElementById('vipLockedContentName').innerText = '✨ Unlock All VIP Movies, Anime & Live Channels';
+                document.getElementById('vipLockModal').style.display = 'flex';
+                return; // ⛔ Channel play nahi hoga, direct VIP Box khulega!
+            }
+
+            // Normal Channel Play
             window.showNav('livePage');
             window.history.pushState({ page: 'livePlayer' }, '');
 
@@ -3208,6 +3565,32 @@ header {
         window.playMovie = (id) => {
             const m = window.allMovies.find(x => String(x.id) === String(id));
             if(!m) return;
+            
+            // 👑 REAL 30-DAY VIP SUBSCRIPTION ENGINE
+            window.isUserVIPActive = () => {
+                const expiry = localStorage.getItem('mm_vip_expiry');
+                if (!expiry) return false;
+                if (Date.now() > parseInt(expiry)) {
+                    // 30 din khatam hote hi VIP khud ba khud band ho jayega
+                    localStorage.removeItem('mm_vip_expiry');
+                    localStorage.removeItem('mm_vip_code');
+                    return false;
+                }
+                return true;
+            };
+
+            window.checkItemVIP = (item) => {
+                const t = (item.title || item.name || '').toLowerCase();
+                const c = (item.category || '').toLowerCase();
+                return t.includes('vip') || c.includes('vip');
+            };
+
+            // Agar movie VIP hai aur user ne khareedi nahi hai to lock screen kholo
+            if (window.checkItemVIP(m) && !window.isUserVIPActive()) {
+                document.getElementById('vipLockedContentName').innerText = '✨ Unlock All VIP Movies, Anime & Live Channels';
+                document.getElementById('vipLockModal').style.display = 'flex';
+                return; // Video play nahi hogi
+            }
 
             // 📺 SMART LIVE TV SWITCHER (Home Page Se Live TV Par Bhejna)
             const checkTitle = (m.title || m.name || '').toLowerCase();
@@ -3634,6 +4017,13 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             window.open(`https://api.whatsapp.com/send?phone=923260197911&text=${msg}`, '_blank');
         };
 
+// 📲 VIP Payment Proof Direct WhatsApp Link
+        window.sendPaymentProofWhatsApp = () => {
+            const msg = encodeURIComponent(`Assalam o Alaikum Hamza Bhai!\nMaine All VIP Pass (Rs. 150) ke liye Abu ke account par payment bhej di hai.\n👑 Plan: 30 Days All VIP Movies, Anime & Live Channels\nPayment receipt ka screenshot attach kar raha hoon, please mujhe mera 30-Day VIP code send kar dein.`);
+            // Direct WhatsApp App Launch (No Console Error)
+            window.location.href = `https://wa.me/923260197911?text=${msg}`;
+        };
+
         window.joinWhatsAppCommunity = () => {
             // Apna WhatsApp Group ya Channel link yahan laga sakte hain
             const appLink = "https://firebasedatabas-hash.github.io/Movies-master-/download.html";
@@ -3658,6 +4048,93 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
 
         window.loadUserProfile = () => {
             window.updateProfileFavCounter();
+            // ⏱️ ASLI LIVE REVERSE COUNTDOWN CLOCK (HAR SECOND PEECHAY JAYEGA)
+            if (window.vipTimerInterval) clearInterval(window.vipTimerInterval);
+
+            const updateLiveVipClock = () => {
+                const vipText = document.getElementById('profileVipStatusText');
+                const vipSub = document.getElementById('profileVipSubText');
+                if (!vipText) return;
+
+                const vipBox = vipText.closest('.profile-stat-box');
+
+                if (window.isUserVIPActive && window.isUserVIPActive()) {
+                    const expiry = parseInt(localStorage.getItem('mm_vip_expiry'));
+                    const remainingMs = expiry - Date.now();
+
+                    // Agar time poora ho jaye to band karo
+                    if (remainingMs <= 0) {
+                        localStorage.removeItem('mm_vip_expiry');
+                        localStorage.removeItem('mm_vip_code');
+                        vipText.innerText = 'Free Plan';
+                        vipText.style.color = '#ffffff';
+                        if (vipSub) vipSub.innerText = 'Plan Expired • Tap to Upgrade';
+                        if (vipBox) vipBox.classList.remove('vip-active-card');
+                        clearInterval(window.vipTimerInterval);
+                        return;
+                    }
+
+                    // Days, Hours, Minutes, Seconds
+                    const totalSecs = Math.floor(remainingMs / 1000);
+                    const d = Math.floor(totalSecs / 86400);
+                    const h = Math.floor((totalSecs % 86400) / 3600);
+                    const m = Math.floor((totalSecs % 3600) / 60);
+                    const s = totalSecs % 60;
+
+                    const pad = (n) => String(n).padStart(2, '0');
+
+                    let hudHtml = '';
+                    if (d > 0) {
+                        hudHtml = `
+                            <div class="vip-hud-badge">
+                                <span class="vip-hud-val">${d}<small>d</small></span>
+                                <span class="vip-hud-colon">:</span>
+                                <span class="vip-hud-val">${pad(h)}<small>h</small></span>
+                                <span class="vip-hud-colon">:</span>
+                                <span class="vip-hud-val">${pad(m)}<small>m</small></span>
+                            </div>`;
+                    } else {
+                        hudHtml = `
+                            <div class="vip-hud-badge">
+                                <span class="vip-hud-val">${pad(h)}<small>h</small></span>
+                                <span class="vip-hud-colon">:</span>
+                                <span class="vip-hud-val">${pad(m)}<small>m</small></span>
+                                <span class="vip-hud-colon">:</span>
+                                <span class="vip-hud-val" style="color:#ffd700;">${pad(s)}<small style="color:#ffaa00;">s</small></span>
+                            </div>`;
+                    }
+
+                    // 👑 2026 Luxury Digital HUD Layout
+                    vipText.innerHTML = `
+                        <div style="font-size:12px; font-weight:900; color:#ffd700; display:flex; align-items:center; gap:4px; letter-spacing:0.3px;">
+                            👑 VIP PASS
+                        </div>
+                        ${hudHtml}
+                    `;
+
+                    if (vipSub) {
+                        vipSub.innerText = 'All Content Unlocked';
+                        vipSub.style.color = '#a0a5b8';
+                    }
+
+                    // Card ko 3D Golden Glow do
+                    if (vipBox) vipBox.classList.add('vip-active-card');
+
+                } else {
+                    vipText.innerText = 'Free Plan';
+                    vipText.style.color = '#ffffff';
+                    if (vipSub) {
+                        vipSub.innerText = 'Tap Content to Upgrade';
+                        vipSub.style.color = '#8b8f9e';
+                    }
+                    if (vipBox) vipBox.classList.remove('vip-active-card');
+                    clearInterval(window.vipTimerInterval);
+                }
+            };
+
+            updateLiveVipClock();
+            window.vipTimerInterval = setInterval(updateLiveVipClock, 1000);
+            
             const profile = JSON.parse(localStorage.getItem('mm_user_profile'));
             if (!profile) return;
 
@@ -3696,6 +4173,108 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                 navAvatarBox.style.border = 'none';
                  }
  }; 
+ 
+     // 🔑 REAL FIREBASE SINGLE-USE VIP CODE UNLOCK ENGINE (30 DAYS)
+        window.activateVIPCode = async () => {
+            const input = document.getElementById('vipUserInputCode');
+            const code = input ? input.value.trim().toUpperCase() : '';
+            if (!code) { 
+                alert('Please enter a valid VIP code.'); 
+                return; 
+            }
+
+            try {
+                const codeRef = ref(db, `vip_codes/${code}`);
+                const snap = await get(codeRef);
+                
+                // 1. Check karein code database mein hai ya nahi
+                if (!snap.exists()) {
+                    alert('❌ Galat Code! Yeh VIP code database mein mojood nahi hai.');
+                    return;
+                }
+
+                const data = snap.val();
+                
+                // 2. Check karein code pehle use to nahi ho chuka
+                if (data.used === true) {
+                    alert('❌ Yeh code pehle hi kisi doosre phone par use ho chuka hai!\nEk code sirf aik phone par chal sakta hai.');
+                    return;
+                }
+
+                // 3. Code ko Firebase mein 'used' mark karo taake koi chori na kar sake
+                await update(codeRef, { 
+                    used: true, 
+                    usedAt: Date.now() 
+                });
+
+                // 4. Asli 30 Din (720 Ghante) Ka Real Clock Timestamp Save Karo
+                const days = data.days || 30;
+                const expiryTime = Date.now() + (days * 24 * 60 * 60 * 1000);
+                localStorage.setItem('mm_vip_expiry', expiryTime.toString());
+                localStorage.setItem('mm_vip_code', code);
+
+                alert(`🎉 Mubarak Ho! Aapka ${days} Din Ka All VIP Pass Kamyabi Se Activate Ho Gaya Hai!`);
+                
+                // Lock screen band karo aur profile refresh karo
+                document.getElementById('vipLockModal').style.display = 'none';
+                window.loadUserProfile();
+
+            } catch(e) {
+                alert('Connection error! Please internet check karein.');
+            }
+        };
+          
+   // 🤫 SECRET ADMIN 5-TAP DOOR (PIN: 7860)
+        let adminTapCount = 0;
+        let adminTapTimer = null;
+        window.triggerSecretAdmin = () => {
+            adminTapCount++;
+            clearTimeout(adminTapTimer);
+            adminTapTimer = setTimeout(() => { adminTapCount = 0; }, 1500);
+
+            if (adminTapCount >= 5) {
+                adminTapCount = 0;
+                const enteredPin = prompt('🔒 Enter Master Admin Secret PIN:');
+                if (enteredPin === '7860') { // 👈 Aapka Secret PIN
+                    document.getElementById('adminSecretModal').style.display = 'flex';
+                } else if (enteredPin !== null) {
+                    alert('❌ Galat PIN! Access Denied.');
+                }
+            }
+        };
+
+        // ⚡ Admin VIP Generator Functions
+        window.generateNewVIPCode = () => {
+            const rand = Math.floor(1000 + Math.random() * 9000);
+            const newCode = `VIP-${rand}`;
+            const input = document.getElementById('adminGeneratedCode');
+            if (input) input.value = newCode;
+        };
+
+        window.saveAndCopyVIPCode = async () => {
+            const input = document.getElementById('adminGeneratedCode');
+            const code = input ? input.value.trim() : '';
+            if (!code) { alert('Pehle Generate Code dabayein!'); return; }
+
+            // Admin ka chuna hua Plan (1 Day ya 30 Days)
+            const planSelect = document.getElementById('adminPlanDays');
+            const chosenDays = planSelect ? parseInt(planSelect.value) : 1;
+
+            try {
+                // Firebase Database mein Asli Expiry ke sath save karo
+                await set(ref(db, `vip_codes/${code}`), {
+                    days: chosenDays,
+                    used: false,
+                    createdAt: Date.now()
+                });
+
+                await navigator.clipboard.writeText(code);
+                alert(`✅ ${chosenDays} Din Ka Code "${code}" Firebase mein save ho gaya hai aur Copy bhi ho gaya hai!\nAb aap isay test kar sakte hain.`);
+                document.getElementById('adminSecretModal').style.display = 'none';
+            } catch(e) {
+                alert('Firebase save error: ' + e.message);
+            }
+        };
    
    // 🌟 MASTER HD WALLPAPERS ENGINE (LIGHT CONTROL + ALL PAGES LIVE)
         const appThemes = {
@@ -3937,6 +4516,126 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             </div>
         </div>
     </div>
-    
+     
+     <!-- 🔒 1. USER KE LIYE VIP PAYMENT & ACTIVATION SCREEN -->
+    <div id="vipLockModal">
+        <div class="vip-modal-card">
+            <div class="vip-crown-icon-wrap">
+                <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+            </div>
+            <h2 class="vip-modal-title">VIP Content Locked</h2>
+            <p class="vip-modal-sub" id="vipLockedContentName">Exclusive VIP Access</p>
+
+            <div class="vip-payment-info-box">
+                <div class="vip-pay-row"><span>Fees (30 Days):</span> <b>Rs. 150 Only</b></div>
+                <!-- 💳 Abu Ka JazzCash / Easypaisa Account -->
+                <div class="vip-pay-row"><span>Send Payment To:</span> <b style="color:#ffd700;">03XX-XXXXXXX</b></div>
+                <div class="vip-pay-row"><span>Account Name:</span> <b style="color:#00ffcc;">Abu Ka Naam</b></div>
+            </div>
+
+            <!-- 📲 Screenshot Seedha Aapke WhatsApp Par Aayega -->
+            <button class="vip-wa-btn" onclick="window.sendPaymentProofWhatsApp()">
+                <i class="fab fa-whatsapp" style="font-size:16px;"></i>
+                <span>Send Screenshot on My WhatsApp</span>
+            </button>
+
+            <!-- VIP Activation Code Input Box -->
+            <div class="vip-code-input-row">
+                <input type="text" id="vipUserInputCode" class="vip-input-field" placeholder="ENTER VIP CODE...">
+                <button class="vip-activate-btn" onclick="window.activateVIPCode()">Unlock</button>
+            </div>
+
+            <span class="vip-close-link" onclick="document.getElementById('vipLockModal').style.display='none'">Close Window</span>
+        </div>
+    </div>
+
+    <!-- 🔑 2. KHUFIA ADMIN VIP CODE GENERATOR (SIRF AAPKE LIYE) -->
+    <div id="adminSecretModal">
+        <div class="vip-modal-card" style="border-color:#00ffcc;">
+            <div class="vip-crown-icon-wrap" style="background:linear-gradient(135deg,#00b4d8,#0077b6);">
+                <svg viewBox="0 0 24 24" style="fill:#fff;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            </div>
+            <h2 class="vip-modal-title">Admin VIP Generator</h2>
+            <p class="vip-modal-sub" style="color:#00ffcc;">Customer Ke Liye 30 Din Ka Code Banayein</p>
+
+            <div style="width:100%; margin-bottom:12px;">
+                <input type="text" id="adminGeneratedCode" class="vip-input-field" style="width:100%; text-align:center; font-size:14px; margin-bottom:10px;" placeholder="Click Generate..." readonly>
+                
+                <!-- ⏱️ VIP Plan Duration Selector (1 Day Testing Se Lekar 30 Days Tak) -->
+                <select id="adminPlanDays" class="vip-input-field" style="width:100%; margin-bottom:10px; background:#0d111a; color:#ffd700; border-color:rgba(255,215,0,0.5);">
+                    <option value="1">⏱️ 1 Day Pass (For Testing / Trial)</option>
+                    <option value="7">📅 7 Days Pass (Weekly)</option>
+                    <option value="30" selected>👑 30 Days Pass (Monthly Standard)</option>
+                </select>
+
+                <button class="vip-activate-btn" style="width:100%;" onclick="window.generateNewVIPCode()">⚡ Generate Random Code</button>
+            </div>
+
+            <button class="vip-wa-btn" style="background:linear-gradient(135deg,#0984e3,#74b9ff);" onclick="window.saveAndCopyVIPCode()">
+                <i class="fa fa-save"></i>
+                <span>Save to Firebase & Copy</span>
+            </button>
+
+            <span class="vip-close-link" onclick="document.getElementById('adminSecretModal').style.display='none'">Exit Admin</span>
+        </div>
+    </div>
+     
+     <!-- 🌟 2026 GLOBAL SMART TOAST & ZERO-POPUP MAGIC ENGINE -->
+    <script>
+        (function() {
+            // 1. 2026 Floating Glass Notification Box
+            window.showCustomToast = function(msg) {
+                if (!msg) return;
+                let toast = document.getElementById('customToastBox');
+                if (!toast) {
+                    toast = document.createElement('div');
+                    toast.id = 'customToastBox';
+                    toast.style.cssText = 'position:fixed; top:20px; left:50%; transform:translate(-50%, -60px) scale(0.9); background:rgba(14, 16, 24, 0.96); backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px); border:1px solid rgba(255, 255, 255, 0.18); border-radius:20px; padding:12px 20px; z-index:9999999999; opacity:0; transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-width:90%; box-shadow:0 12px 35px rgba(0,0,0,0.85); display:flex; align-items:center; gap:10px; font-size:12px; font-weight:800; color:#fff; pointer-events:none;';
+                    document.body.appendChild(toast);
+                }
+
+                let icon = 'ℹ️';
+                let glow = 'rgba(0, 255, 204, 0.4)';
+                let border = '#00ffcc';
+
+                if (msg.includes('Galat') || msg.includes('error') || msg.includes('PERMISSION') || msg.includes('pehle')) {
+                    icon = '❌';
+                    border = '#ff4757';
+                    glow = 'rgba(255, 71, 87, 0.5)';
+                } else if (msg.includes('Mubarak') || msg.includes('save') || msg.includes('VIP')) {
+                    icon = '👑';
+                    border = '#ffd700';
+                    glow = 'rgba(255, 215, 0, 0.5)';
+                }
+
+                toast.style.borderColor = border;
+                toast.style.boxShadow = '0 12px 35px rgba(0,0,0,0.9), 0 0 20px ' + glow;
+                toast.innerHTML = `<span style="font-size:16px;">${icon}</span><span>${msg}</span>`;
+
+                toast.style.transform = 'translate(-50%, 0) scale(1)';
+                toast.style.opacity = '1';
+
+                if (window.toastTimer) clearTimeout(window.toastTimer);
+                window.toastTimer = setTimeout(() => {
+                    toast.style.transform = 'translate(-50%, -60px) scale(0.9)';
+                    toast.style.opacity = '0';
+                }, 3200);
+            };
+
+            // 2. Overwrite Alert (Browser Ke Local Safaid Box Mukammal Khatam!)
+            window.alert = function(msg) {
+                if (!msg) return;
+
+                // 🚫 Download wale button par KOI BHI BOX NAHI AAYEGA! (100% Silent)
+                if (msg.includes('Snaptube') || msg.includes('Download') || msg.includes('Copy')) {
+                    return; 
+                }
+
+                // Baqi saari jagah 2026 Floating Glass Notification aayegi!
+                window.showCustomToast(msg);
+            };
+        })();
+    </script>
+     
 </body>
 </html>
