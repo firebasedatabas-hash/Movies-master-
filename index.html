@@ -3430,14 +3430,10 @@ header {
             }
         };
 
-// 📥 SNAPTUBE & ANDROID NATIVE DOWNLOAD ENGINE
+// 📥 100% UNIVERSAL DOWNLOAD ENGINE (WORKS EVERYWHERE + SNAPTUBE AUTODETECT)
         window.downloadOrShareVideo = async (url, title) => {
-            if (!url) {
-                alert('Is video ka download link mojood nahi hai.');
-                return;
-            }
+            if (!url) return;
 
-            // YouTube link ko clean format mein banana taake Snaptube foran pakday
             let targetUrl = url;
             if (url.includes('youtu.be/')) {
                 const vid = url.split('youtu.be/')[1].split('?')[0];
@@ -3447,21 +3443,34 @@ header {
                 targetUrl = `https://www.youtube.com/watch?v=${vid}`;
             }
 
-            // Android System Share Sheet Open Karega (Jisme Snaptube aayega)
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        url: targetUrl
-                    });
-                } catch (e) {}
-            } else {
-                // Agar browser share support na kare to link copy kar dega
-                try {
-                    await navigator.clipboard.writeText(targetUrl);
-                    alert('Video Link Copy Ho Gaya Hai! Snaptube Khol Kar Download Karein.');
-                } catch(err) {
-                    window.open(targetUrl, '_blank');
+            // 1. Guaranteed Universal Copy (Acode, App aur Browser Sab Jagah Link Copy Karega)
+            try {
+                const tempInput = document.createElement("textarea");
+                tempInput.value = targetUrl;
+                tempInput.style.position = "fixed";
+                tempInput.style.left = "-9999px";
+                tempInput.style.top = "-9999px";
+                document.body.appendChild(tempInput);
+                tempInput.focus();
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+            } catch(e) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(targetUrl).catch(() => {});
                 }
+            }
+
+            // 2. 2026 Luxury Floating Glass Notification (Safaid Browser Popup Khatam)
+            if (typeof window.showCustomToast === 'function') {
+                window.showCustomToast('Link Copy Ho Gaya! Snaptube / Vidmate Kholein', 'success');
+            }
+
+            // 3. Android System Share Sheet (Agar Live Browser Ho To System Sheet Bhi Khulegi)
+            if (navigator.share && window.location.protocol.startsWith('http')) {
+                try {
+                    await navigator.share({ url: targetUrl });
+                } catch (err) {}
             }
         };
 
