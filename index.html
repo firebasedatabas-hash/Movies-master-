@@ -1187,6 +1187,19 @@ header {
             background: #000;
         }
 
+/* 📺 VIDEO 100% FIT & NO ZOOM (TICKER AUR ANCHOR POORA SAAF DIKHEGA) */
+        .cyber-player-wrap video,
+        .native-chrome-player-box video,
+        .video-fixed-top video {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important; /* 👈 Zoom mukammal khatam, poora channel fit aayega */
+            background: #000000 !important;
+            display: block !important;
+        }
+
         /* 🌌 CYBER OVERLAY CONTROLS */
         .cyber-player-wrap {
             position: relative;
