@@ -1153,7 +1153,7 @@ header {
         .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
 
         /* 🎬 2026 CYBER-GLASS M3U8 PLAYER STYLES */
-        .native-chrome-player-box, .video-fixed-top {
+        .native-chrome-player-box {
             position: relative !important;
             width: 100% !important;
             aspect-ratio: 16 / 9 !important;
@@ -1165,12 +1165,19 @@ header {
             overflow: hidden;
         }
 
-        .native-chrome-player-box video, .video-fixed-top video {
+        /* 📺 LIVE TV FIXED TOP PLAYER (PLAYER UPAR FREEZE RAHEGA, CHANNELS NEECHE SCROLL HONGE) */
+        .video-fixed-top {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 1001 !important;
             width: 100% !important;
-            height: 100% !important;
-            object-fit: contain !important;
-            background: #000;
-            display: block;
+            aspect-ratio: 16 / 9 !important;
+            background: #000000 !important;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .native-chrome-player-box iframe, .video-fixed-top iframe {
