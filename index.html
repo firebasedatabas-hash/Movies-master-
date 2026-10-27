@@ -12,6 +12,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 🔔 FLATICON UICONS SOLID-ROUNDED CDN -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css">
     <!-- LIGHTWEIGHT HLS STREAM ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
@@ -135,25 +137,9 @@
         .splash-footer { position: absolute; bottom: 25px; z-index: 2; font-size: 11px; color: #777; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
         .splash-footer b { color: var(--primary); font-weight: 800; }
 
-        /* TOP SCROLLING MARQUEE NOTICE BAR */
-        #liveNoticeBar {
-    display: none;
-    background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #00ffd5, #002bff, #7a00ff, #ff0000);
-    background-size: 300% 100%;
-    animation: moveNoticeRainbow 15s linear infinite;
-    color: #000000;
-    padding: 7px 12px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    position: sticky;
-    top: 56px;
-    z-index: 999;
-    border-bottom: none !important;
-    overflow: hidden;
-    white-space: nowrap;
-    border-radius: 25px;
-    margin: 6px 12px;
+        /* 🚫 TICKER BOX MUKAMMAL KHATAM */
+#liveNoticeBar, .ticker-row-container { 
+    display: none !important; 
 }
 
 @keyframes moveNoticeRainbow {
@@ -188,6 +174,63 @@ header {
     position: relative !important; /* 👈 Ab Logo bhi Ticker ki tarah sath upar scroll ho jayega */
     z-index: 1000; 
     height: 48px; 
+}
+
+/* 👑 TOP RIGHT LUXURY ROTATING HEADER AVATAR (Zero 7-colors, Pure Luxury Ring) */
+.header-avatar-wrap {
+    position: absolute !important;
+    right: 14px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    display: none; /* 👈 Default hidden: sirf tab dikhega jab profile se photo set ho! */
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    background: #000 !important;
+    overflow: hidden !important;
+    box-shadow: 0 0 14px rgba(0, 242, 254, 0.45) !important;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    z-index: 1010 !important;
+}
+.header-avatar-wrap:active {
+    transform: translateY(-50%) scale(0.9) !important;
+}
+
+/* 💫 Ghoomne Wala Ring (Electric Cyan & Silver White) */
+.header-avatar-wrap::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 150% !important;
+    height: 150% !important;
+    background: conic-gradient(#00f2fe, #ffffff, #0077b6, #ffffff, #00f2fe) !important;
+    animation: rotateCyberRing 2.5s linear infinite !important;
+}
+@keyframes rotateCyberRing {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.header-avatar-inner {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 86% !important;
+    height: 86% !important;
+    border-radius: 50% !important;
+    background: #141724 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+.header-avatar-inner img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
 }
 
 .logo { 
@@ -302,6 +345,17 @@ header {
     display: block !important; 
 }
 
+/* 🎬 2026 TAMASHA SKELETON SHIMMER LOADING SYSTEM */
+.skeleton-shimmer {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.03) 100%);
+    background-size: 200% 100%;
+    animation: tamashaShimmer 1.5s infinite linear;
+}
+@keyframes tamashaShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
 /* 🎬 PERFECT TAMASHA SLIDER (NO OVERLAP + FULL GLOW) */
 .slider-container { 
     width: 100%; 
@@ -396,6 +450,11 @@ header {
     display: none !important; 
 }
 
+/* 🚫 DOTH (DOTS) MUKAMMAL KHATAM */
+.slider-dots, .dot { 
+    display: none !important; 
+}
+
 .slider-dots { 
     position: absolute; 
     bottom: 6px; 
@@ -435,6 +494,14 @@ header {
     min-height: auto !important; /* 👈 Faltu kaali jagah khatam! */
     align-items: flex-start;
 }
+
+/* 📺 HOME PAGE LIVE CHANNELS SCROLL FIX */
+.movie-scroll .channel-box {
+    min-width: 64px !important;
+    width: 64px !important;
+    flex-shrink: 0 !important;
+}
+
         .movie-scroll::-webkit-scrollbar { display: none; }
         
         /* 🎬 SMART HYBRID CARDS (POSTER + YOUTUBE AUTO) */
@@ -509,279 +576,354 @@ header {
     white-space: nowrap;
 }
 
-/* 👑 2026 GOLDEN CROWN VIP BADGE (SCREENSHOT 1 JAISA) */
+/* 👑 2026 DIRECT METALLIC GOLD VIP BADGE (CRASH-PROOF - ZERO COLLISION) */
+.channel-vip-3d-badge {
+    position: absolute !important;
+    top: -5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 15 !important;
+    background: linear-gradient(135deg, #1c160a, #0d0f17) !important;
+    border: 1.2px solid #ffd700 !important;
+    border-radius: 12px !important;
+    padding: 2px 7px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3.5px !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.45), 0 3px 6px rgba(0, 0, 0, 0.85) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+}
+
+/* 👑 VIP BADGE (TOP-RIGHT PAR CHOTI PATTI - NO STRETCH) */
 .card-vip-badge {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    color: #000000;
-    font-size: 8px;
-    font-weight: 900;
-    padding: 2.5px 6px;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-    z-index: 6;
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.7), 0 4px 10px rgba(0, 0, 0, 0.8);
-    border: 1px solid #ffffff;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    text-transform: uppercase;
-    pointer-events: none;
-}
-.card-vip-badge svg {
-    width: 10px;
-    height: 10px;
-    fill: #000000;
+    position: absolute !important;
+    top: 6px !important;         /* 👈 Upar set ho gaya */
+    bottom: auto !important;      /* 👈 Neechay tak khinchna 100% band */
+    right: 6px !important;
+    left: auto !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: max-content !important;
+    z-index: 10 !important;
+    background: linear-gradient(135deg, #1c160a, #0d0f17) !important;
+    border: 1.2px solid #ffd700 !important;
+    border-radius: 12px !important;
+    padding: 2.5px 7px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3.5px !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.45), 0 3px 6px rgba(0, 0, 0, 0.85) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
 }
 
-/* 👑 2026 LUXURY VIP DIGITAL HUD TIMER & GOLDEN GLOW CARD */
-.vip-active-card {
-    border-color: rgba(255, 215, 0, 0.4) !important;
-    background: linear-gradient(145deg, rgba(26, 20, 8, 0.85), rgba(14, 16, 24, 0.85)) !important;
-    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 215, 0, 0.06) !important;
+.vip-badge-crown {
+    width: 10px !important;
+    height: 10px !important;
+    fill: #ffd700 !important;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.8));
+    display: block !important;
 }
 
-.vip-hud-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(0, 255, 204, 0.35);
-    border-radius: 9px;
-    padding: 3px 6px;
-    margin-top: 4px;
-    box-shadow: 0 2px 10px rgba(0, 255, 204, 0.2);
+.vip-badge-text {
+    font-size: 8px !important;
+    font-weight: 900 !important;
+    color: #ffd700 !important;
+    letter-spacing: 0.6px !important;
+    line-height: 1 !important;
+    text-shadow: 0 0 6px rgba(255, 215, 0, 0.5);
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
-.vip-hud-val {
-    font-size: 11px;
-    font-weight: 900;
-    color: #00ffcc;
-    font-family: 'Plus Jakarta Sans', monospace, sans-serif;
-    letter-spacing: -0.2px;
+/* 🔴 LIVE BADGE (AB UPAR TOP-LEFT PAR SET HO GAYA) */
+.card-live-badge {
+    position: absolute !important;
+    top: 6px !important;         /* 👈 Upar set ho gaya */
+    bottom: auto !important;
+    left: 6px !important;
+    right: auto !important;
+    width: auto !important;
+    max-width: max-content !important;
+    background: linear-gradient(135deg, #e50914, #b20710) !important;
+    color: #ffffff !important;
+    font-size: 7.5px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.6px !important;
+    padding: 2px 6px !important;
+    border-radius: 5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    z-index: 5 !important;
+    box-shadow: 0 2px 8px rgba(229, 9, 20, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    text-transform: uppercase !important;
+    pointer-events: none !important;
 }
 
-.vip-hud-val small {
-    font-size: 7.5px;
-    color: #8b8f9e;
-    font-weight: 700;
-    margin-left: 1px;
-    text-transform: uppercase;
+/* 👑 2026 DIRECT METALLIC GOLD VIP BADGE (CRASH-PROOF - ZERO COLLISION) */
+.channel-vip-3d-badge {
+    position: absolute !important;
+    top: -5px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 15 !important;
+    background: linear-gradient(135deg, #1c160a, #0d0f17) !important;
+    border: 1.2px solid #ffd700 !important;
+    border-radius: 12px !important;
+    padding: 2px 7px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 3.5px !important;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.45), 0 3px 6px rgba(0, 0, 0, 0.85) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
 }
 
-.vip-hud-colon {
-    color: rgba(0, 255, 204, 0.7);
-    font-size: 10px;
-    font-weight: 900;
-    animation: colonPulse 1s infinite alternate ease-in-out;
+/* 👑 2026 LIQUID GOLD LIGHT-SWEEP VIP BADGE (DESIGN 1) */
+.card-vip-badge, .channel-vip-3d-badge {
+    position: absolute !important;
+    z-index: 15 !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, rgba(20, 16, 8, 0.96) 0%, rgba(5, 7, 12, 0.98) 100%) !important;
+    border: 1px solid rgba(255, 215, 0, 0.55) !important;
+    border-radius: 14px !important;
+    padding: 2.5px 8px 2.5px 6.5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 0 0 12px rgba(255, 215, 0, 0.35) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    max-width: max-content !important;
 }
 
-@keyframes colonPulse {
-    0% { opacity: 0.2; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 6px #00ffcc; }
-}
-
-/* 👑 LIVE TV CHANNEL CIRCLE VIP BADGE */
-.channel-vip-badge {
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    width: 19px;
-    height: 19px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    border: 1.5px solid #ffffff;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-}
-.channel-vip-badge svg {
-    width: 10px;
-    height: 10px;
-    fill: #000000;
-}
-
-/* 👑 2026 ULTRA-LUXURY GOLD VIP BADGES & LOCK MODALS */
+/* Movie Card & Slider Position (Top-Right) */
 .card-vip-badge {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    color: #000000;
+    top: 6px !important;
+    right: 6px !important;
+    left: auto !important;
+    bottom: auto !important;
+}
+
+/* Live TV Channel Circle Position (Top-Center) */
+.channel-vip-3d-badge {
+    top: -6px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+/* 💫 Asli Laser Beam Chamak (Light Sweep Animation) */
+.card-vip-badge::after, .channel-vip-3d-badge::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 60% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent) !important;
+    transform: skewX(-25deg) !important;
+    animation: goldSweep 2.8s infinite ease-in-out !important;
+}
+
+@keyframes goldSweep {
+    0% { left: -100%; }
+    50%, 100% { left: 200%; }
+}
+
+.vip-badge-crown {
+    width: 11px !important;
+    height: 11px !important;
+    fill: #ffd700 !important;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8)) !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+}
+
+.vip-badge-text {
+    font-size: 8.5px !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, #ffffff 0%, #ffd700 60%, #ff8c00 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* 🌟 VIP Channel Ka Ghoomne Wala Golden Ring */
+.channel-box.is-vip-channel .live-item::before {
+    background: conic-gradient(#ffd700, #ff8c00, #ffffff, #ffd700) !important;
+    animation: rotateRainbowBorder 2s linear infinite !important;
+}
+
+.channel-box.is-vip-channel .live-item {
+    box-shadow: 0 0 14px rgba(255, 215, 0, 0.5) !important;
+}
+
+/* ✨ VIP Channel Ka Sunehra Naam */
+.channel-title-text.vip-chan-title {
+    color: #ffd700 !important;
+    font-weight: 800 !important;
+}
+
+.live-vip-badge-black {
+    background: rgba(10, 12, 18, 0.95);
+    border: 1px solid rgba(255, 215, 0, 0.45);
+    color: #ffd700;
     font-size: 8.5px;
     font-weight: 900;
-    padding: 2.5px 7px;
-    border-radius: 6px;
-    letter-spacing: 0.6px;
-    z-index: 5;
-    box-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
-    border: 1px solid #ffffff;
+    padding: 3px 8px;
+    border-radius: 12px;
     display: inline-flex;
     align-items: center;
-    gap: 3px;
-    text-transform: uppercase;
-    pointer-events: none;
+    gap: 4px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.25);
+    vertical-align: middle;
 }
-.card-vip-badge svg {
+.live-vip-badge-black svg {
     width: 10px;
     height: 10px;
-    fill: #000000;
+    fill: #ffd700;
 }
 
-/* 🔒 VIP LOCK PAYMENT MODAL (USER KE LIYE) */
-#vipLockModal, #adminSecretModal {
-    position: fixed;
-    inset: 0;
-    background: rgba(5, 7, 12, 0.94);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
-    z-index: 99999999;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    box-sizing: border-box;
-}
+/* 🔒 2026 LIQUID SILVER TITANIUM VIP MODAL (ZERO YELLOW - PURE LUXURY) */
+        #vipLockModal, #adminSecretModal {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 6, 10, 0.94);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            z-index: 99999999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            box-sizing: border-box;
+        }
 
-.vip-modal-card {
-    width: 100%;
-    max-width: 326px;
-    background: rgba(18, 20, 28, 0.9);
-    border: 1px solid rgba(255, 215, 0, 0.35);
-    border-radius: 26px;
-    padding: 26px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 215, 0, 0.15);
-    box-sizing: border-box;
-    position: relative;
-    animation: popInVip 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-@keyframes popInVip {
-    0% { transform: scale(0.85); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
+        .vip-modal-card {
+            width: 100%;
+            max-width: 330px;
+            background: rgba(14, 18, 28, 0.96) !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important;
+            border-radius: 26px !important;
+            padding: 24px 18px 20px !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 255, 255, 0.08) !important;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden !important;
+            animation: popInVip 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popInVip {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
-.vip-crown-icon-wrap {
-    width: 68px;
-    height: 68px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 14px;
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5);
-}
-.vip-crown-icon-wrap svg {
-    width: 36px;
-    height: 36px;
-    fill: #000000;
-}
+        /* 💫 Chandi Jaisi Chamak (Silver Laser Beam Sweep) */
+        .vip-modal-card::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -120% !important;
+            width: 70% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+            transform: skewX(-25deg) !important;
+            animation: modalLaserSweep 3.5s infinite ease-in-out !important;
+            pointer-events: none !important;
+        }
+        @keyframes modalLaserSweep {
+            0% { left: -120%; }
+            40%, 100% { left: 220%; }
+        }
 
-.vip-modal-title {
-    font-size: 19px;
-    font-weight: 900;
-    color: #ffffff;
-    margin: 0 0 4px;
-}
-.vip-modal-sub {
-    font-size: 11.5px;
-    color: #ffd700;
-    font-weight: 800;
-    margin: 0 0 14px;
-}
+        /* 👑 Platinum Titanium Crown (Peela Dabba Khatam) */
+        .vip-crown-icon-wrap {
+            width: 56px !important;
+            height: 56px !important;
+            border-radius: 18px !important;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px !important;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.22) !important;
+        }
+        .vip-crown-icon-wrap svg {
+            width: 28px !important;
+            height: 28px !important;
+            fill: #000000 !important;
+            filter: drop-shadow(0 1px 2px rgba(255,255,255,0.4)) !important;
+        }
 
-/* 💳 Payment Methods Box */
-.vip-payment-info-box {
-    width: 100%;
-    background: rgba(10, 12, 18, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
-    padding: 12px;
-    margin-bottom: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: left;
-    box-sizing: border-box;
-}
-.vip-pay-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 700;
-    color: #fff;
-}
-.vip-pay-row b {
-    color: #00ffcc;
-    letter-spacing: 0.5px;
-}
+        .vip-modal-title {
+            font-size: 18px !important;
+            font-weight: 900 !important;
+            color: #ffffff !important;
+            letter-spacing: 0.5px !important;
+            margin: 0 0 3px !important;
+        }
+        .vip-modal-sub {
+            font-size: 10.5px !important;
+            color: #94a3b8 !important; /* 👈 Peela rang khatam, clean platinum grey */
+            font-weight: 700 !important;
+            margin: 0 0 16px !important;
+            letter-spacing: 0.2px !important;
+        }
 
-/* Activation Code Input Row */
-.vip-code-input-row {
-    width: 100%;
-    display: flex;
-    gap: 8px;
-    margin: 12px 0 14px;
-}
-.vip-input-field {
-    flex: 1;
-    background: #090b10;
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    border-radius: 14px;
-    padding: 10px 12px;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    outline: none;
-}
-.vip-activate-btn {
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    border: none;
-    color: #000;
-    font-size: 11.5px;
-    font-weight: 900;
-    padding: 10px 14px;
-    border-radius: 14px;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(255, 215, 0, 0.4);
-    white-space: nowrap;
-}
+        /* 🔑 Activation Code Input Row */
+        .vip-code-input-row {
+            width: 100%;
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px !important;
+        }
+        .vip-input-field {
+            flex: 1;
+            background: #090b10 !important;
+            border: 1px solid rgba(255, 255, 255, 0.22) !important; /* 👈 Peeli border khatam */
+            border-radius: 14px !important;
+            padding: 10px 12px !important;
+            color: #ffffff !important;
+            font-size: 12px !important;
+            font-weight: 800 !important;
+            letter-spacing: 1px !important;
+            text-transform: uppercase !important;
+            outline: none !important;
+        }
+        
+        /* ⚡ Unlock Button (Apple Style White & Pure Crisp) */
+        .vip-activate-btn {
+            background: #ffffff !important; /* 👈 Peela button khatam, pure white luxury */
+            border: none !important;
+            color: #000000 !important;
+            font-size: 12px !important;
+            font-weight: 900 !important;
+            padding: 10px 18px !important;
+            border-radius: 14px !important;
+            cursor: pointer;
+            box-shadow: 0 0 14px rgba(255, 255, 255, 0.35) !important;
+            white-space: nowrap !important;
+            transition: transform 0.2s !important;
+        }
+        .vip-activate-btn:active { transform: scale(0.92) !important; }
 
-.vip-wa-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    border: none;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 800;
-    padding: 12px;
-    border-radius: 14px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
-    margin-bottom: 8px;
-}
-.vip-close-link {
-    font-size: 11px;
-    color: #888;
-    cursor: pointer;
-    font-weight: 700;
-    margin-top: 4px;
-}
+        .vip-close-link {
+            font-size: 11px !important;
+            color: #64748b !important;
+            cursor: pointer;
+            font-weight: 700 !important;
+        }
 
 /* 🟢 CHAMAKTA HUA REAL-TIME GREEN DOT */
 .live-pulse-dot {
@@ -807,7 +949,20 @@ header {
     }
 }
 
-.card-rect img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 3px; }
+/* 🌟 2026 CRYSTAL CLEAR FULL HD IMAGE RENDERING */
+.card-rect img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+    border-radius: 4px; 
+    image-rendering: -webkit-optimize-contrast !important; /* 👈 Blurriness khatam karega */
+    image-rendering: crisp-edges !important;
+    transform: translateZ(0);                              /* 👈 GPU HD Acceleration */
+    backface-visibility: hidden;
+    filter: contrast(1.04) brightness(1.02);              /* 👈 Photos chamakdar aur saaf dikhengi */
+}
+
 .card-views-badge { position: absolute; bottom: 6px; left: 6px; background: rgba(0,0,0,0.8); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 8px; display: flex; align-items: center; gap: 3px; z-index: 3; }
 .card-rect-info { padding: 6px 2px 0; }
 .card-rect-info p { margin: 0; font-size: 11px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #f0f0f5; font-weight: 600; }
@@ -844,6 +999,63 @@ header {
         .video-fixed-top { position: sticky; top: 0; z-index: 1001; background: #000; width: 100%; aspect-ratio: 16/9; border-bottom: 1px solid var(--card-border); flex-shrink: 0; }
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; padding-bottom: 30px; }
+
+/* 🌟 2026 CYBER-GLASS HOME CATEGORY SCROLL BAR */
+.home-cat-scroll {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 6px 12px 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    z-index: 15;
+    background: transparent;
+}
+.home-cat-scroll::-webkit-scrollbar { display: none; }
+
+.home-cat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(18, 20, 28, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 7px 14px;
+    border-radius: 20px;
+    color: #8b8f9e;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    user-select: none;
+}
+.home-cat-pill:active {
+    transform: scale(0.92);
+}
+.home-cat-pill.active {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 14px var(--primary-glow);
+}
+.home-cat-pill svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.home-cat-pill.active svg {
+    stroke: var(--primary) !important;
+}
 
 /* 🌟 2026 CYBER-GLASS LIVE TV CATEGORY PILLS */
 .live-cat-scroll {
@@ -940,12 +1152,12 @@ header {
         .fav-channel-btn { position: absolute; top: -3px; right: 2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
         .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
 
-        /* PLAYER CONTAINER */
-        .native-chrome-player-box {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000000;
+        /* 🎬 2026 CYBER-GLASS M3U8 PLAYER STYLES */
+        .native-chrome-player-box, .video-fixed-top {
+            position: relative !important;
+            width: 100% !important;
+            aspect-ratio: 16 / 9 !important;
+            background: #000000 !important;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
@@ -958,6 +1170,7 @@ header {
             height: 100% !important;
             object-fit: contain !important;
             background: #000;
+            display: block;
         }
 
         .native-chrome-player-box iframe, .video-fixed-top iframe {
@@ -965,6 +1178,330 @@ header {
             height: 100% !important;
             border: none;
             background: #000;
+        }
+
+        /* 🌌 CYBER OVERLAY CONTROLS */
+        .cyber-player-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .m3u8-controls-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(7, 9, 14, 0.85) 0%, transparent 30%, transparent 68%, rgba(7, 9, 14, 0.94) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 14px 8px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            z-index: 100;
+            user-select: none;
+            pointer-events: auto;
+        }
+        .m3u8-controls-overlay.hide {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        .m3u8-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .m3u8-video-title {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 80%;
+        }
+
+        .m3u8-btn-hud {
+            background: rgba(18, 22, 34, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        .m3u8-btn-hud:active { transform: scale(0.9); }
+        .m3u8-btn-hud svg {
+            width: 15px;
+            height: 15px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* CENTER 10s SKIP & PLAY */
+        .m3u8-center-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            margin-top: -6px;
+        }
+
+        .m3u8-btn-skip {
+            background: rgba(18, 22, 34, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .m3u8-btn-skip:active { transform: scale(0.88); }
+        .m3u8-btn-skip svg { width: 22px; height: 22px; fill: #ffffff; }
+
+        .m3u8-btn-play {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e50914, #b20710);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.65);
+            transition: transform 0.2s;
+        }
+        .m3u8-btn-play:active { transform: scale(0.9); }
+        .m3u8-btn-play svg { width: 20px; height: 20px; fill: #ffffff; }
+
+        /* 🔴 YOUTUBE RED LINE PROGRESS BAR */
+        .m3u8-bottom-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .m3u8-progress-container {
+            position: relative;
+            width: 100%;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .m3u8-progress-bg {
+            position: absolute;
+            width: 100%;
+            height: 3.5px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .m3u8-progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #e50914;
+            border-radius: 4px;
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.85);
+        }
+        .m3u8-progress-thumb {
+            position: absolute;
+            left: 0%;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #e50914;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 8px rgba(229, 9, 20, 0.95);
+            transform: translate(-50%, 0);
+            pointer-events: none;
+        }
+
+        .m3u8-bottom-btn-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .m3u8-left-tools {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 🔊 VOLUME EXPAND WRAPPER */
+        .m3u8-volume-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(18, 22, 34, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 3px 8px 3px 4px;
+        }
+        .m3u8-vol-btn {
+            background: transparent;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 0;
+        }
+        .m3u8-vol-btn svg {
+            width: 15px;
+            height: 15px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .m3u8-vol-slider {
+            -webkit-appearance: none;
+            width: 50px;
+            height: 3px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+        .m3u8-vol-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        .m3u8-time-txt {
+            font-size: 10px;
+            font-weight: 800;
+            color: #cbd5e1;
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        /* 🔴 LIVE BADGE */
+        .m3u8-live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: linear-gradient(135deg, #e50914, #b20710);
+            color: #ffffff;
+            font-size: 8.5px;
+            font-weight: 900;
+            padding: 2.5px 7px;
+            border-radius: 6px;
+            letter-spacing: 0.6px;
+        }
+        .m3u8-live-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #00ff66;
+            box-shadow: 0 0 6px #00ff66;
+            animation: m3u8LivePulse 1s infinite alternate;
+        }
+        @keyframes m3u8LivePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* ⚙️ CYBER SETTINGS POPUP (WITH RED SCROLL LINE | ) */
+        .m3u8-settings-modal {
+            position: absolute;
+            top: 36px;
+            right: 8px;
+            max-height: calc(100% - 44px);
+            background: rgba(10, 14, 22, 0.97);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border-radius: 14px;
+            padding: 10px 8px 10px 12px;
+            width: 195px;
+            display: none;
+            flex-direction: column;
+            gap: 7px;
+            z-index: 200;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.95);
+            overflow-y: scroll !important;       /* 👈 Scroll hamesha on */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #e50914 rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 🔴 Chamakti Hui Line | Jo Upar Neeche Hogi */
+        .m3u8-settings-modal::-webkit-scrollbar {
+            width: 4px !important;
+            display: block !important;
+        }
+        .m3u8-settings-modal::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-radius: 4px !important;
+            margin: 6px 0 !important;
+        }
+        .m3u8-settings-modal::-webkit-scrollbar-thumb {
+            background: #e50914 !important;
+            border-radius: 4px !important;
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.9) !important;
+        }
+        .m3u8-settings-modal.show { display: flex !important; }
+
+        .m3u8-settings-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            font-weight: 900;
+            color: #e50914;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+        .m3u8-settings-header svg {
+            width: 13px;
+            height: 13px;
+            stroke: #e50914;
+            fill: none;
+            stroke-width: 2.2;
+        }
+
+        .m3u8-opt-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+        .m3u8-opt-chip {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            font-size: 9px;
+            font-weight: 800;
+            color: #fff;
+            padding: 3px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .m3u8-opt-chip.active {
+            background: #e50914;
+            color: #fff;
+            border-color: #e50914;
+            box-shadow: 0 0 10px rgba(229,9,20,0.6);
         }
 
         /* 🎬 YOUTUBE & NETFLIX CAPSULE PILL ACTION CHIPS */
@@ -1050,41 +1587,58 @@ header {
             display: none !important; 
         }
 
-        /* 💎 2026 CLEAN LUXURY BOTTOM NAV (NO 7 COLORS - LOCKED AT BOTTOM) */
+        /* 📱 FULL-WIDTH EDGE-TO-EDGE BOTTOM NAV (SIDE CORNERS 100% KHATAM) */
+        /* 🌈 2026 CURVED 7-COLOR RAINBOW NAV (CORNERS PAR BHI GOLAYI - ZERO KAALI JAGAH) */
         .bottom-nav-container {
             position: fixed !important;
-            bottom: 10px !important;
-            top: auto !important; /* 👈 Upar chadhna bilkul band */
-            left: 14px !important;
-            right: 14px !important;
-            height: 54px !important;
-            border-radius: 20px !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            height: 56px !important;
+            border-radius: 22px 22px 0 0 !important; /* 👈 Bahar wale corners ki golayi */
             padding: 0 !important;
             margin: 0 !important;
             overflow: hidden !important;
-            z-index: 99999 !important; /* 👈 Hamesha screen ke sabse aage rahega */
+            z-index: 99999 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            background: rgba(14, 16, 24, 0.94) !important;
-            backdrop-filter: blur(28px) saturate(190%) !important;
-            -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-            border: 1px solid rgba(255, 255, 255, 0.12) !important; /* 👈 Clean Luxury Border (7 Colors Khatam) */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85) !important;
+            background: transparent !important;
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.85) !important;
+            border: none !important;
         }
 
-        /* 🚫 7-COLOR RAINBOW BORDER MUKAMMAL DELETE */
+        /* 🌈 7-COLOR LIVE FLOWING RAINBOW (POORE CORNERS PAR GHOOMAY GA) */
         .bottom-nav-container::before {
-            display: none !important;
-            content: none !important;
-        }
-
-        .bottom-nav { 
-            position: relative !important;
-            z-index: 2 !important;
+            content: "" !important;
+            display: block !important;
+            position: absolute !important;
+            inset: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            background: transparent !important; 
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
+            background-size: 200% 100%;
+            animation: flowRainbow 3s linear infinite; /* 👈 Upar jaisi 3s speed */
+            will-change: background-position;
+            transform: translateZ(0);
+            z-index: 1 !important;
+        }
+
+        /* 📱 INNER DARK NAV (SIRF UPAR 2.5px KI GOL RAINBOW LINE CHHOD KAR POORA COVER KAREGA) */
+        .bottom-nav { 
+            position: absolute !important;
+            top: 2.5px !important;                   /* 👈 Upar sirf 2.5px ki gol line bachegi */
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: calc(100% - 2.5px) !important;
+            background: rgba(12, 14, 22, 0.98) !important; 
+            backdrop-filter: blur(28px) saturate(190%) !important; 
+            -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+            border-radius: 20px 20px 0 0 !important; /* 👈 Gol corners ke sath 100% match */
+            z-index: 2 !important;
             display: flex !important; 
             justify-content: space-around !important; 
             align-items: center !important;
@@ -1096,70 +1650,94 @@ header {
 
         .nav-item { 
             text-align: center !important; 
-            color: #8b8f9e !important; 
-            font-size: 9px !important; 
-            font-weight: 700 !important; 
+            color: #8e92a4 !important; 
+            font-size: 10px !important; 
+            font-weight: 600 !important; 
             flex: 1 !important; 
             display: flex !important; 
             flex-direction: column !important; 
             align-items: center !important; 
             justify-content: center !important; 
             cursor: pointer !important; 
-            border-radius: 12px !important; 
             padding: 4px 0 !important; 
             margin: 0 !important;
             white-space: nowrap !important; 
-            transition: all 0.2s ease !important;
+            position: relative !important;
+            transition: all 0.25s ease !important;
             user-select: none !important;
             background: transparent !important;
             border: none !important;
         }
 
-        .nav-item span {
-            line-height: 1 !important;
-            margin-top: 2px !important;
+        /* 🌟 ICON WRAPPER WITH RED AMBIENT SPOTLIGHT GLOW */
+        .nav-icon-wrap {
+            position: relative;
+            width: 28px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2px;
         }
 
         .nav-svg {
-            width: 18px !important;
-            height: 18px !important;
-            max-width: 18px !important;
-            max-height: 18px !important;
-            stroke: currentColor !important;
+            width: 20px !important;
+            height: 20px !important;
+            stroke: #8e92a4;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            display: block;
+            transition: all 0.25s ease;
+        }
+
+        .nav-item span {
+            font-size: 10px !important;
+            font-weight: 600 !important;
+            line-height: 1 !important;
+            color: #8e92a4;
+            transition: color 0.25s ease, font-weight 0.25s ease;
+        }
+
+        /* ⚡ DESIGN 5: CYBERPUNK 2026 NEON HUD ACTIVE ICON EFFECT */
+        .nav-item.active .nav-icon-wrap {
+            background: rgba(0, 242, 254, 0.14) !important;
+            border: 1px solid #00f2fe !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border-radius: 14px !important;
+            box-shadow: 0 0 14px rgba(0, 242, 254, 0.45), inset 0 0 8px rgba(0, 242, 254, 0.15) !important;
+            width: 42px !important;
+            height: 28px !important;
+        }
+
+        /* 🚫 Faltu Laal Saya Mukammal Khatam */
+        .nav-item.active .nav-icon-wrap::before {
+            display: none !important;
+        }
+
+        .nav-item.active .nav-svg {
+            stroke: #00f2fe !important;
             fill: none !important;
-            stroke-width: 2.2 !important;
-            stroke-linecap: round !important;
-            stroke-linejoin: round !important;
-            display: block !important;
-            transition: stroke 0.2s, transform 0.2s !important;
+            filter: drop-shadow(0 0 8px #00f2fe) !important;
+            transform: scale(1.08) !important;
         }
 
-        .nav-item:active { 
-            transform: scale(0.88) !important; 
-        }
-
-        /* Active Item Glow */
-        .nav-item.active { 
-            color: #ffffff !important; 
-            background: transparent !important; 
-            border: none !important; 
-            box-shadow: none !important;
-        }
-
-        .nav-item.active .nav-svg { 
-            stroke: var(--primary) !important; 
-            filter: drop-shadow(0 0 6px var(--primary-glow)) !important; 
-            transform: translateY(-2px) !important;
+        .nav-item.active .nav-svg.solid-icon {
+            fill: #00f2fe !important;
+            stroke: #00f2fe !important;
         }
 
         .nav-item.active span {
-            color: #ffffff !important;
-            font-weight: 800 !important;
+            color: #00f2fe !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.4px !important;
+            text-shadow: 0 0 8px rgba(0, 242, 254, 0.7) !important;
         }
 
-        .nav-item.active #navAvatarBox {
-            border-color: var(--primary) !important;
-            box-shadow: 0 0 8px var(--primary-glow) !important;
+        .nav-item:active {
+            transform: scale(0.92);
         }
 
 /* 🎬 ULTRA-MODERN LUXURY PROFILE (NO RED RING - NO 7 COLORS) */
@@ -1522,24 +2100,180 @@ header {
     gap: 8px;
 }
 
-/* Glass Stat Card (Favorites & Watched) */
+/* 👑 2026 FULL-WIDTH CYBER-GLASS VIP PASS (ZERO TEXT WRAPPING) */
 .profile-stats-card {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 4px;
+    display: flex !important;
+    flex-direction: column !important; /* 👈 Card full width chau-da ho jayega */
+    gap: 10px !important;
+    width: 100% !important;
+    margin-bottom: 4px !important;
 }
 
 .profile-stat-box {
-    background: rgba(18, 20, 28, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    border-radius: 16px;
-    padding: 12px;
+    width: 100% !important;
+    background: rgba(18, 20, 28, 0.78) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-radius: 18px !important;
+    padding: 12px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
+    box-sizing: border-box !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ✈️ 2026 DESIGN 1: TELEGRAM CONTACT ADMIN CARD STYLE */
+.profile-stat-box.tg-contact-card {
+    background: rgba(14, 20, 32, 0.88) !important;
+    border: 1px solid rgba(0, 136, 204, 0.38) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75), 0 0 16px rgba(0, 136, 204, 0.2) !important;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.profile-stat-box.tg-contact-card:active {
+    transform: scale(0.97) !important;
+}
+
+/* 🌟 CARD 1: LIQUID SILVER TITANIUM VIP PASS CARD (SILVER LIGHT SWEEP) */
+.profile-stat-box.vip-active-card {
+    position: relative !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    background: linear-gradient(135deg, rgba(20, 24, 33, 0.96) 0%, rgba(9, 11, 16, 0.98) 100%) !important;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.9), 0 0 20px rgba(255, 255, 255, 0.12) !important;
+}
+
+/* 💫 Asli Chandi Ki Laser Beam Chamak (Silver Sweep Animation) */
+.profile-stat-box.vip-active-card::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -120% !important;
+    width: 70% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.32), transparent) !important;
+    transform: skewX(-25deg) !important;
+    animation: silverBeam 3s infinite ease-in-out !important;
+    pointer-events: none !important;
+}
+
+@keyframes silverBeam {
+    0% { left: -120%; }
+    45%, 100% { left: 220%; }
+}
+
+/* 📱 2026 DIGITAL CYBER-HUD LUXURY TIMER LINE */
+.vip-cyber-timer-box {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.vip-cyber-top {
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.vip-title-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 900;
+    color: #ffd700;
+    letter-spacing: 0.6px;
+}
+
+/* 👑 2026 Vector Crown SVG */
+.vip-crown-svg {
+    width: 15px;
+    height: 15px;
+    fill: #ffd700;
+    filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.7));
+    flex-shrink: 0;
+}
+
+.vip-cyber-badge {
+    background: rgba(0, 255, 204, 0.12);
+    border: 1px solid rgba(0, 255, 204, 0.4);
+    color: #00ffcc;
+    font-size: 8.5px;
+    font-weight: 900;
+    padding: 2.5px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.25);
+}
+
+.vip-cyber-clock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Plus Jakarta Sans', monospace, sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+}
+
+/* 🔔 Flaticon Solid Rounded Alarm Clock Icon */
+.vip-alarm-icon {
+    font-size: 14px;
+    color: #00ffcc;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 204, 0.65));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.vip-cyber-clock b {
+    color: #00ffcc;
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+}
+
+.vip-cyber-clock b.sec-pulse {
+    color: #ffd700;
+}
+
+.vip-cyber-clock small {
+    font-size: 8.5px;
+    color: #8b8f9e;
+    font-weight: 800;
+    margin-right: 1px;
+}
+
+/* ✨ 2026 Sparkle Star SVG */
+.vip-sub-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 3px;
+}
+
+.vip-sparkle-svg {
+    width: 12px;
+    height: 12px;
+    fill: #ffd700;
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.8));
+    animation: sparkleGlow 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes sparkleGlow {
+    0% { transform: scale(0.85) rotate(0deg); opacity: 0.7; }
+    100% { transform: scale(1.15) rotate(90deg); opacity: 1; }
 }
 
 /* 💎 2026 LUXURY 3D GRADIENT SQUIRCLE BADGES */
@@ -1875,44 +2609,67 @@ header {
         .movie-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
         .movie-details-box { padding: 16px; background: #0c0e14; border-bottom: 1px solid var(--card-border); }
         
-        /* 🎬 TAMASHA APP STYLE EPISODES & TABS SYSTEM */
-.card-ep-count-badge {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    background: rgba(9, 10, 15, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #00ffcc;
-    font-size: 8.5px;
-    font-weight: 900;
-    padding: 2px 6px;
-    border-radius: 6px;
-    letter-spacing: 0.5px;
-    z-index: 4;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-    text-transform: uppercase;
+        /* 🎬 2026 DESIGN 1: LIQUID SILVER TITANIUM EPISODES BADGE (APPLE TV+ LASER SWEEP) */
+.card-ep-count-badge, .card-ep-single-badge {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 6px !important;
+    left: 6px !important;
+    right: auto !important;
+    overflow: hidden !important;
+    background: linear-gradient(135deg, rgba(20, 24, 34, 0.96), rgba(8, 10, 15, 0.98)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.45) !important;
+    border-radius: 12px !important;
+    padding: 2.5px 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    z-index: 6 !important;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.22), 0 4px 10px rgba(0, 0, 0, 0.9) !important;
+    pointer-events: none !important;
+    white-space: nowrap !important;
 }
 
-/* 🏷️ SINGLE EPISODE BADGE (EP 1, EP 2, EP 3...) */
-.card-ep-single-badge {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    background: rgba(9, 10, 15, 0.9);
-    border: 1px solid #00e5ff;
-    color: #00e5ff;
-    font-size: 8.5px;
-    font-weight: 900;
-    padding: 2.5px 7px;
-    border-radius: 6px;
-    letter-spacing: 0.6px;
-    z-index: 4;
-    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4), 0 4px 10px rgba(0, 0, 0, 0.8);
-    display: inline-flex;
-    align-items: center;
-    text-transform: uppercase;
+/* 💫 Asli Chandi Ki Laser Beam Chamak (Silver Sweep Animation) */
+.card-ep-count-badge::after, .card-ep-single-badge::after {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -120% !important;
+    width: 60% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent) !important;
+    transform: skewX(-25deg) !important;
+    animation: epSilverSweep 2.8s infinite ease-in-out !important;
 }
 
+@keyframes epSilverSweep {
+    0% { left: -120%; }
+    45%, 100% { left: 220%; }
+}
+
+.card-ep-count-badge span, .card-ep-single-badge span {
+    font-size: 8px !important;
+    font-weight: 900 !important;
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 60%, #94a3b8 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    line-height: 1 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.ep-badge-svg, .ep-badge-svg polygon, .ep-badge-svg rect {
+    width: 10px !important;
+    height: 10px !important;
+    fill: #ffffff !important;
+    stroke: none !important;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)) !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+}
+        
 /* 📱 Tamasha Style Info / UpNext Tabs */
 .tamasha-tabs-bar {
     display: flex;
@@ -2265,7 +3022,7 @@ header {
         })();
     </script>
 
-    <!-- HEADER (CENTERED LOGO) -->
+    <!-- HEADER (CENTERED LOGO + CONDITIONAL TOP-RIGHT AVATAR) -->
     <header>
         <div class="logo">
             <!-- 🌟 CLEAN TEXT LOGO (NO ICON - RED MASTER) -->
@@ -2287,29 +3044,118 @@ header {
                 </g>
             </svg>
         </div>
-    </header>
 
-    <!-- 📢 TICKER + WHATSAPP ROW -->
-    <div class="ticker-row-container">
-        <div class="header-whatsapp-btn" onclick="window.shareAppViaWhatsApp()">
-            <i class="fab fa-whatsapp"></i> <span>Share App</span>
+        <!-- 👑 TOP RIGHT ROTATING PROFILE AVATAR (Sirf tab dikhega jab profile se photo set ho!) -->
+        <div class="header-avatar-wrap" id="headerAvatarBtn" onclick="window.showNav('profilePage')" title="My Profile">
+            <div class="header-avatar-inner">
+                <img id="headerAvatarImg" alt="Profile">
+            </div>
         </div>
-        <div id="liveNoticeBar">
-            <div class="marquee-inner" id="noticeTextContainer"></div>
-        </div>
-    </div>
+    </header>
 
     <!-- 1. HOME PAGE -->
     <div id="homePage" class="page">
+        <!-- 🌟 2026 CYBER-GLASS HOME CATEGORY SCROLL BAR WITH TAMASHA SHIMMER PILLS -->
+        <div class="home-cat-scroll" id="homeCategoryBar">
+            <div class="home-cat-pill active" onclick="window.filterHomeCategory('all', this)">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                <span>All</span>
+            </div>
+            <!-- Loading Shimmer Pills (Yellow Circle wali khali jagah khatam) -->
+            <div class="skeleton-shimmer" style="width:75px; height:28px; border-radius:20px; flex-shrink:0;"></div>
+            <div class="skeleton-shimmer" style="width:90px; height:28px; border-radius:20px; flex-shrink:0;"></div>
+            <div class="skeleton-shimmer" style="width:80px; height:28px; border-radius:20px; flex-shrink:0;"></div>
+        </div>
         <div class="slider-container" id="sliderClickArea">
             <div class="slider-backdrop" id="sliderBackdrop">
             </div>
-            <div class="slider-track" id="sliderTrack"></div>
+            <!-- 🎬 Slider Shimmer Placeholder -->
+            <div class="slider-track" id="sliderTrack">
+                <div class="slide active-slide">
+                    <div class="skeleton-shimmer" style="width:100%; height:100%; border-radius:8px; border:1px solid rgba(255,255,255,0.06); box-shadow:0 8px 25px rgba(0,0,0,0.85);"></div>
+                </div>
+            </div>
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
-        <!-- ⚡ 100% INSTANT RENDER SECTIONS -->
-        <div id="homeSections"></div>
+        <!-- 🎬 TAMASHA SKELETON LOADING BOXES (Firebase aate hi khud gayab ho jayenge) -->
+        <div id="homeSections">
+            <!-- 1. Live Channels Skeleton -->
+            <div class="section-header">
+                <div class="skeleton-shimmer" style="width:130px; height:16px; border-radius:6px;"></div>
+                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
+            </div>
+            <div class="movie-scroll" style="gap:16px; padding-bottom:12px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
+                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
+                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
+                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
+                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
+                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
+                </div>
+            </div>
+
+            <!-- 2. Movies Row 1 Skeleton -->
+            <div class="section-header">
+                <div class="skeleton-shimmer" style="width:110px; height:16px; border-radius:6px;"></div>
+                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
+            </div>
+            <div class="movie-scroll" style="gap:12px; padding-bottom:12px;">
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:80%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:70%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+            </div>
+
+            <!-- 3. Movies Row 2 Skeleton -->
+            <div class="section-header">
+                <div class="skeleton-shimmer" style="width:120px; height:16px; border-radius:6px;"></div>
+                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
+            </div>
+            <div class="movie-scroll" style="gap:12px; padding-bottom:12px;">
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:75%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:80%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+                <div style="width:120px; flex-shrink:0;">
+                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                    <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- ⚡ 0ms INSTANT RESTORE (APP KHULTE HI MOVIES DIKHANE KE LIYE) -->
@@ -2334,10 +3180,20 @@ header {
         
         <div id="liveChannelInfo" class="live-channel-bar" style="display:none;">
             <div>
-                <span id="playingChannelTitle" style="font-weight:700; font-size:14px; color:#fff;">Live Channel</span>
+                <div style="display:flex; align-items:center; gap:8px;">
+                        <span id="playingChannelTitle" style="font-weight:700; font-size:14px; color:#fff;">Live Channel</span>
+                        <span id="liveChannelVipBadge" class="live-vip-badge-black" style="display:none;">
+                            <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                            <span>VIP</span>
+                        </span>
+                    </div>
                 <div style="color:var(--primary); font-size:10px; font-weight:700; margin-top:2px;"><i class="fa fa-circle" style="font-size:8px;"></i> LIVE BROADCAST</div>
             </div>
-            <button id="livePlayerFavBtn" class="view-all-btn"><i class="fa fa-heart"></i> Favorite</button>
+ <!-- ❤️ MOVIE PLAYER JAISA CAPSULE FAVORITE BUTTON -->
+            <button id="livePlayerFavBtn" class="action-btn" style="flex:unset; width:auto; padding:7px 14px; border-radius:22px;">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <span>Favorite</span>
+            </button>
         </div>
 
         <div class="adsterra-320x50-box">
@@ -2409,13 +3265,19 @@ header {
 
     <!-- 💖 4. 2026 ULTRA-LUXURY FAVORITES VAULT -->
     <div id="favPage" class="full-page">
-        <!-- Header -->
-        <div class="page-header">
-            <svg viewBox="0 0 24 24" onclick="window.backToHome()" style="width:20px; height:20px; cursor:pointer; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span style="font-weight:800; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px;">
-                <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:var(--primary); stroke:var(--primary);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                My Favorites Vault
-            </span>
+        <!-- Header (With WhatsApp Share on Right) -->
+        <div class="page-header" style="justify-content: space-between;">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <svg viewBox="0 0 24 24" onclick="window.backToHome()" style="width:20px; height:20px; cursor:pointer; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span style="font-weight:800; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px;">
+                    <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:var(--primary); stroke:var(--primary);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    My Favorites Vault
+                </span>
+            </div>
+            <!-- 📲 Right Side WhatsApp Share Button -->
+            <div class="header-whatsapp-btn" onclick="window.shareAppViaWhatsApp()" style="margin-left:auto;">
+                <i class="fab fa-whatsapp"></i> <span>Share</span>
+            </div>
         </div>
 
         <div class="fav-container-box">
@@ -2487,15 +3349,21 @@ header {
         </div>
         <div class="movie-grid" id="viewAllGrid"></div>
     </div>
-
-<!-- 5.1 VIP PROFILE PAGE (PROFESSIONAL DESIGN) -->
-    <div id="profilePage" class="full-page">
-        <div class="page-header" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-            <svg viewBox="0 0 24 24" onclick="window.backToHome()" style="width:20px; height:20px; cursor:pointer; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span style="font-weight:800; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px;">
-                <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:var(--primary); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                My Profile
-            </span>
+    
+<div id="profilePage" class="full-page">
+<!-- Profile Header (With WhatsApp Share on Right) -->
+        <div class="page-header" style="justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <svg viewBox="0 0 24 24" onclick="window.backToHome()" style="width:20px; height:20px; cursor:pointer; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                <span style="font-weight:800; font-size:15px; color:#fff; display:flex; align-items:center; gap:8px;">
+                    <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:var(--primary); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    My Profile
+                </span>
+            </div>
+            <!-- 📲 Right Side WhatsApp Share Button -->
+            <div class="header-whatsapp-btn" onclick="window.shareAppViaWhatsApp()" style="margin-left:auto;">
+                <i class="fab fa-whatsapp"></i> <span>Share</span>
+            </div>
         </div>
         
         <div class="profile-page-container">
@@ -2710,14 +3578,17 @@ header {
                 <!-- 1. Stats Row (Favorites & VIP Side-by-Side 2 Columns) -->
                 <div class="profile-stats-card">
                     
-                    <!-- ❤️ Solid Heart (Saved Favorites) -->
-                    <div class="profile-stat-box" onclick="window.showNav('favPage')">
-                        <div class="profile-stat-icon-wrap" style="background: linear-gradient(135deg, #ff4757, #ff6b81); box-shadow: 0 4px 14px rgba(255, 71, 87, 0.45);">
-                            <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#ffffff;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <!-- ✈️ Contact Admin (Official Telegram Support) -->
+                    <div class="profile-stat-box tg-contact-card" onclick="window.openTelegramSupport()">
+                        <div class="profile-stat-icon-wrap" style="background: linear-gradient(135deg, #0088cc, #00a8ff); box-shadow: 0 4px 14px rgba(0, 136, 204, 0.5);">
+                            <svg viewBox="0 0 24 24" style="width:22px; height:22px; fill:#ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
                         </div>
-                        <div class="profile-menu-text-wrap">
-                            <span id="profileFavCount" class="profile-menu-title">0 Saved</span>
-                            <span class="profile-menu-sub">Favorites</span>
+                        <div class="profile-menu-text-wrap" style="flex:1;">
+                            <span class="profile-menu-title" style="color:#ffffff;">Contact Admin</span>
+                            <span class="profile-menu-sub" style="color:#00a8ff; font-weight:700;">Telegram Support (@MovieMasterHelp)</span>
+                        </div>
+                        <div class="profile-chevron-icon">
+                            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
                         </div>
                     </div>
 
@@ -2822,37 +3693,48 @@ header {
             <div class="movie-scroll" id="relatedCategoryMovies"></div>
         </div>
 </div>
-    <!-- 💎 2026 CLEAN LUXURY BOTTOM NAV (FIXED AT BOTTOM - NO 7 COLORS) -->
+
+    <!-- 💎 SCREENSHOT WALA EXACT BOTTOM NAVIGATION -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
-            <!-- 1. Home -->
+            <!-- 1. Home (Solid Home Icon with Red Glow) -->
             <div class="nav-item active" onclick="window.showNav('homePage', this)">
-                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><path d="M3 10.5L12 3l9 7.5v9.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <div class="nav-icon-wrap">
+                    <svg viewBox="0 0 24 24" class="nav-svg solid-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/></svg>
+                </div>
                 <span>Home</span>
             </div>
 
-            <!-- 2. Live TV -->
+            <!-- 2. Live TV (Antenna Smart TV Icon) -->
             <div class="nav-item" onclick="window.showNav('livePage', this)">
-                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><rect x="2" y="7" width="20" height="14" rx="3"/><polyline points="17 2 12 7 7 2"/><circle cx="12" cy="14" r="2.5"/></svg>
+                <div class="nav-icon-wrap">
+                    <svg viewBox="0 0 24 24" class="nav-svg"><polyline points="8 2 12 7 16 2"/><rect x="3" y="7" width="18" height="13" rx="2"/></svg>
+                </div>
                 <span>Live TV</span>
             </div>
 
-            <!-- 3. Search -->
+            <!-- 3. Search (Magnifier Glass) -->
             <div class="nav-item" onclick="window.showNav('searchPage', this)">
-                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><circle cx="11" cy="11" r="7.5"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                <div class="nav-icon-wrap">
+                    <svg viewBox="0 0 24 24" class="nav-svg"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                </div>
                 <span>Search</span>
             </div>
 
-            <!-- 4. Favorites -->
+            <!-- 4. Favorites (Sleek Heart) -->
             <div class="nav-item" onclick="window.showNav('favPage', this)">
-                <svg width="18" height="18" viewBox="0 0 24 24" class="nav-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <div class="nav-icon-wrap">
+                    <svg viewBox="0 0 24 24" class="nav-svg solid-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
                 <span>Favorites</span>
             </div>
 
-            <!-- 5. Profile -->
+            <!-- 5. Profile (With Live Avatar Photo Support) -->
             <div class="nav-item" id="navProfileBtn" onclick="window.showNav('profilePage', this)">
-                <div id="navAvatarBox" style="width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:1px; border:1px solid rgba(255,255,255,0.2);">
-                    <svg width="12" height="12" viewBox="0 0 24 24" style="stroke:currentColor; fill:none; stroke-width:2.2; stroke-linecap:round;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <div class="nav-icon-wrap">
+                    <div id="navAvatarBox" style="width:20px; height:20px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                        <svg viewBox="0 0 24 24" class="nav-svg"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="3.2"/><path d="M6.2 18.5c1.4-2.3 3.4-3.5 5.8-3.5s4.4 1.2 5.8 3.5"/></svg>
+                    </div>
                 </div>
                 <span>Profile</span>
             </div>
@@ -2865,6 +3747,16 @@ header {
         window.sliders = [];
         window.categories = [];
         window.globalLimit = 10;
+
+            // 🏷️ SMART CLEAN TITLE ENGINE (Title se [VIP] aur [LIVE] dono ko screen se hide karega)
+        window.cleanTitleName = (title) => {
+            if (!title) return '';
+            return String(title)
+                .replace(/\s*[\-\_\(\[\{]*\s*\bvip\b\s*[\)\]\}]*\s*/gi, ' ')
+                .replace(/\s*[\-\_\(\[\{]*\s*\blive\b\s*[\)\]\}]*\s*/gi, ' ')
+                .replace(/\s*[\-\_]+$/, '')
+                .trim();
+        };
         let favorites = JSON.parse(localStorage.getItem('user_favorites')) || { movies: [], channels: [] };
 
         window.isFav = (type, id) => favorites[type] && favorites[type].includes(String(id));
@@ -2891,25 +3783,35 @@ header {
             const rawViews = parseInt(m.views) || 1;
             const viewCount = rawViews >= 1000 ? (rawViews / 1000).toFixed(1).replace('.0', '') + 'k' : rawViews;
             const isYt = m.thumb && (m.thumb.includes('ytimg') || m.thumb.includes('youtube') || m.thumb.includes('hqdefault'));
+            
+            // 🌟 AUTO-CONVERT TO TRUE 1080p FULL HD THUMBNAIL
+            let hdThumb = m.thumb || '';
+            if (hdThumb.includes('ytimg.com') || hdThumb.includes('youtube.com')) {
+                // Low-res (320x180) ko direct 1080p Full HD (maxresdefault) mein badlo
+                hdThumb = hdThumb.replace(/\/(default|mqdefault|hqdefault|sddefault)\.jpg/i, '/maxresdefault.jpg');
+            }
 
             const rawTitle = m.title || m.name || '';
             
-            // 🔴 1. Purana Live Badge Check (Green Dot Wala)
-            const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle);
+            // 🔴 1. SMART LIVE BADGE ENGINE (Title mein live likha ho YA Live TV channel link match kare)
+            const mLiveUrl = String(m.url || '').trim();
+            const isLiveChannelLink = (window.allChannels || []).some(c => c && c.url && String(c.url).trim() === mLiveUrl);
+            const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle) || isLiveChannelLink;
             
-            // 👑 2. Naya Golden Crown VIP Check
-            const isVip = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip');
+            // 👑 VIP Check: Agar user ke paas VIP Pass active hai toh badge hide ho jayega
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            const isVip = !userHasVip && (m.isVipSeries || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip'));
 
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''} ${isYt ? 'is-landscape' : ''}" onclick="window.playMovie('${m.id}')">
                     <div class="card-img-wrap">
                         <img src="${m.thumb}" alt="${rawTitle}" loading="eager" decoding="async" onload="window.checkCardRatio(this)">
                         
-                        <!-- 👑 Golden Crown VIP Badge -->
+                        <!-- 👑 Direct Gold VIP Badge -->
                         ${isVip ? `
                             <div class="card-vip-badge">
-                                <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-                                <span>VIP</span>
+                                <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                                <span class="vip-badge-text">VIP</span>
                             </div>
                         ` : ''}
 
@@ -2918,11 +3820,17 @@ header {
                             <div class="card-live-badge"><span class="live-pulse-dot"></span><span>LIVE</span></div>
                         ` : ''}
 
-                        <!-- 🎬 Purana Episodes Badge (EP 1, EP 2) -->
+                        <!-- 🎬 2026 Cyber-Glass Episodes Badge With Vector SVG -->
                         ${m.episodes && m.episodes.length > 1 ? `
-                            <div class="card-ep-count-badge">${m.episodes.length} EPISODES</div>
+                            <div class="card-ep-count-badge">
+                                <svg viewBox="0 0 24 24" class="ep-badge-svg"><rect x="2" y="4" width="20" height="16" rx="3"/><polygon points="10 8 16 12 10 16 10 8" fill="#00f2fe"/></svg>
+                                <span>${m.episodes.length} EPISODES</span>
+                            </div>
                         ` : (rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i) ? `
-                            <div class="card-ep-single-badge">EP ${rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i)[1]}</div>
+                            <div class="card-ep-single-badge">
+                                <svg viewBox="0 0 24 24" class="ep-badge-svg"><polygon points="6 4 20 12 6 20 6 4" fill="#00f2fe"/></svg>
+                                <span>EP ${rawTitle.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i)[1]}</span>
+                            </div>
                         ` : '')}
                     </div>
                     <div class="card-rect-info" style="padding-top:4px; text-align:center;">
@@ -2936,49 +3844,73 @@ header {
                 </div>`;
         };
         
+        // 📺 SMART CHANNEL ENGINE (VIP Active hone par badges gayab, expire hone par wapas)
         window.renderChannelItem = (c) => {
-            const fav = window.isFav('channels', c.id);
-            const cName = c.title || c.name || '';
-            
-            // 👑 Channel par VIP Check
-            const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(cName);
+            const rawName = c.title || c.name || '';
+            const hasVipTag = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawName);
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+
+            // Agar user ke paas VIP Pass active hai toh badge aur ring nahi aayegi
+            const showVipBadge = hasVipTag && !userHasVip;
+
+            // Naam se "VIP" lafz ko safaai se saaf karna jab VIP active ho
+            const cleanDisplayName = userHasVip ? rawName.replace(/\s*[\(\[\{]?vip[\)\]\}]?\s*/gi, ' ').trim() : rawName;
 
             return `
-                <div class="channel-box">
-                    <button class="fav-channel-btn ${fav ? 'active' : ''}" onclick="window.toggleFav('channels', '${c.id}', event)"><i class="fa fa-heart"></i></button>
+                <div class="channel-box ${showVipBadge ? 'is-vip-channel' : ''}">
                     
-                    <!-- 👑 Channel Ka Golden Crown Badge -->
-                    ${isVipChan ? `
-                        <div class="channel-vip-badge" title="VIP Channel">
-                            <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                    <!-- 👑 Gold VIP Badge (Sirf tab dikhega jab plan active NA ho) -->
+                    ${showVipBadge ? `
+                        <div class="channel-vip-3d-badge">
+                            <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                            <span class="vip-badge-text">VIP</span>
                         </div>
                     ` : ''}
 
-                    <div class="live-item" onclick="window.playLive('${c.url}', '${cName.replace(/'/g, "\\'")}', '${c.id}')">
-                        <img src="${c.thumb}" alt="${cName}" loading="eager" decoding="async">
+                    <div class="live-item" onclick="window.playLive('${c.url}', '${rawName.replace(/'/g, "\\'")}', '${c.id}')">
+                        <img src="${c.thumb}" alt="${cleanDisplayName}" loading="eager" decoding="async">
                     </div>
-                    <div class="channel-title-text">${cName}</div>
+                    <div class="channel-title-text ${showVipBadge ? 'vip-chan-title' : ''}">
+                        ${cleanDisplayName}
+                    </div>
                 </div>`;
         };
 
-        // 🧠 SMART SERIES & EPISODE DETECTOR (TAMASHA STYLE)
+        // 🧠 SMART SERIES & EPISODE DETECTOR (VIP MERGE SYSTEM)
         window.parseSeriesData = (title) => {
             const raw = title || '';
-            const match = raw.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i);
+            
+            // 👑 1. Check karein agar title mein VIP likha hai
+            const isVip = /\b(vip)\b|\[vip\]|\(vip\)/i.test(raw);
+            
+            // 2. VIP lafz ko mita kar saaf title nikaalo taake alag alag cards na banein
+            const cleanNoVip = raw.replace(/\s*[\(\[\{]?vip[\)\]\}]?\s*/gi, ' ').trim();
+            
+            // 3. Match Episode Number (Ep1, Episode 2, Part 3)
+            const match = cleanNoVip.match(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*(\d+)[\)\]]?/i);
             if (match) {
-                const cleanSeriesName = raw.replace(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*\d+[\)\]]?/i, '').trim();
-                return { isSeries: true, seriesName: cleanSeriesName || raw, epNum: parseInt(match[1]) };
+                const cleanSeriesName = cleanNoVip.replace(/[\s\-\_\(\[]*(?:ep|episode|part|e)\s*[\.\:\#\-]?\s*\d+[\)\]]?/i, '').trim();
+                return { 
+                    isSeries: true, 
+                    seriesName: cleanSeriesName || cleanNoVip, 
+                    epNum: parseInt(match[1]),
+                    isVip: isVip 
+                };
             }
-            return { isSeries: false, seriesName: raw, epNum: 1 };
+            return { isSeries: false, seriesName: cleanNoVip || raw, epNum: 1, isVip: isVip };
         };
 
-        // Group Movies into Series on Home (1 Poster per Series)
+        // Group Movies into 1 Single Card on Home & View All
         window.groupMoviesBySeries = (movieList) => {
             const grouped = [];
             const seriesTracker = {};
 
-            movieList.forEach(m => {
+            (movieList || []).forEach(m => {
+                if (!m) return;
                 const info = window.parseSeriesData(m.title || m.name);
+                const mCat = (m.category || '').toLowerCase();
+                const movieIsVip = info.isVip || mCat.includes('vip');
+
                 if (info.isSeries) {
                     const key = (m.category || '') + '_' + info.seriesName.toLowerCase();
                     if (!seriesTracker[key]) {
@@ -2986,29 +3918,99 @@ header {
                             ...m,
                             title: info.seriesName,
                             isSeriesRoot: true,
+                            isVipSeries: movieIsVip,
                             episodes: []
                         };
                         grouped.push(seriesTracker[key]);
+                    } else if (movieIsVip) {
+                        // Agar kisi aik episode par bhi VIP hai to poori series VIP ban jayegi
+                        seriesTracker[key].isVipSeries = true;
                     }
-                    seriesTracker[key].episodes.push({ ...m, epNum: info.epNum });
+                    seriesTracker[key].episodes.push({ 
+                        ...m, 
+                        epNum: info.epNum,
+                        isVip: movieIsVip 
+                    });
                 } else {
                     grouped.push(m);
                 }
             });
 
             Object.values(seriesTracker).forEach(s => {
-                s.episodes.sort((a, b) => a.epNum - b.epNum);
+                if (s.episodes) s.episodes.sort((a, b) => a.epNum - b.epNum);
             });
 
             return grouped;
         };
 
         // ⚡ CRASH-PROOF RENDER HOME (MOVIES 100% WAPAS LAANE KE LIYE)
+        // 🌟 2026 SMART HOME CATEGORY FILTER ENGINE
+        window.activeHomeCategory = 'all';
+
+        window.filterHomeCategory = (catName, btn) => {
+            window.activeHomeCategory = catName;
+            document.querySelectorAll('.home-cat-pill').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const secHeaders = document.querySelectorAll('#homeSections .section-header');
+            secHeaders.forEach(header => {
+                const titleEl = header.querySelector('.section-title');
+                const titleText = titleEl ? titleEl.innerText.trim().toLowerCase() : '';
+                const scrollBox = header.nextElementSibling;
+                
+                if (catName === 'all') {
+                    header.style.display = 'flex';
+                    if (scrollBox && scrollBox.classList.contains('movie-scroll')) scrollBox.style.display = 'flex';
+                } else {
+                    const isMatch = titleText === catName.toLowerCase();
+                    header.style.display = isMatch ? 'flex' : 'none';
+                    if (scrollBox && scrollBox.classList.contains('movie-scroll')) scrollBox.style.display = isMatch ? 'flex' : 'none';
+                }
+            });
+        };
+
+        window.renderHomeCategoryBar = (categoriesList) => {
+            const bar = document.getElementById('homeCategoryBar');
+            if (!bar) return;
+            let html = `
+                <div class="home-cat-pill ${window.activeHomeCategory === 'all' ? 'active' : ''}" onclick="window.filterHomeCategory('all', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                    <span>All</span>
+                </div>`;
+            categoriesList.forEach(cName => {
+                const isActive = (window.activeHomeCategory || '').toLowerCase() === cName.toLowerCase();
+                html += `
+                    <div class="home-cat-pill ${isActive ? 'active' : ''}" onclick="window.filterHomeCategory('${cName.replace(/'/g, "\\'")}', this)">
+                        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        <span>${cName}</span>
+                    </div>`;
+            });
+            bar.innerHTML = html;
+        };
         window.renderHome = () => {
             if (!window.allMovies || window.allMovies.length === 0) return;
 
             let html = '';
             let catMap = {};
+            
+            // 📺 1. HOME PAGE PAR POPULAR LIVE CHANNELS RAIL
+            if (window.allChannels && window.allChannels.length > 0) {
+                html += `
+                    <div class="section-header">
+                        <div class="section-title" style="display:flex; align-items:center; gap:8px;">
+    <svg viewBox="0 0 24 24" style="width:20px; height:20px; stroke:var(--primary); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 7px var(--primary-glow)); flex-shrink:0;">
+        <polyline points="8 2 12 7 16 2"/>
+        <rect x="3" y="7" width="18" height="13" rx="2.5"/>
+        <circle cx="12" cy="13.5" r="2" fill="var(--primary)"/>
+    </svg>
+    <span>Live TV Channels</span>
+</div>
+                        <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                    </div>
+                    <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
+                        ${window.allChannels.slice(0, 10).map(c => window.renderChannelItem(c)).join('')}
+                    </div>`;
+            }
 
             if (window.categories && window.categories.length > 0) {
                 window.categories.forEach(c => {
@@ -3048,6 +4050,9 @@ header {
             if (sec && html) {
                 sec.innerHTML = html;
                 try { localStorage.setItem('mm_cached_home_html', html); } catch(e){}
+                // 🌟 Saari Categories Ko Upar Patti Mein Dikhana
+            const currentCatNames = Object.values(catMap).filter(cat => cat.movies && cat.movies.length > 0).map(cat => cat.name);
+            window.renderHomeCategoryBar(currentCatNames);
             }
         };
 
@@ -3191,14 +4196,8 @@ header {
             window.updateProfileFavCounter();
         };
 
-        // ⚡ INSTANT RESTORE ON 0ms (NO WAITING)
+        // 🚀 SUPER-FAST 200kbps DUAL-ENGINE (0.1s INSTANT LOAD)
         try {
-            const cachedHtml = localStorage.getItem('mm_cached_home_html');
-            if (cachedHtml) {
-                const sec = document.getElementById('homeSections');
-                if (sec) sec.innerHTML = cachedHtml;
-            }
-
             const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
             if (localCache) {
                 window.allMovies = localCache.movies || [];
@@ -3206,8 +4205,17 @@ header {
                 window.sliders = localCache.sliders || [];
                 window.categories = localCache.categories || [];
                 window.globalLimit = localCache.limit || 10;
-                window.renderHome();
-                window.initLiveChannels();
+                
+                // ⚡ Agar cache mein data hai toh bina 1 second rukaawat ke foran render karo
+                if (window.allMovies.length > 0) {
+                    window.renderHome();
+                }
+                if (window.allChannels.length > 0) {
+                    window.initLiveChannels();
+                }
+                if (window.sliders.length > 0 && typeof initSlider === 'function') {
+                    initSlider(true);
+                }
             }
         } catch(e){}
     </script>
@@ -3383,6 +4391,7 @@ header {
             saveFastCache();
             window.initLiveChannels();
             window.renderFavoritesPage();
+            window.renderHome();
         });
 
         // ⚡ 0-SECOND INSTANT MOVIES CACHE ENGINE
@@ -3394,26 +4403,29 @@ header {
             }
         } catch(e){}
 
+        // ⚡ ULTRA-FAST SLOW-NET FIREBASE SYNC (200kbps Optimized)
         onValue(ref(db, 'movies'), (snap) => {
             const data = snap.val();
-            window.allMovies = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            if (!data) return;
             
-            // 💾 Phone ki memory mein movies permanently save karo
+            window.allMovies = Array.isArray(data) ? data : Object.values(data);
+            
+            // 💾 Phone memory mein instant save
             try {
                 localStorage.setItem('mm_cached_movies_list', JSON.stringify(window.allMovies));
             } catch(e){}
 
             saveFastCache();
+            
+            // 🎬 Smooth Update: Screen ko freeze kiye baghair background se refresh
             window.renderHome();
             window.renderFavoritesPage();
 
-            // 💾 Home Page ka bana banaya HTML bhi save karo taake agli baar 0ms mein khulay
-            try {
-                const homeSec = document.getElementById('homeSections');
-                if (homeSec && homeSec.innerHTML.trim() !== '') {
-                    localStorage.setItem('mm_instant_home_html', homeSec.innerHTML);
-                }
-            } catch(e){}
+            if (window.sliders && window.sliders.length > 0 && typeof initSlider === 'function') {
+                initSlider(true);
+            }
+        }, (error) => {
+            console.warn('Firebase slow net retry active...');
         });
 
         window.handleNativeSystemShare = async (url, title) => {
@@ -3474,58 +4486,351 @@ header {
             }
         };
 
+        let m3u8HideTimer = null;
+
         function cleanupPlayer() {
             if (currentHls) { try { currentHls.destroy(); } catch(e){} currentHls = null; }
+            if (m3u8HideTimer) { clearTimeout(m3u8HideTimer); m3u8HideTimer = null; }
         }
 
+        // 🎬 2026 CUSTOM M3U8 CYBER-GLASS PLAYER ENGINE
         function startNativePlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer();
             const container = document.getElementById(wrapperId);
+            if (!container) return;
             container.innerHTML = '';
 
-             if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/')) {
-            const iframe = document.createElement('iframe');
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                let vid = '';
-                if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
-                else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
-                else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
-                iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
-            } else {
-                iframe.src = url;
+            // 1. 📺 YOUTUBE VIDEOS (Normal Iframe Player - Untouched)
+            if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/')) {
+                const iframe = document.createElement('iframe');
+                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                    let vid = '';
+                    if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
+                    else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
+                    else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
+                    iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+                } else {
+                    iframe.src = url;
+                }
+                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+                iframe.setAttribute('allowfullscreen', 'true');
+                container.appendChild(iframe);
+                return;
             }
-            iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
-            iframe.setAttribute('allowfullscreen', 'true');
-            container.appendChild(iframe);
-        }
-        else if (url.includes('.m3u8')) {
-            
-                const videoEl = document.createElement('video');
-                videoEl.setAttribute('controls', '');
-                videoEl.setAttribute('autoplay', '');
-                videoEl.setAttribute('playsinline', '');
-                container.appendChild(videoEl);
 
+            // 2. 🔥 M3U8 & STREAM LINKS (2026 Cyber-Glass Player)
+            const cleanTitle = (wrapperId === 'livePlayerWrapper') 
+                ? (document.getElementById('playingChannelTitle') ? document.getElementById('playingChannelTitle').innerText : 'Live TV')
+                : (document.getElementById('playingTitle') ? document.getElementById('playingTitle').innerText : 'Movie Master');
+
+            const wrap = document.createElement('div');
+            wrap.className = 'cyber-player-wrap';
+
+            const videoEl = document.createElement('video');
+            videoEl.setAttribute('autoplay', '');
+            videoEl.setAttribute('playsinline', '');
+            videoEl.setAttribute('webkit-playsinline', '');
+            videoEl.removeAttribute('controls');
+            wrap.appendChild(videoEl);
+
+            // Controls Overlay HTML
+            const overlay = document.createElement('div');
+            overlay.className = 'm3u8-controls-overlay';
+            overlay.innerHTML = `
+                <!-- Top Row (Title + Settings SVG) -->
+                <div class="m3u8-top-row" onclick="event.stopPropagation()">
+                    <span class="m3u8-video-title">${cleanTitle}</span>
+                    <button class="m3u8-btn-hud" id="m3u8SettingsBtn" title="Settings">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </button>
+                </div>
+
+                <!-- Settings Popup Modal (Speed + Quality Both Always Available) -->
+                <div class="m3u8-settings-modal" id="m3u8SettingsModal" onclick="event.stopPropagation()">
+                    <!-- ⚡ Playback Speed -->
+                    <div>
+                        <div class="m3u8-settings-header">
+                            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            <span>Playback Speed</span>
+                        </div>
+                        <div class="m3u8-opt-chips" id="m3u8SpeedChips" style="margin-top:4px;">
+                            <span class="m3u8-opt-chip" data-spd="0.5">0.5x</span>
+                            <span class="m3u8-opt-chip active" data-spd="1">1.0x</span>
+                            <span class="m3u8-opt-chip" data-spd="1.25">1.25x</span>
+                            <span class="m3u8-opt-chip" data-spd="1.5">1.5x</span>
+                            <span class="m3u8-opt-chip" data-spd="2">2.0x</span>
+                        </div>
+                    </div>
+
+                    <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
+
+                    <!-- 🎬 Video Quality -->
+                    <div>
+                        <div class="m3u8-settings-header">
+                            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            <span>Video Quality</span>
+                        </div>
+                        <div class="m3u8-opt-chips" id="m3u8QualityChips" style="margin-top:4px;">
+                            <span class="m3u8-opt-chip active" data-level="-1">Auto</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Row (10s Rewind / Play / 10s Forward) -->
+                <div class="m3u8-center-row" id="m3u8CenterRow" onclick="event.stopPropagation()" style="${isLive ? 'display:none;' : ''}">
+                    <!-- ⏪ 10 Sec Rewind -->
+                    <button class="m3u8-btn-skip" id="m3u8Back10Btn" title="10s Back">
+                        <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.2 3.16-1.93 5.12-1.93 3.84 0 7.02 2.7 7.74 6.3l2.43-.59C21.69 11.43 17.52 8 12.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
+                    </button>
+
+                    <!-- Center Play / Pause -->
+                    <button class="m3u8-btn-play" id="m3u8CenterPlayBtn">
+                        <svg id="m3u8PlaySvg" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                    </button>
+
+                    <!-- 10 Sec Forward ⏩ -->
+                    <button class="m3u8-btn-skip" id="m3u8Fwd10Btn" title="10s Forward">
+                        <svg viewBox="0 0 24 24"><path d="M11.5 8c2.65 0 5.05.99 6.9 2.6L22 7v9h-9l3.62-3.62c-1.39-1.2-3.16-1.93-5.12-1.93-3.84 0-7.02 2.7-7.74 6.3l-2.43-.59C2.31 11.43 6.48 8 11.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
+                    </button>
+                </div>
+
+                <!-- Bottom Row (YouTube Red Line + Volume + Fullscreen) -->
+                <div class="m3u8-bottom-controls" onclick="event.stopPropagation()">
+                    
+                    <!-- 🔴 YOUTUBE RED LINE PROGRESS BAR (Movies only) -->
+                    <div class="m3u8-progress-container" id="m3u8ProgressTrack" style="${isLive ? 'display:none;' : ''}">
+                        <div class="m3u8-progress-bg">
+                            <div class="m3u8-progress-fill" id="m3u8ProgressFill"></div>
+                        </div>
+                        <div class="m3u8-progress-thumb" id="m3u8ProgressThumb"></div>
+                    </div>
+
+                    <div class="m3u8-bottom-btn-row">
+                        <div class="m3u8-left-tools">
+                            <!-- 🔊 Volume Slider -->
+                            <div class="m3u8-volume-wrap">
+                                <button class="m3u8-vol-btn" id="m3u8VolBtn">
+                                    <svg id="m3u8VolSvg" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                                </button>
+                                <input type="range" min="0" max="1" step="0.05" value="1" class="m3u8-vol-slider" id="m3u8VolSlider">
+                            </div>
+
+                            <!-- Duration (Movies only) -->
+                            <span class="m3u8-time-txt" id="m3u8TimeTxt" style="${isLive ? 'display:none;' : ''}">00:00 / 00:00</span>
+                            
+                            <!-- 🔴 LIVE Badge -->
+                            <div class="m3u8-live-badge" style="${isLive ? 'display:inline-flex;' : 'display:none;'}">
+                                <span class="m3u8-live-dot"></span>
+                                <span>LIVE</span>
+                            </div>
+                        </div>
+
+                        <!-- ⛶ Fullscreen -->
+                        <button class="m3u8-btn-hud" id="m3u8FsBtn" title="Full Screen">
+                            <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+            wrap.appendChild(overlay);
+            container.appendChild(wrap);
+
+            // 🎯 INTERACTIVE CONTROLS JAVASCRIPT
+            const playSvg = overlay.querySelector('#m3u8PlaySvg');
+            const centerPlayBtn = overlay.querySelector('#m3u8CenterPlayBtn');
+            const progressFill = overlay.querySelector('#m3u8ProgressFill');
+            const progressThumb = overlay.querySelector('#m3u8ProgressThumb');
+            const progressTrack = overlay.querySelector('#m3u8ProgressTrack');
+            const timeTxt = overlay.querySelector('#m3u8TimeTxt');
+            const volSlider = overlay.querySelector('#m3u8VolSlider');
+            const volSvg = overlay.querySelector('#m3u8VolSvg');
+            const volBtn = overlay.querySelector('#m3u8VolBtn');
+            const settingsModal = overlay.querySelector('#m3u8SettingsModal');
+            const settingsBtn = overlay.querySelector('#m3u8SettingsBtn');
+            const fsBtn = overlay.querySelector('#m3u8FsBtn');
+            const back10Btn = overlay.querySelector('#m3u8Back10Btn');
+            const fwd10Btn = overlay.querySelector('#m3u8Fwd10Btn');
+
+            const resetAutoHide = () => {
+                overlay.classList.remove('hide');
+                if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
+                if (!videoEl.paused) {
+                    m3u8HideTimer = setTimeout(() => {
+                        overlay.classList.add('hide');
+                        if (settingsModal) settingsModal.classList.remove('show');
+                    }, 3500);
+                }
+            };
+
+            wrap.onclick = () => {
+                if (overlay.classList.contains('hide')) {
+                    resetAutoHide();
+                } else {
+                    overlay.classList.add('hide');
+                    if (settingsModal) settingsModal.classList.remove('show');
+                }
+            };
+
+            const updatePlayState = () => {
+                if (videoEl.paused) {
+                    playSvg.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
+                    overlay.classList.remove('hide');
+                    if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
+                } else {
+                    playSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+                    resetAutoHide();
+                }
+            };
+
+            if (centerPlayBtn) {
+                centerPlayBtn.onclick = () => {
+                    if (videoEl.paused) videoEl.play(); else videoEl.pause();
+                    updatePlayState();
+                };
+            }
+
+            if (back10Btn) back10Btn.onclick = () => { videoEl.currentTime = Math.max(0, videoEl.currentTime - 10); resetAutoHide(); };
+            if (fwd10Btn) fwd10Btn.onclick = () => { videoEl.currentTime = Math.min(videoEl.duration || 99999, videoEl.currentTime + 10); resetAutoHide(); };
+
+            // 🔴 Progress Update
+            videoEl.ontimeupdate = () => {
+                if (isLive || !videoEl.duration) return;
+                const pct = (videoEl.currentTime / videoEl.duration) * 100;
+                if (progressFill) progressFill.style.width = pct + '%';
+                if (progressThumb) progressThumb.style.left = pct + '%';
+
+                const curM = Math.floor(videoEl.currentTime / 60);
+                const curS = Math.floor(videoEl.currentTime % 60);
+                const durM = Math.floor(videoEl.duration / 60);
+                const durS = Math.floor(videoEl.duration % 60);
+                if (timeTxt) {
+                    timeTxt.innerText = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')} / ${String(durM).padStart(2,'0')}:${String(durS).padStart(2,'0')}`;
+                }
+            };
+
+            if (progressTrack) {
+                progressTrack.onclick = (e) => {
+                    if (isLive || !videoEl.duration) return;
+                    const rect = progressTrack.getBoundingClientRect();
+                    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                    videoEl.currentTime = pos * videoEl.duration;
+                    resetAutoHide();
+                };
+            }
+
+            // 🔊 Volume Logic
+            const updateVolIcon = () => {
+                if (videoEl.muted || videoEl.volume === 0) {
+                    volSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+                } else {
+                    volSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+                }
+            };
+
+            if (volSlider) {
+                volSlider.oninput = () => {
+                    videoEl.volume = parseFloat(volSlider.value);
+                    videoEl.muted = (videoEl.volume === 0);
+                    updateVolIcon();
+                    resetAutoHide();
+                };
+            }
+
+            if (volBtn) {
+                volBtn.onclick = () => {
+                    videoEl.muted = !videoEl.muted;
+                    if (volSlider) volSlider.value = videoEl.muted ? 0 : videoEl.volume;
+                    updateVolIcon();
+                    resetAutoHide();
+                };
+            }
+
+            // ⚙️ Settings Menu
+            if (settingsBtn) {
+                settingsBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    settingsModal.classList.toggle('show');
+                };
+            }
+
+            // Speed
+            overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(chip => {
+                chip.onclick = () => {
+                    overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(c => c.classList.remove('active'));
+                    chip.classList.add('active');
+                    videoEl.playbackRate = parseFloat(chip.getAttribute('data-spd'));
+                    settingsModal.classList.remove('show');
+                    resetAutoHide();
+                };
+            });
+
+            // ⛶ Fullscreen
+            if (fsBtn) {
+                fsBtn.onclick = () => {
+                    if (typeof window.toggleLandscapePlayer === 'function') {
+                        window.toggleLandscapePlayer();
+                    }
+                    resetAutoHide();
+                };
+            }
+
+            // ⚡ HLS STREAM LOADER & QUALITIES
+            if (url.includes('.m3u8')) {
                 if (Hls.isSupported()) {
                     const hls = new Hls({ enableWorker: true });
                     currentHls = hls;
                     hls.loadSource(url);
                     hls.attachMedia(videoEl);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => { videoEl.play(); });
+
+                    hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+                        videoEl.play().catch(() => {});
+                        updatePlayState();
+
+                        // Dynamic HLS Quality Selector
+                        const qContainer = overlay.querySelector('#m3u8QualityChips');
+                        if (qContainer && data.levels && data.levels.length > 1) {
+                            qContainer.innerHTML = '<span class="m3u8-opt-chip active" data-level="-1">Auto</span>';
+                            data.levels.forEach((lvl, idx) => {
+                                const h = lvl.height || (idx + 1) + 'p';
+                                const chip = document.createElement('span');
+                                chip.className = 'm3u8-opt-chip';
+                                chip.setAttribute('data-level', idx);
+                                chip.innerText = h + (h.toString().includes('p') ? '' : 'p');
+                                chip.onclick = () => {
+                                    qContainer.querySelectorAll('.m3u8-opt-chip').forEach(c => c.classList.remove('active'));
+                                    chip.classList.add('active');
+                                    hls.currentLevel = idx;
+                                    settingsModal.classList.remove('show');
+                                    resetAutoHide();
+                                };
+                                qContainer.appendChild(chip);
+                            });
+
+                            const autoBtn = qContainer.querySelector('[data-level="-1"]');
+                            if (autoBtn) {
+                                autoBtn.onclick = () => {
+                                    qContainer.querySelectorAll('.m3u8-opt-chip').forEach(c => c.classList.remove('active'));
+                                    autoBtn.classList.add('active');
+                                    hls.currentLevel = -1;
+                                    settingsModal.classList.remove('show');
+                                    resetAutoHide();
+                                };
+                            }
+                        }
+                    });
                 } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
                     videoEl.src = url;
-                    videoEl.play();
+                    videoEl.play().catch(() => {});
+                    updatePlayState();
                 }
-            } 
-            else {
-                const videoEl = document.createElement('video');
-                videoEl.setAttribute('controls', '');
-                videoEl.setAttribute('autoplay', '');
-                videoEl.setAttribute('playsinline', '');
+            } else {
                 videoEl.src = url;
-                container.appendChild(videoEl);
-                videoEl.play();
+                videoEl.play().catch(() => {});
+                updatePlayState();
             }
+
+            videoEl.onplay = updatePlayState;
+            videoEl.onpause = updatePlayState;
         }
 
         // 👑 REAL 30-DAY VIP CHECK ENGINE
@@ -3543,12 +4848,12 @@ header {
         window.playLive = (url, title, id) => {
             const rawChannelName = title || '';
             
-            // 👑 1. Channel Par VIP Check (Agar VIP ho aur user ne na khareeda ho to Lock Screen kholo)
+            // 👑 1. Channel Par VIP Check
             const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawChannelName);
             if (isVipChan && !window.isUserVIPActive()) {
                 document.getElementById('vipLockedContentName').innerText = '✨ Unlock All VIP Movies, Anime & Live Channels';
                 document.getElementById('vipLockModal').style.display = 'flex';
-                return; // ⛔ Channel play nahi hoga, direct VIP Box khulega!
+                return; // ⛔ Channel play nahi hoga, direct VIP Box aayega!
             }
 
             // Normal Channel Play
@@ -3559,12 +4864,30 @@ header {
             const bar = document.getElementById('liveChannelInfo');
             if (bar) {
                 bar.style.display = 'flex';
-                document.getElementById('playingChannelTitle').innerText = title;
+                document.getElementById('playingChannelTitle').innerText = window.cleanTitleName(title);
+            
+            // 🚫 Player bar se VIP badge hamesha ke liye hide
+                const vipPill = document.getElementById('liveChannelVipBadge');
+                if (vipPill) vipPill.style.display = 'none';
+                
                 const isFavChannel = window.isFav('channels', id);
                 const btn = document.getElementById('livePlayerFavBtn');
-                btn.className = `view-all-btn ${isFavChannel ? 'active' : ''}`;
-                btn.innerHTML = `<i class="fa fa-heart"></i> Favorite`;
-                btn.onclick = (e) => window.toggleFav('channels', id, e);
+                if (btn) {
+                    btn.className = `action-btn ${isFavChannel ? 'active' : ''}`;
+                    btn.innerHTML = `
+                        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        <span>${isFavChannel ? 'Saved' : 'Favorite'}</span>
+                    `;
+                    btn.onclick = (e) => {
+                        window.toggleFav('channels', id, e);
+                        const nowFav = window.isFav('channels', id);
+                        btn.className = `action-btn ${nowFav ? 'active' : ''}`;
+                        btn.innerHTML = `
+                            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            <span>${nowFav ? 'Saved' : 'Favorite'}</span>
+                        `;
+                    };
+                }
             }
 
             startNativePlayer('livePlayerWrapper', url, true, id);
@@ -3624,18 +4947,24 @@ header {
 
             registerRealDeviceView(m.id);
    document.getElementById('videoPage').style.display = 'block';
-            document.getElementById('playingTitle').innerText = m.title || m.name;
+            // 🏷️ Movie Title se [VIP] text saaf karna
+            const cleanMovieTitle = window.cleanTitleName(m.title || m.name);
+
+            document.getElementById('playingTitle').innerText = cleanMovieTitle;
             window.history.pushState({ page: 'moviePlayer' }, '');
             
             const isFavorite = window.isFav('movies', m.id);
-            const mTitle = (m.title || m.name || 'Movie').replace(/'/g, "\\'");
+            const mTitle = cleanMovieTitle.replace(/'/g, "\\'");
             const mUrl = (m.url || '').replace(/'/g, "\\'");
             const viewCount = m.views ? (m.views > 999 ? (m.views/1000).toFixed(1)+'k' : m.views) : '1';
+
+            // 🎯 YouTube vs M3U8 Smart Detection
+            const isYouTube = mUrl && (mUrl.includes('youtube.com') || mUrl.includes('youtu.be'));
 
             document.getElementById('movieDetailsArea').innerHTML = `
                 <div class="movie-header-row">
                     <div>
-                        <h2 style="font-size:17px; font-weight:800; color:#fff; margin:0 0 4px 0; line-height:1.3;">${m.title || m.name}</h2>
+                        <h2 style="font-size:17px; font-weight:800; color:#fff; margin:0 0 4px 0; line-height:1.3;">${cleanMovieTitle}</h2>
                         <div class="movie-meta-clean">
                             <span class="meta-badge-hd">FULL HD</span>
                             <span>${m.category || 'Movie'}</span>
@@ -3646,21 +4975,30 @@ header {
                 </div>
 
                 <div class="movie-actions-bar">
+                    <!-- 1. Favorite Button -->
                     <button id="playerFavBtn_${m.id}" class="action-btn ${isFavorite ? 'active' : ''}" onclick="window.toggleFav('movies', '${m.id}', event)">
                         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                         <span>${isFavorite ? 'Saved' : 'Favorite'}</span>
                     </button>
                     
+                    <!-- 2. Share Button -->
                     <button class="action-btn" onclick="window.handleNativeSystemShare('${mUrl}', '${mTitle}')">
                         <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
                         <span>Share</span>
                     </button>
 
-                    <!-- 📥 SNAPTUBE & SYSTEM DOWNLOAD BUTTON -->
-                    <button class="action-btn" onclick="window.downloadOrShareVideo('${mUrl}', '${mTitle}')">
-                        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                        <span>Download</span>
-                    </button>
+                    <!-- 3. Dynamic Action: YouTube par "Download", M3U8 par "Full Screen" -->
+                    ${isYouTube ? `
+                        <button class="action-btn" onclick="window.downloadOrShareVideo('${mUrl}', '${mTitle}')">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download</span>
+                        </button>
+                    ` : `
+                        <button class="action-btn" onclick="window.toggleLandscapePlayer()">
+                            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+                            <span>Full Screen</span>
+                        </button>
+                    `}
                 </div>
             `;
 
@@ -3724,20 +5062,81 @@ header {
         let touchStartX = 0;
         let touchEndX = 0;
 
-        function initSlider() {
-            const track = document.getElementById('sliderTrack'), dots = document.getElementById('sliderDots');
+        function initSlider(force = false) {
+            const track = document.getElementById('sliderTrack');
             const sliderArea = document.getElementById('sliderClickArea');
-            if(!window.sliders.length) return;
+            if (!track || !window.sliders || !window.sliders.length) return;
 
-            track.innerHTML = window.sliders.map(s => `<div class="slide" onclick="window.handleSlideClick('${s.url}')"><img src="${s.img}"><div class="slide-overlay"></div></div>`).join('');
-            dots.innerHTML = window.sliders.map((_, i) => `<div class="dot ${i===0?'active':''}"></div>`).join('');
+            // ⏳ Jab tak neeche movies load na hon, slider par bhi shimmer chalne do (Pehle akele load nahi hoga)
+            if (!force && (!window.allMovies || window.allMovies.length === 0)) {
+                return;
+            }
+
+            // 🧠 FAST CACHE CHECK: Agar network slow ho toh phone cache se check karega
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+
+            // 👑 User VIP Pass Active Status Check
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+
+            track.innerHTML = window.sliders.map((s, idx) => {
+                if (!s) return '';
+                const sUrl = String(s.url || '').trim();
+                const sTitle = String(s.title || s.name || '').trim().toLowerCase();
+                const sImg = String(s.img || '').trim();
+
+                // 🔍 4-Way Match (ID, URL, Title, Poster Image)
+                const matchedMovie = cachedMovies.find(m => {
+                    if (!m) return false;
+                    const mId = String(m.id || '');
+                    const mUrl = String(m.url || '').trim();
+                    const mTitle = String(m.title || m.name || '').trim().toLowerCase();
+                    const mThumb = String(m.thumb || '').trim();
+                    return (sUrl && (mId === sUrl || mUrl === sUrl)) || 
+                           (sTitle && mTitle && sTitle === mTitle) || 
+                           (sImg && mThumb && sImg === mThumb);
+                });
+
+                let isVip = false;
+                if (matchedMovie) {
+                    const mTitle = (matchedMovie.title || matchedMovie.name || '').toLowerCase();
+                    const mCat = (matchedMovie.category || '').toLowerCase();
+                    isVip = matchedMovie.isVipSeries || mTitle.includes('vip') || mCat.includes('vip');
+                }
+                if (!isVip) {
+                    isVip = s.isVip === true || sTitle.includes('vip') || sUrl.includes('vip');
+                }
+
+                // 👑 VIP Active hone par Slider se bhi VIP Badge gayab ho jayega!
+                const showSliderVip = !userHasVip && isVip;
+
+                return `
+                    <div class="slide" onclick="window.handleSlideClick(${idx})">
+                        <img src="${s.img}">
+                        ${showSliderVip ? `
+                            <div class="card-vip-badge" style="top:12px !important; right:16px !important; z-index:10 !important;">
+                                <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                                <span class="vip-badge-text">VIP</span>
+                            </div>
+                        ` : ''}
+                        <div class="slide-overlay"></div>
+                    </div>
+                `;
+            }).join('');
             
-            sliderArea.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
-            sliderArea.ontouchend = (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); };
+            if (sliderArea) {
+                sliderArea.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
+                sliderArea.ontouchend = (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); };
+            }
 
             activeSliderIndex = 0; 
             updateSliderPosition();
             startAutoSlider();
+
+            // ⚡ Agar neeche movies load nahi huin toh foran render karein
+            const sec = document.getElementById('homeSections');
+            if (sec && !sec.innerHTML.trim() && typeof window.renderHome === 'function') {
+                window.renderHome();
+            }
         }
 
         function handleSwipeGesture() {
@@ -3747,12 +5146,11 @@ header {
 
         function updateSliderPosition() {
             const track = document.getElementById('sliderTrack');
-            if (!track || !window.sliders.length) return;
+            if (!track || !window.sliders || !window.sliders.length) return;
             track.style.transform = `translateX(calc(15% - ${activeSliderIndex * 70}%))`;
             document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active-slide', i === activeSliderIndex));
-            document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === activeSliderIndex));
             
-            // 🌟 Tamasha App Ambient Blurred Background Sync
+            // 🌟 Ambient Blurred Glow Sync
             const backdrop = document.getElementById('sliderBackdrop');
             if (backdrop && window.sliders[activeSliderIndex]) {
                 backdrop.style.backgroundImage = `url('${window.sliders[activeSliderIndex].img}')`;
@@ -3760,44 +5158,91 @@ header {
         }
 
         function slideManual(direction) {
-            if (!window.sliders.length) return;
+            if (!window.sliders || !window.sliders.length) return;
             activeSliderIndex = (activeSliderIndex + direction + window.sliders.length) % window.sliders.length;
             updateSliderPosition();
             startAutoSlider();
         }
 
         function startAutoSlider() {
-            if(window.si) clearInterval(window.si);
+            if (window.si) clearInterval(window.si);
             window.si = setInterval(() => {
-                if (!window.sliders.length) return;
+                if (!window.sliders || !window.sliders.length) return;
                 activeSliderIndex = (activeSliderIndex + 1) % window.sliders.length;
                 updateSliderPosition();
             }, 4000);
         }
 
-        window.handleSlideClick = (targetUrl) => {
-            if(!targetUrl) return;
+        // 👑 BULLETPROOF SLIDER CLICK & VIP LOCK PROTECTION
+        window.handleSlideClick = (param) => {
+            let s = null;
+            let targetUrl = '';
 
-            // 1. Agar slider kisi movie ka hai to foran poori movie details ke sath open karo
-            const matchedMovie = window.allMovies.find(m => 
-                String(m.id) === String(targetUrl) || 
-                (m.url && m.url === targetUrl)
-            );
+            if (typeof param === 'number' || (!isNaN(param) && typeof param === 'string' && param.length < 5)) {
+                const idx = parseInt(param);
+                s = (window.sliders && window.sliders[idx]) ? window.sliders[idx] : null;
+                targetUrl = s ? (s.url || '') : '';
+            } else {
+                targetUrl = String(param || '');
+                s = (window.sliders || []).find(x => x && (x.url === targetUrl || x.id === targetUrl)) || { url: targetUrl };
+            }
+
+            if (!targetUrl && !s) return;
+
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+
+            const sUrl = String(targetUrl).trim();
+            const sTitle = String((s && (s.title || s.name)) || '').trim().toLowerCase();
+            const sImg = String((s && s.img) || '').trim();
+
+            const matchedMovie = cachedMovies.find(m => {
+                if (!m) return false;
+                const mId = String(m.id || '');
+                const mUrl = String(m.url || '').trim();
+                const mTitle = String(m.title || m.name || '').trim().toLowerCase();
+                const mThumb = String(m.thumb || '').trim();
+                return (sUrl && (mId === sUrl || mUrl === sUrl)) || 
+                       (sTitle && mTitle && sTitle === mTitle) || 
+                       (sImg && mThumb && sImg === mThumb);
+            });
+
+            // 👑 VIP Check
+            let isVip = false;
+            if (matchedMovie) {
+                const mTitle = (matchedMovie.title || matchedMovie.name || '').toLowerCase();
+                const mCat = (matchedMovie.category || '').toLowerCase();
+                isVip = matchedMovie.isVipSeries || mTitle.includes('vip') || mCat.includes('vip');
+            }
+            if (!isVip && s) {
+                isVip = s.isVip === true || sTitle.includes('vip') || sUrl.includes('vip');
+            }
+
+            // 🛑 STRICT VIP BLOCK (Bina subscription ke KABHI nahi chalega)
+            if (isVip && !window.isUserVIPActive()) {
+                const modal = document.getElementById('vipLockModal');
+                const lockName = document.getElementById('vipLockedContentName');
+                if (lockName) {
+                    lockName.innerText = (matchedMovie ? (matchedMovie.title || matchedMovie.name) : ((s && s.title) || 'VIP Movie')) + ' (Locked)';
+                }
+                if (modal) modal.style.display = 'flex';
+                return; // ⛔ Free mein play hona band!
+            }
+
+            // Movie list mein matched hai toh full details se open karein
             if (matchedMovie) {
                 window.playMovie(matchedMovie.id);
                 return;
             }
 
-            // 2. Agar standalone featured video hai to purani movie ka data saaf karo
+            // Featured Standalone Video
             document.getElementById('videoPage').style.display = 'block';
-            document.getElementById('playingTitle').innerText = 'Featured Video';
+            document.getElementById('playingTitle').innerText = (s && s.title) || 'Featured Video';
             window.history.pushState({ page: 'moviePlayer' }, '');
 
-            // Neechay purani movie (jaise Janwar 2) ka naam aur buttons mita kar naya clean panel lagao
             document.getElementById('movieDetailsArea').innerHTML = `
                 <div class="movie-header-row">
                     <div>
-                        <h2 style="font-size:17px; font-weight:800; color:#fff; margin:0 0 4px 0;">Featured Premiere</h2>
+                        <h2 style="font-size:17px; font-weight:800; color:#fff; margin:0 0 4px 0;">${(s && s.title) || 'Featured Premiere'}</h2>
                         <div class="movie-meta-clean">
                             <span class="meta-badge-hd">EXCLUSIVE</span>
                             <span>Featured Special</span>
@@ -3805,7 +5250,7 @@ header {
                     </div>
                 </div>
                 <div class="movie-actions-bar">
-                    <button class="action-btn" onclick="window.handleNativeSystemShare('${targetUrl}', 'Featured Video')">
+                    <button class="action-btn" onclick="window.handleNativeSystemShare('${targetUrl}', '${(s && s.title) || 'Featured Video'}')">
                         <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
                         <span>Share</span>
                     </button>
@@ -4071,7 +5516,7 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                     const expiry = parseInt(localStorage.getItem('mm_vip_expiry'));
                     const remainingMs = expiry - Date.now();
 
-                    // Agar time poora ho jaye to band karo
+                    // Agar time khatam ho jaye
                     if (remainingMs <= 0) {
                         localStorage.removeItem('mm_vip_expiry');
                         localStorage.removeItem('mm_vip_code');
@@ -4092,51 +5537,62 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
 
                     const pad = (n) => String(n).padStart(2, '0');
 
-                    let hudHtml = '';
+                    let timeLine = '';
                     if (d > 0) {
-                        hudHtml = `
-                            <div class="vip-hud-badge">
-                                <span class="vip-hud-val">${d}<small>d</small></span>
-                                <span class="vip-hud-colon">:</span>
-                                <span class="vip-hud-val">${pad(h)}<small>h</small></span>
-                                <span class="vip-hud-colon">:</span>
-                                <span class="vip-hud-val">${pad(m)}<small>m</small></span>
-                            </div>`;
+                        timeLine = `<b>${d}</b><small style="color:#94a3b8; font-size:9px;">D</small> : <b>${pad(h)}</b><small style="color:#94a3b8; font-size:9px;">H</small> : <b>${pad(m)}</b><small style="color:#94a3b8; font-size:9px;">M</small>`;
                     } else {
-                        hudHtml = `
-                            <div class="vip-hud-badge">
-                                <span class="vip-hud-val">${pad(h)}<small>h</small></span>
-                                <span class="vip-hud-colon">:</span>
-                                <span class="vip-hud-val">${pad(m)}<small>m</small></span>
-                                <span class="vip-hud-colon">:</span>
-                                <span class="vip-hud-val" style="color:#ffd700;">${pad(s)}<small style="color:#ffaa00;">s</small></span>
-                            </div>`;
+                        timeLine = `<b>${pad(h)}</b><small style="color:#94a3b8; font-size:9px;">H</small> : <b>${pad(m)}</b><small style="color:#94a3b8; font-size:9px;">M</small> : <b style="color:#ffffff;">${pad(s)}</b><small style="color:#94a3b8; font-size:9px;">S</small>`;
                     }
 
-                    // 👑 2026 Luxury Digital HUD Layout
+                    // 🌟 CARD 1: LIQUID SILVER TITANIUM HUD (CHANDI KI CHAMAK)
                     vipText.innerHTML = `
-                        <div style="font-size:12px; font-weight:900; color:#ffd700; display:flex; align-items:center; gap:4px; letter-spacing:0.3px;">
-                            👑 VIP PASS
+                        <div style="display:flex; flex-direction:column; gap:4px; width:100%;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+                                <span style="font-size:12px; font-weight:900; color:#ffffff; letter-spacing:1px; text-transform:uppercase;">VIP PASS</span>
+                                <span style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.35); color:#ffffff; font-size:8px; font-weight:900; padding:2.5px 8px; border-radius:12px; letter-spacing:0.8px;">● ACTIVE PASS</span>
+                            </div>
+                            <div style="display:inline-flex; align-items:center; gap:6px; color:#ffffff; font-family:'Plus Jakarta Sans', monospace; font-size:13.5px; font-weight:800; letter-spacing:0.5px; margin-top:1px;">
+                                <svg viewBox="0 0 24 24" style="width:13px; height:13px; stroke:#ffffff; fill:none; stroke-width:2.2; flex-shrink:0;"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M10 2h4M12 2v3"/></svg>
+                                <span>${timeLine}</span>
+                            </div>
                         </div>
-                        ${hudHtml}
                     `;
 
                     if (vipSub) {
-                        vipSub.innerText = 'All Content Unlocked';
-                        vipSub.style.color = '#a0a5b8';
+                        vipSub.innerHTML = `<span style="font-size:9.5px; font-weight:700; color:#94a3b8; letter-spacing:0.2px;">All VIP Movies, Anime & Live TV Unlocked</span>`;
                     }
 
-                    // Card ko 3D Golden Glow do
-                    if (vipBox) vipBox.classList.add('vip-active-card');
+                    // 💎 Card aur Left Icon ko Platinum Titanium Silver Look do
+                    if (vipBox) {
+                        vipBox.classList.add('vip-active-card');
+                        const iconWrap = vipBox.querySelector('.profile-stat-icon-wrap');
+                        if (iconWrap) {
+                            iconWrap.style.background = 'linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #64748b 100%)';
+                            iconWrap.style.border = '1px solid rgba(255, 255, 255, 0.5)';
+                            iconWrap.style.boxShadow = '0 4px 15px rgba(255, 255, 255, 0.25)';
+                            iconWrap.innerHTML = `<svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#000000; filter:drop-shadow(0 1px 2px rgba(255,255,255,0.4));"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>`;
+                        }
+                    }
 
                 } else {
+                    // Agar VIP na ho toh Free Plan dikhaye
                     vipText.innerText = 'Free Plan';
                     vipText.style.color = '#ffffff';
                     if (vipSub) {
                         vipSub.innerText = 'Tap Content to Upgrade';
                         vipSub.style.color = '#8b8f9e';
+                        vipSub.style.fontSize = '10px';
                     }
-                    if (vipBox) vipBox.classList.remove('vip-active-card');
+                    if (vipBox) {
+                        vipBox.classList.remove('vip-active-card');
+                        const iconWrap = vipBox.querySelector('.profile-stat-icon-wrap');
+                        if (iconWrap) {
+                            iconWrap.style.background = 'linear-gradient(135deg, #10ac84, #2ed573)';
+                            iconWrap.style.border = 'none';
+                            iconWrap.style.boxShadow = '0 4px 14px rgba(46, 213, 115, 0.45)';
+                            iconWrap.innerHTML = `<svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>`;
+                        }
+                    }
                     clearInterval(window.vipTimerInterval);
                 }
             };
@@ -4175,12 +5631,29 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                 if (removeBtn) removeBtn.style.display = 'none';
             }
 
-            // 3. Navigation Bar Avatar Photo
+            // 3. Navigation Bar Avatar Photo (Live DP Update)
             const navAvatarBox = document.getElementById('navAvatarBox');
-            if (navAvatarBox && profile.photo) {
-                navAvatarBox.innerHTML = `<img src="${profile.photo}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
-                navAvatarBox.style.border = 'none';
-                 }
+            if (navAvatarBox) {
+                if (profile.photo) {
+                    navAvatarBox.innerHTML = `<img src="${profile.photo}" style="width:100%; height:100%; object-fit:cover; border-radius:50%; display:block;">`;
+                    navAvatarBox.style.border = '1px solid rgba(255,255,255,0.3)';
+                } else {
+                    navAvatarBox.innerHTML = `<svg viewBox="0 0 24 24" class="nav-svg"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="3.2"/><path d="M6.2 18.5c1.4-2.3 3.4-3.5 5.8-3.5s4.4 1.2 5.8 3.5"/></svg>`;
+                    navAvatarBox.style.border = 'none';
+                }
+            }
+
+            // 👑 4. Top Header Avatar Photo (Sirf tab dikhega jab user profile se photo lagaye!)
+            const headerAvatar = document.getElementById('headerAvatarBtn');
+            const headerImg = document.getElementById('headerAvatarImg');
+            if (headerAvatar && headerImg) {
+                if (profile && profile.photo) {
+                    headerImg.src = profile.photo;
+                    headerAvatar.style.display = 'flex';
+                } else {
+                    headerAvatar.style.display = 'none';
+                }
+            }
  }; 
  
      // 🔑 REAL FIREBASE SINGLE-USE VIP CODE UNLOCK ENGINE (30 DAYS)
@@ -4526,30 +5999,50 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
         </div>
     </div>
      
-     <!-- 🔒 1. USER KE LIYE VIP PAYMENT & ACTIVATION SCREEN -->
+     <!-- 🔒 1. USER KE LIYE VIP PAYMENT & ACTIVATION SCREEN (DUAL SUPPORT: CHAT + TELEGRAM) -->
     <div id="vipLockModal">
         <div class="vip-modal-card">
+            
+            <!-- 👑 Titanium Crown -->
             <div class="vip-crown-icon-wrap">
                 <svg viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
             </div>
-            <h2 class="vip-modal-title">VIP Content Locked</h2>
-            <p class="vip-modal-sub" id="vipLockedContentName">Exclusive VIP Access</p>
 
-            <div class="vip-payment-info-box">
-                <div class="vip-pay-row"><span>Fees (30 Days):</span> <b>Rs. 150 Only</b></div>
-                <!-- 💳 Abu Ka JazzCash / Easypaisa Account -->
-                <div class="vip-pay-row"><span>Send Payment To:</span> <b style="color:#ffd700;">03XX-XXXXXXX</b></div>
-                <div class="vip-pay-row"><span>Account Name:</span> <b style="color:#00ffcc;">Abu Ka Naam</b></div>
+            <h2 class="vip-modal-title">VIP Access Locked</h2>
+            <p class="vip-modal-sub" id="vipLockedContentName">Unlock All Live Sports, 4K Movies & Anime</p>
+
+            <!-- 💳 NETFLIX STYLE PLAN CARDS -->
+            <div style="display:flex; gap:10px; width:100%; margin-bottom:12px;">
+                <div style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center;">
+                    <span style="font-size:9.5px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Weekly Pass</span>
+                    <span style="font-size:15px; font-weight:900; color:#ffffff; margin:2px 0;">Rs. 50</span>
+                    <span style="font-size:8px; font-weight:800; background:rgba(255,255,255,0.08); color:#cbd5e1; padding:2px 6px; border-radius:8px;">7 Days</span>
+                </div>
+                <div style="flex:1; background:rgba(255,255,255,0.12); border:1px solid #ffffff; border-radius:16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center; box-shadow:0 0 16px rgba(255,255,255,0.2);">
+                    <span style="font-size:9.5px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Monthly VIP</span>
+                    <span style="font-size:15px; font-weight:900; color:#ffffff; margin:2px 0;">Rs. 150</span>
+                    <span style="font-size:8px; font-weight:900; background:#ffffff; color:#000000; padding:2px 6px; border-radius:8px;">30 Days Pass</span>
+                </div>
             </div>
 
-            <!-- 📲 Screenshot Seedha Aapke WhatsApp Par Aayega -->
-            <button class="vip-wa-btn" onclick="window.sendPaymentProofWhatsApp()">
-                <i class="fab fa-whatsapp" style="font-size:16px;"></i>
-                <span>Send Screenshot on My WhatsApp</span>
+            <div style="font-size:10.5px; color:#cbd5e1; text-align:center; margin-bottom:12px; font-weight:700; line-height:1.4;">
+                VIP Pass khareedne aur Code hasil karne ke liye Live Support par rabta karein:
+            </div>
+
+            <!-- 💬 BUTTON 1: IN-APP LIVE CHAT (TAWK.TO CONNECTED) -->
+            <button onclick="window.openTawkChat()" style="width:100%; background:linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)); border:1px solid rgba(255,255,255,0.35); color:#ffffff; font-size:12px; font-weight:900; padding:12px; border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 15px rgba(0,0,0,0.5); margin-bottom:8px; transition:transform 0.2s;">
+                <svg viewBox="0 0 24 24" style="width:16px; height:16px; fill:none; stroke:#ffffff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span>Live Chat Support (In-App)</span>
             </button>
 
-            <!-- VIP Activation Code Input Box -->
-            <div class="vip-code-input-row">
+            <!-- ✈️ BUTTON 2: TELEGRAM OFFICIAL SUPPORT (@MovieMasterHelp) -->
+            <button onclick="window.openTelegramSupport()" style="width:100%; background:linear-gradient(135deg, #0088cc, #005580); border:none; color:#ffffff; font-size:12px; font-weight:900; padding:12px; border-radius:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 15px rgba(0,136,204,0.45); margin-bottom:14px; transition:transform 0.2s;">
+                <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:#ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+                <span>Telegram Support (@MovieMasterHelp)</span>
+            </button>
+
+            <!-- 🔑 VIP Activation Code Input Box -->
+            <div class="vip-code-input-row" style="margin-bottom:12px;">
                 <input type="text" id="vipUserInputCode" class="vip-input-field" placeholder="ENTER VIP CODE...">
                 <button class="vip-activate-btn" onclick="window.activateVIPCode()">Unlock</button>
             </div>
@@ -4589,61 +6082,125 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
         </div>
     </div>
      
-     <!-- 🌟 2026 GLOBAL SMART TOAST & ZERO-POPUP MAGIC ENGINE -->
+     <!-- 🌟 2026 CYBER-GLASS FLOATING HUD NOTIFICATION ENGINE -->
     <script>
         (function() {
-            // 1. 2026 Floating Glass Notification Box
-            window.showCustomToast = function(msg) {
+            window.showCustomToast = function(msg, customType) {
                 if (!msg) return;
                 let toast = document.getElementById('customToastBox');
                 if (!toast) {
                     toast = document.createElement('div');
                     toast.id = 'customToastBox';
-                    toast.style.cssText = 'position:fixed; top:20px; left:50%; transform:translate(-50%, -60px) scale(0.9); background:rgba(14, 16, 24, 0.96); backdrop-filter:blur(28px); -webkit-backdrop-filter:blur(28px); border:1px solid rgba(255, 255, 255, 0.18); border-radius:20px; padding:12px 20px; z-index:9999999999; opacity:0; transition:all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-width:90%; box-shadow:0 12px 35px rgba(0,0,0,0.85); display:flex; align-items:center; gap:10px; font-size:12px; font-weight:800; color:#fff; pointer-events:none;';
+                    toast.style.cssText = 'position:fixed; top:24px; left:50%; transform:translate(-50%, -80px) scale(0.88); background:rgba(10, 13, 22, 0.92); backdrop-filter:blur(30px) saturate(190%); -webkit-backdrop-filter:blur(30px) saturate(190%); border-radius:24px; padding:10px 16px; z-index:9999999999; opacity:0; transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-width:92%; width:max-content; box-sizing:border-box; display:flex; align-items:center; gap:12px; pointer-events:none;';
                     document.body.appendChild(toast);
                 }
 
-                let icon = 'ℹ️';
-                let glow = 'rgba(0, 255, 204, 0.4)';
-                let border = '#00ffcc';
+                let iconSvg = '';
+                let titleText = 'NOTIFICATION';
+                let descText = msg;
+                let borderColor = 'rgba(0, 242, 254, 0.4)';
+                let glowColor = 'rgba(0, 242, 254, 0.3)';
+                let iconWrapBg = 'linear-gradient(135deg, rgba(0, 242, 254, 0.25), rgba(0, 180, 216, 0.08))';
+                let iconWrapBorder = '#00f2fe';
+                let titleColor = '#00f2fe';
 
-                if (msg.includes('Galat') || msg.includes('error') || msg.includes('PERMISSION') || msg.includes('pehle')) {
-                    icon = '❌';
-                    border = '#ff4757';
-                    glow = 'rgba(255, 71, 87, 0.5)';
-                } else if (msg.includes('Mubarak') || msg.includes('save') || msg.includes('VIP')) {
-                    icon = '👑';
-                    border = '#ffd700';
-                    glow = 'rgba(255, 215, 0, 0.5)';
+                // 📥 1. Download Link Copy Case (Sabse Professional 2026 Checkmark)
+                if (msg.includes('Snaptube') || msg.includes('Copy') || msg.includes('Download') || customType === 'download') {
+                    titleText = 'LINK COPIED!';
+                    descText = 'Snaptube ya Vidmate khol kar download karein';
+                    titleColor = '#00f2fe';
+                    borderColor = 'rgba(0, 242, 254, 0.45)';
+                    glowColor = 'rgba(0, 242, 254, 0.35)';
+                    iconWrapBorder = '#00f2fe';
+                    iconWrapBg = 'linear-gradient(135deg, rgba(0, 242, 254, 0.28), rgba(0, 180, 216, 0.1))';
+                    iconSvg = `
+                        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#00f2fe; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 5px rgba(0, 242, 254, 0.8));">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    `;
+                } 
+                // ❌ 2. Error / Warning Case
+                else if (msg.includes('Galat') || msg.includes('error') || msg.includes('pehle') || msg.includes('Expired')) {
+                    titleText = 'ACCESS ALERT';
+                    titleColor = '#ff4757';
+                    borderColor = 'rgba(255, 71, 87, 0.45)';
+                    glowColor = 'rgba(255, 71, 87, 0.35)';
+                    iconWrapBorder = '#ff4757';
+                    iconWrapBg = 'linear-gradient(135deg, rgba(255, 71, 87, 0.28), rgba(255, 71, 87, 0.08))';
+                    iconSvg = `
+                        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#ff4757; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 5px rgba(255, 71, 87, 0.8));">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    `;
+                } 
+                // 👑 3. VIP / Success Case
+                else if (msg.includes('Mubarak') || msg.includes('VIP') || msg.includes('Pass') || msg.includes('save')) {
+                    titleText = 'VIP SYSTEM';
+                    titleColor = '#ffd700';
+                    borderColor = 'rgba(255, 215, 0, 0.45)';
+                    glowColor = 'rgba(255, 215, 0, 0.35)';
+                    iconWrapBorder = '#ffd700';
+                    iconWrapBg = 'linear-gradient(135deg, rgba(255, 215, 0, 0.28), rgba(255, 140, 0, 0.1))';
+                    iconSvg = `
+                        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:#ffd700; filter:drop-shadow(0 0 6px rgba(255, 215, 0, 0.8));">
+                            <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/>
+                        </svg>
+                    `;
+                } 
+                // ℹ️ 4. Normal Notice
+                else {
+                    iconSvg = `
+                        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#00ffcc; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    `;
                 }
 
-                toast.style.borderColor = border;
-                toast.style.boxShadow = '0 12px 35px rgba(0,0,0,0.9), 0 0 20px ' + glow;
-                toast.innerHTML = `<span style="font-size:16px;">${icon}</span><span>${msg}</span>`;
+                toast.style.border = '1px solid ' + borderColor;
+                toast.style.boxShadow = '0 16px 40px rgba(0, 0, 0, 0.9), 0 0 22px ' + glowColor;
+                
+                toast.innerHTML = `
+                    <div style="width:36px; height:36px; border-radius:12px; background:${iconWrapBg}; border:1px solid ${iconWrapBorder}; display:flex; align-items:center; justify-content:center; flex-shrink:0; box-shadow:0 4px 14px ${glowColor};">
+                        ${iconSvg}
+                    </div>
+                    <div style="display:flex; flex-direction:column; text-align:left; min-width:0;">
+                        <span style="font-size:11.5px; font-weight:900; color:${titleColor}; letter-spacing:0.8px; text-transform:uppercase; line-height:1.2;">${titleText}</span>
+                        <span style="font-size:10px; font-weight:700; color:#e2e8f0; letter-spacing:0.2px; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${descText}</span>
+                    </div>
+                `;
 
                 toast.style.transform = 'translate(-50%, 0) scale(1)';
                 toast.style.opacity = '1';
 
                 if (window.toastTimer) clearTimeout(window.toastTimer);
                 window.toastTimer = setTimeout(() => {
-                    toast.style.transform = 'translate(-50%, -60px) scale(0.9)';
+                    toast.style.transform = 'translate(-50%, -80px) scale(0.88)';
                     toast.style.opacity = '0';
                 }, 3200);
             };
 
-            // 2. Overwrite Alert (Browser Ke Local Safaid Box Mukammal Khatam!)
+            // Safaid default browser alert ko bypass karna
             window.alert = function(msg) {
                 if (!msg) return;
-
-                // 🚫 Download wale button par KOI BHI BOX NAHI AAYEGA! (100% Silent)
-                if (msg.includes('Snaptube') || msg.includes('Download') || msg.includes('Copy')) {
-                    return; 
-                }
-
-                // Baqi saari jagah 2026 Floating Glass Notification aayegi!
                 window.showCustomToast(msg);
             };
         })();
+    </script>
+     
+     <!-- 💬 OFFICIAL LIVE CHAT & TELEGRAM (ZERO BUBBLE ON NAV BAR) -->
+    <script>
+        // 💬 Live Chat: Sirf button dabane par khulegi (Screen aur Nav Bar 100% clean rahega)
+        window.openTawkChat = function() {
+            window.open('https://tawk.to/chat/6adf65c3cce2b5346f98fe27/1k5sab1om', '_blank');
+        };
+
+        // ✈️ Telegram Support Link (@MovieMasterHelp)
+        window.openTelegramSupport = function() {
+            window.open('https://t.me/MovieMasterHelp', '_blank');
+        };
     </script>
      
 </body>
