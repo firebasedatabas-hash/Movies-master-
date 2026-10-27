@@ -1191,6 +1191,37 @@ header {
             justify-content: center;
         }
 
+        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN (HEADER & NAV BAR CHUP JAYENGE) */
+        .cyber-player-wrap.is-cinema-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 99999999999 !important;
+            background: #000000 !important;
+            border: none !important;
+            border-radius: 0 !important;
+            aspect-ratio: unset !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .cyber-player-wrap.is-cinema-fullscreen video {
+            width: 100vw !important;
+            height: 100vh !important;
+            object-fit: contain !important;
+            background: #000000 !important;
+        }
+
+        /* Fullscreen ke dauran Header aur Bottom Nav mukammal gayab */
+        body.in-cinema-mode .bottom-nav-container,
+        body.in-cinema-mode header {
+            display: none !important;
+        }
+
         .m3u8-controls-overlay {
             position: absolute;
             inset: 0;
@@ -4764,15 +4795,67 @@ header {
                 };
             });
 
-            // ⛶ Fullscreen
+            // ⛶ 100% TRUE CINEMA FULLSCREEN TOGGLE (NO HEADER, NO NAV BAR)
+            const toggleCinemaFs = async () => {
+                const isFs = wrap.classList.contains('is-cinema-fullscreen') || !!document.fullscreenElement;
+
+                if (!isFs) {
+                    // 1. Fullscreen On: Header aur Nav Bar Chupa kar Video Poori Screen Par Phailayein
+                    wrap.classList.add('is-cinema-fullscreen');
+                    document.body.classList.add('in-cinema-mode');
+
+                    try {
+                        if (wrap.requestFullscreen) {
+                            await wrap.requestFullscreen();
+                        } else if (wrap.webkitRequestFullscreen) {
+                            await wrap.webkitRequestFullscreen();
+                        } else if (videoEl.webkitEnterFullscreen) {
+                            videoEl.webkitEnterFullscreen();
+                        }
+                    } catch(e){}
+
+                    try {
+                        if (screen.orientation && screen.orientation.lock) {
+                            await screen.orientation.lock('landscape').catch(() => {});
+                        }
+                    } catch(e){}
+
+                } else {
+                    // 2. Fullscreen Off: Wapas Normal Mode
+                    wrap.classList.remove('is-cinema-fullscreen');
+                    document.body.classList.remove('in-cinema-mode');
+
+                    try {
+                        if (document.exitFullscreen) {
+                            await document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            await document.webkitExitFullscreen();
+                        }
+                    } catch(e){}
+
+                    try {
+                        if (screen.orientation && screen.orientation.unlock) {
+                            screen.orientation.unlock();
+                        }
+                    } catch(e){}
+                }
+            };
+
             if (fsBtn) {
                 fsBtn.onclick = () => {
-                    if (typeof window.toggleLandscapePlayer === 'function') {
-                        window.toggleLandscapePlayer();
-                    }
+                    toggleCinemaFs();
                     resetAutoHide();
                 };
             }
+
+            // Mobile System Back Gesture Par Fullscreen Auto-Close Handle Karna
+            document.onfullscreenchange = () => {
+                if (!document.fullscreenElement) {
+                    wrap.classList.remove('is-cinema-fullscreen');
+                    document.body.classList.remove('in-cinema-mode');
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                }
+            };
 
             // ⚡ HLS STREAM LOADER & QUALITIES
             if (url.includes('.m3u8')) {
