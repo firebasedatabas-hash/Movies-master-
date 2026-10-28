@@ -1211,7 +1211,7 @@ header {
             justify-content: center;
         }
 
-        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN */
+        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN (ZERO WHITE FLASH) */
         .cyber-player-wrap.is-cinema-fullscreen {
             position: fixed !important;
             top: 0 !important;
@@ -1230,29 +1230,28 @@ header {
         }
 
         .cyber-player-wrap.is-cinema-fullscreen video {
-            width: 100vw !important;
-            height: 100vh !important;
+            width: 100% !important;
+            height: 100% !important;
             object-fit: contain !important;
             background: #000000 !important;
         }
 
-        /* 🔄 APPCREATOR24 SPECIAL: FORCE 90° ROTATE JAB SCREEN PORTRAIT HO */
+        /* 🔄 Auto-Rotate 90° (Jab mobile seedha pakda ho) */
         .cyber-player-wrap.is-cinema-fullscreen.force-rotate-landscape {
             top: 50% !important;
             left: 50% !important;
-            width: 100vh !important;  /* Mobile ki poori lambayi */
-            height: 100vw !important; /* Mobile ki poori chaudayi */
+            width: 100vh !important;
+            height: 100vw !important;
             transform: translate(-50%, -50%) rotate(90deg) !important;
             transform-origin: center center !important;
         }
 
-        .cyber-player-wrap.is-cinema-fullscreen.force-rotate-landscape video {
-            width: 100vh !important;
-            height: 100vw !important;
-            object-fit: contain !important;
+        /* 🚫 Safaid Screen Ka Khatma (All Layers Force Black) */
+        ::backdrop, :fullscreen, :-webkit-full-screen {
+            background-color: #000000 !important;
+            background: #000000 !important;
         }
 
-        /* Fullscreen ke dauran Header aur Bottom Nav mukammal gayab */
         body.in-cinema-mode .bottom-nav-container,
         body.in-cinema-mode header {
             display: none !important;
@@ -4831,49 +4830,34 @@ header {
                 };
             });
 
-            // ⛶ 100% TRUE CINEMA FULLSCREEN TOGGLE (APPCREATOR24 ROTATION FIX)
-            const toggleCinemaFs = async () => {
-                const isFs = wrap.classList.contains('is-cinema-fullscreen') || !!document.fullscreenElement;
+            // ⛶ 100% ZERO-FLASH INSTANT CINEMA FULLSCREEN ENGINE
+            const toggleCinemaFs = () => {
+                const isFs = wrap.classList.contains('is-cinema-fullscreen');
 
                 if (!isFs) {
+                    // Fullscreen On: Pure Black, 0 White Flash
                     wrap.classList.add('is-cinema-fullscreen');
                     document.body.classList.add('in-cinema-mode');
 
-                    // 📱 Agar mobile seedha (Portrait) ho toh zabardasti 90° ghuma kar landscape banao
+                    // Agar phone seedha ho toh 90° ghooma kar cinema display banao
                     if (window.innerWidth < window.innerHeight) {
                         wrap.classList.add('force-rotate-landscape');
                     } else {
                         wrap.classList.remove('force-rotate-landscape');
                     }
 
-                    try {
-                        if (wrap.requestFullscreen) {
-                            await wrap.requestFullscreen();
-                        } else if (wrap.webkitRequestFullscreen) {
-                            await wrap.webkitRequestFullscreen();
-                        } else if (videoEl.webkitEnterFullscreen) {
-                            videoEl.webkitEnterFullscreen();
-                        }
-                    } catch(e){}
-
+                    // Native rotation try karein bina kisi safaid jhatkay ke
                     try {
                         if (screen.orientation && screen.orientation.lock) {
-                            await screen.orientation.lock('landscape').catch(() => {});
+                            screen.orientation.lock('landscape').catch(() => {});
                         }
                     } catch(e){}
 
                 } else {
+                    // Fullscreen Off: Wapas Normal Mode
                     wrap.classList.remove('is-cinema-fullscreen');
                     wrap.classList.remove('force-rotate-landscape');
                     document.body.classList.remove('in-cinema-mode');
-
-                    try {
-                        if (document.exitFullscreen) {
-                            await document.exitFullscreen();
-                        } else if (document.webkitExitFullscreen) {
-                            await document.webkitExitFullscreen();
-                        }
-                    } catch(e){}
 
                     try {
                         if (screen.orientation && screen.orientation.unlock) {
