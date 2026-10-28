@@ -1211,7 +1211,7 @@ header {
             justify-content: center;
         }
 
-        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN (HEADER & NAV BAR CHUP JAYENGE) */
+        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN */
         .cyber-player-wrap.is-cinema-fullscreen {
             position: fixed !important;
             top: 0 !important;
@@ -1234,6 +1234,22 @@ header {
             height: 100vh !important;
             object-fit: contain !important;
             background: #000000 !important;
+        }
+
+        /* 🔄 APPCREATOR24 SPECIAL: FORCE 90° ROTATE JAB SCREEN PORTRAIT HO */
+        .cyber-player-wrap.is-cinema-fullscreen.force-rotate-landscape {
+            top: 50% !important;
+            left: 50% !important;
+            width: 100vh !important;  /* Mobile ki poori lambayi */
+            height: 100vw !important; /* Mobile ki poori chaudayi */
+            transform: translate(-50%, -50%) rotate(90deg) !important;
+            transform-origin: center center !important;
+        }
+
+        .cyber-player-wrap.is-cinema-fullscreen.force-rotate-landscape video {
+            width: 100vh !important;
+            height: 100vw !important;
+            object-fit: contain !important;
         }
 
         /* Fullscreen ke dauran Header aur Bottom Nav mukammal gayab */
@@ -4815,14 +4831,20 @@ header {
                 };
             });
 
-            // ⛶ 100% TRUE CINEMA FULLSCREEN TOGGLE (NO HEADER, NO NAV BAR)
+            // ⛶ 100% TRUE CINEMA FULLSCREEN TOGGLE (APPCREATOR24 ROTATION FIX)
             const toggleCinemaFs = async () => {
                 const isFs = wrap.classList.contains('is-cinema-fullscreen') || !!document.fullscreenElement;
 
                 if (!isFs) {
-                    // 1. Fullscreen On: Header aur Nav Bar Chupa kar Video Poori Screen Par Phailayein
                     wrap.classList.add('is-cinema-fullscreen');
                     document.body.classList.add('in-cinema-mode');
+
+                    // 📱 Agar mobile seedha (Portrait) ho toh zabardasti 90° ghuma kar landscape banao
+                    if (window.innerWidth < window.innerHeight) {
+                        wrap.classList.add('force-rotate-landscape');
+                    } else {
+                        wrap.classList.remove('force-rotate-landscape');
+                    }
 
                     try {
                         if (wrap.requestFullscreen) {
@@ -4841,8 +4863,8 @@ header {
                     } catch(e){}
 
                 } else {
-                    // 2. Fullscreen Off: Wapas Normal Mode
                     wrap.classList.remove('is-cinema-fullscreen');
+                    wrap.classList.remove('force-rotate-landscape');
                     document.body.classList.remove('in-cinema-mode');
 
                     try {
