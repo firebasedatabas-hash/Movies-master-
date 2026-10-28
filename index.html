@@ -4308,7 +4308,17 @@ header {
 
         window.history.replaceState({ page: 'homePage' }, '');
         window.addEventListener('popstate', () => {
-            // ⛶ 1. Mobile Back Button Se Fullscreen Aur Pattiya Smooth Restore
+            window.history.replaceState({ page: 'homePage' }, '');
+        window.isExitingFsViaBtn = false; // 👈 Home jane se rokne wala flag
+
+        window.addEventListener('popstate', () => {
+            // 🛑 Agar user ne player ka ⛶ button dabaya tha, toh Home hargiz na jao!
+            if (window.isExitingFsViaBtn) {
+                window.isExitingFsViaBtn = false;
+                return;
+            }
+
+            // ⛶ 1. Agar mobile ka apna hardware back button (◁) dabaya ho:
             const fsWrap = document.querySelector('.cyber-player-wrap.is-cinema-fullscreen');
             if (fsWrap) {
                 fsWrap.classList.remove('is-cinema-fullscreen');
@@ -4321,7 +4331,7 @@ header {
                 try {
                     if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
                 } catch(e){}
-                return;
+                return; // 👈 Page peeche nahi jayega, sirf fullscreen band hoga!
             }
 
             const videoPage = document.getElementById('videoPage');
@@ -4847,7 +4857,7 @@ header {
                 };
             });
 
-            // ⛶ 100% TRUE IMMERSIVE FULL DISPLAY ENGINE (STATUS & NAV BAR AUTO-HIDE)
+            // ⛶ 100% TRUE IMMERSIVE FULL DISPLAY ENGINE (ZERO HOME-REDIRECT BUG)
             const toggleCinemaFs = (fromBack = false) => {
                 const isFs = wrap.classList.contains('is-cinema-fullscreen');
 
@@ -4887,7 +4897,6 @@ header {
                     wrap.classList.remove('force-rotate-landscape');
                     document.body.classList.remove('in-cinema-mode');
 
-                    // 📱 Android OS Pattiya Wapas Normal Karo
                     try {
                         if (document.exitFullscreen) {
                             document.exitFullscreen().catch(() => {});
@@ -4902,7 +4911,9 @@ header {
                         }
                     } catch(e){}
 
+                    // 🛑 Flag set karein taake popstate isay normal back samajh kar Home par na le jaye!
                     if (!fromBack && window.history.state && window.history.state.cinemaFs) {
+                        window.isExitingFsViaBtn = true;
                         window.history.back();
                     }
                 }
