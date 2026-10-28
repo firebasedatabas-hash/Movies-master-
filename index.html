@@ -7,7 +7,8 @@
     <title>Movie Master Pro</title>
     <!-- 📲 PWA APP MANIFEST LINK -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#090a0f">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -4860,13 +4861,16 @@ header {
                         wrap.classList.remove('force-rotate-landscape');
                     }
 
-                    // 📱 Android OS Immersive Mode: Upar ka Status Bar aur Neeche ke 3 Buttons Chupao!
+                    // 📱 Android OS Immersive Mode: { navigationUI: 'hide' } Se 3 Buttons Chupao!
                     try {
                         const docEl = document.documentElement;
+                        const fsOpts = { navigationUI: 'hide' };
                         if (docEl.requestFullscreen) {
-                            docEl.requestFullscreen().catch(() => {});
+                            docEl.requestFullscreen(fsOpts).catch(() => {
+                                docEl.requestFullscreen().catch(() => {});
+                            });
                         } else if (docEl.webkitRequestFullscreen) {
-                            docEl.webkitRequestFullscreen();
+                            docEl.webkitRequestFullscreen(fsOpts);
                         }
                     } catch(e){}
 
