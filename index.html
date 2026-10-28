@@ -4307,16 +4307,20 @@ header {
 
         window.history.replaceState({ page: 'homePage' }, '');
         window.addEventListener('popstate', () => {
-            // ⛶ 1. Agar Fullscreen chal raha ho toh mobile Back button se sirf fullscreen band ho (Nav Bar Wapas Aaye!)
+            // ⛶ 1. Mobile Back Button Se Fullscreen Aur Pattiya Smooth Restore
             const fsWrap = document.querySelector('.cyber-player-wrap.is-cinema-fullscreen');
             if (fsWrap) {
                 fsWrap.classList.remove('is-cinema-fullscreen');
                 fsWrap.classList.remove('force-rotate-landscape');
                 document.body.classList.remove('in-cinema-mode');
                 try {
+                    if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                } catch(e){}
+                try {
                     if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
                 } catch(e){}
-                return; // 👈 Page peeche nahi jayega, sirf fullscreen band hoga aur sab wapas aa jayega!
+                return;
             }
 
             const videoPage = document.getElementById('videoPage');
@@ -4842,7 +4846,7 @@ header {
                 };
             });
 
-            // ⛶ 100% ZERO-FLASH INSTANT CINEMA FULLSCREEN ENGINE (MOBILE BACK SYNC)
+            // ⛶ 100% TRUE IMMERSIVE FULL DISPLAY ENGINE (STATUS & NAV BAR AUTO-HIDE)
             const toggleCinemaFs = (fromBack = false) => {
                 const isFs = wrap.classList.contains('is-cinema-fullscreen');
 
@@ -4856,13 +4860,22 @@ header {
                         wrap.classList.remove('force-rotate-landscape');
                     }
 
+                    // 📱 Android OS Immersive Mode: Upar ka Status Bar aur Neeche ke 3 Buttons Chupao!
+                    try {
+                        const docEl = document.documentElement;
+                        if (docEl.requestFullscreen) {
+                            docEl.requestFullscreen().catch(() => {});
+                        } else if (docEl.webkitRequestFullscreen) {
+                            docEl.webkitRequestFullscreen();
+                        }
+                    } catch(e){}
+
                     try {
                         if (screen.orientation && screen.orientation.lock) {
                             screen.orientation.lock('landscape').catch(() => {});
                         }
                     } catch(e){}
 
-                    // 📱 Mobile Back Button ke liye history mein entry karein
                     try { window.history.pushState({ cinemaFs: true }, ''); } catch(e){}
 
                 } else {
@@ -4870,13 +4883,21 @@ header {
                     wrap.classList.remove('force-rotate-landscape');
                     document.body.classList.remove('in-cinema-mode');
 
+                    // 📱 Android OS Pattiya Wapas Normal Karo
+                    try {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen().catch(() => {});
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        }
+                    } catch(e){}
+
                     try {
                         if (screen.orientation && screen.orientation.unlock) {
                             screen.orientation.unlock();
                         }
                     } catch(e){}
 
-                    // Agar user ne button dabaya ho toh history state saaf karein
                     if (!fromBack && window.history.state && window.history.state.cinemaFs) {
                         window.history.back();
                     }
