@@ -4307,6 +4307,18 @@ header {
 
         window.history.replaceState({ page: 'homePage' }, '');
         window.addEventListener('popstate', () => {
+            // ⛶ 1. Agar Fullscreen chal raha ho toh mobile Back button se sirf fullscreen band ho (Nav Bar Wapas Aaye!)
+            const fsWrap = document.querySelector('.cyber-player-wrap.is-cinema-fullscreen');
+            if (fsWrap) {
+                fsWrap.classList.remove('is-cinema-fullscreen');
+                fsWrap.classList.remove('force-rotate-landscape');
+                document.body.classList.remove('in-cinema-mode');
+                try {
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                } catch(e){}
+                return; // 👈 Page peeche nahi jayega, sirf fullscreen band hoga aur sab wapas aa jayega!
+            }
+
             const videoPage = document.getElementById('videoPage');
             if (videoPage && videoPage.style.display === 'block') { window.closePlayer(false); return; }
             const fullPages = ['searchPage', 'favPage', 'viewAllPage', 'profilePage'];
@@ -4830,31 +4842,30 @@ header {
                 };
             });
 
-            // ⛶ 100% ZERO-FLASH INSTANT CINEMA FULLSCREEN ENGINE
-            const toggleCinemaFs = () => {
+            // ⛶ 100% ZERO-FLASH INSTANT CINEMA FULLSCREEN ENGINE (MOBILE BACK SYNC)
+            const toggleCinemaFs = (fromBack = false) => {
                 const isFs = wrap.classList.contains('is-cinema-fullscreen');
 
                 if (!isFs) {
-                    // Fullscreen On: Pure Black, 0 White Flash
                     wrap.classList.add('is-cinema-fullscreen');
                     document.body.classList.add('in-cinema-mode');
 
-                    // Agar phone seedha ho toh 90° ghooma kar cinema display banao
                     if (window.innerWidth < window.innerHeight) {
                         wrap.classList.add('force-rotate-landscape');
                     } else {
                         wrap.classList.remove('force-rotate-landscape');
                     }
 
-                    // Native rotation try karein bina kisi safaid jhatkay ke
                     try {
                         if (screen.orientation && screen.orientation.lock) {
                             screen.orientation.lock('landscape').catch(() => {});
                         }
                     } catch(e){}
 
+                    // 📱 Mobile Back Button ke liye history mein entry karein
+                    try { window.history.pushState({ cinemaFs: true }, ''); } catch(e){}
+
                 } else {
-                    // Fullscreen Off: Wapas Normal Mode
                     wrap.classList.remove('is-cinema-fullscreen');
                     wrap.classList.remove('force-rotate-landscape');
                     document.body.classList.remove('in-cinema-mode');
@@ -4864,6 +4875,11 @@ header {
                             screen.orientation.unlock();
                         }
                     } catch(e){}
+
+                    // Agar user ne button dabaya ho toh history state saaf karein
+                    if (!fromBack && window.history.state && window.history.state.cinemaFs) {
+                        window.history.back();
+                    }
                 }
             };
 
