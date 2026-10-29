@@ -4307,8 +4307,6 @@ header {
         }, { passive: true });
 
         window.history.replaceState({ page: 'homePage' }, '');
-        window.addEventListener('popstate', () => {
-            window.history.replaceState({ page: 'homePage' }, '');
         window.isExitingFsViaBtn = false; // 👈 Home jane se rokne wala flag
 
         window.addEventListener('popstate', () => {
@@ -4586,14 +4584,14 @@ header {
             if (m3u8HideTimer) { clearTimeout(m3u8HideTimer); m3u8HideTimer = null; }
         }
 
-        // 🎬 2026 CUSTOM M3U8 CYBER-GLASS PLAYER ENGINE
+// 🎬 2026 CUSTOM M3U8 CYBER-GLASS PLAYER ENGINE
         function startNativePlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer();
             const container = document.getElementById(wrapperId);
             if (!container) return;
             container.innerHTML = '';
 
-            // 1. 📺 YOUTUBE VIDEOS (Normal Iframe Player - Untouched)
+            // 1. 📺 YOUTUBE VIDEOS (Normal Iframe Player)
             if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/')) {
                 const iframe = document.createElement('iframe');
                 if (url.includes('youtube.com') || url.includes('youtu.be')) {
@@ -4626,11 +4624,10 @@ header {
             videoEl.removeAttribute('controls');
             wrap.appendChild(videoEl);
 
-            // Controls Overlay HTML
+            // Controls Overlay
             const overlay = document.createElement('div');
             overlay.className = 'm3u8-controls-overlay';
             overlay.innerHTML = `
-                <!-- Top Row (Title + Settings SVG) -->
                 <div class="m3u8-top-row" onclick="event.stopPropagation()">
                     <span class="m3u8-video-title">${cleanTitle}</span>
                     <button class="m3u8-btn-hud" id="m3u8SettingsBtn" title="Settings">
@@ -4638,9 +4635,7 @@ header {
                     </button>
                 </div>
 
-                <!-- Settings Popup Modal (Speed + Quality Both Always Available) -->
                 <div class="m3u8-settings-modal" id="m3u8SettingsModal" onclick="event.stopPropagation()">
-                    <!-- ⚡ Playback Speed -->
                     <div>
                         <div class="m3u8-settings-header">
                             <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
@@ -4654,10 +4649,7 @@ header {
                             <span class="m3u8-opt-chip" data-spd="2">2.0x</span>
                         </div>
                     </div>
-
                     <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
-
-                    <!-- 🎬 Video Quality -->
                     <div>
                         <div class="m3u8-settings-header">
                             <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
@@ -4669,28 +4661,21 @@ header {
                     </div>
                 </div>
 
-                <!-- Center Row (10s Rewind / Play / 10s Forward) -->
                 <div class="m3u8-center-row" id="m3u8CenterRow" onclick="event.stopPropagation()" style="${isLive ? 'display:none;' : ''}">
-                    <!-- ⏪ 10 Sec Rewind -->
                     <button class="m3u8-btn-skip" id="m3u8Back10Btn" title="10s Back">
                         <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.2 3.16-1.93 5.12-1.93 3.84 0 7.02 2.7 7.74 6.3l2.43-.59C21.69 11.43 17.52 8 12.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
                     </button>
 
-                    <!-- Center Play / Pause -->
                     <button class="m3u8-btn-play" id="m3u8CenterPlayBtn">
                         <svg id="m3u8PlaySvg" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
                     </button>
 
-                    <!-- 10 Sec Forward ⏩ -->
                     <button class="m3u8-btn-skip" id="m3u8Fwd10Btn" title="10s Forward">
                         <svg viewBox="0 0 24 24"><path d="M11.5 8c2.65 0 5.05.99 6.9 2.6L22 7v9h-9l3.62-3.62c-1.39-1.2-3.16-1.93-5.12-1.93-3.84 0-7.02 2.7-7.74 6.3l-2.43-.59C2.31 11.43 6.48 8 11.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
                     </button>
                 </div>
 
-                <!-- Bottom Row (YouTube Red Line + Volume + Fullscreen) -->
                 <div class="m3u8-bottom-controls" onclick="event.stopPropagation()">
-                    
-                    <!-- 🔴 YOUTUBE RED LINE PROGRESS BAR (Movies only) -->
                     <div class="m3u8-progress-container" id="m3u8ProgressTrack" style="${isLive ? 'display:none;' : ''}">
                         <div class="m3u8-progress-bg">
                             <div class="m3u8-progress-fill" id="m3u8ProgressFill"></div>
@@ -4700,25 +4685,19 @@ header {
 
                     <div class="m3u8-bottom-btn-row">
                         <div class="m3u8-left-tools">
-                            <!-- 🔊 Volume Slider -->
                             <div class="m3u8-volume-wrap">
                                 <button class="m3u8-vol-btn" id="m3u8VolBtn">
                                     <svg id="m3u8VolSvg" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                                 </button>
                                 <input type="range" min="0" max="1" step="0.05" value="1" class="m3u8-vol-slider" id="m3u8VolSlider">
                             </div>
-
-                            <!-- Duration (Movies only) -->
                             <span class="m3u8-time-txt" id="m3u8TimeTxt" style="${isLive ? 'display:none;' : ''}">00:00 / 00:00</span>
-                            
-                            <!-- 🔴 LIVE Badge -->
                             <div class="m3u8-live-badge" style="${isLive ? 'display:inline-flex;' : 'display:none;'}">
                                 <span class="m3u8-live-dot"></span>
                                 <span>LIVE</span>
                             </div>
                         </div>
 
-                        <!-- ⛶ Fullscreen -->
                         <button class="m3u8-btn-hud" id="m3u8FsBtn" title="Full Screen">
                             <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
                         </button>
@@ -4728,7 +4707,7 @@ header {
             wrap.appendChild(overlay);
             container.appendChild(wrap);
 
-            // 🎯 INTERACTIVE CONTROLS JAVASCRIPT
+            // Controls JS Logic
             const playSvg = overlay.querySelector('#m3u8PlaySvg');
             const centerPlayBtn = overlay.querySelector('#m3u8CenterPlayBtn');
             const progressFill = overlay.querySelector('#m3u8ProgressFill');
@@ -4785,7 +4764,6 @@ header {
             if (back10Btn) back10Btn.onclick = () => { videoEl.currentTime = Math.max(0, videoEl.currentTime - 10); resetAutoHide(); };
             if (fwd10Btn) fwd10Btn.onclick = () => { videoEl.currentTime = Math.min(videoEl.duration || 99999, videoEl.currentTime + 10); resetAutoHide(); };
 
-            // 🔴 Progress Update
             videoEl.ontimeupdate = () => {
                 if (isLive || !videoEl.duration) return;
                 const pct = (videoEl.currentTime / videoEl.duration) * 100;
@@ -4811,7 +4789,6 @@ header {
                 };
             }
 
-            // 🔊 Volume Logic
             const updateVolIcon = () => {
                 if (videoEl.muted || videoEl.volume === 0) {
                     volSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
@@ -4838,7 +4815,6 @@ header {
                 };
             }
 
-            // ⚙️ Settings Menu
             if (settingsBtn) {
                 settingsBtn.onclick = (e) => {
                     e.stopPropagation();
@@ -4846,7 +4822,6 @@ header {
                 };
             }
 
-            // Speed
             overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(chip => {
                 chip.onclick = () => {
                     overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(c => c.classList.remove('active'));
@@ -4857,7 +4832,7 @@ header {
                 };
             });
 
-            // ⛶ 100% TRUE IMMERSIVE FULL DISPLAY ENGINE (ZERO HOME-REDIRECT BUG)
+            // ⛶ FULLSCREEN TOGGLE (ANTI-REDIRECT & ZERO FLASH)
             const toggleCinemaFs = (fromBack = false) => {
                 const isFs = wrap.classList.contains('is-cinema-fullscreen');
 
@@ -4871,7 +4846,6 @@ header {
                         wrap.classList.remove('force-rotate-landscape');
                     }
 
-                    // 📱 Android OS Immersive Mode: { navigationUI: 'hide' } Se 3 Buttons Chupao!
                     try {
                         const docEl = document.documentElement;
                         const fsOpts = { navigationUI: 'hide' };
@@ -4911,7 +4885,6 @@ header {
                         }
                     } catch(e){}
 
-                    // 🛑 Flag set karein taake popstate isay normal back samajh kar Home par na le jaye!
                     if (!fromBack && window.history.state && window.history.state.cinemaFs) {
                         window.isExitingFsViaBtn = true;
                         window.history.back();
@@ -4926,16 +4899,7 @@ header {
                 };
             }
 
-            // Mobile System Back Gesture Par Fullscreen Auto-Close Handle Karna
-            document.onfullscreenchange = () => {
-                if (!document.fullscreenElement) {
-                    wrap.classList.remove('is-cinema-fullscreen');
-                    document.body.classList.remove('in-cinema-mode');
-                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
-                }
-            };
-
-            // ⚡ HLS STREAM LOADER & QUALITIES
+            // HLS Stream Load
             if (url.includes('.m3u8')) {
                 if (Hls.isSupported()) {
                     const hls = new Hls({ enableWorker: true });
@@ -4947,7 +4911,6 @@ header {
                         videoEl.play().catch(() => {});
                         updatePlayState();
 
-                        // Dynamic HLS Quality Selector
                         const qContainer = overlay.querySelector('#m3u8QualityChips');
                         if (qContainer && data.levels && data.levels.length > 1) {
                             qContainer.innerHTML = '<span class="m3u8-opt-chip active" data-level="-1">Auto</span>';
