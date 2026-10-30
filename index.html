@@ -1001,7 +1001,7 @@ header {
         .live-channel-bar { padding: 10px 16px; background: #12141c; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
         .scrollable-content { flex: 1; padding-bottom: 30px; }
 
-/* 🌟 2026 CYBER-GLASS HOME CATEGORY SCROLL BAR */
+/* 🍏 2026 DESIGN 1: APPLE visionOS FROSTED GLASS CATEGORY PILLS */
 .home-cat-scroll {
     display: flex;
     align-items: center;
@@ -1020,13 +1020,13 @@ header {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(18, 20, 28, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     padding: 7px 14px;
     border-radius: 20px;
-    color: #8b8f9e;
+    color: #94a3b8 !important;
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.3px;
@@ -1041,9 +1041,9 @@ header {
 }
 .home-cat-pill.active {
     color: #ffffff !important;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)) !important;
-    border-color: var(--primary) !important;
-    box-shadow: 0 0 14px var(--primary-glow);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.08)) !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.25) !important;
 }
 .home-cat-pill svg {
     width: 13px;
@@ -1055,7 +1055,31 @@ header {
     stroke-linejoin: round;
 }
 .home-cat-pill.active svg {
-    stroke: var(--primary) !important;
+    stroke: #ffffff !important;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8)) !important;
+}
+
+/* 📺 SECTION TITLE FROSTED GLASS ICON BOX (LAAL ICON KHATAM) */
+.sec-icon-box {
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+.sec-icon-box svg {
+    width: 14px !important;
+    height: 14px !important;
+    stroke: #ffffff !important;
+    fill: none !important;
+    stroke-width: 2.2 !important;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6)) !important;
 }
 
 /* 🌟 2026 CYBER-GLASS LIVE TV CATEGORY PILLS */
@@ -3125,7 +3149,7 @@ header {
         <!-- 🌟 2026 CYBER-GLASS HOME CATEGORY SCROLL BAR WITH TAMASHA SHIMMER PILLS -->
         <div class="home-cat-scroll" id="homeCategoryBar">
             <div class="home-cat-pill active" onclick="window.filterHomeCategory('all', this)">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor"/></svg>
                 <span>All</span>
             </div>
             <!-- Loading Shimmer Pills (Yellow Circle wali khali jagah khatam) -->
@@ -3145,98 +3169,28 @@ header {
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
-        <!-- 🎬 TAMASHA SKELETON LOADING BOXES (Firebase aate hi khud gayab ho jayenge) -->
-        <div id="homeSections">
-            <!-- 1. Live Channels Skeleton -->
-            <div class="section-header">
-                <div class="skeleton-shimmer" style="width:130px; height:16px; border-radius:6px;"></div>
-                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
-            </div>
-            <div class="movie-scroll" style="gap:16px; padding-bottom:12px;">
-                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
-                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
-                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
-                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
-                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
-                </div>
-                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-                    <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);"></div>
-                    <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px;"></div>
-                </div>
-            </div>
-
-            <!-- 2. Movies Row 1 Skeleton -->
-            <div class="section-header">
-                <div class="skeleton-shimmer" style="width:110px; height:16px; border-radius:6px;"></div>
-                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
-            </div>
-            <div class="movie-scroll" style="gap:12px; padding-bottom:12px;">
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:80%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:70%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-            </div>
-
-            <!-- 3. Movies Row 2 Skeleton -->
-            <div class="section-header">
-                <div class="skeleton-shimmer" style="width:120px; height:16px; border-radius:6px;"></div>
-                <div class="skeleton-shimmer" style="width:55px; height:14px; border-radius:6px;"></div>
-            </div>
-            <div class="movie-scroll" style="gap:12px; padding-bottom:12px;">
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:75%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:80%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-                <div style="width:120px; flex-shrink:0;">
-                    <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                    <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                </div>
-            </div>
-        </div>
+        <!-- ⚡ 100% CLEAN HOME SECTIONS CONTAINER -->
+        <div id="homeSections"></div>
     </div>
     
-    <!-- ⚡ 0ms INSTANT RESTORE (APP KHULTE HI MOVIES DIKHANE KE LIYE) -->
-        <script>
-            (function() {
-                try {
-                    var cachedHtml = localStorage.getItem('mm_instant_home_html');
-                    if (cachedHtml) {
-                        var sec = document.getElementById('homeSections');
-                        if (sec) sec.innerHTML = cachedHtml;
-                    }
-                } catch(e){}
-            })();
-        </script>
+    <!-- ⚡ 0ms GUARANTEED INSTANT DRAW ENGINE (TAMASHA / YOUTUBE) -->
+    <script>
+        (function() {
+            try {
+                // 1. Categories bar foran bhar do
+                var cHtml = localStorage.getItem('mm_cached_categories_html');
+                var cBar = document.getElementById('homeCategoryBar');
+                if (cHtml && cBar) cBar.innerHTML = cHtml;
+
+                // 2. Movies screen par foran daalo (Khali kaala dabba foran khatam!)
+                var mHtml = localStorage.getItem('mm_instant_home_html') || localStorage.getItem('mm_cached_home_html');
+                var hSec = document.getElementById('homeSections');
+                if (mHtml && hSec && mHtml.trim() !== '') {
+                    hSec.innerHTML = mHtml;
+                }
+            } catch(e){}
+        })();
+    </script>
     
     <!-- 2. LIVE TV -->
     <div id="livePage" class="page">
@@ -3809,10 +3763,11 @@ header {
     </div>
     <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE & ENGINE -->
     <script>
-        window.allMovies = [];
-        window.allChannels = [];
-        window.sliders = [];
-        window.categories = [];
+        // 🚀 PERMANENT OFFLINE STORAGE ENGINE (TAMASHA / YOUTUBE ARCHITECTURE)
+        window.allMovies = JSON.parse(localStorage.getItem('mm_cached_movies_list')) || (JSON.parse(localStorage.getItem('mm_fast_cache'))?.movies) || [];
+        window.allChannels = JSON.parse(localStorage.getItem('mm_fast_cache'))?.channels || [];
+        window.sliders = JSON.parse(localStorage.getItem('mm_fast_cache'))?.sliders || [];
+        window.categories = JSON.parse(localStorage.getItem('mm_fast_cache'))?.categories || [];
         window.globalLimit = 10;
 
             // 🏷️ SMART CLEAN TITLE ENGINE (Title se [VIP] aur [LIVE] dono ko screen se hide karega)
@@ -4014,71 +3969,141 @@ header {
         // 🌟 2026 SMART HOME CATEGORY FILTER ENGINE
         window.activeHomeCategory = 'all';
 
+        // 🎬 2026 TAMASHA SKELETON SHIMMER CATEGORY ENGINE (NO EMPTY TEXT - PURE SHIMMER)
         window.filterHomeCategory = (catName, btn) => {
             window.activeHomeCategory = catName;
             document.querySelectorAll('.home-cat-pill').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
 
-            const secHeaders = document.querySelectorAll('#homeSections .section-header');
-            secHeaders.forEach(header => {
-                const titleEl = header.querySelector('.section-title');
-                const titleText = titleEl ? titleEl.innerText.trim().toLowerCase() : '';
-                const scrollBox = header.nextElementSibling;
-                
-                if (catName === 'all') {
-                    header.style.display = 'flex';
-                    if (scrollBox && scrollBox.classList.contains('movie-scroll')) scrollBox.style.display = 'flex';
-                } else {
-                    const isMatch = titleText === catName.toLowerCase();
-                    header.style.display = isMatch ? 'flex' : 'none';
-                    if (scrollBox && scrollBox.classList.contains('movie-scroll')) scrollBox.style.display = isMatch ? 'flex' : 'none';
-                }
+            const sec = document.getElementById('homeSections');
+            if (!sec) return;
+
+            const cleanTarget = String(catName || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+
+            // 1. Agar 'All' select ho toh normal poora home page render karo
+            if (cleanTarget === 'all' || cleanTarget === '') {
+                window.renderHome();
+                return;
+            }
+
+            // 2. Shimmer Cards HTML Generator (Tamasha Style)
+            const getShimmerPlaceholder = (title) => `
+                <div class="section-header">
+                    <div class="section-title">${title}</div>
+                    <div class="skeleton-shimmer" style="width:60px; height:14px; border-radius:6px;"></div>
+                </div>
+                <div class="movie-scroll" style="gap:12px; padding-bottom:12px; display:flex;">
+                    <div style="width:120px; flex-shrink:0;">
+                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                        <div class="skeleton-shimmer" style="width:80%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                    </div>
+                    <div style="width:120px; flex-shrink:0;">
+                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                        <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                    </div>
+                    <div style="width:120px; flex-shrink:0;">
+                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                        <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                    </div>
+                    <div style="width:120px; flex-shrink:0;">
+                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
+                        <div class="skeleton-shimmer" style="width:70%; height:9px; border-radius:4px; margin-top:6px;"></div>
+                    </div>
+                </div>`;
+
+            // 3. Specific Category Filter
+            const allM = (window.allMovies && window.allMovies.length > 0) 
+                ? window.allMovies 
+                : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+
+            const filteredMovies = allM.filter(m => {
+                if (!m) return false;
+                const mCat = String(m.category || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                return (mCat === cleanTarget) || mCat.includes(cleanTarget) || cleanTarget.includes(mCat);
             });
+
+            const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
+
+            // Agar movies mil jayein toh foran dikhao, warna khali text ke bajaye Shimmer Cards dikhao!
+            if (cleanList.length > 0) {
+                sec.innerHTML = `
+                    <div class="section-header">
+                        <div class="section-title">${catName}</div>
+                        <div class="view-all-btn" onclick="window.openViewAll('${catName.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                    </div>
+                    <div class="movie-scroll" style="display:flex;">
+                        ${cleanList.map(m => window.renderMovieCard(m)).join('')}
+                    </div>`;
+            } else {
+                // 🌟 Asli Tamasha Shimmer (Jab tak Firebase load karega, chamakta hua card chalega!)
+                sec.innerHTML = getShimmerPlaceholder(catName);
+            }
         };
 
+        // 🍏 2026 DESIGN 1: SMART VECTOR CATEGORY BAR ENGINE
         window.renderHomeCategoryBar = (categoriesList) => {
             const bar = document.getElementById('homeCategoryBar');
             if (!bar) return;
+
+            const getCatIconSvg = (name) => {
+                const n = (name || '').toLowerCase();
+                if (n.includes('trend')) {
+                    return `<svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`;
+                } else if (n.includes('sport') || n.includes('cricket')) {
+                    return `<svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34M7 4h10v6a5 5 0 0 1-10 0V4z"/></svg>`;
+                } else if (n.includes('anim')) {
+                    return `<svg viewBox="0 0 24 24"><polygon points="12 2 15 8 21 9 17 14 18 20 12 17 6 20 7 14 3 9 9 8 12 2"/></svg>`;
+                } else {
+                    return `<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`;
+                }
+            };
+
             let html = `
                 <div class="home-cat-pill ${window.activeHomeCategory === 'all' ? 'active' : ''}" onclick="window.filterHomeCategory('all', this)">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor"/></svg>
                     <span>All</span>
                 </div>`;
+
             categoriesList.forEach(cName => {
                 const isActive = (window.activeHomeCategory || '').toLowerCase() === cName.toLowerCase();
                 html += `
                     <div class="home-cat-pill ${isActive ? 'active' : ''}" onclick="window.filterHomeCategory('${cName.replace(/'/g, "\\'")}', this)">
-                        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        ${getCatIconSvg(cName)}
                         <span>${cName}</span>
                     </div>`;
             });
             bar.innerHTML = html;
+            try {
+                localStorage.setItem('mm_cached_categories_html', html);
+                localStorage.setItem('mm_cached_cat_names', JSON.stringify(categoriesList));
+            } catch(e){}
         };
-        window.renderHome = () => {
-            if (!window.allMovies || window.allMovies.length === 0) return;
 
+        // 🚀 BULLETPROOF HOME RENDER (CHANNELS & MOVIES BILKUL ALAG ALAG BOX MEIN)
+        window.renderHome = () => {
             let html = '';
             let catMap = {};
             
-            // 📺 1. HOME PAGE PAR POPULAR LIVE CHANNELS RAIL
+            // 📺 1. HOME PAGE LIVE CHANNELS RAIL (ALAG WRAPPER MEIN)
             if (window.allChannels && window.allChannels.length > 0) {
                 html += `
-                    <div class="section-header">
-                        <div class="section-title" style="display:flex; align-items:center; gap:8px;">
-    <svg viewBox="0 0 24 24" style="width:20px; height:20px; stroke:var(--primary); fill:none; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 7px var(--primary-glow)); flex-shrink:0;">
-        <polyline points="8 2 12 7 16 2"/>
-        <rect x="3" y="7" width="18" height="13" rx="2.5"/>
-        <circle cx="12" cy="13.5" r="2" fill="var(--primary)"/>
-    </svg>
-    <span>Live TV Channels</span>
-</div>
-                        <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
-                    </div>
-                    <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
-                        ${window.allChannels.slice(0, 10).map(c => window.renderChannelItem(c)).join('')}
+                    <div id="homeLiveChannelsSection" style="display:block;">
+                        <div class="section-header">
+                            <div class="section-title" style="display:flex; align-items:center; gap:8px;">
+                                <div class="sec-icon-box">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/><circle cx="12" cy="14.5" r="1.5" fill="currentColor"/></svg>
+                                </div>
+                                <span>Live TV Channels</span>
+                            </div>
+                            <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                        </div>
+                        <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
+                            ${window.allChannels.slice(0, 10).map(c => window.renderChannelItem(c)).join('')}
+                        </div>
                     </div>`;
             }
 
+            // 🎬 2. MOVIES & CATEGORIES
             if (window.categories && window.categories.length > 0) {
                 window.categories.forEach(c => {
                     const cName = (typeof c === 'object' ? c.name : c) || '';
@@ -4086,45 +4111,74 @@ header {
                 });
             }
 
-            window.allMovies.forEach(m => {
-                if (!m) return;
-                const cName = (m.category || 'Trending Movies').trim();
-                const cKey = cName.toLowerCase();
-                if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
-                catMap[cKey].movies.push(m);
-            });
+            if (window.allMovies && window.allMovies.length > 0) {
+                window.allMovies.forEach(m => {
+                    if (!m) return;
+                    const cName = (m.category || 'Trending Movies').trim();
+                    const cKey = cName.toLowerCase();
+                    if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
+                    catMap[cKey].movies.push(m);
+                });
+            }
 
+            // Har Movie Category ko alag data-cat container mein band karo
             let renderedAny = false;
             Object.values(catMap).forEach(cat => {
                 if (cat.movies && cat.movies.length > 0) {
                     const lim = parseInt(cat.limit) || window.globalLimit;
                     const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
                     html += `
-                        <div class="section-header">
-                            <div class="section-title">${cat.name}</div>
-                            <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
-                        </div>
-                        <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>`;
+                        <div class="home-movie-section" data-cat="${(cat.name || '').replace(/"/g, '&quot;')}" style="display:block;">
+                            <div class="section-header">
+                                <div class="section-title">${cat.name}</div>
+                                <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                            </div>
+                            <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>
+                        </div>`;
                     renderedAny = true;
                 }
             });
 
-            if (!renderedAny) {
-                html = `<div class="section-header"><div class="section-title">Trending Movies</div></div><div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>`;
+            if (!renderedAny && window.allMovies && window.allMovies.length > 0) {
+                html += `
+                    <div class="home-movie-section" data-cat="Trending" style="display:block;">
+                        <div class="section-header"><div class="section-title">Trending Movies</div></div>
+                        <div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>
+                    </div>`;
             }
 
             const sec = document.getElementById('homeSections');
             if (sec && html) {
                 sec.innerHTML = html;
-                try { localStorage.setItem('mm_cached_home_html', html); } catch(e){}
-                // 🌟 Saari Categories Ko Upar Patti Mein Dikhana
-            const currentCatNames = Object.values(catMap).filter(cat => cat.movies && cat.movies.length > 0).map(cat => cat.name);
-            window.renderHomeCategoryBar(currentCatNames);
+                try {
+                    localStorage.setItem('mm_cached_home_html', html);
+                    localStorage.setItem('mm_instant_home_html', html);
+                } catch(e){}
+
+                const currentCatNames = Object.values(catMap).filter(cat => cat.movies && cat.movies.length > 0).map(cat => cat.name);
+                if (currentCatNames.length > 0 && typeof window.renderHomeCategoryBar === 'function') {
+                    window.renderHomeCategoryBar(currentCatNames);
+                }
+
+                // Agar pehle se koi category chuni hui thi toh wapas filter apply karo
+                if (window.activeHomeCategory && window.activeHomeCategory !== 'all') {
+                    const activePill = document.querySelector(`.home-cat-pill[onclick*="${window.activeHomeCategory}"]`);
+                    window.filterHomeCategory(window.activeHomeCategory, activePill);
+                }
             }
         };
 
-        // Foran Home Screen Ko Render Karo
-        window.renderHome();
+        // 🚀 Force Render From Memory (Bina Firebase Ke Intezar Ke Foran Draw Karo)
+        if (typeof window.renderHome === 'function') {
+            window.renderHome();
+        }
+        
+        // Agar pehli dafa na hua ho toh 50ms ke andar dubara push karo
+        setTimeout(function() {
+            if (typeof window.renderHome === 'function') {
+                window.renderHome();
+            }
+        }, 50);
 
         // 🧠 2026 SMART AI AUTO-DETECTION LIVE CHANNELS ENGINE
         window.currentLiveCategory = 'all';
@@ -4263,26 +4317,54 @@ header {
             window.updateProfileFavCounter();
         };
 
-        // 🚀 SUPER-FAST 200kbps DUAL-ENGINE (0.1s INSTANT LOAD)
+        // 🚀 0.01s COMPLETE MEMORY BOOT (CATEGORIES + MOVIES + CHANNELS)
         try {
+            // ⚡ 1. Categories Bar Ko Memory Se Foran 0ms Par Restore Karo (Shimmer Dabbe Khatam!)
+            const fastCats = localStorage.getItem('mm_cached_categories_html');
+            const catBar = document.getElementById('homeCategoryBar');
+            if (fastCats && catBar && fastCats.trim() !== '') {
+                catBar.innerHTML = fastCats;
+            }
+
+            // ⚡ 2. Movies & Channels Screen Par Foran Phenko
+            const fastHtml = localStorage.getItem('mm_instant_home_html') || localStorage.getItem('mm_cached_home_html');
+            const homeContainer = document.getElementById('homeSections');
+            if (fastHtml && homeContainer && fastHtml.trim() !== '') {
+                homeContainer.innerHTML = fastHtml;
+            }
+
+            // ⚡ 3. Memory Se Saara Data Load Karo
             const localCache = JSON.parse(localStorage.getItem('mm_fast_cache'));
+            const cachedMovies = JSON.parse(localStorage.getItem('mm_cached_movies_list'));
+            const cachedCats = JSON.parse(localStorage.getItem('mm_cached_cat_names'));
+
+            if (cachedMovies && cachedMovies.length > 0) {
+                window.allMovies = cachedMovies;
+            } else if (localCache && localCache.movies) {
+                window.allMovies = localCache.movies;
+            }
+
             if (localCache) {
-                window.allMovies = localCache.movies || [];
                 window.allChannels = localCache.channels || [];
                 window.sliders = localCache.sliders || [];
                 window.categories = localCache.categories || [];
                 window.globalLimit = localCache.limit || 10;
-                
-                // ⚡ Agar cache mein data hai toh bina 1 second rukaawat ke foran render karo
-                if (window.allMovies.length > 0) {
-                    window.renderHome();
-                }
-                if (window.allChannels.length > 0) {
-                    window.initLiveChannels();
-                }
-                if (window.sliders.length > 0 && typeof initSlider === 'function') {
-                    initSlider(true);
-                }
+            }
+
+            // ⚡ 4. Categories Ko Memory Se Foran Draw Karo
+            if (cachedCats && cachedCats.length > 0 && typeof window.renderHomeCategoryBar === 'function') {
+                window.renderHomeCategoryBar(cachedCats);
+            }
+
+            // ⚡ 5. Movies, Channels Aur Slider Ko Foran Active Karo
+            if (window.allMovies && window.allMovies.length > 0) {
+                window.renderHome();
+            }
+            if (window.allChannels && window.allChannels.length > 0) {
+                window.initLiveChannels();
+            }
+            if (window.sliders && window.sliders.length > 0 && typeof initSlider === 'function') {
+                initSlider(true);
             }
         } catch(e){}
     </script>
@@ -4420,17 +4502,17 @@ header {
             }
         };
 
-        // ⚡ PERMANENT FAST CACHE (KABHI DATA DELETE NAHI HOGA)
+        // ⚡ PERMANENT OFFLINE MEMORY LOCK (MOVIES HAMESHA PHONE MEIN SAVE RAHENGI)
         function saveFastCache() {
             try {
                 const existing = JSON.parse(localStorage.getItem('mm_fast_cache')) || {};
                 
-                // Agar movies abhi load nahi huin, toh purani save movies ko delete mat karo
                 const moviesToSave = (window.allMovies && window.allMovies.length > 0) ? window.allMovies : (existing.movies || []);
                 const channelsToSave = (window.allChannels && window.allChannels.length > 0) ? window.allChannels : (existing.channels || []);
                 const slidersToSave = (window.sliders && window.sliders.length > 0) ? window.sliders : (existing.sliders || []);
                 const categoriesToSave = (window.categories && window.categories.length > 0) ? window.categories : (existing.categories || []);
 
+                // 💾 1. Fast Cache Object Lock
                 localStorage.setItem('mm_fast_cache', JSON.stringify({
                     movies: moviesToSave,
                     channels: channelsToSave,
@@ -4438,6 +4520,11 @@ header {
                     categories: categoriesToSave,
                     limit: window.globalLimit || 10
                 }));
+
+                // 💾 2. Direct Movies List Lock
+                if (moviesToSave.length > 0) {
+                    localStorage.setItem('mm_cached_movies_list', JSON.stringify(moviesToSave));
+                }
             } catch(e){}
         }
 
@@ -4494,29 +4581,32 @@ header {
             }
         } catch(e){}
 
-        // ⚡ ULTRA-FAST SLOW-NET FIREBASE SYNC (200kbps Optimized)
-        onValue(ref(db, 'movies'), (snap) => {
-            const data = snap.val();
+        // ⚡ LIGHTNING-FAST 200ms PARALLEL REST ENGINE (TAMASHA STYLE)
+        const applyFreshMovies = (data) => {
             if (!data) return;
-            
             window.allMovies = Array.isArray(data) ? data : Object.values(data);
-            
-            // 💾 Phone memory mein instant save
             try {
                 localStorage.setItem('mm_cached_movies_list', JSON.stringify(window.allMovies));
             } catch(e){}
-
             saveFastCache();
-            
-            // 🎬 Smooth Update: Screen ko freeze kiye baghair background se refresh
             window.renderHome();
             window.renderFavoritesPage();
-
             if (window.sliders && window.sliders.length > 0 && typeof initSlider === 'function') {
                 initSlider(true);
             }
+        };
+
+        // 🚀 1. Fast Direct HTTP Fetch (0.2 Second Mein Data Laane Ke Liye)
+        fetch('https://movies-master-59452-default-rtdb.firebaseio.com/movies.json')
+            .then(res => res.json())
+            .then(data => { applyFreshMovies(data); })
+            .catch(() => {});
+
+        // 🔥 2. Live Realtime Listener (Background Sync)
+        onValue(ref(db, 'movies'), (snap) => {
+            applyFreshMovies(snap.val());
         }, (error) => {
-            console.warn('Firebase slow net retry active...');
+            console.warn('Firebase slow net retry...');
         });
 
         window.handleNativeSystemShare = async (url, title) => {
@@ -5043,7 +5133,7 @@ header {
 
             // Agar movie VIP hai aur user ne khareedi nahi hai to lock screen kholo
             if (window.checkItemVIP(m) && !window.isUserVIPActive()) {
-                document.getElementById('vipLockedContentName').innerText = '✨ Unlock All VIP Movies, Anime & Live Channels';
+                document.getElementById('vipLockedContentName').innerText = 'Unlock All VIP Movies, Anime & Live Channels';
                 document.getElementById('vipLockModal').style.display = 'flex';
                 return; // Video play nahi hogi
             }
@@ -5183,54 +5273,63 @@ header {
             }, 200);
         };
 
-        let touchStartX = 0;
-        let touchEndX = 0;
+        // 🚀 REAL-TIME BUTTER-SMOOTH TOUCH GESTURE ENGINE (1:1 FINGER DRAG)
+        let isSliderTouching = false;
+        let sliderDragStartX = 0;
+        let sliderDragStartY = 0;
+        let sliderCurrentDiffX = 0;
+        window.isSliderDraggingAction = false;
 
         function initSlider(force = false) {
             const track = document.getElementById('sliderTrack');
             const sliderArea = document.getElementById('sliderClickArea');
+            // 🚀 Instant Slider Unblock (Posters bina rukaawat ke foran load honge)
             if (!track || !window.sliders || !window.sliders.length) return;
 
-            // ⏳ Jab tak neeche movies load na hon, slider par bhi shimmer chalne do (Pehle akele load nahi hoga)
-            if (!force && (!window.allMovies || window.allMovies.length === 0)) {
-                return;
-            }
-
-            // 🧠 FAST CACHE CHECK: Agar network slow ho toh phone cache se check karega
-            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
-
-            // 👑 User VIP Pass Active Status Check
+            // 🧠 0ms Instant VIP Slider Memory (Pehle hi frame se VIP badge lock rahega)
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || (JSON.parse(localStorage.getItem('mm_fast_cache'))?.movies) || []);
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            let knownVipSliders = JSON.parse(localStorage.getItem('mm_known_vip_sliders')) || {};
 
             track.innerHTML = window.sliders.map((s, idx) => {
                 if (!s) return '';
                 const sUrl = String(s.url || '').trim();
-                const sTitle = String(s.title || s.name || '').trim().toLowerCase();
+                const sRawTitle = String(s.title || s.name || '').trim().toLowerCase();
+                const sCleanTitle = sRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
                 const sImg = String(s.img || '').trim();
 
-                // 🔍 4-Way Match (ID, URL, Title, Poster Image)
+                // 🔍 Smart Fuzzy Match (Even with [VIP] or - Dubbed in title)
                 const matchedMovie = cachedMovies.find(m => {
                     if (!m) return false;
                     const mId = String(m.id || '');
                     const mUrl = String(m.url || '').trim();
-                    const mTitle = String(m.title || m.name || '').trim().toLowerCase();
+                    const mRawTitle = String(m.title || m.name || '').trim().toLowerCase();
+                    const mCleanTitle = mRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
                     const mThumb = String(m.thumb || '').trim();
+                    
                     return (sUrl && (mId === sUrl || mUrl === sUrl)) || 
-                           (sTitle && mTitle && sTitle === mTitle) || 
+                           (sCleanTitle && mCleanTitle && (sCleanTitle === mCleanTitle || mCleanTitle.includes(sCleanTitle) || sCleanTitle.includes(mCleanTitle))) || 
                            (sImg && mThumb && sImg === mThumb);
                 });
 
+                // 👑 VIP Check: Memory Cache + URL + Title
                 let isVip = false;
                 if (matchedMovie) {
-                    const mTitle = (matchedMovie.title || matchedMovie.name || '').toLowerCase();
-                    const mCat = (matchedMovie.category || '').toLowerCase();
+                    const mTitle = String(matchedMovie.title || matchedMovie.name || '').toLowerCase();
+                    const mCat = String(matchedMovie.category || '').toLowerCase();
                     isVip = matchedMovie.isVipSeries || mTitle.includes('vip') || mCat.includes('vip');
                 }
                 if (!isVip) {
-                    isVip = s.isVip === true || sTitle.includes('vip') || sUrl.includes('vip');
+                    isVip = s.isVip === true || sRawTitle.includes('vip') || sUrl.includes('vip') || !!knownVipSliders[sUrl] || !!knownVipSliders[sImg];
                 }
 
-                // 👑 VIP Active hone par Slider se bhi VIP Badge gayab ho jayega!
+                // Agar VIP confirm ho toh phone memory mein lock kar do taake agli dafa 0ms par badge aaye
+                if (isVip) {
+                    s.isVip = true;
+                    if (sUrl) knownVipSliders[sUrl] = true;
+                    if (sImg) knownVipSliders[sImg] = true;
+                }
+
                 const showSliderVip = !userHasVip && isVip;
 
                 return `
@@ -5246,35 +5345,81 @@ header {
                     </div>
                 `;
             }).join('');
-            
+
+            // Memory mein save kar do
+            try { localStorage.setItem('mm_known_vip_sliders', JSON.stringify(knownVipSliders)); } catch(e){}
+
+            // 👆 UNGLI KE SATH SATH REAL-TIME CHALNE WALA TOUCH LISTENER
             if (sliderArea) {
-                sliderArea.ontouchstart = (e) => { touchStartX = e.changedTouches[0].screenX; };
-                sliderArea.ontouchend = (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipeGesture(); };
+                sliderArea.ontouchstart = (e) => {
+                    if (!window.sliders || window.sliders.length <= 1) return;
+                    if (window.si) clearInterval(window.si); // Ungli lagate hi auto-slide pause
+                    isSliderTouching = true;
+                    window.isSliderDraggingAction = false;
+                    sliderDragStartX = e.touches[0].clientX;
+                    sliderDragStartY = e.touches[0].clientY;
+                    sliderCurrentDiffX = 0;
+                    track.style.transition = 'none'; // Real-time follow ke liye transition zero
+                };
+
+                sliderArea.ontouchmove = (e) => {
+                    if (!isSliderTouching) return;
+                    const curX = e.touches[0].clientX;
+                    const curY = e.touches[0].clientY;
+                    const diffX = curX - sliderDragStartX;
+                    const diffY = curY - sliderDragStartY;
+
+                    // Agar horizontal swipe ho raha ho toh page scroll hone se bachao
+                    if (Math.abs(diffX) > Math.abs(diffY)) {
+                        sliderCurrentDiffX = diffX;
+                        if (Math.abs(diffX) > 10) {
+                            window.isSliderDraggingAction = true;
+                        }
+                        const sWidth = sliderArea.clientWidth || window.innerWidth;
+                        const basePx = (sWidth * 0.15) - (activeSliderIndex * (sWidth * 0.70));
+                        track.style.transform = `translateX(${basePx + diffX}px)`;
+                    }
+                };
+
+                const endDrag = () => {
+                    if (!isSliderTouching) return;
+                    isSliderTouching = false;
+                    track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1)'; // Smooth spring snap
+
+                    // 50px se zyada kheenchne par agla/pichla slide
+                    if (sliderCurrentDiffX < -50) {
+                        slideManual(1);
+                    } else if (sliderCurrentDiffX > 50) {
+                        slideManual(-1);
+                    } else {
+                        updateSliderPosition(); // Wapas usi slide par smooth snap
+                        startAutoSlider();
+                    }
+
+                    setTimeout(() => { window.isSliderDraggingAction = false; }, 100);
+                };
+
+                sliderArea.ontouchend = endDrag;
+                sliderArea.ontouchcancel = endDrag;
             }
 
             activeSliderIndex = 0; 
             updateSliderPosition();
             startAutoSlider();
 
-            // ⚡ Agar neeche movies load nahi huin toh foran render karein
             const sec = document.getElementById('homeSections');
             if (sec && !sec.innerHTML.trim() && typeof window.renderHome === 'function') {
                 window.renderHome();
             }
         }
 
-        function handleSwipeGesture() {
-            if (touchEndX < touchStartX - 40) slideManual(1);
-            if (touchEndX > touchStartX + 40) slideManual(-1);
-        }
-
         function updateSliderPosition() {
             const track = document.getElementById('sliderTrack');
             if (!track || !window.sliders || !window.sliders.length) return;
+            track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
             track.style.transform = `translateX(calc(15% - ${activeSliderIndex * 70}%))`;
             document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active-slide', i === activeSliderIndex));
             
-            // 🌟 Ambient Blurred Glow Sync
             const backdrop = document.getElementById('sliderBackdrop');
             if (backdrop && window.sliders[activeSliderIndex]) {
                 backdrop.style.backgroundImage = `url('${window.sliders[activeSliderIndex].img}')`;
@@ -5291,7 +5436,7 @@ header {
         function startAutoSlider() {
             if (window.si) clearInterval(window.si);
             window.si = setInterval(() => {
-                if (!window.sliders || !window.sliders.length) return;
+                if (!window.sliders || !window.sliders.length || isSliderTouching) return;
                 activeSliderIndex = (activeSliderIndex + 1) % window.sliders.length;
                 updateSliderPosition();
             }, 4000);
@@ -6135,17 +6280,19 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             <h2 class="vip-modal-title">VIP Access Locked</h2>
             <p class="vip-modal-sub" id="vipLockedContentName">Unlock All Live Sports, 4K Movies & Anime</p>
 
-            <!-- 💳 NETFLIX STYLE PLAN CARDS -->
+            <!-- 💳 MATCHING CLEAN PLAN CARDS (WHITE BORDER KHATAM) -->
             <div style="display:flex; gap:10px; width:100%; margin-bottom:12px;">
+                <!-- Weekly Pass -->
                 <div style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center;">
                     <span style="font-size:9.5px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Weekly Pass</span>
                     <span style="font-size:15px; font-weight:900; color:#ffffff; margin:2px 0;">Rs. 50</span>
                     <span style="font-size:8px; font-weight:800; background:rgba(255,255,255,0.08); color:#cbd5e1; padding:2px 6px; border-radius:8px;">7 Days</span>
                 </div>
-                <div style="flex:1; background:rgba(255,255,255,0.12); border:1px solid #ffffff; border-radius:16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center; box-shadow:0 0 16px rgba(255,255,255,0.2);">
+                <!-- Monthly VIP (Ab bilkul weekly box jaisa matching dark border hoga) -->
+                <div style="flex:1; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:10px 8px; display:flex; flex-direction:column; align-items:center;">
                     <span style="font-size:9.5px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Monthly VIP</span>
                     <span style="font-size:15px; font-weight:900; color:#ffffff; margin:2px 0;">Rs. 150</span>
-                    <span style="font-size:8px; font-weight:900; background:#ffffff; color:#000000; padding:2px 6px; border-radius:8px;">30 Days Pass</span>
+                    <span style="font-size:8px; font-weight:800; background:rgba(255,255,255,0.08); color:#cbd5e1; padding:2px 6px; border-radius:8px;">30 Days Pass</span>
                 </div>
             </div>
 
