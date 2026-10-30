@@ -1391,20 +1391,38 @@ header {
             align-items: center;
             cursor: pointer;
         }
+        /* 🔴 YOUTUBE PROGRESS TRACK WITH WHITE BUFFER BAR */
         .m3u8-progress-bg {
             position: absolute;
             width: 100%;
             height: 3.5px;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 4px;
             overflow: hidden;
         }
+        /* ⚪ YouTube White / Grey Buffer Bar (Jo aage aage chalti hai) */
+        .m3u8-progress-buffer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 4px;
+            transition: width 0.2s ease;
+            z-index: 1;
+        }
+        /* 🔴 YouTube Active Red Bar */
         .m3u8-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
             height: 100%;
             width: 0%;
             background: #e50914;
             border-radius: 4px;
             box-shadow: 0 0 8px rgba(229, 9, 20, 0.85);
+            z-index: 2;
         }
         .m3u8-progress-thumb {
             position: absolute;
@@ -4753,6 +4771,7 @@ header {
                 <div class="m3u8-bottom-controls" onclick="event.stopPropagation()">
                     <div class="m3u8-progress-container" id="m3u8ProgressTrack" style="${isLive ? 'display:none;' : ''}">
                         <div class="m3u8-progress-bg">
+                            <div class="m3u8-progress-buffer" id="m3u8ProgressBuffer"></div>
                             <div class="m3u8-progress-fill" id="m3u8ProgressFill"></div>
                         </div>
                         <div class="m3u8-progress-thumb" id="m3u8ProgressThumb"></div>
@@ -4786,6 +4805,7 @@ header {
             const playSvg = overlay.querySelector('#m3u8PlaySvg');
             const centerPlayBtn = overlay.querySelector('#m3u8CenterPlayBtn');
             const progressFill = overlay.querySelector('#m3u8ProgressFill');
+            const progressBuffer = overlay.querySelector('#m3u8ProgressBuffer');
             const progressThumb = overlay.querySelector('#m3u8ProgressThumb');
             const progressTrack = overlay.querySelector('#m3u8ProgressTrack');
             const timeTxt = overlay.querySelector('#m3u8TimeTxt');
