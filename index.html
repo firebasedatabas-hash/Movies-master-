@@ -1236,15 +1236,15 @@ header {
             justify-content: center;
         }
 
-        /* ⛶ 100% EDGE-TO-EDGE CINEMA FULLSCREEN (ZERO WHITE FLASH) */
+        /* ⛶ 100% TRUE CINEMA FULLSCREEN (CHROME + APPCREATOR24 PERFECT FIT) */
         .cyber-player-wrap.is-cinema-fullscreen {
             position: fixed !important;
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
             bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
+            width: 100% !important;
+            height: 100% !important;
             z-index: 99999999999 !important;
             background: #000000 !important;
             border: none !important;
@@ -1257,23 +1257,14 @@ header {
         .cyber-player-wrap.is-cinema-fullscreen video {
             width: 100% !important;
             height: 100% !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
             object-fit: contain !important;
             background: #000000 !important;
         }
 
-        /* 🔄 Auto-Rotate 90° (Jab mobile seedha pakda ho) */
-        .cyber-player-wrap.is-cinema-fullscreen.force-rotate-landscape {
-            top: 50% !important;
-            left: 50% !important;
-            width: 100vh !important;
-            height: 100vw !important;
-            transform: translate(-50%, -50%) rotate(90deg) !important;
-            transform-origin: center center !important;
-        }
-
-        /* 🚫 Safaid Screen Ka Khatma (All Layers Force Black) */
+        /* Chrome aur Android Black Backdrop */
         ::backdrop, :fullscreen, :-webkit-full-screen {
-            background-color: #000000 !important;
             background: #000000 !important;
         }
 
@@ -4389,29 +4380,23 @@ header {
         }, { passive: true });
 
         window.history.replaceState({ page: 'homePage' }, '');
-        window.isExitingFsViaBtn = false; // 👈 Home jane se rokne wala flag
-
         window.addEventListener('popstate', () => {
-            // 🛑 Agar user ne player ka ⛶ button dabaya tha, toh Home hargiz na jao!
-            if (window.isExitingFsViaBtn) {
-                window.isExitingFsViaBtn = false;
-                return;
-            }
-
-            // ⛶ 1. Agar mobile ka apna hardware back button (◁) dabaya ho:
-            const fsWrap = document.querySelector('.cyber-player-wrap.is-cinema-fullscreen');
-            if (fsWrap) {
-                fsWrap.classList.remove('is-cinema-fullscreen');
-                fsWrap.classList.remove('force-rotate-landscape');
-                document.body.classList.remove('in-cinema-mode');
+            // ⛶ Agar Native Fullscreen chal raha ho toh 1-Tap exit
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
                 try {
                     if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
                 } catch(e){}
+                return;
+            }
+            const fsWrap = document.querySelector('.cyber-player-wrap.is-cinema-fullscreen');
+            if (fsWrap) {
+                fsWrap.classList.remove('is-cinema-fullscreen');
+                document.body.classList.remove('in-cinema-mode');
                 try {
                     if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
                 } catch(e){}
-                return; // 👈 Page peeche nahi jayega, sirf fullscreen band hoga!
+                return;
             }
 
             const videoPage = document.getElementById('videoPage');
@@ -4869,12 +4854,65 @@ header {
                 }
             };
 
+            // 🔴 2026 YOUTUBE REAL-TIME TOUCH & DRAG SEEKER ENGINE
             if (progressTrack) {
-                progressTrack.onclick = (e) => {
+                let isSeekingDrag = false;
+
+                const updateSeekUI = (clientX) => {
                     if (isLive || !videoEl.duration) return;
                     const rect = progressTrack.getBoundingClientRect();
-                    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-                    videoEl.currentTime = pos * videoEl.duration;
+                    const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+                    const targetSec = pos * videoEl.duration;
+
+                    // Real-time Red Line aur Gola ungli ke sath sath chale
+                    if (progressFill) progressFill.style.width = (pos * 100) + '%';
+                    if (progressThumb) progressThumb.style.left = (pos * 100) + '%';
+
+                    // Time text foran update ho
+                    const curM = Math.floor(targetSec / 60);
+                    const curS = Math.floor(targetSec % 60);
+                    const durM = Math.floor(videoEl.duration / 60);
+                    const durS = Math.floor(videoEl.duration % 60);
+                    if (timeTxt) {
+                        timeTxt.innerText = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')} / ${String(durM).padStart(2,'0')}:${String(durS).padStart(2,'0')}`;
+                    }
+                    return targetSec;
+                };
+
+                // Touch Start
+                progressTrack.addEventListener('touchstart', (e) => {
+                    if (isLive || !videoEl.duration) return;
+                    isSeekingDrag = true;
+                    if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
+                    updateSeekUI(e.touches[0].clientX);
+                }, { passive: true });
+
+                // Touch Move (Ungli ke sath sath patti aage peechay ho)
+                window.addEventListener('touchmove', (e) => {
+                    if (!isSeekingDrag || isLive || !videoEl.duration) return;
+                    updateSeekUI(e.touches[0].clientX);
+                }, { passive: true });
+
+                // Touch End (Jahan ungli chhodi wahan se video play ho)
+                const endSeekDrag = (clientX) => {
+                    if (!isSeekingDrag) return;
+                    isSeekingDrag = false;
+                    const finalSec = updateSeekUI(clientX);
+                    if (!isNaN(finalSec)) {
+                        videoEl.currentTime = finalSec;
+                    }
+                    resetAutoHide();
+                };
+
+                progressTrack.addEventListener('touchend', (e) => {
+                    endSeekDrag(e.changedTouches[0].clientX);
+                });
+
+                // Desktop Click
+                progressTrack.onclick = (e) => {
+                    if (isLive || !videoEl.duration) return;
+                    const finalSec = updateSeekUI(e.clientX);
+                    if (!isNaN(finalSec)) videoEl.currentTime = finalSec;
                     resetAutoHide();
                 };
             }
@@ -4922,65 +4960,58 @@ header {
                 };
             });
 
-            // ⛶ FULLSCREEN TOGGLE (ANTI-REDIRECT & ZERO FLASH)
-            const toggleCinemaFs = (fromBack = false) => {
-                const isFs = wrap.classList.contains('is-cinema-fullscreen');
+            // ⛶ 1-TAP INSTANT CINEMA FULLSCREEN TOGGLE (SINGLE BACK EXIT)
+            const exitCinemaMode = () => {
+                wrap.classList.remove('is-cinema-fullscreen');
+                document.body.classList.remove('in-cinema-mode');
+                try {
+                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
+                } catch(e){}
+            };
+
+            const toggleCinemaFs = async () => {
+                const isFs = wrap.classList.contains('is-cinema-fullscreen') || !!document.fullscreenElement || !!document.webkitFullscreenElement;
 
                 if (!isFs) {
                     wrap.classList.add('is-cinema-fullscreen');
                     document.body.classList.add('in-cinema-mode');
 
-                    if (window.innerWidth < window.innerHeight) {
-                        wrap.classList.add('force-rotate-landscape');
-                    } else {
-                        wrap.classList.remove('force-rotate-landscape');
-                    }
-
                     try {
-                        const docEl = document.documentElement;
-                        const fsOpts = { navigationUI: 'hide' };
-                        if (docEl.requestFullscreen) {
-                            docEl.requestFullscreen(fsOpts).catch(() => {
-                                docEl.requestFullscreen().catch(() => {});
-                            });
-                        } else if (docEl.webkitRequestFullscreen) {
-                            docEl.webkitRequestFullscreen(fsOpts);
+                        const targetEl = wrap;
+                        if (targetEl.requestFullscreen) {
+                            await targetEl.requestFullscreen({ navigationUI: 'hide' });
+                        } else if (targetEl.webkitRequestFullscreen) {
+                            await targetEl.webkitRequestFullscreen();
+                        } else if (videoEl.webkitEnterFullscreen) {
+                            videoEl.webkitEnterFullscreen();
                         }
                     } catch(e){}
 
                     try {
                         if (screen.orientation && screen.orientation.lock) {
-                            screen.orientation.lock('landscape').catch(() => {});
+                            await screen.orientation.lock('landscape').catch(() => {});
                         }
                     } catch(e){}
-
-                    try { window.history.pushState({ cinemaFs: true }, ''); } catch(e){}
-
                 } else {
-                    wrap.classList.remove('is-cinema-fullscreen');
-                    wrap.classList.remove('force-rotate-landscape');
-                    document.body.classList.remove('in-cinema-mode');
-
                     try {
-                        if (document.exitFullscreen) {
-                            document.exitFullscreen().catch(() => {});
-                        } else if (document.webkitExitFullscreen) {
-                            document.webkitExitFullscreen();
-                        }
+                        if (document.exitFullscreen) await document.exitFullscreen();
+                        else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
                     } catch(e){}
-
-                    try {
-                        if (screen.orientation && screen.orientation.unlock) {
-                            screen.orientation.unlock();
-                        }
-                    } catch(e){}
-
-                    if (!fromBack && window.history.state && window.history.state.cinemaFs) {
-                        window.isExitingFsViaBtn = true;
-                        window.history.back();
-                    }
+                    exitCinemaMode();
                 }
             };
+
+            // 📱 Mobile Ka Back Button Ya System Exit: 1-Tap Mein Foran Normal Karega
+            document.addEventListener('fullscreenchange', () => {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    exitCinemaMode();
+                }
+            });
+            document.addEventListener('webkitfullscreenchange', () => {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    exitCinemaMode();
+                }
+            });
 
             if (fsBtn) {
                 fsBtn.onclick = () => {
@@ -4992,7 +5023,16 @@ header {
             // HLS Stream Load
             if (url.includes('.m3u8')) {
                 if (Hls.isSupported()) {
-                    const hls = new Hls({ enableWorker: true });
+                    // 🚀 High-Speed Anti-Lag Buffer Engine (Video Makkhan Jaisi Chalegi)
+                    const hls = new Hls({
+                        enableWorker: true,
+                        lowLatencyMode: true,
+                        maxBufferLength: 60,            // 60 second pehle se buffer load rakhe
+                        maxMaxBufferLength: 120,        // Max 2 minute ka video backup rakhe
+                        maxBufferSize: 60 * 1000 * 1000,// 60MB RAM Cache
+                        backBufferLength: 30,           // Peeche mudne par bhi instant chalay
+                        liveSyncDurationCount: 3
+                    });
                     currentHls = hls;
                     hls.loadSource(url);
                     hls.attachMedia(videoEl);
