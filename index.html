@@ -357,44 +357,43 @@ header {
     100% { background-position: 200% 0; }
 }
 
-/* 🎬 PERFECT TAMASHA SLIDER (NO OVERLAP + FULL GLOW) */
+/* 🎬 2026 EXACT TAMASHA APP SLIDER ENGINE */
 .slider-container { 
     width: 100%; 
-    height: 335px; /* 👈 Sahi Tamasha Height */
-    margin-top: 8px; /* 👈 Poster Ticker se takrayega nahi */
+    height: 375px; /* 👈 Tamasha App Uncha Poster Height */
+    margin-top: 10px;
     padding-top: 0;
     position: relative; 
-    overflow: visible !important; /* 👈 Sirf blur ko upar nikalne dega */
+    overflow: visible !important;
     background: transparent !important; 
     border: none !important;
 }
 
-/* 🌈 POSTER COLORS MATCHING GLOW (NO EXTRA BLACK) */
+/* 🌈 TAMASHA AMBIENT BACKDROP GLOW */
 .slider-backdrop {
     position: absolute;
-    top: -140px;      /* 👈 Upar Header ke bilkul top tak phel gaya */
+    top: -120px;
     left: -30px;
     right: -30px;
-    height: calc(100% + 160px);
+    height: calc(100% + 150px);
     background-size: cover;
     background-position: center top;
-    filter: blur(40px) brightness(0.65) saturate(1.9); /* 👈 Kaala rang khatam, poster ke colors 100% match honge */
+    filter: blur(45px) brightness(0.6) saturate(1.8);
     transition: background-image 0.5s ease-in-out;
     z-index: 0;
     pointer-events: none;
 }
 
-/* 🌑 TOP & BOTTOM BALANCED DARK SHADOW (LINE CHUP JAYEGI) */
 .slider-backdrop::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, 
-        rgba(9, 10, 15, 0.85) 0%,   /* 👈 Upar dark shadow (Red lines wali jagah ko chupayega) */
-        rgba(9, 10, 15, 0.5) 12%, 
-        transparent 28%, 
-        transparent 72%, 
-        #090a0f 100%               /* 👈 Neeche wala dark shadow */
+        rgba(9, 10, 15, 0.85) 0%, 
+        rgba(9, 10, 15, 0.4) 15%, 
+        transparent 35%, 
+        transparent 70%, 
+        #090a0f 100%
     );
 }
 
@@ -407,10 +406,10 @@ header {
     width: 100%; 
 }
 
-/* 👈 70% Balanced Width (Na zyada door, na zyada kareeb) */
+/* 👈 Tamasha 74% Card Width & 12px Perfect Gap */
 .slide { 
-    min-width: 70% !important; 
-    width: 70% !important;
+    min-width: 74% !important; 
+    width: 74% !important;
     height: 100%; 
     position: relative; 
     cursor: pointer; 
@@ -418,31 +417,27 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 8px 24px; /* 👈 16px ka perfect gap de diya */
+    padding: 4px 6px 14px;
     box-sizing: border-box;
-    opacity: 0.6;
-    transition: opacity 0.35s ease;
+    opacity: 0.45; /* 👈 Side wale posters Tamasha jaise dim rahenge */
+    transform: scale(0.94);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* 🌟 Center wala poster 100% bright */
-.slide.active-slide {
-    opacity: 1 !important;
-}
-
+/* 🌟 Center Wala Poster 100% Bright Aur Scale-up */
 .slide.active-slide {
     opacity: 1 !important;
     transform: scale(1) !important;
 }
 
-/* 🌟 AUTO-FIT SLIDER POSTER (ZERO CROP + NEECHE WALE CARDS JAISA 8px BORDER) */
+/* 🎬 TAMASHA ROUNDED POSTER CORNERS & CINEMA COVER */
 .slide img, .slide-main-img { 
-    width: auto !important;        /* 👈 Photo ke asli size ke mutabiq khud set hoga */
-    max-width: 100% !important;
+    width: 100% !important;
     height: 100% !important; 
-    object-fit: contain !important; /* 👈 Bilkul crop nahi hoga, 100% poora dikhega */
-    border-radius: 8px;            /* 👈 Neeche wale cards jaise 8px sharp corners */
-    border: 1px solid rgba(255, 255, 255, 0.2); 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.85); 
+    object-fit: cover !important; /* 👈 Tamasha ki tarah poora card cover karega */
+    border-radius: 16px !important; /* 👈 Tamasha app jaise 16px gol curves */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important; 
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85); 
     position: relative;
     z-index: 2;
 }
@@ -1177,12 +1172,12 @@ header {
         .fav-channel-btn { position: absolute; top: -3px; right: 2px; background: rgba(0,0,0,0.85); border: 1px solid #444; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 9px; cursor: pointer; z-index: 10; }
         .fav-channel-btn.active { color: var(--primary); background: rgba(229, 9, 20, 0.35); border-color: var(--primary); }
 
-        /* 🎬 2026 CYBER-GLASS M3U8 PLAYER STYLES */
+        /* 📺 ORIGINAL NATIVE CHROME PLAYER STYLES */
         .native-chrome-player-box {
-            position: relative !important;
-            width: 100% !important;
-            aspect-ratio: 16 / 9 !important;
-            background: #000000 !important;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000000;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
@@ -1190,437 +1185,33 @@ header {
             overflow: hidden;
         }
 
-        /* 📺 LIVE TV FIXED TOP PLAYER (PLAYER UPAR FREEZE RAHEGA, CHANNELS NEECHE SCROLL HONGE) */
         .video-fixed-top {
-            position: sticky !important;
-            top: 0 !important;
-            z-index: 1001 !important;
-            width: 100% !important;
-            aspect-ratio: 16 / 9 !important;
-            background: #000000 !important;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            background: #000000;
+            width: 100%;
+            aspect-ratio: 16 / 9;
             border-bottom: 1px solid var(--card-border);
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .native-chrome-player-box video, .video-fixed-top video {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: contain !important;
+            background: #000000;
         }
 
         .native-chrome-player-box iframe, .video-fixed-top iframe {
             width: 100% !important;
             height: 100% !important;
             border: none;
-            background: #000;
-        }
-
-/* 📺 VIDEO 100% FIT & NO ZOOM (TICKER AUR ANCHOR POORA SAAF DIKHEGA) */
-        .cyber-player-wrap video,
-        .native-chrome-player-box video,
-        .video-fixed-top video {
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 100% !important;
-            max-height: 100% !important;
-            object-fit: contain !important; /* 👈 Zoom mukammal khatam, poora channel fit aayega */
-            background: #000000 !important;
-            display: block !important;
-        }
-
-        /* 🌌 CYBER OVERLAY CONTROLS */
-        .cyber-player-wrap {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* ⛶ 100% TRUE CINEMA FULLSCREEN (CHROME + APPCREATOR24 PERFECT FIT) */
-        .cyber-player-wrap.is-cinema-fullscreen {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            z-index: 99999999999 !important;
-            background: #000000 !important;
-            border: none !important;
-            border-radius: 0 !important;
-            aspect-ratio: unset !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .cyber-player-wrap.is-cinema-fullscreen video {
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 100vw !important;
-            max-height: 100vh !important;
-            object-fit: contain !important;
-            background: #000000 !important;
-        }
-
-        /* Chrome aur Android Black Backdrop */
-        ::backdrop, :fullscreen, :-webkit-full-screen {
-            background: #000000 !important;
-        }
-
-        body.in-cinema-mode .bottom-nav-container,
-        body.in-cinema-mode header {
-            display: none !important;
-        }
-
-        .m3u8-controls-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(7, 9, 14, 0.85) 0%, transparent 30%, transparent 68%, rgba(7, 9, 14, 0.94) 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 10px 14px 8px;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            z-index: 100;
-            user-select: none;
-            pointer-events: auto;
-        }
-        .m3u8-controls-overlay.hide {
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-
-        .m3u8-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .m3u8-video-title {
-            font-size: 11.5px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.3px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 80%;
-        }
-
-        .m3u8-btn-hud {
-            background: rgba(18, 22, 34, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(14px);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s;
-            flex-shrink: 0;
-        }
-        .m3u8-btn-hud:active { transform: scale(0.9); }
-        .m3u8-btn-hud svg {
-            width: 15px;
-            height: 15px;
-            stroke: #ffffff;
-            fill: none;
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* CENTER 10s SKIP & PLAY */
-        .m3u8-center-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 28px;
-            margin-top: -6px;
-        }
-
-        .m3u8-btn-skip {
-            background: rgba(18, 22, 34, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(14px);
-            border-radius: 50%;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .m3u8-btn-skip:active { transform: scale(0.88); }
-        .m3u8-btn-skip svg { width: 22px; height: 22px; fill: #ffffff; }
-
-        .m3u8-btn-play {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e50914, #b20710);
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(229, 9, 20, 0.65);
-            transition: transform 0.2s;
-        }
-        .m3u8-btn-play:active { transform: scale(0.9); }
-        .m3u8-btn-play svg { width: 20px; height: 20px; fill: #ffffff; }
-
-        /* 🔴 YOUTUBE RED LINE PROGRESS BAR */
-        .m3u8-bottom-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            width: 100%;
-        }
-
-        .m3u8-progress-container {
-            position: relative;
-            width: 100%;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        /* 🔴 YOUTUBE PROGRESS TRACK WITH WHITE BUFFER BAR */
-        .m3u8-progress-bg {
-            position: absolute;
-            width: 100%;
-            height: 3.5px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-        
-        /* ⚪ FULL SOLID BRIGHT WHITE BUFFER BAR (6 MINUTE AAGE LOAD HOGI) */
-        .m3u8-progress-buffer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: #ffffff !important; /* 👈 Full Solid Bright White */
-            border-radius: 4px;
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.95);
-            transition: width 0.25s linear;
-            z-index: 1;
-            opacity: 0.95 !important;
-        }
-
-        /* 📐 MX Player Screen Fit Modes */
-        .cyber-player-wrap video.aspect-fit {
-            object-fit: contain !important;
-        }
-        .cyber-player-wrap video.aspect-stretch {
-            object-fit: fill !important;
-        }
-        .cyber-player-wrap video.aspect-zoom {
-            object-fit: cover !important;
-        }
-        .cyber-player-wrap video.aspect-16-9 {
-            aspect-ratio: 16 / 9 !important;
-            object-fit: fill !important;
-        }
-        
-        /* 🔴 YouTube Active Red Bar */
-        .m3u8-progress-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 0%;
-            background: #e50914;
-            border-radius: 4px;
-            box-shadow: 0 0 8px rgba(229, 9, 20, 0.85);
-            z-index: 2;
-        }
-        .m3u8-progress-thumb {
-            position: absolute;
-            left: 0%;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: #e50914;
-            border: 2px solid #ffffff;
-            box-shadow: 0 0 8px rgba(229, 9, 20, 0.95);
-            transform: translate(-50%, 0);
-            pointer-events: none;
-        }
-
-        .m3u8-bottom-btn-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
-        .m3u8-left-tools {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* 🔊 VOLUME EXPAND WRAPPER */
-        .m3u8-volume-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(18, 22, 34, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 3px 8px 3px 4px;
-        }
-        .m3u8-vol-btn {
-            background: transparent;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 0;
-        }
-        .m3u8-vol-btn svg {
-            width: 15px;
-            height: 15px;
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 2.2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .m3u8-vol-slider {
-            -webkit-appearance: none;
-            width: 50px;
-            height: 3px;
-            border-radius: 3px;
-            background: rgba(255, 255, 255, 0.3);
-            outline: none;
-        }
-        .m3u8-vol-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #ffffff;
-            cursor: pointer;
-        }
-
-        .m3u8-time-txt {
-            font-size: 10px;
-            font-weight: 800;
-            color: #cbd5e1;
-            font-family: monospace;
-            letter-spacing: 0.5px;
-        }
-
-        /* 🔴 LIVE BADGE */
-        .m3u8-live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: linear-gradient(135deg, #e50914, #b20710);
-            color: #ffffff;
-            font-size: 8.5px;
-            font-weight: 900;
-            padding: 2.5px 7px;
-            border-radius: 6px;
-            letter-spacing: 0.6px;
-        }
-        .m3u8-live-dot {
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: #00ff66;
-            box-shadow: 0 0 6px #00ff66;
-            animation: m3u8LivePulse 1s infinite alternate;
-        }
-        @keyframes m3u8LivePulse { 0% { opacity: 0.4; } 100% { opacity: 1; } }
-
-        /* ⚙️ CYBER SETTINGS POPUP (WITH RED SCROLL LINE | ) */
-        .m3u8-settings-modal {
-            position: absolute;
-            top: 36px;
-            right: 8px;
-            max-height: calc(100% - 44px);
-            background: rgba(10, 14, 22, 0.97);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            backdrop-filter: blur(28px);
-            -webkit-backdrop-filter: blur(28px);
-            border-radius: 14px;
-            padding: 10px 8px 10px 12px;
-            width: 195px;
-            display: none;
-            flex-direction: column;
-            gap: 7px;
-            z-index: 200;
-            box-shadow: 0 16px 40px rgba(0,0,0,0.95);
-            overflow-y: scroll !important;       /* 👈 Scroll hamesha on */
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: #e50914 rgba(255, 255, 255, 0.1);
-        }
-        
-        /* 🔴 Chamakti Hui Line | Jo Upar Neeche Hogi */
-        .m3u8-settings-modal::-webkit-scrollbar {
-            width: 4px !important;
-            display: block !important;
-        }
-        .m3u8-settings-modal::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.08) !important;
-            border-radius: 4px !important;
-            margin: 6px 0 !important;
-        }
-        .m3u8-settings-modal::-webkit-scrollbar-thumb {
-            background: #e50914 !important;
-            border-radius: 4px !important;
-            box-shadow: 0 0 10px rgba(229, 9, 20, 0.9) !important;
-        }
-        .m3u8-settings-modal.show { display: flex !important; }
-
-        .m3u8-settings-header {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 10px;
-            font-weight: 900;
-            color: #e50914;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-        }
-        .m3u8-settings-header svg {
-            width: 13px;
-            height: 13px;
-            stroke: #e50914;
-            fill: none;
-            stroke-width: 2.2;
-        }
-
-        .m3u8-opt-chips { display: flex; gap: 5px; flex-wrap: wrap; }
-        .m3u8-opt-chip {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            font-size: 9px;
-            font-weight: 800;
-            color: #fff;
-            padding: 3px 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .m3u8-opt-chip.active {
-            background: #e50914;
-            color: #fff;
-            border-color: #e50914;
-            box-shadow: 0 0 10px rgba(229,9,20,0.6);
+            background: #000000;
         }
 
         /* 🎬 YOUTUBE & NETFLIX CAPSULE PILL ACTION CHIPS */
@@ -4689,494 +4280,85 @@ header {
             }
         };
 
-        let m3u8HideTimer = null;
-
         function cleanupPlayer() {
-            if (currentHls) { try { currentHls.destroy(); } catch(e){} currentHls = null; }
-            if (m3u8HideTimer) { clearTimeout(m3u8HideTimer); m3u8HideTimer = null; }
+            if (currentHls) { 
+                try { currentHls.destroy(); } catch(e){} 
+                currentHls = null; 
+            }
         }
 
-// 🎬 2026 CUSTOM M3U8 CYBER-GLASS PLAYER ENGINE
+        // 📺 NATIVE CHROME DEFAULT PLAYER ENGINE (PURANI DEFAULT SETTING)
         function startNativePlayer(wrapperId, url, isLive, itemKey) {
             cleanupPlayer();
             const container = document.getElementById(wrapperId);
             if (!container) return;
             container.innerHTML = '';
 
-            // 1. 📺 YOUTUBE VIDEOS (Normal Iframe Player)
-            if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/')) {
+            // 1. 📺 YOUTUBE & DAILYMOTION & WEB EMBEDS ENGINE
+            const isYt = url.includes('youtube.com') || url.includes('youtu.be');
+            const isDm = url.includes('dailymotion.com') || url.includes('dai.ly');
+            const isWebEmbed = url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/');
+
+            if (isYt || isDm || isWebEmbed) {
                 const iframe = document.createElement('iframe');
-                if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                
+                if (isYt) {
                     let vid = '';
                     if (url.includes('youtu.be/')) vid = url.split('youtu.be/')[1].split('?')[0];
                     else if (url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
                     else if (url.includes('embed/')) vid = url.split('embed/')[1].split('?')[0];
                     iframe.src = `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&playsinline=1&rel=0&modestbranding=1`;
+                } else if (isDm) {
+                    let dmId = '';
+                    if (url.includes('dai.ly/')) {
+                        dmId = url.split('dai.ly/')[1].split('?')[0];
+                    } else if (url.includes('/video/')) {
+                        dmId = url.split('/video/')[1].split('?')[0];
+                    } else {
+                        dmId = url.split('/').pop().split('?')[0];
+                    }
+                    // 🛡️ Dailymotion 403 Forbidden Bypass (Safe Referrer Policy)
+                    iframe.src = `https://www.dailymotion.com/embed/video/${dmId}?autoplay=1&mute=0&queue-enable=0&ui-logo=0&sharing-enable=0`;
+                    iframe.setAttribute('referrerpolicy', 'no-referrer');
                 } else {
                     iframe.src = url;
                 }
-                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen');
+
+                iframe.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture; fullscreen; web-share');
                 iframe.setAttribute('allowfullscreen', 'true');
+                iframe.style.width = '100%';
+                iframe.style.height = '100%';
+                iframe.style.border = 'none';
+                iframe.style.backgroundColor = '#000000';
                 container.appendChild(iframe);
                 return;
             }
 
-            // 2. 🔥 M3U8 & STREAM LINKS (2026 Cyber-Glass Player)
-            const cleanTitle = (wrapperId === 'livePlayerWrapper') 
-                ? (document.getElementById('playingChannelTitle') ? document.getElementById('playingChannelTitle').innerText : 'Live TV')
-                : (document.getElementById('playingTitle') ? document.getElementById('playingTitle').innerText : 'Movie Master');
-
-            const wrap = document.createElement('div');
-            wrap.className = 'cyber-player-wrap';
-
+            // 2. Chrome Native Default HTML5 Video Player
             const videoEl = document.createElement('video');
+            videoEl.setAttribute('controls', '');
             videoEl.setAttribute('autoplay', '');
             videoEl.setAttribute('playsinline', '');
             videoEl.setAttribute('webkit-playsinline', '');
-            videoEl.setAttribute('preload', 'auto'); // 👈 Video pehle se aage download hogi!
-            videoEl.removeAttribute('controls');
-            wrap.appendChild(videoEl);
+            container.appendChild(videoEl);
 
-            // Controls Overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'm3u8-controls-overlay';
-            overlay.innerHTML = `
-                <div class="m3u8-top-row" onclick="event.stopPropagation()">
-                    <span class="m3u8-video-title">${cleanTitle}</span>
-                    <button class="m3u8-btn-hud" id="m3u8SettingsBtn" title="Settings">
-                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                    </button>
-                </div>
-
-                <div class="m3u8-settings-modal" id="m3u8SettingsModal" onclick="event.stopPropagation()">
-                    <div>
-                        <div class="m3u8-settings-header">
-                            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                            <span>Playback Speed</span>
-                        </div>
-                        <div class="m3u8-opt-chips" id="m3u8SpeedChips" style="margin-top:4px;">
-                            <span class="m3u8-opt-chip" data-spd="0.5">0.5x</span>
-                            <span class="m3u8-opt-chip active" data-spd="1">1.0x</span>
-                            <span class="m3u8-opt-chip" data-spd="1.25">1.25x</span>
-                            <span class="m3u8-opt-chip" data-spd="1.5">1.5x</span>
-                            <span class="m3u8-opt-chip" data-spd="2">2.0x</span>
-                        </div>
-                    </div>
-                    <div style="height:1px; background:rgba(255,255,255,0.1); margin:4px 0;"></div>
-                    <div>
-                        <div class="m3u8-settings-header">
-                            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                            <span>Video Quality</span>
-                        </div>
-                        <div class="m3u8-opt-chips" id="m3u8QualityChips" style="margin-top:4px;">
-                            <span class="m3u8-opt-chip active" data-level="-1">Auto</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="m3u8-center-row" id="m3u8CenterRow" onclick="event.stopPropagation()" style="${isLive ? 'display:none;' : ''}">
-                    <button class="m3u8-btn-skip" id="m3u8Back10Btn" title="10s Back">
-                        <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.2 3.16-1.93 5.12-1.93 3.84 0 7.02 2.7 7.74 6.3l2.43-.59C21.69 11.43 17.52 8 12.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
-                    </button>
-
-                    <button class="m3u8-btn-play" id="m3u8CenterPlayBtn">
-                        <svg id="m3u8PlaySvg" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-                    </button>
-
-                    <button class="m3u8-btn-skip" id="m3u8Fwd10Btn" title="10s Forward">
-                        <svg viewBox="0 0 24 24"><path d="M11.5 8c2.65 0 5.05.99 6.9 2.6L22 7v9h-9l3.62-3.62c-1.39-1.2-3.16-1.93-5.12-1.93-3.84 0-7.02 2.7-7.74 6.3l-2.43-.59C2.31 11.43 6.48 8 11.5 8z"/><text x="12" y="16.5" font-size="7" font-weight="900" fill="#fff" text-anchor="middle" font-family="sans-serif">10</text></svg>
-                    </button>
-                </div>
-
-                <div class="m3u8-bottom-controls" onclick="event.stopPropagation()">
-                    <div class="m3u8-progress-container" id="m3u8ProgressTrack" style="${isLive ? 'display:none;' : ''}">
-                        <div class="m3u8-progress-bg">
-                            <div class="m3u8-progress-buffer" id="m3u8ProgressBuffer"></div>
-                            <div class="m3u8-progress-fill" id="m3u8ProgressFill"></div>
-                        </div>
-                        <div class="m3u8-progress-thumb" id="m3u8ProgressThumb"></div>
-                    </div>
-
-                    <div class="m3u8-bottom-btn-row">
-                        <div class="m3u8-left-tools">
-                            <div class="m3u8-volume-wrap">
-                                <button class="m3u8-vol-btn" id="m3u8VolBtn">
-                                    <svg id="m3u8VolSvg" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                                </button>
-                                <input type="range" min="0" max="1" step="0.05" value="1" class="m3u8-vol-slider" id="m3u8VolSlider">
-                            </div>
-                            <span class="m3u8-time-txt" id="m3u8TimeTxt" style="${isLive ? 'display:none;' : ''}">00:00 / 00:00</span>
-                            <div class="m3u8-live-badge" style="${isLive ? 'display:inline-flex;' : 'display:none;'}">
-                                <span class="m3u8-live-dot"></span>
-                                <span>LIVE</span>
-                            </div>
-                        </div>
-
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <!-- 📐 MX PLAYER SCREEN SIZE / ASPECT RATIO BUTTON -->
-                            <button class="m3u8-btn-hud" id="m3u8AspectBtn" title="Screen Ratio (Fit, Stretch, Zoom)">
-                                <svg id="aspectSvg" viewBox="0 0 24 24">
-                                    <rect x="3" y="5" width="18" height="14" rx="2" ry="2"/>
-                                    <polyline points="7 15 3 15 3 11"/>
-                                    <polyline points="17 9 21 9 21 13"/>
-                                </svg>
-                            </button>
-
-                            <!-- ⛶ Fullscreen -->
-                            <button class="m3u8-btn-hud" id="m3u8FsBtn" title="Full Screen">
-                                <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                            </button>
-                        </div>
-                </div>
-            `;
-            wrap.appendChild(overlay);
-            container.appendChild(wrap);
-
-            // Controls JS Logic
-            const playSvg = overlay.querySelector('#m3u8PlaySvg');
-            const centerPlayBtn = overlay.querySelector('#m3u8CenterPlayBtn');
-            const progressFill = overlay.querySelector('#m3u8ProgressFill');
-            const progressBuffer = overlay.querySelector('#m3u8ProgressBuffer');
-            const progressThumb = overlay.querySelector('#m3u8ProgressThumb');
-            const progressTrack = overlay.querySelector('#m3u8ProgressTrack');
-            const timeTxt = overlay.querySelector('#m3u8TimeTxt');
-            const volSlider = overlay.querySelector('#m3u8VolSlider');
-            const volSvg = overlay.querySelector('#m3u8VolSvg');
-            const volBtn = overlay.querySelector('#m3u8VolBtn');
-            const settingsModal = overlay.querySelector('#m3u8SettingsModal');
-            const settingsBtn = overlay.querySelector('#m3u8SettingsBtn');
-            const fsBtn = overlay.querySelector('#m3u8FsBtn');
-            const aspectBtn = overlay.querySelector('#m3u8AspectBtn');
-            const back10Btn = overlay.querySelector('#m3u8Back10Btn');
-            const fwd10Btn = overlay.querySelector('#m3u8Fwd10Btn');
-
-            const resetAutoHide = () => {
-                overlay.classList.remove('hide');
-                if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
-                if (!videoEl.paused) {
-                    m3u8HideTimer = setTimeout(() => {
-                        overlay.classList.add('hide');
-                        if (settingsModal) settingsModal.classList.remove('show');
-                    }, 3500);
-                }
-            };
-
-            wrap.onclick = () => {
-                if (overlay.classList.contains('hide')) {
-                    resetAutoHide();
-                } else {
-                    overlay.classList.add('hide');
-                    if (settingsModal) settingsModal.classList.remove('show');
-                }
-            };
-
-            const updatePlayState = () => {
-                if (videoEl.paused) {
-                    playSvg.innerHTML = '<polygon points="6 4 20 12 6 20 6 4"/>';
-                    overlay.classList.remove('hide');
-                    if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
-                } else {
-                    playSvg.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
-                    resetAutoHide();
-                }
-            };
-
-            if (centerPlayBtn) {
-                centerPlayBtn.onclick = () => {
-                    if (videoEl.paused) videoEl.play(); else videoEl.pause();
-                    updatePlayState();
-                };
-            }
-
-            if (back10Btn) back10Btn.onclick = () => { videoEl.currentTime = Math.max(0, videoEl.currentTime - 10); resetAutoHide(); };
-            if (fwd10Btn) fwd10Btn.onclick = () => { videoEl.currentTime = Math.min(videoEl.duration || 99999, videoEl.currentTime + 10); resetAutoHide(); };
-
-            // ⚪ YOUTUBE WHITE BUFFER BAR ACCELERATOR (VIDEO AAGE AAGE DOWNLOAD HOGI)
-            const syncBufferProgress = () => {
-                if (isLive || !videoEl.duration) return;
-                try {
-                    const buf = videoEl.buffered;
-                    if (buf && buf.length > 0) {
-                        for (let i = 0; i < buf.length; i++) {
-                            if (buf.start(i) <= videoEl.currentTime && videoEl.currentTime <= buf.end(i)) {
-                                const bufferedEnd = buf.end(i);
-                                const bufPct = Math.min(100, (bufferedEnd / videoEl.duration) * 100);
-                                if (progressBuffer) {
-                                    progressBuffer.style.width = bufPct + '%';
-                                }
-                                break;
-                            }
-                        }
-                    }
-                } catch(e){}
-            };
-
-            videoEl.addEventListener('progress', syncBufferProgress);
-            videoEl.addEventListener('loadeddata', syncBufferProgress);
-            videoEl.addEventListener('canplaythrough', syncBufferProgress);
-
-            videoEl.ontimeupdate = () => {
-                if (isLive || !videoEl.duration) return;
-                const pct = (videoEl.currentTime / videoEl.duration) * 100;
-                if (progressFill) progressFill.style.width = pct + '%';
-                if (progressThumb) progressThumb.style.left = pct + '%';
-
-                const curM = Math.floor(videoEl.currentTime / 60);
-                const curS = Math.floor(videoEl.currentTime % 60);
-                const durM = Math.floor(videoEl.duration / 60);
-                const durS = Math.floor(videoEl.duration % 60);
-                if (timeTxt) {
-                    timeTxt.innerText = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')} / ${String(durM).padStart(2,'0')}:${String(durS).padStart(2,'0')}`;
-                }
-
-                syncBufferProgress();
-            };
-
-            // 🔴 2026 YOUTUBE REAL-TIME TOUCH & DRAG SEEKER ENGINE
-            if (progressTrack) {
-                let isSeekingDrag = false;
-
-                const updateSeekUI = (clientX) => {
-                    if (isLive || !videoEl.duration) return;
-                    const rect = progressTrack.getBoundingClientRect();
-                    const pos = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-                    const targetSec = pos * videoEl.duration;
-
-                    // Real-time Red Line aur Gola ungli ke sath sath chale
-                    if (progressFill) progressFill.style.width = (pos * 100) + '%';
-                    if (progressThumb) progressThumb.style.left = (pos * 100) + '%';
-
-                    // Time text foran update ho
-                    const curM = Math.floor(targetSec / 60);
-                    const curS = Math.floor(targetSec % 60);
-                    const durM = Math.floor(videoEl.duration / 60);
-                    const durS = Math.floor(videoEl.duration % 60);
-                    if (timeTxt) {
-                        timeTxt.innerText = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')} / ${String(durM).padStart(2,'0')}:${String(durS).padStart(2,'0')}`;
-                    }
-                    return targetSec;
-                };
-
-                // Touch Start
-                progressTrack.addEventListener('touchstart', (e) => {
-                    if (isLive || !videoEl.duration) return;
-                    isSeekingDrag = true;
-                    if (m3u8HideTimer) clearTimeout(m3u8HideTimer);
-                    updateSeekUI(e.touches[0].clientX);
-                }, { passive: true });
-
-                // Touch Move (Ungli ke sath sath patti aage peechay ho)
-                window.addEventListener('touchmove', (e) => {
-                    if (!isSeekingDrag || isLive || !videoEl.duration) return;
-                    updateSeekUI(e.touches[0].clientX);
-                }, { passive: true });
-
-                // Touch End (Jahan ungli chhodi wahan se video play ho)
-                const endSeekDrag = (clientX) => {
-                    if (!isSeekingDrag) return;
-                    isSeekingDrag = false;
-                    const finalSec = updateSeekUI(clientX);
-                    if (!isNaN(finalSec)) {
-                        videoEl.currentTime = finalSec;
-                    }
-                    resetAutoHide();
-                };
-
-                progressTrack.addEventListener('touchend', (e) => {
-                    endSeekDrag(e.changedTouches[0].clientX);
-                });
-
-                // Desktop Click
-                progressTrack.onclick = (e) => {
-                    if (isLive || !videoEl.duration) return;
-                    const finalSec = updateSeekUI(e.clientX);
-                    if (!isNaN(finalSec)) videoEl.currentTime = finalSec;
-                    resetAutoHide();
-                };
-            }
-
-            const updateVolIcon = () => {
-                if (videoEl.muted || videoEl.volume === 0) {
-                    volSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
-                } else {
-                    volSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>';
-                }
-            };
-
-            if (volSlider) {
-                volSlider.oninput = () => {
-                    videoEl.volume = parseFloat(volSlider.value);
-                    videoEl.muted = (videoEl.volume === 0);
-                    updateVolIcon();
-                    resetAutoHide();
-                };
-            }
-
-            if (volBtn) {
-                volBtn.onclick = () => {
-                    videoEl.muted = !videoEl.muted;
-                    if (volSlider) volSlider.value = videoEl.muted ? 0 : videoEl.volume;
-                    updateVolIcon();
-                    resetAutoHide();
-                };
-            }
-
-            if (settingsBtn) {
-                settingsBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    settingsModal.classList.toggle('show');
-                };
-            }
-
-            overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(chip => {
-                chip.onclick = () => {
-                    overlay.querySelectorAll('#m3u8SpeedChips .m3u8-opt-chip').forEach(c => c.classList.remove('active'));
-                    chip.classList.add('active');
-                    videoEl.playbackRate = parseFloat(chip.getAttribute('data-spd'));
-                    settingsModal.classList.remove('show');
-                    resetAutoHide();
-                };
-            });
-
-            // ⛶ 1-TAP INSTANT CINEMA FULLSCREEN TOGGLE (SINGLE BACK EXIT)
-            const exitCinemaMode = () => {
-                wrap.classList.remove('is-cinema-fullscreen');
-                document.body.classList.remove('in-cinema-mode');
-                try {
-                    if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
-                } catch(e){}
-            };
-
-            const toggleCinemaFs = async () => {
-                const isFs = wrap.classList.contains('is-cinema-fullscreen') || !!document.fullscreenElement || !!document.webkitFullscreenElement;
-
-                if (!isFs) {
-                    wrap.classList.add('is-cinema-fullscreen');
-                    document.body.classList.add('in-cinema-mode');
-
-                    try {
-                        const targetEl = wrap;
-                        if (targetEl.requestFullscreen) {
-                            await targetEl.requestFullscreen({ navigationUI: 'hide' });
-                        } else if (targetEl.webkitRequestFullscreen) {
-                            await targetEl.webkitRequestFullscreen();
-                        } else if (videoEl.webkitEnterFullscreen) {
-                            videoEl.webkitEnterFullscreen();
-                        }
-                    } catch(e){}
-
-                    try {
-                        if (screen.orientation && screen.orientation.lock) {
-                            await screen.orientation.lock('landscape').catch(() => {});
-                        }
-                    } catch(e){}
-                } else {
-                    try {
-                        if (document.exitFullscreen) await document.exitFullscreen();
-                        else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
-                    } catch(e){}
-                    exitCinemaMode();
-                }
-            };
-
-            // 📱 Mobile Ka Back Button Ya System Exit: 1-Tap Mein Foran Normal Karega
-            document.addEventListener('fullscreenchange', () => {
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                    exitCinemaMode();
-                }
-            });
-            document.addEventListener('webkitfullscreenchange', () => {
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                    exitCinemaMode();
-                }
-            });
-
-            // 📐 MX PLAYER SCREEN ASPECT RATIO SWITCHER (FIT -> STRETCH -> ZOOM -> 16:9)
-            const aspectModes = ['fit', 'stretch', 'zoom', '16-9'];
-            const aspectNames = ['FIT (100%)', 'STRETCH (Full)', 'CROP / ZOOM', '16 : 9 Cinema'];
-            let currentAspectIdx = 0;
-
-            if (aspectBtn) {
-                aspectBtn.onclick = () => {
-                    currentAspectIdx = (currentAspectIdx + 1) % aspectModes.length;
-                    const mode = aspectModes[currentAspectIdx];
-                    
-                    // Saari classes remove karke naya mode lagao
-                    videoEl.classList.remove('aspect-fit', 'aspect-stretch', 'aspect-zoom', 'aspect-16-9');
-                    videoEl.classList.add('aspect-' + mode);
-
-                    // MX Player jaisa on-screen notification
-                    if (typeof window.showCustomToast === 'function') {
-                        window.showCustomToast('📺 Screen: ' + aspectNames[currentAspectIdx]);
-                    }
-                    resetAutoHide();
-                };
-            }
-
-            // HLS Stream Load With 6-Minute (360s) Buffer Length
             if (url.includes('.m3u8')) {
                 if (Hls.isSupported()) {
-                    const hls = new Hls({
-                        enableWorker: true,
-                        lowLatencyMode: false,
-                        maxBufferLength: 360,           // 👈 Poore 6 Minute pehle se buffer load hoga!
-                        maxMaxBufferLength: 600,       // Max 10 minute tak video store rakhe
-                        maxBufferSize: 120 * 1000 * 1000, // 120 MB RAM buffer
-                        backBufferLength: 60,          // Peeche mudne par bhi instant play
-                        liveSyncDurationCount: 3
-                    });
+                    const hls = new Hls({ enableWorker: true });
                     currentHls = hls;
                     hls.loadSource(url);
                     hls.attachMedia(videoEl);
-
-                    hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-                        videoEl.play().catch(() => {});
-                        updatePlayState();
-
-                        const qContainer = overlay.querySelector('#m3u8QualityChips');
-                        if (qContainer && data.levels && data.levels.length > 1) {
-                            qContainer.innerHTML = '<span class="m3u8-opt-chip active" data-level="-1">Auto</span>';
-                            data.levels.forEach((lvl, idx) => {
-                                const h = lvl.height || (idx + 1) + 'p';
-                                const chip = document.createElement('span');
-                                chip.className = 'm3u8-opt-chip';
-                                chip.setAttribute('data-level', idx);
-                                chip.innerText = h + (h.toString().includes('p') ? '' : 'p');
-                                chip.onclick = () => {
-                                    qContainer.querySelectorAll('.m3u8-opt-chip').forEach(c => c.classList.remove('active'));
-                                    chip.classList.add('active');
-                                    hls.currentLevel = idx;
-                                    settingsModal.classList.remove('show');
-                                    resetAutoHide();
-                                };
-                                qContainer.appendChild(chip);
-                            });
-
-                            const autoBtn = qContainer.querySelector('[data-level="-1"]');
-                            if (autoBtn) {
-                                autoBtn.onclick = () => {
-                                    qContainer.querySelectorAll('.m3u8-opt-chip').forEach(c => c.classList.remove('active'));
-                                    autoBtn.classList.add('active');
-                                    hls.currentLevel = -1;
-                                    settingsModal.classList.remove('show');
-                                    resetAutoHide();
-                                };
-                            }
-                        }
+                    hls.on(Hls.Events.MANIFEST_PARSED, () => { 
+                        videoEl.play().catch(() => {}); 
                     });
                 } else if (videoEl.canPlayType('application/vnd.apple.mpegurl')) {
                     videoEl.src = url;
                     videoEl.play().catch(() => {});
-                    updatePlayState();
                 }
             } else {
                 videoEl.src = url;
                 videoEl.play().catch(() => {});
-                updatePlayState();
             }
-
-            videoEl.onplay = updatePlayState;
-            videoEl.onpause = updatePlayState;
         }
 
         // 👑 REAL 30-DAY VIP CHECK ENGINE
@@ -5333,18 +4515,14 @@ header {
                         <span>Share</span>
                     </button>
 
-                    <!-- 3. Dynamic Action: YouTube par "Download", M3U8 par "Full Screen" -->
+                    <!-- 3. Sirf YouTube Par Download Button Dikhayein (M3U8 Par Faltu Fullscreen Button Khatam) -->
                     ${isYouTube ? `
                         <button class="action-btn" onclick="window.downloadOrShareVideo('${mUrl}', '${mTitle}')">
                             <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                             <span>Download</span>
                         </button>
-                    ` : `
-                        <button class="action-btn" onclick="window.toggleLandscapePlayer()">
-                            <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
-                            <span>Full Screen</span>
-                        </button>
-                    `}
+                    ` : ''}
+                 </div>
                 </div>
             `;
 
@@ -5467,15 +4645,17 @@ header {
                 return `
                     <div class="slide" onclick="window.handleSlideClick(${idx})">
                         <img src="${s.img}">
+                        
                         ${showSliderVip ? `
-                            <div class="card-vip-badge" style="top:12px !important; right:16px !important; z-index:10 !important;">
+                            <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
                                 <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-                                <span class="vip-badge-text">VIP</span>
+                                <span class="vip-badge-text">VIP PASS</span>
                             </div>
                         ` : ''}
                         <div class="slide-overlay"></div>
                     </div>
                 `;
+                        
             }).join('');
 
             // Memory mein save kar do
@@ -5508,7 +4688,7 @@ header {
                             window.isSliderDraggingAction = true;
                         }
                         const sWidth = sliderArea.clientWidth || window.innerWidth;
-                        const basePx = (sWidth * 0.15) - (activeSliderIndex * (sWidth * 0.70));
+                        const basePx = (sWidth * 0.13) - (activeSliderIndex * (sWidth * 0.74));
                         track.style.transform = `translateX(${basePx + diffX}px)`;
                     }
                 };
@@ -5549,7 +4729,7 @@ header {
             const track = document.getElementById('sliderTrack');
             if (!track || !window.sliders || !window.sliders.length) return;
             track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
-            track.style.transform = `translateX(calc(15% - ${activeSliderIndex * 70}%))`;
+            track.style.transform = `translateX(calc(13% - ${activeSliderIndex * 74}%))`;
             document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active-slide', i === activeSliderIndex));
             
             const backdrop = document.getElementById('sliderBackdrop');
