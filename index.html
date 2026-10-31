@@ -1400,18 +1400,37 @@ header {
             border-radius: 4px;
             overflow: hidden;
         }
-        /* ⚪ YouTube White / Grey Buffer Bar (Jo aage aage chalti hai) */
+        
+        /* ⚪ FULL SOLID BRIGHT WHITE BUFFER BAR (6 MINUTE AAGE LOAD HOGI) */
         .m3u8-progress-buffer {
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
             width: 0%;
-            background: rgba(255, 255, 255, 0.45);
+            background: #ffffff !important; /* 👈 Full Solid Bright White */
             border-radius: 4px;
-            transition: width 0.2s ease;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.95);
+            transition: width 0.25s linear;
             z-index: 1;
+            opacity: 0.95 !important;
         }
+
+        /* 📐 MX Player Screen Fit Modes */
+        .cyber-player-wrap video.aspect-fit {
+            object-fit: contain !important;
+        }
+        .cyber-player-wrap video.aspect-stretch {
+            object-fit: fill !important;
+        }
+        .cyber-player-wrap video.aspect-zoom {
+            object-fit: cover !important;
+        }
+        .cyber-player-wrap video.aspect-16-9 {
+            aspect-ratio: 16 / 9 !important;
+            object-fit: fill !important;
+        }
+        
         /* 🔴 YouTube Active Red Bar */
         .m3u8-progress-fill {
             position: absolute;
@@ -4714,6 +4733,7 @@ header {
             videoEl.setAttribute('autoplay', '');
             videoEl.setAttribute('playsinline', '');
             videoEl.setAttribute('webkit-playsinline', '');
+            videoEl.setAttribute('preload', 'auto'); // 👈 Video pehle se aage download hogi!
             videoEl.removeAttribute('controls');
             wrap.appendChild(videoEl);
 
@@ -4792,10 +4812,21 @@ header {
                             </div>
                         </div>
 
-                        <button class="m3u8-btn-hud" id="m3u8FsBtn" title="Full Screen">
-                            <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                        </button>
-                    </div>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <!-- 📐 MX PLAYER SCREEN SIZE / ASPECT RATIO BUTTON -->
+                            <button class="m3u8-btn-hud" id="m3u8AspectBtn" title="Screen Ratio (Fit, Stretch, Zoom)">
+                                <svg id="aspectSvg" viewBox="0 0 24 24">
+                                    <rect x="3" y="5" width="18" height="14" rx="2" ry="2"/>
+                                    <polyline points="7 15 3 15 3 11"/>
+                                    <polyline points="17 9 21 9 21 13"/>
+                                </svg>
+                            </button>
+
+                            <!-- ⛶ Fullscreen -->
+                            <button class="m3u8-btn-hud" id="m3u8FsBtn" title="Full Screen">
+                                <svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                            </button>
+                        </div>
                 </div>
             `;
             wrap.appendChild(overlay);
@@ -4815,6 +4846,7 @@ header {
             const settingsModal = overlay.querySelector('#m3u8SettingsModal');
             const settingsBtn = overlay.querySelector('#m3u8SettingsBtn');
             const fsBtn = overlay.querySelector('#m3u8FsBtn');
+            const aspectBtn = overlay.querySelector('#m3u8AspectBtn');
             const back10Btn = overlay.querySelector('#m3u8Back10Btn');
             const fwd10Btn = overlay.querySelector('#m3u8Fwd10Btn');
 
@@ -4859,6 +4891,30 @@ header {
             if (back10Btn) back10Btn.onclick = () => { videoEl.currentTime = Math.max(0, videoEl.currentTime - 10); resetAutoHide(); };
             if (fwd10Btn) fwd10Btn.onclick = () => { videoEl.currentTime = Math.min(videoEl.duration || 99999, videoEl.currentTime + 10); resetAutoHide(); };
 
+            // ⚪ YOUTUBE WHITE BUFFER BAR ACCELERATOR (VIDEO AAGE AAGE DOWNLOAD HOGI)
+            const syncBufferProgress = () => {
+                if (isLive || !videoEl.duration) return;
+                try {
+                    const buf = videoEl.buffered;
+                    if (buf && buf.length > 0) {
+                        for (let i = 0; i < buf.length; i++) {
+                            if (buf.start(i) <= videoEl.currentTime && videoEl.currentTime <= buf.end(i)) {
+                                const bufferedEnd = buf.end(i);
+                                const bufPct = Math.min(100, (bufferedEnd / videoEl.duration) * 100);
+                                if (progressBuffer) {
+                                    progressBuffer.style.width = bufPct + '%';
+                                }
+                                break;
+                            }
+                        }
+                    }
+                } catch(e){}
+            };
+
+            videoEl.addEventListener('progress', syncBufferProgress);
+            videoEl.addEventListener('loadeddata', syncBufferProgress);
+            videoEl.addEventListener('canplaythrough', syncBufferProgress);
+
             videoEl.ontimeupdate = () => {
                 if (isLive || !videoEl.duration) return;
                 const pct = (videoEl.currentTime / videoEl.duration) * 100;
@@ -4872,6 +4928,8 @@ header {
                 if (timeTxt) {
                     timeTxt.innerText = `${String(curM).padStart(2,'0')}:${String(curS).padStart(2,'0')} / ${String(durM).padStart(2,'0')}:${String(durS).padStart(2,'0')}`;
                 }
+
+                syncBufferProgress();
             };
 
             // 🔴 2026 YOUTUBE REAL-TIME TOUCH & DRAG SEEKER ENGINE
@@ -5033,24 +5091,38 @@ header {
                 }
             });
 
-            if (fsBtn) {
-                fsBtn.onclick = () => {
-                    toggleCinemaFs();
+            // 📐 MX PLAYER SCREEN ASPECT RATIO SWITCHER (FIT -> STRETCH -> ZOOM -> 16:9)
+            const aspectModes = ['fit', 'stretch', 'zoom', '16-9'];
+            const aspectNames = ['FIT (100%)', 'STRETCH (Full)', 'CROP / ZOOM', '16 : 9 Cinema'];
+            let currentAspectIdx = 0;
+
+            if (aspectBtn) {
+                aspectBtn.onclick = () => {
+                    currentAspectIdx = (currentAspectIdx + 1) % aspectModes.length;
+                    const mode = aspectModes[currentAspectIdx];
+                    
+                    // Saari classes remove karke naya mode lagao
+                    videoEl.classList.remove('aspect-fit', 'aspect-stretch', 'aspect-zoom', 'aspect-16-9');
+                    videoEl.classList.add('aspect-' + mode);
+
+                    // MX Player jaisa on-screen notification
+                    if (typeof window.showCustomToast === 'function') {
+                        window.showCustomToast('📺 Screen: ' + aspectNames[currentAspectIdx]);
+                    }
                     resetAutoHide();
                 };
             }
 
-            // HLS Stream Load
+            // HLS Stream Load With 6-Minute (360s) Buffer Length
             if (url.includes('.m3u8')) {
                 if (Hls.isSupported()) {
-                    // 🚀 High-Speed Anti-Lag Buffer Engine (Video Makkhan Jaisi Chalegi)
                     const hls = new Hls({
                         enableWorker: true,
-                        lowLatencyMode: true,
-                        maxBufferLength: 60,            // 60 second pehle se buffer load rakhe
-                        maxMaxBufferLength: 120,        // Max 2 minute ka video backup rakhe
-                        maxBufferSize: 60 * 1000 * 1000,// 60MB RAM Cache
-                        backBufferLength: 30,           // Peeche mudne par bhi instant chalay
+                        lowLatencyMode: false,
+                        maxBufferLength: 360,           // 👈 Poore 6 Minute pehle se buffer load hoga!
+                        maxMaxBufferLength: 600,       // Max 10 minute tak video store rakhe
+                        maxBufferSize: 120 * 1000 * 1000, // 120 MB RAM buffer
+                        backBufferLength: 60,          // Peeche mudne par bhi instant play
                         liveSyncDurationCount: 3
                     });
                     currentHls = hls;
