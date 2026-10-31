@@ -1297,89 +1297,69 @@ header {
             display: none !important; 
         }
 
-        /* 📱 FULL-WIDTH EDGE-TO-EDGE BOTTOM NAV (SIDE CORNERS 100% KHATAM) */
-        /* 🌈 2026 CURVED 7-COLOR RAINBOW NAV (CORNERS PAR BHI GOLAYI - ZERO KAALI JAGAH) */
+        /* 🍏 2026 DESIGN 1: APPLE visionOS LIQUID FROSTED GLASS NAVIGATION BAR */
         .bottom-nav-container {
             position: fixed !important;
             bottom: 0 !important;
             left: 0 !important;
             right: 0 !important;
             width: 100% !important;
-            height: 56px !important;
-            border-radius: 22px 22px 0 0 !important; /* 👈 Bahar wale corners ki golayi */
+            height: 62px !important;
+            border-radius: 0 !important; /* 👈 Flat edge-to-edge finish */
             padding: 0 !important;
             margin: 0 !important;
-            overflow: hidden !important;
             z-index: 99999 !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            background: transparent !important;
-            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.85) !important;
-            border: none !important;
+            background: rgba(14, 18, 28, 0.88) !important;
+            backdrop-filter: blur(35px) saturate(190%) !important;
+            -webkit-backdrop-filter: blur(35px) saturate(190%) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.9) !important;
+            overflow: visible !important;
         }
 
-        /* 🌈 7-COLOR LIVE FLOWING RAINBOW (POORE CORNERS PAR GHOOMAY GA) */
+        /* 🚫 7-Color Rainbow Line Mukammal Khatam */
         .bottom-nav-container::before {
-            content: "" !important;
-            display: block !important;
-            position: absolute !important;
-            inset: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00b4d8, #4b0082, #ff007f, #ff0000);
-            background-size: 200% 100%;
-            animation: flowRainbow 3s linear infinite; /* 👈 Upar jaisi 3s speed */
-            will-change: background-position;
-            transform: translateZ(0);
-            z-index: 1 !important;
+            display: none !important;
         }
 
-        /* 📱 INNER DARK NAV (SIRF UPAR 2.5px KI GOL RAINBOW LINE CHHOD KAR POORA COVER KAREGA) */
-        .bottom-nav { 
-            position: absolute !important;
-            top: 2.5px !important;                   /* 👈 Upar sirf 2.5px ki gol line bachegi */
+        .bottom-nav {
+            position: relative !important;
+            top: 0 !important;
             left: 0 !important;
             right: 0 !important;
             bottom: 0 !important;
             width: 100% !important;
-            height: calc(100% - 2.5px) !important;
-            background: rgba(12, 14, 22, 0.98) !important; 
-            backdrop-filter: blur(28px) saturate(190%) !important; 
-            -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-            border-radius: 20px 20px 0 0 !important; /* 👈 Gol corners ke sath 100% match */
-            z-index: 2 !important;
-            display: flex !important; 
-            justify-content: space-around !important; 
-            align-items: center !important;
-            padding: 0 4px !important; 
-            margin: 0 !important;
-            box-sizing: border-box !important;
-            border: none !important;
-        }
-
-        .nav-item { 
-            text-align: center !important; 
-            color: #8e92a4 !important; 
-            font-size: 10px !important; 
-            font-weight: 600 !important; 
-            flex: 1 !important; 
-            display: flex !important; 
-            flex-direction: column !important; 
-            align-items: center !important; 
-            justify-content: center !important; 
-            cursor: pointer !important; 
-            padding: 4px 0 !important; 
-            margin: 0 !important;
-            white-space: nowrap !important; 
-            position: relative !important;
-            transition: all 0.25s ease !important;
-            user-select: none !important;
+            height: 100% !important;
             background: transparent !important;
             border: none !important;
+            border-radius: 0 !important;
+            display: flex !important;
+            justify-content: space-around !important;
+            align-items: center !important;
+            padding: 0 4px !important;
+            box-sizing: border-box !important;
         }
 
-        /* 🌟 ICON WRAPPER WITH RED AMBIENT SPOTLIGHT GLOW */
+        .nav-item {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            cursor: pointer !important;
+            user-select: none !important;
+            transition: all 0.2s ease !important;
+            padding: 4px 0 !important;
+            position: relative !important;
+            background: transparent !important;
+            border: none !important;
+            color: #64748b !important;
+        }
+        .nav-item:active { transform: scale(0.92) !important; }
+
         .nav-icon-wrap {
             position: relative;
             width: 28px;
@@ -1388,66 +1368,54 @@ header {
             align-items: center;
             justify-content: center;
             margin-bottom: 2px;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
         }
 
         .nav-svg {
-            width: 20px !important;
-            height: 20px !important;
-            stroke: #8e92a4;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            display: block;
-            transition: all 0.25s ease;
+            width: 22px !important;
+            height: 22px !important;
+            stroke: #64748b !important;
+            fill: none !important;
+            stroke-width: 2 !important;
+            stroke-linecap: round !important;
+            stroke-linejoin: round !important;
+            display: block !important;
+            transition: all 0.25s ease !important;
         }
 
         .nav-item span {
-            font-size: 10px !important;
-            font-weight: 600 !important;
+            font-size: 9.5px !important;
+            font-weight: 700 !important;
             line-height: 1 !important;
-            color: #8e92a4;
-            transition: color 0.25s ease, font-weight 0.25s ease;
+            margin-top: 3px !important;
+            color: #64748b !important;
+            letter-spacing: 0.3px !important;
+            transition: all 0.25s ease !important;
         }
 
-        /* ⚡ DESIGN 5: CYBERPUNK 2026 NEON HUD ACTIVE ICON EFFECT */
+        /* 🌟 ACTIVE TAB: PURE WHITE GLOW & APPLE ACTIVE DOT (ZERO BLUE BOX) */
+        .nav-item.active {
+            color: #ffffff !important;
+        }
         .nav-item.active .nav-icon-wrap {
-            background: rgba(0, 242, 254, 0.14) !important;
-            border: 1px solid #00f2fe !important;
-            backdrop-filter: blur(16px) !important;
-            -webkit-backdrop-filter: blur(16px) !important;
-            border-radius: 14px !important;
-            box-shadow: 0 0 14px rgba(0, 242, 254, 0.45), inset 0 0 8px rgba(0, 242, 254, 0.15) !important;
-            width: 42px !important;
-            height: 28px !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
         }
-
-        /* 🚫 Faltu Laal Saya Mukammal Khatam */
-        .nav-item.active .nav-icon-wrap::before {
-            display: none !important;
-        }
-
         .nav-item.active .nav-svg {
-            stroke: #00f2fe !important;
-            fill: none !important;
-            filter: drop-shadow(0 0 8px #00f2fe) !important;
-            transform: scale(1.08) !important;
+            stroke: #ffffff !important;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.75)) !important;
+            transform: translateY(-2px) !important;
         }
-
         .nav-item.active .nav-svg.solid-icon {
-            fill: #00f2fe !important;
-            stroke: #00f2fe !important;
+            fill: none !important;
+            stroke: #ffffff !important;
         }
-
         .nav-item.active span {
-            color: #00f2fe !important;
+            color: #ffffff !important;
             font-weight: 900 !important;
-            letter-spacing: 0.4px !important;
-            text-shadow: 0 0 8px rgba(0, 242, 254, 0.7) !important;
-        }
-
-        .nav-item:active {
-            transform: scale(0.92);
         }
 
 /* 🎬 ULTRA-MODERN LUXURY PROFILE (NO RED RING - NO 7 COLORS) */
@@ -3334,26 +3302,26 @@ header {
         </div>
 </div>
 
-    <!-- 💎 SCREENSHOT WALA EXACT BOTTOM NAVIGATION -->
+    <!-- 🍏 2026 APPLE visionOS BOTTOM NAVIGATION BAR -->
     <div class="bottom-nav-container">
         <div class="bottom-nav">
-            <!-- 1. Home (Solid Home Icon with Red Glow) -->
+            <!-- 1. Home (Crisp Precision Home SVG) -->
             <div class="nav-item active" onclick="window.showNav('homePage', this)">
                 <div class="nav-icon-wrap">
-                    <svg viewBox="0 0 24 24" class="nav-svg solid-icon"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/></svg>
+                    <svg viewBox="0 0 24 24" class="nav-svg"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                 </div>
                 <span>Home</span>
             </div>
 
-            <!-- 2. Live TV (Antenna Smart TV Icon) -->
+            <!-- 2. Live TV (Smart Broadcast Antenna TV SVG) -->
             <div class="nav-item" onclick="window.showNav('livePage', this)">
                 <div class="nav-icon-wrap">
-                    <svg viewBox="0 0 24 24" class="nav-svg"><polyline points="8 2 12 7 16 2"/><rect x="3" y="7" width="18" height="13" rx="2"/></svg>
+                    <svg viewBox="0 0 24 24" class="nav-svg"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/></svg>
                 </div>
                 <span>Live TV</span>
             </div>
 
-            <!-- 3. Search (Magnifier Glass) -->
+            <!-- 3. Search (Minimalist Precision Lens SVG) -->
             <div class="nav-item" onclick="window.showNav('searchPage', this)">
                 <div class="nav-icon-wrap">
                     <svg viewBox="0 0 24 24" class="nav-svg"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
@@ -3361,10 +3329,10 @@ header {
                 <span>Search</span>
             </div>
 
-            <!-- 4. Favorites (Sleek Heart) -->
+            <!-- 4. Favorites (Sleek Curvature Heart SVG) -->
             <div class="nav-item" onclick="window.showNav('favPage', this)">
                 <div class="nav-icon-wrap">
-                    <svg viewBox="0 0 24 24" class="nav-svg solid-icon"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <svg viewBox="0 0 24 24" class="nav-svg"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 </div>
                 <span>Favorites</span>
             </div>
@@ -3372,14 +3340,15 @@ header {
             <!-- 5. Profile (With Live Avatar Photo Support) -->
             <div class="nav-item" id="navProfileBtn" onclick="window.showNav('profilePage', this)">
                 <div class="nav-icon-wrap">
-                    <div id="navAvatarBox" style="width:20px; height:20px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-                        <svg viewBox="0 0 24 24" class="nav-svg"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="3.2"/><path d="M6.2 18.5c1.4-2.3 3.4-3.5 5.8-3.5s4.4 1.2 5.8 3.5"/></svg>
+                    <div id="navAvatarBox" style="width:22px; height:22px; border-radius:50%; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                        <svg viewBox="0 0 24 24" class="nav-svg"><circle cx="12" cy="7" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
                     </div>
                 </div>
                 <span>Profile</span>
             </div>
         </div>
     </div>
+    
     <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE & ENGINE -->
     <script>
         // 🚀 PERMANENT OFFLINE STORAGE ENGINE (TAMASHA / YOUTUBE ARCHITECTURE)
@@ -3439,9 +3408,18 @@ header {
             const isLiveChannelLink = (window.allChannels || []).some(c => c && c.url && String(c.url).trim() === mLiveUrl);
             const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle) || isLiveChannelLink;
             
-            // 👑 VIP Check: Agar user ke paas VIP Pass active hai toh badge hide ho jayega
+            // 👑 SMART VIP MATCH BY LINK (Live TV Channel Ka VIP Check)
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
-            const isVip = !userHasVip && (m.isVipSeries || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip'));
+
+            const isChannelVipMatch = (window.allChannels || []).some(c => {
+                if (!c || !c.url || !mLiveUrl) return false;
+                const isSameUrl = String(c.url).trim() === mLiveUrl;
+                const chanIsVip = /\b(vip)\b|\[vip\]|\(vip\)/i.test(c.title || c.name || '') || String(c.category || '').toLowerCase().includes('vip') || c.isVip === true;
+                return isSameUrl && chanIsVip;
+            });
+
+            const isMovieVip = m.isVipSeries || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip') || isChannelVipMatch;
+            const isVip = !userHasVip && isMovieVip;
 
             return `
                 <div class="card-rect ${isGrid ? 'grid-item' : ''} ${isYt ? 'is-landscape' : ''}" onclick="window.playMovie('${m.id}')">
@@ -4651,12 +4629,32 @@ header {
                     if (sImg) knownVipSliders[sImg] = true;
                 }
 
-                const showSliderVip = !userHasVip && isVip;
+                // 📡 Live & VIP Match By Link For Slider
+                const matchedChan = (window.allChannels || []).find(c => c && c.url && sUrl && String(c.url).trim() === sUrl);
+                const isSliderLive = /\b(live)\b|\[live\]|\(live\)/i.test(sRawTitle) || !!matchedChan;
+
+                const isSliderChanVip = matchedChan && (
+                    /\b(vip)\b|\[vip\]|\(vip\)/i.test(matchedChan.title || matchedChan.name || '') ||
+                    String(matchedChan.category || '').toLowerCase().includes('vip') ||
+                    matchedChan.isVip === true
+                );
+
+                const finalSliderIsVip = isVip || isSliderChanVip;
+                const showSliderVip = !userHasVip && finalSliderIsVip;
 
                 return `
                     <div class="slide" onclick="window.handleSlideClick(${idx})">
                         <img src="${s.img}">
+
+                        <!-- 🔴 Slider Live Badge (Top-Left) -->
+                        ${isSliderLive ? `
+                            <div class="card-live-badge" style="top:14px !important; left:18px !important; z-index:15 !important; padding:3px 8px !important;">
+                                <span class="live-pulse-dot"></span>
+                                <span style="font-size:8.5px !important; font-weight:900;">LIVE</span>
+                            </div>
+                        ` : ''}
                         
+                        <!-- 👑 Slider Design 1 Laser VIP Badge (Top-Right) -->
                         ${showSliderVip ? `
                             <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
                                 <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
@@ -4765,8 +4763,10 @@ header {
             }, 4000);
         }
 
-        // 👑 BULLETPROOF SLIDER CLICK & VIP LOCK PROTECTION
+        // 👑 100% STRICT VIP-LOCKED SLIDER CLICK ENGINE (NO LEAK - PURE SECURITY)
         window.handleSlideClick = (param) => {
+            if (window.isSliderDraggingAction) return; // Drag swipe par click block
+
             let s = null;
             let targetUrl = '';
 
@@ -4781,81 +4781,83 @@ header {
 
             if (!targetUrl && !s) return;
 
-            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
-
             const sUrl = String(targetUrl).trim();
-            const sTitle = String((s && (s.title || s.name)) || '').trim().toLowerCase();
-            const sImg = String((s && s.img) || '').trim();
+            const sTitle = String((s && (s.title || s.name)) || '').trim();
+            const cleanSTitle = sTitle.toLowerCase().replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
 
+            // 🔍 1. Channel Aur Movie Match Dhoondein
+            const matchedChannel = (window.allChannels || []).find(c => {
+                if (!c) return false;
+                const cUrl = String(c.url || '').trim();
+                const cTitle = String(c.title || c.name || '').toLowerCase().trim();
+                return (sUrl && cUrl && sUrl === cUrl) || (cTitle && cleanSTitle && (cTitle === cleanSTitle || cleanSTitle.includes(cTitle)));
+            });
+
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
             const matchedMovie = cachedMovies.find(m => {
                 if (!m) return false;
                 const mId = String(m.id || '');
                 const mUrl = String(m.url || '').trim();
-                const mTitle = String(m.title || m.name || '').trim().toLowerCase();
-                const mThumb = String(m.thumb || '').trim();
-                return (sUrl && (mId === sUrl || mUrl === sUrl)) || 
-                       (sTitle && mTitle && sTitle === mTitle) || 
-                       (sImg && mThumb && sImg === mThumb);
+                const mTitle = String(m.title || m.name || '').toLowerCase().trim();
+                return (sUrl && (mId === sUrl || mUrl === sUrl)) || (mTitle && cleanSTitle && mTitle === cleanSTitle);
             });
 
-            // 👑 VIP Check
-            let isVip = false;
-            if (matchedMovie) {
-                const mTitle = (matchedMovie.title || matchedMovie.name || '').toLowerCase();
-                const mCat = (matchedMovie.category || '').toLowerCase();
-                isVip = matchedMovie.isVipSeries || mTitle.includes('vip') || mCat.includes('vip');
-            }
-            if (!isVip && s) {
-                isVip = s.isVip === true || sTitle.includes('vip') || sUrl.includes('vip');
+            // 👑 2. STRICT VIP CHECK (Channel, Movie Ya Slider Kisi Par Bhi VIP Ho)
+            let isItemVip = false;
+
+            if (matchedChannel) {
+                const chanTitle = String(matchedChannel.title || matchedChannel.name || '').toLowerCase();
+                const chanCat = String(matchedChannel.category || '').toLowerCase();
+                if (chanTitle.includes('vip') || chanCat.includes('vip') || matchedChannel.isVip === true) {
+                    isItemVip = true;
+                }
             }
 
-            // 🛑 STRICT VIP BLOCK (Bina subscription ke KABHI nahi chalega)
-            if (isVip && !window.isUserVIPActive()) {
+            if (!isItemVip && matchedMovie) {
+                const movTitle = String(matchedMovie.title || matchedMovie.name || '').toLowerCase();
+                const movCat = String(matchedMovie.category || '').toLowerCase();
+                if (matchedMovie.isVipSeries || movTitle.includes('vip') || movCat.includes('vip') || matchedMovie.isVip === true) {
+                    isItemVip = true;
+                }
+            }
+
+            if (!isItemVip && s) {
+                if (s.isVip === true || sTitle.toLowerCase().includes('vip') || sUrl.toLowerCase().includes('vip')) {
+                    isItemVip = true;
+                }
+            }
+
+            // 🛑 3. AGAR VIP HAI AUR USER KE PAAS PASS NAHI HAI -> DIRECT BLOCK!
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            if (isItemVip && !userHasVip) {
                 const modal = document.getElementById('vipLockModal');
                 const lockName = document.getElementById('vipLockedContentName');
                 if (lockName) {
-                    lockName.innerText = (matchedMovie ? (matchedMovie.title || matchedMovie.name) : ((s && s.title) || 'VIP Movie')) + ' (Locked)';
+                    lockName.innerText = 'Unlock All VIP Movies, Anime & Live Channels';
                 }
                 if (modal) modal.style.display = 'flex';
-                return; // ⛔ Free mein play hona band!
+                return; // ⛔ YAHAN DIRECT STOP! Video play nahi hogi!
             }
 
-            // Movie list mein matched hai toh full details se open karein
+            // 📺 4. Agar Channel Hai Aur VIP Pass Active Hai (Ya Free Hai) -> Live TV Par Play Karo
+            if (matchedChannel) {
+                const cUrl = matchedChannel.url || sUrl;
+                const cName = matchedChannel.title || matchedChannel.name || sTitle;
+                const cleanCName = window.cleanTitleName ? window.cleanTitleName(cName) : cName;
+                window.playLive(cUrl, cleanCName, matchedChannel.id);
+                return;
+            }
+
+            // 🎬 5. Agar Movie Hai -> Movie Player Par Play Karo
             if (matchedMovie) {
                 window.playMovie(matchedMovie.id);
                 return;
             }
 
-            // Featured Standalone Video
+            // 6. Standalone Video
             document.getElementById('videoPage').style.display = 'block';
-            document.getElementById('playingTitle').innerText = (s && s.title) || 'Featured Video';
+            document.getElementById('playingTitle').innerText = sTitle || 'Featured Video';
             window.history.pushState({ page: 'moviePlayer' }, '');
-
-            document.getElementById('movieDetailsArea').innerHTML = `
-                <div class="movie-header-row">
-                    <div>
-                        <h2 style="font-size:17px; font-weight:800; color:#fff; margin:0 0 4px 0;">${(s && s.title) || 'Featured Premiere'}</h2>
-                        <div class="movie-meta-clean">
-                            <span class="meta-badge-hd">EXCLUSIVE</span>
-                            <span>Featured Special</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="movie-actions-bar">
-                    <button class="action-btn" onclick="window.handleNativeSystemShare('${targetUrl}', '${(s && s.title) || 'Featured Video'}')">
-                        <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
-                        <span>Share</span>
-                    </button>
-                    <button class="action-btn" onclick="window.toggleLandscapePlayer()">
-                        <svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
-                        <span>Full Screen</span>
-                    </button>
-                </div>
-            `;
-            const descArea = document.getElementById('movieDescArea');
-            if (descArea) descArea.innerHTML = '';
-            const relatedBox = document.getElementById('relatedCategoryMovies');
-            if (relatedBox) relatedBox.innerHTML = '';
 
             startNativePlayer('moviePlayerWrapper', targetUrl, false, 'slider_' + activeSliderIndex);
         };
