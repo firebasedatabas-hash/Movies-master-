@@ -11,12 +11,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Java 21 setup
-      - name: Setup Java JDK 21
+      - name: Setup Java JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17'
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -26,12 +25,16 @@ jobs:
       - name: Build Native Android APK
         run: |
           mkdir -p dist
-          echo "<html><body>Loading...</body></html>" > dist/index.html
+          echo "<html><body>Loading Movie Master...</body></html>" > dist/index.html
           
+          # Stable Capacitor 6 install karein
           npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npm install @capacitor/core@6 @capacitor/cli@6 @capacitor/android@6
           
-          # Capacitor Configuration (Website URL)
+          # Initialize project
+          npx cap init "Movie Master Pro" "com.moviemaster.pro" --web-dir dist
+          
+          # Aapki website ka link connect kiya hai
           cat << 'EOF' > capacitor.config.json
           {
             "appId": "com.moviemaster.pro",
@@ -44,12 +47,10 @@ jobs:
           }
           EOF
 
-          # Android project create karein
+          # Android platform add karein
           npx cap add android
           
-          # Gradle ko zabardasti Java 21 par set karein (Is se error khatam hoga)
-          echo "org.gradle.java.home=$JAVA_HOME" >> android/gradle.properties
-          
+          # Build APK
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
