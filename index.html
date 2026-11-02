@@ -430,12 +430,12 @@ header {
     transform: scale(1) !important;
 }
 
-/* 🎬 TAMASHA ROUNDED POSTER CORNERS & CINEMA COVER */
+/* 🎬 SLIDER POSTER CORNERS (MATCHING CATEGORY CARDS) */
 .slide img, .slide-main-img { 
     width: 100% !important;
     height: 100% !important; 
-    object-fit: cover !important; /* 👈 Tamasha ki tarah poora card cover karega */
-    border-radius: 16px !important; /* 👈 Tamasha app jaise 16px gol curves */
+    object-fit: cover !important;
+    border-radius: 4px !important; /* 👈 Category cards jaisi matching 4px golayi */
     border: 1px solid rgba(255, 255, 255, 0.15) !important; 
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85); 
     position: relative;
@@ -2658,14 +2658,59 @@ header {
         .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: #ff5252; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(229, 9, 20, 0.3); }
         .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
 
-        /* LANDSCAPE OPTIMIZATION */
+        /* 📱 2026 ULTRA-PRO LANDSCAPE & ROTATION ENGINE */
         @media screen and (orientation: landscape) {
-            body { padding-bottom: 70px; }
-            .slider-container { height: 260px; max-width: 800px; margin: 0 auto; border-radius: 12px; }
-            .live-grid-container-4 { grid-template-columns: repeat(6, 1fr) !important; max-width: 900px; margin: 0 auto; }
-            .movie-grid { grid-template-columns: repeat(5, 1fr) !important; max-width: 950px; margin: 0 auto; }
-            .video-fixed-top, .native-chrome-player-box { max-height: 75vh; }
-            .bottom-nav-container { max-width: 480px; left: 50%; transform: translateX(-50%); bottom: 8px; }
+            body { padding-bottom: 90px !important; }
+            
+            /* Slider height choti aur balanced taake poori screen na ghaire */
+            .slider-container { 
+                height: 215px !important; 
+                max-width: 860px !important; 
+                margin: 4px auto 10px !important; 
+            }
+            
+            /* Landscape mein poster khinchne ke bajaye perfect cinema size ban jaye */
+            .slide { 
+                min-width: 36% !important; 
+                width: 36% !important; 
+                padding: 2px 4px 8px !important;
+            }
+            
+            /* Bottom Nav bar slim ho jaye */
+            .bottom-nav-container { 
+                max-width: 440px !important; 
+                height: 46px !important;
+                left: 50% !important; 
+                transform: translateX(-50%) !important; 
+                bottom: 6px !important; 
+                border-radius: 24px !important;
+            }
+            .nav-svg { width: 18px !important; height: 18px !important; }
+            .nav-item span { font-size: 8px !important; }
+            
+            /* 📺 Live TV Player ko 50% height di taake channels ke liye jagah bache */
+            .video-fixed-top, .native-chrome-player-box { 
+                max-height: 50vh !important; 
+            }
+            
+            /* 🚀 CHANNELS KE NEECHE 120px KI SPACE (Nav Bar ab channels ko nahi chupaye ga) */
+            .scrollable-content { 
+                padding-bottom: 120px !important; 
+            }
+            
+            /* Grid sections balance (6 channels per row in landscape) */
+            .live-grid-container-4 { 
+                grid-template-columns: repeat(6, 1fr) !important; 
+                max-width: 900px; 
+                margin: 0 auto; 
+                padding-bottom: 40px !important;
+            }
+            .movie-grid { 
+                grid-template-columns: repeat(5, 1fr) !important; 
+                max-width: 950px; 
+                margin: 0 auto; 
+                padding-bottom: 40px !important;
+            }
         }
     </style>
 </head>
@@ -2688,8 +2733,14 @@ header {
 
     <script>
         (function() {
+            var s = document.getElementById('splashScreen');
+            // 🚀 Agar app rotate ho ya back ho, Splash Screen ko 0ms par foran band karo
+            if (sessionStorage.getItem('mm_splash_loaded')) {
+                if (s) { s.style.display = 'none'; s.classList.add('hide'); }
+                return;
+            }
+            sessionStorage.setItem('mm_splash_loaded', 'true');
             function hideSplashNow() {
-                var s = document.getElementById('splashScreen');
                 if (s && s.style.display !== 'none') {
                     s.classList.add('hide');
                     setTimeout(function() { s.style.display = 'none'; }, 350);
@@ -2996,7 +3047,7 @@ header {
 
                 <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="window.handleAvatarUpload(event)">
                 
-                <h3 id="profileNameDisplay" class="profile-display-name" onclick="window.triggerSecretAdmin()" style="cursor:pointer;">Profile</h3>
+                <h3 id="profileNameDisplay" class="profile-display-name">Profile</h3>
                 
                 <!-- Name Input Box with SVG Icon -->
                 <div class="profile-field-wrap">
@@ -3566,7 +3617,7 @@ header {
         // 🌟 2026 SMART HOME CATEGORY FILTER ENGINE
         window.activeHomeCategory = 'all';
 
-        // 🎬 2026 TAMASHA SKELETON SHIMMER CATEGORY ENGINE (NO EMPTY TEXT - PURE SHIMMER)
+        // 🎬 SMART CATEGORY FILTER (WITH ADMIN PANEL LIMIT APPLIED)
         window.filterHomeCategory = (catName, btn) => {
             window.activeHomeCategory = catName;
             document.querySelectorAll('.home-cat-pill').forEach(b => b.classList.remove('active'));
@@ -3583,7 +3634,7 @@ header {
                 return;
             }
 
-            // 2. Shimmer Cards HTML Generator (Tamasha Style)
+            // 2. Shimmer Placeholder
             const getShimmerPlaceholder = (title) => `
                 <div class="section-header">
                     <div class="section-title">${title}</div>
@@ -3598,17 +3649,9 @@ header {
                         <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
                         <div class="skeleton-shimmer" style="width:65%; height:9px; border-radius:4px; margin-top:6px;"></div>
                     </div>
-                    <div style="width:120px; flex-shrink:0;">
-                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                        <div class="skeleton-shimmer" style="width:85%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                    </div>
-                    <div style="width:120px; flex-shrink:0;">
-                        <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:6px; border:1px solid rgba(255,255,255,0.06);"></div>
-                        <div class="skeleton-shimmer" style="width:70%; height:9px; border-radius:4px; margin-top:6px;"></div>
-                    </div>
                 </div>`;
 
-            // 3. Specific Category Filter
+            // 3. Category Filter
             const allM = (window.allMovies && window.allMovies.length > 0) 
                 ? window.allMovies 
                 : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
@@ -3621,7 +3664,20 @@ header {
 
             const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
 
-            // Agar movies mil jayein toh foran dikhao, warna khali text ke bajaye Shimmer Cards dikhao!
+            // 🎯 ADMIN PANEL KI SET KI HUI LIMIT HASIL KAREIN
+            let catLimit = window.globalLimit || 10;
+            if (window.categories && window.categories.length > 0) {
+                const targetCat = window.categories.find(c => {
+                    const cName = (typeof c === 'object' ? c.name : c) || '';
+                    const cClean = cName.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return cClean === cleanTarget || cClean.includes(cleanTarget) || cleanTarget.includes(cClean);
+                });
+                if (targetCat && targetCat.limit) {
+                    catLimit = parseInt(targetCat.limit) || catLimit;
+                }
+            }
+
+            // 🌟 AB SIRF ADMIN LIMIT JITNI HI MOVIES DIKHENGI (BINA FALTU LINE KARE)
             if (cleanList.length > 0) {
                 sec.innerHTML = `
                     <div class="section-header">
@@ -3629,10 +3685,9 @@ header {
                         <div class="view-all-btn" onclick="window.openViewAll('${catName.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
                     </div>
                     <div class="movie-scroll" style="display:flex;">
-                        ${cleanList.map(m => window.renderMovieCard(m)).join('')}
+                        ${cleanList.slice(0, catLimit).map(m => window.renderMovieCard(m)).join('')}
                     </div>`;
             } else {
-                // 🌟 Asli Tamasha Shimmer (Jab tak Firebase load karega, chamakta hua card chalega!)
                 sec.innerHTML = getShimmerPlaceholder(catName);
             }
         };
@@ -3688,7 +3743,9 @@ header {
                         <div class="section-header">
                             <div class="section-title" style="display:flex; align-items:center; gap:8px;">
                                 <div class="sec-icon-box">
-                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/><circle cx="12" cy="14.5" r="1.5" fill="currentColor"/></svg>
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/><div class="sec-icon-box">
+    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/></svg>
+</div></svg>
                                 </div>
                                 <span>Live TV Channels</span>
                             </div>
@@ -4645,15 +4702,7 @@ header {
                 return `
                     <div class="slide" onclick="window.handleSlideClick(${idx})">
                         <img src="${s.img}">
-
-                        <!-- 🔴 Slider Live Badge (Top-Left) -->
-                        ${isSliderLive ? `
-                            <div class="card-live-badge" style="top:14px !important; left:18px !important; z-index:15 !important; padding:3px 8px !important;">
-                                <span class="live-pulse-dot"></span>
-                                <span style="font-size:8.5px !important; font-weight:900;">LIVE</span>
-                            </div>
-                        ` : ''}
-                        
+               
                         <!-- 👑 Slider Design 1 Laser VIP Badge (Top-Right) -->
                         ${showSliderVip ? `
                             <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
@@ -4737,8 +4786,14 @@ header {
         function updateSliderPosition() {
             const track = document.getElementById('sliderTrack');
             if (!track || !window.sliders || !window.sliders.length) return;
+
+            // Check karein mobile rotate hai ya seedha
+            const isLandscape = window.innerWidth > window.innerHeight;
+            const slideWidth = isLandscape ? 36 : 74;
+            const baseCenter = isLandscape ? 32 : 13;
+
             track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
-            track.style.transform = `translateX(calc(13% - ${activeSliderIndex * 74}%))`;
+            track.style.transform = `translateX(calc(${baseCenter}% - ${activeSliderIndex * slideWidth}%))`;
             document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active-slide', i === activeSliderIndex));
             
             const backdrop = document.getElementById('sliderBackdrop');
@@ -4746,6 +4801,14 @@ header {
                 backdrop.style.backgroundImage = `url('${window.sliders[activeSliderIndex].img}')`;
             }
         }
+
+        // Mobile rotate hote hi foran slider update ho
+        window.addEventListener('resize', () => {
+            if (typeof updateSliderPosition === 'function') updateSliderPosition();
+        });
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => { if (typeof updateSliderPosition === 'function') updateSliderPosition(); }, 150);
+        });
 
         function slideManual(direction) {
             if (!window.sliders || !window.sliders.length) return;
@@ -4863,6 +4926,8 @@ header {
         };
 
         window.showNav = (id, el, pushState = true) => {
+        
+        try { sessionStorage.setItem('mm_current_active_nav', id); } catch(e){}
             document.querySelectorAll('.page, .full-page').forEach(p => p.style.display = 'none');
             document.getElementById(id).style.display = id === 'livePage' ? 'flex' : 'block';
 
@@ -5300,58 +5365,6 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             }
         };
           
-   // 🤫 SECRET ADMIN 5-TAP DOOR (PIN: 7860)
-        let adminTapCount = 0;
-        let adminTapTimer = null;
-        window.triggerSecretAdmin = () => {
-            adminTapCount++;
-            clearTimeout(adminTapTimer);
-            adminTapTimer = setTimeout(() => { adminTapCount = 0; }, 1500);
-
-            if (adminTapCount >= 5) {
-                adminTapCount = 0;
-                const enteredPin = prompt('🔒 Enter Master Admin Secret PIN:');
-                if (enteredPin === '7860') { // 👈 Aapka Secret PIN
-                    document.getElementById('adminSecretModal').style.display = 'flex';
-                } else if (enteredPin !== null) {
-                    alert('❌ Galat PIN! Access Denied.');
-                }
-            }
-        };
-
-        // ⚡ Admin VIP Generator Functions
-        window.generateNewVIPCode = () => {
-            const rand = Math.floor(1000 + Math.random() * 9000);
-            const newCode = `VIP-${rand}`;
-            const input = document.getElementById('adminGeneratedCode');
-            if (input) input.value = newCode;
-        };
-
-        window.saveAndCopyVIPCode = async () => {
-            const input = document.getElementById('adminGeneratedCode');
-            const code = input ? input.value.trim() : '';
-            if (!code) { alert('Pehle Generate Code dabayein!'); return; }
-
-            // Admin ka chuna hua Plan (1 Day ya 30 Days)
-            const planSelect = document.getElementById('adminPlanDays');
-            const chosenDays = planSelect ? parseInt(planSelect.value) : 1;
-
-            try {
-                // Firebase Database mein Asli Expiry ke sath save karo
-                await set(ref(db, `vip_codes/${code}`), {
-                    days: chosenDays,
-                    used: false,
-                    createdAt: Date.now()
-                });
-
-                await navigator.clipboard.writeText(code);
-                alert(`✅ ${chosenDays} Din Ka Code "${code}" Firebase mein save ho gaya hai aur Copy bhi ho gaya hai!\nAb aap isay test kar sakte hain.`);
-                document.getElementById('adminSecretModal').style.display = 'none';
-            } catch(e) {
-                alert('Firebase save error: ' + e.message);
-            }
-        };
-   
    // 🌟 MASTER HD WALLPAPERS ENGINE (LIGHT CONTROL + ALL PAGES LIVE)
         const appThemes = {
             stealth: { name: 'Cinema Noir', img: '', primary: '#e50914', accent: '#b20710', glow: 'rgba(229, 9, 20, 0.45)' },
@@ -5522,6 +5535,13 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                    
         // RUN SLIDER AT START
         initSlider();
+        // 🔄 Rotation / Reload Restore Engine
+        try {
+            const lastPage = sessionStorage.getItem('mm_current_active_nav');
+            if (lastPage && lastPage !== 'homePage') {
+                window.showNav(lastPage, null, false);
+            }
+        } catch(e){}
     </script>
     <!-- 📲 PWA AUTO-INSTALL POPUP SCRIPT -->
     <script>
@@ -5647,37 +5667,6 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
         </div>
     </div>
 
-    <!-- 🔑 2. KHUFIA ADMIN VIP CODE GENERATOR (SIRF AAPKE LIYE) -->
-    <div id="adminSecretModal">
-        <div class="vip-modal-card" style="border-color:#00ffcc;">
-            <div class="vip-crown-icon-wrap" style="background:linear-gradient(135deg,#00b4d8,#0077b6);">
-                <svg viewBox="0 0 24 24" style="fill:#fff;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
-            </div>
-            <h2 class="vip-modal-title">Admin VIP Generator</h2>
-            <p class="vip-modal-sub" style="color:#00ffcc;">Customer Ke Liye 30 Din Ka Code Banayein</p>
-
-            <div style="width:100%; margin-bottom:12px;">
-                <input type="text" id="adminGeneratedCode" class="vip-input-field" style="width:100%; text-align:center; font-size:14px; margin-bottom:10px;" placeholder="Click Generate..." readonly>
-                
-                <!-- ⏱️ VIP Plan Duration Selector (1 Day Testing Se Lekar 30 Days Tak) -->
-                <select id="adminPlanDays" class="vip-input-field" style="width:100%; margin-bottom:10px; background:#0d111a; color:#ffd700; border-color:rgba(255,215,0,0.5);">
-                    <option value="1">⏱️ 1 Day Pass (For Testing / Trial)</option>
-                    <option value="7">📅 7 Days Pass (Weekly)</option>
-                    <option value="30" selected>👑 30 Days Pass (Monthly Standard)</option>
-                </select>
-
-                <button class="vip-activate-btn" style="width:100%;" onclick="window.generateNewVIPCode()">⚡ Generate Random Code</button>
-            </div>
-
-            <button class="vip-wa-btn" style="background:linear-gradient(135deg,#0984e3,#74b9ff);" onclick="window.saveAndCopyVIPCode()">
-                <i class="fa fa-save"></i>
-                <span>Save to Firebase & Copy</span>
-            </button>
-
-            <span class="vip-close-link" onclick="document.getElementById('adminSecretModal').style.display='none'">Exit Admin</span>
-        </div>
-    </div>
-     
      <!-- 🌟 2026 CYBER-GLASS FLOATING HUD NOTIFICATION ENGINE -->
     <script>
         (function() {
@@ -5793,9 +5782,21 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             window.open('https://tawk.to/chat/6adf65c3cce2b5346f98fe27/1k5sab1om', '_blank');
         };
 
-        // ✈️ Telegram Support Link (@MovieMasterHelp)
+        // ✈️ Telegram Support (Direct App Launch - No Web Page Reload)
         window.openTelegramSupport = function() {
-            window.open('https://t.me/MovieMasterHelp', '_blank');
+            // Direct Telegram app launch karega taake hamari app ka page kharab na ho
+            const link = document.createElement('a');
+            link.href = "tg://resolve?domain=MovieMasterHelp";
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            // Agar phone mein Telegram App na ho to Web fallback
+            setTimeout(() => {
+                window.open("https://t.me/MovieMasterHelp", "_blank");
+            }, 600);
         };
     </script>
      
