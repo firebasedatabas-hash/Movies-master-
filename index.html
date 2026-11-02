@@ -3523,8 +3523,8 @@ header {
             // Agar user ke paas VIP Pass active hai toh badge aur ring nahi aayegi
             const showVipBadge = hasVipTag && !userHasVip;
 
-            // Naam se "VIP" lafz ko safaai se saaf karna jab VIP active ho
-            const cleanDisplayName = userHasVip ? rawName.replace(/\s*[\(\[\{]?vip[\)\]\}]?\s*/gi, ' ').trim() : rawName;
+            // Naam se "VIP" text hamesha ke liye hide karein (Crown Badge pehle se mojood hai)
+            const cleanDisplayName = window.cleanTitleName ? window.cleanTitleName(rawName) : rawName.replace(/\s*[\-\_\(\[\{]*\s*\bvip\b\s*[\)\]\}]*\s*/gi, ' ').trim();
 
             return `
                 <div class="channel-box ${showVipBadge ? 'is-vip-channel' : ''}">
@@ -4425,7 +4425,7 @@ header {
             // 👑 1. Channel Par VIP Check
             const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawChannelName);
             if (isVipChan && !window.isUserVIPActive()) {
-                document.getElementById('vipLockedContentName').innerText = '✨ Unlock All VIP Movies, Anime & Live Channels';
+                document.getElementById('vipLockedContentName').innerText = 'Unlock All VIP Movies, Anime & Live Channels';
                 document.getElementById('vipLockModal').style.display = 'flex';
                 return; // ⛔ Channel play nahi hoga, direct VIP Box aayega!
             }
@@ -5535,11 +5535,17 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                    
         // RUN SLIDER AT START
         initSlider();
-        // 🔄 Rotation / Reload Restore Engine
+        // 🔄 Rotation / Reload & VIP Screen Restore Engine
         try {
             const lastPage = sessionStorage.getItem('mm_current_active_nav');
             if (lastPage && lastPage !== 'homePage') {
                 window.showNav(lastPage, null, false);
+            }
+            // Agar Live Chat se wapas aayein to Home par na jaye, VIP box wapis khula rahe
+            if (sessionStorage.getItem('mm_stay_on_vip') === 'true') {
+                sessionStorage.removeItem('mm_stay_on_vip');
+                const vModal = document.getElementById('vipLockModal');
+                if (vModal) vModal.style.display = 'flex';
             }
         } catch(e){}
     </script>
@@ -5777,9 +5783,19 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
      
      <!-- 💬 OFFICIAL LIVE CHAT & TELEGRAM (ZERO BUBBLE ON NAV BAR) -->
     <script>
-        // 💬 Live Chat: Sirf button dabane par khulegi (Screen aur Nav Bar 100% clean rahega)
+        // 💬 Live Chat (Safe External Open + Stay On VIP Screen)
         window.openTawkChat = function() {
-            window.open('https://tawk.to/chat/6adf65c3cce2b5346f98fe27/1k5sab1om', '_blank');
+            // Memory mein yaad rakhein ke VIP box khula hua tha
+            try { sessionStorage.setItem('mm_stay_on_vip', 'true'); } catch(e){}
+
+            // Safe external link launch bina page ko reload kiye
+            const link = document.createElement('a');
+            link.href = "https://tawk.to/chat/6adf65c3cce2b5346f98fe27/1k5sab1om";
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
         };
 
         // ✈️ Telegram Support (Direct App Launch - No Web Page Reload)
