@@ -3591,7 +3591,7 @@ header {
                 if (!m) return;
                 const info = window.parseSeriesData(m.title || m.name);
                 const mCat = (m.category || '').toLowerCase();
-                const movieIsVip = info.isVip || mCat.includes('vip');
+                const movieIsVip = (m.isVip === true) || info.isVip || mCat.includes('vip');
 
                 if (info.isSeries) {
                     const key = (m.category || '') + '_' + info.seriesName.toLowerCase();
