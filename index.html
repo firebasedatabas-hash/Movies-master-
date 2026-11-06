@@ -4660,10 +4660,11 @@ header {
             // 🚀 Instant Slider Unblock (Posters bina rukaawat ke foran load honge)
             if (!track || !window.sliders || !window.sliders.length) return;
 
-            // 🧠 0ms Instant VIP Slider Memory (Pehle hi frame se VIP badge lock rahega)
-            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || (JSON.parse(localStorage.getItem('mm_fast_cache'))?.movies) || []);
+            // 🚀 PURANI STUCK MEMORY SAFF KAREIN
+            try { localStorage.removeItem('mm_known_vip_sliders'); } catch(e){}
+
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
-            let knownVipSliders = JSON.parse(localStorage.getItem('mm_known_vip_sliders')) || {};
 
             track.innerHTML = window.sliders.map((s, idx) => {
                 if (!s) return '';
@@ -4672,7 +4673,7 @@ header {
                 const sCleanTitle = sRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
                 const sImg = String(s.img || '').trim();
 
-                // 🔍 Smart Fuzzy Match (Even with [VIP] or - Dubbed in title)
+                // 🔍 Slider ka Movie ya Channel se Link Match Karein
                 const matchedMovie = cachedMovies.find(m => {
                     if (!m) return false;
                     const mId = String(m.id || '');
@@ -4686,35 +4687,28 @@ header {
                            (sImg && mThumb && sImg === mThumb);
                 });
 
-                // 👑 VIP Check: Memory Cache + URL + Title
-                let isVip = false;
+                const matchedChan = (window.allChannels || []).find(c => {
+                    if (!c) return false;
+                    const cUrl = String(c.url || '').trim();
+                    const cTitle = String(c.title || c.name || '').toLowerCase().trim();
+                    return (sUrl && cUrl && sUrl === cUrl) || (sCleanTitle && cTitle && sCleanTitle === cTitle);
+                });
+
+                // 👑 ASLI REAL-TIME VIP CHECK:
+                // 1. Agar Movie Match hui: To wahi status aayega jo Movie ka hai (Tick laga to VIP, Hata to No VIP!)
+                // 2. Agar Channel Match hua: To Channel ka VIP status aayega
+                let finalSliderIsVip = false;
+
                 if (matchedMovie) {
-                    const mTitle = String(matchedMovie.title || matchedMovie.name || '').toLowerCase();
-                    const mCat = String(matchedMovie.category || '').toLowerCase();
-                    isVip = matchedMovie.isVipSeries || mTitle.includes('vip') || mCat.includes('vip');
-                }
-                if (!isVip) {
-                    isVip = s.isVip === true || sRawTitle.includes('vip') || sUrl.includes('vip') || !!knownVipSliders[sUrl] || !!knownVipSliders[sImg];
-                }
-
-                // Agar VIP confirm ho toh phone memory mein lock kar do taake agli dafa 0ms par badge aaye
-                if (isVip) {
-                    s.isVip = true;
-                    if (sUrl) knownVipSliders[sUrl] = true;
-                    if (sImg) knownVipSliders[sImg] = true;
+                    finalSliderIsVip = (matchedMovie.isVip !== undefined) 
+                        ? (matchedMovie.isVip === true) 
+                        : (matchedMovie.isVipSeries || /\b(vip)\b/i.test(matchedMovie.title || ''));
+                } else if (matchedChan) {
+                    finalSliderIsVip = (matchedChan.isVip === true) || /\b(vip)\b/i.test(matchedChan.title || '');
+                } else {
+                    finalSliderIsVip = (s.isVip === true) || /\b(vip)\b/i.test(sRawTitle);
                 }
 
-                // 📡 Live & VIP Match By Link For Slider
-                const matchedChan = (window.allChannels || []).find(c => c && c.url && sUrl && String(c.url).trim() === sUrl);
-                const isSliderLive = /\b(live)\b|\[live\]|\(live\)/i.test(sRawTitle) || !!matchedChan;
-
-                const isSliderChanVip = matchedChan && (
-                    /\b(vip)\b|\[vip\]|\(vip\)/i.test(matchedChan.title || matchedChan.name || '') ||
-                    String(matchedChan.category || '').toLowerCase().includes('vip') ||
-                    matchedChan.isVip === true
-                );
-
-                const finalSliderIsVip = isVip || isSliderChanVip;
                 const showSliderVip = !userHasVip && finalSliderIsVip;
 
                 return `
@@ -4883,15 +4877,17 @@ header {
                 return (sUrl && (mId === sUrl || mUrl === sUrl)) || (mTitle && cleanSTitle && mTitle === cleanSTitle);
             });
 
-            // 👑 2. STRICT VIP CHECK (Channel, Movie Ya Slider Kisi Par Bhi VIP Ho)
+            // 👑 2. REAL-TIME VIP CLICK CHECK (Admin Checkbox ke mutabiq chalega)
             let isItemVip = false;
 
-            if (matchedChannel) {
-                const chanTitle = String(matchedChannel.title || matchedChannel.name || '').toLowerCase();
-                const chanCat = String(matchedChannel.category || '').toLowerCase();
-                if (chanTitle.includes('vip') || chanCat.includes('vip') || matchedChannel.isVip === true) {
-                    isItemVip = true;
-                }
+            if (matchedMovie) {
+                isItemVip = (matchedMovie.isVip !== undefined) 
+                    ? (matchedMovie.isVip === true) 
+                    : (matchedMovie.isVipSeries || /\b(vip)\b/i.test(matchedMovie.title || ''));
+            } else if (matchedChannel) {
+                isItemVip = (matchedChannel.isVip === true) || /\b(vip)\b/i.test(matchedChannel.title || '');
+            } else if (s) {
+                isItemVip = (s.isVip === true) || /\b(vip)\b/i.test(sTitle);
             }
 
             if (!isItemVip && matchedMovie) {
