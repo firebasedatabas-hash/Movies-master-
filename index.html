@@ -3454,22 +3454,32 @@ header {
 
             const rawTitle = m.title || m.name || '';
             
-            // 🔴 1. SMART LIVE BADGE ENGINE (Title mein live likha ho YA Live TV channel link match kare)
+            // 🔴 SMART LIVE BADGE: Agar Admin se Tick lagaya to aayega, Untick kiya to 100% HATEGA!
             const mLiveUrl = String(m.url || '').trim();
             const isLiveChannelLink = (window.allChannels || []).some(c => c && c.url && String(c.url).trim() === mLiveUrl);
-            const isLive = /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle) || isLiveChannelLink;
+            const isLive = (m.isLive !== undefined) 
+                ? (m.isLive === true) 
+                : (isLiveChannelLink || /\b(live)\b|\[live\]|\(live\)/i.test(rawTitle));
             
-            // 👑 SMART VIP MATCH BY LINK (Live TV Channel Ka VIP Check)
+            // 👑 SMART AUTO-VIP MATCH (Agar Live TV Channel VIP hai to Home Card par bhi VIP aayega!)
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            const mCleanTitle = String(rawTitle).toLowerCase().trim();
 
             const isChannelVipMatch = (window.allChannels || []).some(c => {
-                if (!c || !c.url || !mLiveUrl) return false;
-                const isSameUrl = String(c.url).trim() === mLiveUrl;
-                const chanIsVip = /\b(vip)\b|\[vip\]|\(vip\)/i.test(c.title || c.name || '') || String(c.category || '').toLowerCase().includes('vip') || c.isVip === true;
-                return isSameUrl && chanIsVip;
+                if (!c) return false;
+                const cUrl = String(c.url || '').trim();
+                const cTitle = String(c.title || c.name || '').toLowerCase().trim();
+                
+                // Link match kare YA Title match kare (jaise Tensport)
+                const isUrlMatch = mLiveUrl && cUrl && (mLiveUrl === cUrl);
+                const isTitleMatch = mCleanTitle && cTitle && (mCleanTitle === cTitle || mCleanTitle.includes(cTitle) || cTitle.includes(mCleanTitle));
+                
+                const chanIsVip = (c.isVip === true) || /\b(vip)\b|\[vip\]|\(vip\)/i.test(c.title || c.name || '');
+                return (isUrlMatch || isTitleMatch) && chanIsVip;
             });
 
-            const isMovieVip = m.isVipSeries || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle) || (m.category || '').toLowerCase().includes('vip') || isChannelVipMatch;
+            // Agar Movie khud VIP ho YA Live Channel se link match kar jaye -> VIP BADGE 100% AAYEGA!
+            const isMovieVip = (m.isVip === true) || isChannelVipMatch || m.isVipSeries || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawTitle);
             const isVip = !userHasVip && isMovieVip;
 
             return `
@@ -3514,10 +3524,12 @@ header {
                 </div>`;
         };
         
-        // 📺 SMART CHANNEL ENGINE (VIP Active hone par badges gayab, expire hone par wapas)
+        // 📺 SMART CHANNEL ENGINE
         window.renderChannelItem = (c) => {
+            if (!c) return '';
             const rawName = c.title || c.name || '';
-            const hasVipTag = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawName);
+            // 👑 Admin Panel ke Checkbox (c.isVip) se VIP Badge aur Golden Ring lagana
+            const hasVipTag = (c.isVip === true) || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawName);
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
 
             // Agar user ke paas VIP Pass active hai toh badge aur ring nahi aayegi
@@ -4421,9 +4433,10 @@ header {
 
         window.playLive = (url, title, id) => {
             const rawChannelName = title || '';
-            
-            // 👑 1. Channel Par VIP Check
-            const isVipChan = /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawChannelName);
+           
+            // 👑 1. Channel Par VIP Check (Admin Checkbox + Title Match)
+            const channelObj = (window.allChannels || []).find(x => String(x.id) === String(id)) || {};
+            const isVipChan = (channelObj.isVip === true) || /\b(vip)\b|\[vip\]|\(vip\)/i.test(rawChannelName);
             if (isVipChan && !window.isUserVIPActive()) {
                 document.getElementById('vipLockedContentName').innerText = 'Unlock All VIP Movies, Anime & Live Channels';
                 document.getElementById('vipLockModal').style.display = 'flex';
@@ -4486,9 +4499,10 @@ header {
             };
 
             window.checkItemVIP = (item) => {
+                if (!item) return false;
                 const t = (item.title || item.name || '').toLowerCase();
                 const c = (item.category || '').toLowerCase();
-                return t.includes('vip') || c.includes('vip');
+                return (item.isVip === true) || item.isVipSeries === true || t.includes('vip') || c.includes('vip');
             };
 
             // Agar movie VIP hai aur user ne khareedi nahi hai to lock screen kholo
@@ -4498,23 +4512,27 @@ header {
                 return; // Video play nahi hogi
             }
 
-            // 📺 SMART LIVE TV SWITCHER (Home Page Se Live TV Par Bhejna)
-            const checkTitle = (m.title || m.name || '').toLowerCase();
-            const isLiveTagged = /\b(live)\b|\[live\]|\(live\)/i.test(m.title || m.name || '');
+            // 📺 100% SMART LIVE TV REDIRECT (Link Match Hote Hi Live TV Par Bhejega)
+            const mCleanUrl = String(m.url || '').trim();
+            const mCleanTitle = String(m.title || m.name || '').toLowerCase().trim();
 
-            const matchedChannel = (window.allChannels || []).find(c => 
-                (c.url && m.url && c.url.trim() === m.url.trim()) ||
-                (c.title && m.title && c.title.trim().toLowerCase() === checkTitle)
-            );
+            // Check karein kya yeh link ya naam kisi Live TV Channel se match karta hai
+            const matchedChannel = (window.allChannels || []).find(c => {
+                if (!c) return false;
+                const cUrl = String(c.url || '').trim();
+                const cTitle = String(c.title || c.name || '').toLowerCase().trim();
+                return (mCleanUrl && cUrl && mCleanUrl === cUrl) || 
+                       (mCleanTitle && cTitle && (mCleanTitle === cTitle || mCleanTitle.includes(cTitle) || cTitle.includes(mCleanTitle)));
+            });
 
-            if (matchedChannel || isLiveTagged) {
+            // 🚀 Agar link match ho gaya YA movie par LIVE ka tick laga ho -> Direct Live TV Page par redirect karein!
+            if (matchedChannel || m.isLive === true) {
                 const liveUrl = matchedChannel ? matchedChannel.url : m.url;
                 const rawName = matchedChannel ? (matchedChannel.title || matchedChannel.name) : (m.title || m.name);
-                
-                // 🏷️ "Live" lafz saaf karega taake screen par "Cartoon Network" hi likha aaye
-                const cleanLiveTitle = rawName.replace(/\s*[\(\[\{]?live[\)\]\}]?\s*/gi, ' ').trim() || rawName;
+                const cleanLiveTitle = window.cleanTitleName ? window.cleanTitleName(rawName) : rawName;
                 const liveId = matchedChannel ? matchedChannel.id : m.id;
-                
+
+                // Alag movie screen band, foran Live TV Page ke upar wale player par play hoga!
                 window.playLive(liveUrl, cleanLiveTitle, liveId);
                 return;
             }
