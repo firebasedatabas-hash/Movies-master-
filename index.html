@@ -97,6 +97,49 @@
     align-items: center;
     background: #000;
 }
+
+/* 🎙️ EXACT BLUE & WHITE SOLID ROUNDED MIC BUTTON */
+.voice-search-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f67ff 0%, #3851ff 100%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(56, 81, 255, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+.voice-search-btn:active {
+    transform: scale(0.9);
+}
+.voice-search-btn svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+    fill: #ffffff !important;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* 🔴 Bolte Waqt Glowing Blue-Cyan Wave Ring */
+.voice-search-btn.listening {
+    background: linear-gradient(135deg, #ff0844 0%, #ff4e50 100%) !important;
+    border-color: #ffffff !important;
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 8, 68, 0.8), 0 0 40px rgba(79, 103, 255, 0.6) !important;
+    animation: micWavePulse 1.1s infinite alternate ease-in-out;
+}
+@keyframes micWavePulse {
+    0% { transform: scale(0.98); box-shadow: 0 0 12px rgba(255, 8, 68, 0.6); }
+    100% { transform: scale(1.12); box-shadow: 0 0 30px rgba(255, 8, 68, 1), 0 0 20px #ffffff; }
+}
+
 .search-box-rainbow::before {
     content: "";
     position: absolute;
@@ -357,28 +400,30 @@ header {
     100% { background-position: 200% 0; }
 }
 
-/* 🎬 2026 EXACT TAMASHA APP SLIDER ENGINE */
+/* 🎬 2026 EXACT TAMASHA APP SLIDER ENGINE (LOCKED & NO PAGE SHIFT) */
 .slider-container { 
     width: 100%; 
-    height: 375px; /* 👈 Tamasha App Uncha Poster Height */
+    height: 375px; 
     margin-top: 10px;
     padding-top: 0;
     position: relative; 
-    overflow: visible !important;
+    overflow: hidden !important; /* 👈 100% LOCK! Page kabhi bhi side par nahi jayega */
     background: transparent !important; 
     border: none !important;
+    touch-action: pan-y;
 }
 
-/* 🌈 TAMASHA AMBIENT BACKDROP GLOW */
+/* 🌈 FULL AMBIENT GLOW (HEADER + CATEGORIES + SLIDER) */
 .slider-backdrop {
     position: absolute;
-    top: -120px;
-    left: -30px;
-    right: -30px;
-    height: calc(100% + 150px);
+    top: -55px !important; /* 👈 Header aur Logo ke theek peechay */
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 510px !important; /* 👈 Header se le kar Slider ke aakhir tak poora cover karega */
     background-size: cover;
     background-position: center top;
-    filter: blur(45px) brightness(0.6) saturate(1.8);
+    filter: blur(55px) brightness(0.7) saturate(2);
     transition: background-image 0.5s ease-in-out;
     z-index: 0;
     pointer-events: none;
@@ -406,7 +451,7 @@ header {
     width: 100%; 
 }
 
-/* 👈 Tamasha 74% Card Width & 12px Perfect Gap */
+/* 🌟 ALL SLIDER POSTERS EQUAL SIZE & BRIGHTNESS */
 .slide { 
     min-width: 74% !important; 
     width: 74% !important;
@@ -419,12 +464,11 @@ header {
     justify-content: center;
     padding: 4px 6px 14px;
     box-sizing: border-box;
-    opacity: 0.45; /* 👈 Side wale posters Tamasha jaise dim rahenge */
-    transform: scale(0.94);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    opacity: 1 !important; /* 👈 Side wale posters bhi full bright honge */
+    transform: scale(1) !important; /* 👈 Chota hona khatam, 100% barabar height */
+    transition: transform 0.3s ease;
 }
 
-/* 🌟 Center Wala Poster 100% Bright Aur Scale-up */
 .slide.active-slide {
     opacity: 1 !important;
     transform: scale(1) !important;
@@ -1124,6 +1168,32 @@ header {
     border-color: var(--primary) !important;
     box-shadow: 0 0 16px var(--primary-glow);
 }
+
+/* 📡 2026 ULTRA-LUXURY LIVE SATELLITE RADAR ICON */
+.broadcast-live-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+}
+.broadcast-live-icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.2;
+    filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.6));
+    transition: transform 0.25s ease;
+}
+.live-cat-pill.active .broadcast-live-icon svg {
+    stroke: #00f2fe !important;
+    filter: drop-shadow(0 0 10px #00f2fe);
+    transform: scale(1.1);
+}
+
 .live-cat-pill.active svg {
     stroke: var(--primary) !important;
 }
@@ -2658,6 +2728,123 @@ header {
         .meta-tag { display: inline-block; background: rgba(229, 9, 20, 0.15); color: #ff5252; font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(229, 9, 20, 0.3); }
         .desc-text { font-size: 13px; color: #aaa; line-height: 1.6; margin: 10px 0 0 0; background: #13151f; padding: 14px; border-radius: 10px; border: 1px solid var(--card-border); }
 
+/* 📍 VEHARI REAL GPS SECURITY LOCK SCREEN */
+#vehariGpsLockScreen {
+    position: fixed;
+    inset: 0;
+    background: #090a0f;
+    z-index: 9999999999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.gps-lock-card {
+    background: rgba(18, 20, 28, 0.95);
+    border: 1.5px solid rgba(229, 9, 20, 0.4);
+    border-radius: 26px;
+    padding: 28px 20px;
+    max-width: 320px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.9), 0 0 25px rgba(229, 9, 20, 0.3);
+}
+.gps-icon-circle {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(229, 9, 20, 0.15);
+    border: 2px solid #e50914;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
+}
+.gps-icon-circle i {
+    font-size: 30px;
+    color: #e50914;
+}
+.gps-btn-retry {
+    background: linear-gradient(135deg, #e50914, #b20710);
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 12px 22px;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+    margin-top: 14px;
+    width: 100%;
+}
+
+/* 🎬 TRUE YOUTUBE SMOOTH MINI-PLAYER (CLEAN VIEW) */
+        #moviePlayerWrapper.pip-active {
+            position: fixed !important;
+            bottom: 74px !important;
+            right: 14px !important;
+            width: 195px !important;
+            height: 110px !important;
+            min-width: 140px !important;
+            max-width: 90vw !important;
+            border-radius: 14px !important;
+            overflow: hidden !important;
+            background: #000000 !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+            box-shadow: 0 16px 45px rgba(0, 0, 0, 0.95), 0 0 20px rgba(0, 180, 216, 0.5) !important;
+            z-index: 99999999 !important;
+            touch-action: none;
+            cursor: pointer;
+        }
+        #moviePlayerWrapper.pip-active video,
+        #moviePlayerWrapper.pip-active iframe {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            pointer-events: none !important;
+        }
+        /* Top Mini Bar (Pause & Close Buttons) */
+        .pip-action-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 6px 8px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+            z-index: 999999999;
+            pointer-events: auto !important;
+        }
+        #moviePlayerWrapper.pip-active .pip-action-bar {
+            display: flex !important;
+        }
+        .pip-btn-round {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(14, 18, 28, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+        }
+        .pip-btn-round:active {
+            transform: scale(0.85);
+            background: var(--primary);
+        }
+
         /* 📱 2026 ULTRA-PRO LANDSCAPE & ROTATION ENGINE */
         @media screen and (orientation: landscape) {
             body { padding-bottom: 90px !important; }
@@ -2751,6 +2938,173 @@ header {
         })();
     </script>
 
+<!-- 📶 ONLY WIFI SECURITY LOCK SCREEN -->
+    <div id="wifiLockScreen" style="display:none; position:fixed; inset:0; background:#090a0f; z-index:999999999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; font-family:'Plus Jakarta Sans', sans-serif;">
+        <div style="width:72px; height:72px; border-radius:24px; background:rgba(0,180,216,0.12); border:1.5px solid var(--primary); display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:0 0 25px var(--primary-glow);">
+            <i class="fa fa-wifi" style="font-size:32px; color:var(--primary);"></i>
+        </div>
+        <h2 style="font-size:20px; font-weight:900; margin:0 0 8px; color:#ffffff; letter-spacing:0.5px;">WIFI REQUIRED</h2>
+        <p style="color:#8b8f9e; font-size:12.5px; max-width:290px; line-height:1.6; margin:0 0 18px;">
+            Yeh app sirf <b>Wi-Fi Internet</b> par chal sakti hai. Mobile SIM Data par iska istemal block hai.
+        </p>
+        <div style="font-size:11px; font-weight:700; color:#cbd5e1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); padding:8px 16px; border-radius:14px; margin-bottom:20px;">
+            Detected Network: <span id="wifiDetectedNetwork" style="color:#ff4757;">Mobile SIM Data</span>
+        </div>
+        <button onclick="window.recheckWifi()" style="background:linear-gradient(135deg, var(--primary), var(--primary-accent)); border:none; color:#fff; font-size:12px; font-weight:800; padding:11px 24px; border-radius:14px; cursor:pointer; box-shadow:0 6px 20px var(--primary-glow);">
+            <i class="fa fa-sync-alt" style="margin-right:6px;"></i> Wi-Fi Connect Kar Ke Check Karein
+        </button>
+    </div>
+
+    <!-- 🔍 DUAL WIFI DETECTION ENGINE (BROWSER SENSOR + SIM ISP) -->
+    <script>
+        (function setupWiFiGuard() {
+            function showLock(netName) {
+                const lock = document.getElementById('wifiLockScreen');
+                const label = document.getElementById('wifiDetectedNetwork');
+                if (label) label.innerText = netName || "Mobile Data (Blocked)";
+                if (lock) lock.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function removeLock() {
+                const lock = document.getElementById('wifiLockScreen');
+                if (lock) lock.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+
+            async function verifyWiFi() {
+                // 1. Android/Browser Hardware Sensor Check
+                const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (conn && conn.type) {
+                    if (conn.type === 'cellular') {
+                        showLock("Mobile SIM Data (" + (conn.effectiveType || '4G').toUpperCase() + ")");
+                        return;
+                    }
+                    if (conn.type === 'wifi' || conn.type === 'ethernet') {
+                        removeLock();
+                        return;
+                    }
+                }
+
+                // 2. Pakistani Cellular SIM ISP Deep Check (Jazz, Zong, Telenor, Ufone)
+                try {
+                    const res = await fetch('https://ipwho.is/');
+                    const data = await res.json();
+                    const ispInfo = ((data.connection && data.connection.isp ? data.connection.isp : data.isp) || '').toLowerCase();
+                    const orgInfo = ((data.connection && data.connection.org ? data.connection.org : '') || '').toLowerCase();
+                    const fullNet = ispInfo + " " + orgInfo;
+
+                    // Pakistan ke tamam SIM networks
+                    const simKeywords = ['jazz', 'pmcl', 'mobilink', 'zong', 'cmpak', 'telenor', 'ufone', 'ptml'];
+                    const isSIMData = simKeywords.some(k => fullNet.includes(k));
+
+                    if (isSIMData) {
+                        showLock("SIM Internet (" + (data.connection?.isp || 'Cellular 4G') + ")");
+                    } else {
+                        // PTCL, Nayatel, StormFiber ya Local Wi-Fi Router
+                        removeLock();
+                    }
+                } catch(e) {
+                    console.warn("WiFi verify bypass:", e);
+                }
+            }
+
+            // Realtime Switch Listener (Agar user chaltay chaltay Wi-Fi band kare toh foran lock ho jaye)
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            if (conn) {
+                conn.addEventListener('change', verifyWiFi);
+            }
+
+            verifyWiFi();
+            window.recheckWifi = verifyWiFi;
+        })();
+    </script>
+
+<!-- 📍 VEHARI EXCLUSIVE GPS LOCK OVERLAY -->
+    <div id="vehariGpsLockScreen">
+        <div class="gps-lock-card">
+            <div class="gps-icon-circle">
+                <i class="fa fa-map-marked-alt"></i>
+            </div>
+            <h2 style="font-size:19px; font-weight:900; color:#fff; margin:0 0 6px;">LOCATION RESTRICTED</h2>
+            <p style="font-size:11.5px; color:#94a3b8; line-height:1.6; margin:0 0 14px;">
+                Yeh app sirf <b>Vehari City</b> ki hudood ke andar chal sakti hai. Kisi doosre shehar mein iska access mukammal block hai.
+            </p>
+            <div style="font-size:10px; font-weight:700; color:#cbd5e1; background:rgba(255,255,255,0.06); padding:7px 12px; border-radius:10px; width:100%; border:1px solid rgba(255,255,255,0.1);">
+                Status: <span id="vehariGpsStatusText" style="color:#e50914;">Location Required</span>
+            </div>
+            <button class="gps-btn-retry" onclick="window.verifyVehariGps()">
+                <i class="fa fa-crosshairs" style="margin-right:6px;"></i> Verify My Location
+            </button>
+        </div>
+    </div>
+
+    <!-- 🎯 ASLI HARDWARE GPS DISTANCE CALCULATOR SCRIPT -->
+    <script>
+        (function() {
+            // 📍 Vehari City Center Coordinates (Latitude & Longitude)
+            const VEHARI_LAT = 30.0452;
+            const VEHARI_LNG = 72.3489;
+            const MAX_ALLOWED_DISTANCE_KM = 35; // 👈 Vehari + Burewala + Mailsi (35 KM Radius)
+
+            // Do points ke darmiyan zameen ka asli fasla nikalne ka formula (Haversine Formula)
+            function calculateDistance(lat1, lon1, lat2, lon2) {
+                const R = 6371; // Zameen ka radius KM mein
+                const dLat = (lat2 - lat1) * Math.PI / 180;
+                const dLon = (lon2 - lon1) * Math.PI / 180;
+                const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                          Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                          Math.sin(dLon/2) * Math.sin(dLon/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                return R * c; // Kilometers mein fasla
+            }
+
+            window.verifyVehariGps = function() {
+                const lockScreen = document.getElementById('vehariGpsLockScreen');
+                const statusText = document.getElementById('vehariGpsStatusText');
+
+                if (!navigator.geolocation) {
+                    if (statusText) statusText.innerText = "GPS not supported on device";
+                    if (lockScreen) lockScreen.style.display = 'flex';
+                    return;
+                }
+
+                if (statusText) statusText.innerText = "Checking GPS Location...";
+
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+
+                        // Vehari se fasla check karein
+                        const distance = calculateDistance(userLat, userLng, VEHARI_LAT, VEHARI_LNG);
+
+                        if (distance <= MAX_ALLOWED_DISTANCE_KM) {
+                            // User Vehari ke 35 KM ke andar hai -> ALLOW APP!
+                            if (lockScreen) lockScreen.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        } else {
+                            // User Vehari se bahar kisi aur shehar mein hai -> BLOCK!
+                            if (statusText) statusText.innerText = `You are ${Math.round(distance)} KM away from Vehari (Blocked)`;
+                            if (lockScreen) lockScreen.style.display = 'flex';
+                            document.body.style.overflow = 'hidden';
+                        }
+                    },
+                    function(error) {
+                        // Agar user location permission deny kar de
+                        if (statusText) statusText.innerText = "Location permission denied. Please Allow GPS.";
+                        if (lockScreen) lockScreen.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    },
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                );
+            };
+
+            // App khulte hi check karein
+            window.addEventListener('DOMContentLoaded', window.verifyVehariGps);
+        })();
+    </script>
+
     <!-- HEADER (CENTERED LOGO + CONDITIONAL TOP-RIGHT AVATAR) -->
     <header>
         <div class="logo">
@@ -2783,7 +3137,10 @@ header {
     </header>
 
     <!-- 1. HOME PAGE -->
-    <div id="homePage" class="page">
+    <div id="homePage" class="page" style="position:relative;">
+        <!-- 🌈 AMBIENT GLOW BACKDROP (NOW AT HOME LEVEL TO GLOW BEHIND HEADER) -->
+        <div class="slider-backdrop" id="sliderBackdrop"></div>
+
         <!-- 🌟 2026 CYBER-GLASS HOME CATEGORY SCROLL BAR WITH TAMASHA SHIMMER PILLS -->
         <div class="home-cat-scroll" id="homeCategoryBar">
             <div class="home-cat-pill active" onclick="window.filterHomeCategory('all', this)">
@@ -2796,8 +3153,7 @@ header {
             <div class="skeleton-shimmer" style="width:80px; height:28px; border-radius:20px; flex-shrink:0;"></div>
         </div>
         <div class="slider-container" id="sliderClickArea">
-            <div class="slider-backdrop" id="sliderBackdrop">
-            </div>
+            
             <!-- 🎬 Slider Shimmer Placeholder -->
             <div class="slider-track" id="sliderTrack">
                 <div class="slide active-slide">
@@ -2866,9 +3222,20 @@ header {
         <div class="scrollable-content" id="liveScrollContainer">
             <!-- 🌟 2026 NEXT-GEN LIVE TV CATEGORY CAPSULES -->
             <div class="live-cat-scroll">
-                <!-- 1. All -->
+                <!-- 1. All (2026 LIVE SATELLITE RADAR BROADCAST) -->
                 <div class="live-cat-pill active" onclick="window.filterLiveCategory('all', this)">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+                    <div class="broadcast-live-icon">
+                        <svg viewBox="0 0 24 24">
+                            <!-- Center Broadcast Satellite Dot -->
+                            <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+                            <!-- Inner Radar Frequency Waves -->
+                            <path d="M8.5 8.5a5 5 0 0 0 0 7" stroke-linecap="round"/>
+                            <path d="M15.5 8.5a5 5 0 0 1 0 7" stroke-linecap="round"/>
+                            <!-- Outer Global Satellite Waves -->
+                            <path d="M5.5 5.5a9.2 9.2 0 0 0 0 13" stroke-linecap="round"/>
+                            <path d="M18.5 5.5a9.2 9.2 0 0 1 0 13" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <span>All Broadcasts</span>
                 </div>
                 <!-- 2. Sports -->
@@ -2905,12 +3272,25 @@ header {
 
     <!-- 3. SEARCH PAGE -->
     <div id="searchPage" class="full-page">
-        <div class="page-header">
+        <div class="page-header" style="gap: 10px;">
             <i class="fa fa-arrow-left" onclick="window.backToHome()" style="cursor:pointer; font-size:18px;"></i>
             <div class="search-box-rainbow">
                 <input type="text" id="searchInput" placeholder="Search movies or channels..." oninput="window.doSearch(this.value)">
             </div>
+            
+            <!-- 🎙️ SOLID ROUNDED WHITE & BLUE MIC (EXACT AS PHOTO) -->
+            <div class="voice-search-btn" id="voiceMicBtn" onclick="window.startVoiceSearch()" title="Voice Search">
+                <svg viewBox="0 0 24 24">
+                    <!-- Solid Capsule Mic Body -->
+                    <rect x="8.5" y="2" width="7" height="12" rx="3.5" fill="#ffffff"/>
+                    <!-- Solid Stand Curved Holder -->
+                    <path d="M5 10.5C5 14.366 8.134 17.5 12 17.5C15.866 17.5 19 10.5 19 10.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                    <!-- Solid Base Stem -->
+                    <line x1="12" y1="17.5" x2="12" y2="22" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round"/>
+                </svg>
+            </div>
         </div>
+        
         <div style="padding: 15px;">
             <div id="searchChannelsTitle" class="section-title" style="display:none; margin-bottom:12px;">Channels</div>
             <div class="live-grid-container-4" id="searchChannelGrid" style="padding:0 0 20px 0;"></div>
@@ -3262,38 +3642,6 @@ header {
                         </div>
                     </div>
 
-                </div>
-
-                <!-- 2. Request a Movie (Aapka Bheja Hua Note & Pen Icon) -->
-                <div class="profile-menu-item" onclick="window.requestMovieWhatsApp()">
-                    <div class="profile-menu-left">
-                        <div class="profile-menu-icon" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe); box-shadow: 0 4px 14px rgba(108, 92, 231, 0.4);">
-                            <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#ffffff;"><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/><path d="M12 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h8v-2H4V6h8V4z"/></svg>
-                        </div>
-                        <div class="profile-menu-text-wrap">
-                            <span class="profile-menu-title">Request a Movie</span>
-                            <span class="profile-menu-sub">Apni pasand ki movie add karwayen</span>
-                        </div>
-                    </div>
-                    <div class="profile-chevron-icon">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
-                </div>
-
-                <!-- 3. WhatsApp Community (Aapka Bheja Hua 3-People Group Icon) -->
-                <div class="profile-menu-item" onclick="window.joinWhatsAppCommunity()">
-                    <div class="profile-menu-left">
-                        <div class="profile-menu-icon" style="background: linear-gradient(135deg, #25d366, #128c7e); box-shadow: 0 4px 14px rgba(37, 211, 102, 0.45);">
-                            <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:#ffffff;"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                        </div>
-                        <div class="profile-menu-text-wrap">
-                            <span class="profile-menu-title">WhatsApp Community</span>
-                            <span class="profile-menu-sub">Daily updates & new uploads</span>
-                        </div>
-                    </div>
-                    <div class="profile-chevron-icon">
-                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                    </div>
                 </div>
 
                 <!-- 4. Share App (Aapka Bheja Hua Connected Share Nodes Icon) -->
@@ -4432,6 +4780,11 @@ header {
         };
 
         window.playLive = (url, title, id) => {
+            // 🛑 AGAR PEHLE SE KOI CHOTI SCREEN CHAL RAHI HO TOH FORAN BAND KARO!
+            if (typeof window.exitMiniPlayer === 'function') {
+                window.exitMiniPlayer();
+            }
+
             const rawChannelName = title || '';
            
             // 👑 1. Channel Par VIP Check (Admin Checkbox + Title Match)
@@ -4611,6 +4964,51 @@ header {
             startNativePlayer('moviePlayerWrapper', m.url, false, m.id);
         };
 
+// 🎙️ 2026 FAST APPLE SILENT VOICE SEARCH (NO POPUP - DIRECT MIC)
+        window.startVoiceSearch = () => {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const micBtn = document.getElementById('voiceMicBtn');
+            const searchInput = document.getElementById('searchInput');
+
+            if (!SpeechRecognition) {
+                alert("Aap ke mobile browser mein Voice Search support nahi hai.");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US'; // English aur Urdu dono bol sakte hain
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            // Jab mic shuru ho (Sirf Apple Siri ring chalegi, koi popup nahi aayega)
+            recognition.onstart = () => {
+                if (micBtn) micBtn.classList.add('listening');
+                if (searchInput) searchInput.placeholder = "Boliyen, sun raha hoon...";
+            };
+
+            // Jaise hi aap bolenge, foran search bar mein likh kar search kar dega
+            recognition.onresult = (event) => {
+                const spokenText = event.results[0][0].transcript;
+                if (searchInput) {
+                    searchInput.value = spokenText;
+                    window.doSearch(spokenText);
+                }
+            };
+
+            recognition.onerror = () => {
+                if (micBtn) micBtn.classList.remove('listening');
+                if (searchInput) searchInput.placeholder = "Search movies or channels...";
+            };
+
+            // Bolna khatam hote hi mic khud band ho jayega
+            recognition.onend = () => {
+                if (micBtn) micBtn.classList.remove('listening');
+                if (searchInput) searchInput.placeholder = "Search movies or channels...";
+            };
+
+            recognition.start();
+        };
+
         window.doSearch = (query) => {
             clearTimeout(searchDebounceTimer);
             searchDebounceTimer = setTimeout(() => {
@@ -4673,36 +5071,40 @@ header {
                 const sCleanTitle = sRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
                 const sImg = String(s.img || '').trim();
 
-                // 🔍 Slider ka Movie ya Channel se Link Match Karein
+                // 🔍 100% GUARANTEED SUPER-SMART SLIDER MATCH ENGINE
                 const matchedMovie = cachedMovies.find(m => {
                     if (!m) return false;
-                    const mId = String(m.id || '');
+                    const mId = String(m.id || '').trim();
                     const mUrl = String(m.url || '').trim();
-                    const mRawTitle = String(m.title || m.name || '').trim().toLowerCase();
-                    const mCleanTitle = mRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
                     const mThumb = String(m.thumb || '').trim();
+                    const mTitle = String(m.title || m.name || '').toLowerCase().trim();
+
+                    // 1. Video Link Match (Direct ya Partial)
+                    const urlMatch = sUrl && (mId === sUrl || mUrl === sUrl || (mUrl.length > 8 && sUrl.includes(mUrl)) || (sUrl.length > 8 && mUrl.includes(sUrl)));
                     
-                    return (sUrl && (mId === sUrl || mUrl === sUrl)) || 
-                           (sCleanTitle && mCleanTitle && (sCleanTitle === mCleanTitle || mCleanTitle.includes(sCleanTitle) || sCleanTitle.includes(mCleanTitle))) || 
-                           (sImg && mThumb && sImg === mThumb);
+                    // 2. Photo / Poster Match
+                    const imgMatch = sImg && mThumb && (sImg === mThumb || (sImg.length > 25 && mThumb.includes(sImg.substring(0, 50))));
+
+                    // 3. Title Match
+                    const titleMatch = sCleanTitle && mTitle && (sCleanTitle === mTitle || mTitle.includes(sCleanTitle) || sCleanTitle.includes(mTitle));
+
+                    return urlMatch || imgMatch || titleMatch;
                 });
 
                 const matchedChan = (window.allChannels || []).find(c => {
                     if (!c) return false;
                     const cUrl = String(c.url || '').trim();
+                    const cThumb = String(c.thumb || '').trim();
                     const cTitle = String(c.title || c.name || '').toLowerCase().trim();
-                    return (sUrl && cUrl && sUrl === cUrl) || (sCleanTitle && cTitle && sCleanTitle === cTitle);
+                    return (sUrl && cUrl && sUrl === cUrl) || (sImg && cThumb && sImg === cThumb) || (sCleanTitle && cTitle && sCleanTitle === cTitle);
                 });
 
-                // 👑 ASLI REAL-TIME VIP CHECK:
-                // 1. Agar Movie Match hui: To wahi status aayega jo Movie ka hai (Tick laga to VIP, Hata to No VIP!)
-                // 2. Agar Channel Match hua: To Channel ka VIP status aayega
+                // 👑 REAL-TIME VIP BADGE LOCK:
                 let finalSliderIsVip = false;
 
                 if (matchedMovie) {
-                    finalSliderIsVip = (matchedMovie.isVip !== undefined) 
-                        ? (matchedMovie.isVip === true) 
-                        : (matchedMovie.isVipSeries || /\b(vip)\b/i.test(matchedMovie.title || ''));
+                    const isChanVip = (window.allChannels || []).some(c => c && c.url && matchedMovie.url && String(c.url).trim() === String(matchedMovie.url).trim() && (c.isVip === true || /\b(vip)\b/i.test(c.title || '')));
+                    finalSliderIsVip = (matchedMovie.isVip === true) || matchedMovie.isVipSeries || isChanVip || /\b(vip)\b/i.test(matchedMovie.title || '');
                 } else if (matchedChan) {
                     finalSliderIsVip = (matchedChan.isVip === true) || /\b(vip)\b/i.test(matchedChan.title || '');
                 } else {
@@ -4751,10 +5153,11 @@ header {
                     const diffX = curX - sliderDragStartX;
                     const diffY = curY - sliderDragStartY;
 
-                    // Agar horizontal swipe ho raha ho toh page scroll hone se bachao
+                    // Jab ungli side par ghoome toh poore page ko hilne se rokna
                     if (Math.abs(diffX) > Math.abs(diffY)) {
+                        if (e.cancelable) e.preventDefault(); // 👈 Page hilna 100% block!
                         sliderCurrentDiffX = diffX;
-                        if (Math.abs(diffX) > 10) {
+                        if (Math.abs(diffX) > 8) {
                             window.isSliderDraggingAction = true;
                         }
                         const sWidth = sliderArea.clientWidth || window.innerWidth;
@@ -4967,23 +5370,184 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
             document.getElementById('viewAllGrid').innerHTML = groupedList.map(m => window.renderMovieCard(m, true)).join('');
         };
 
+        // 🎬 100% CLEAN YOUTUBE MINI-PLAYER (HOME VISIBLE + NO BLACK SCREEN)
+        let isPipMode = false;
+
+        // 1. BACK BUTTON: Video Float Karna & Home Screen Ko Saaf Rakhna
         window.closePlayer = (fromUserBtn = true) => { 
             const videoPage = document.getElementById('videoPage');
-            if (videoPage) videoPage.style.display = 'none'; 
-            cleanupPlayer();
-            
-            // Video Player aur purana saara data 100% reset karo
-            const container = document.getElementById('moviePlayerWrapper');
-            if(container) container.innerHTML = '';
-            const detailsArea = document.getElementById('movieDetailsArea');
-            if(detailsArea) detailsArea.innerHTML = '';
-            const descArea = document.getElementById('movieDescArea');
-            if(descArea) descArea.innerHTML = '';
-            const relatedArea = document.getElementById('relatedCategoryMovies');
-            if(relatedArea) relatedArea.innerHTML = '';
+            const playerWrapper = document.getElementById('moviePlayerWrapper');
+            const vid = playerWrapper ? playerWrapper.querySelector('video') : null;
+            const ifr = playerWrapper ? playerWrapper.querySelector('iframe') : null;
 
-            if (fromUserBtn) window.history.back();
+            // Agar video chal rahi ho toh mini-player banao
+            if ((vid || ifr) && !isPipMode) {
+                isPipMode = true;
+
+                // Player ke upar Buttons lagayein
+                if (!document.getElementById('pipBar')) {
+                    const bar = document.createElement('div');
+                    bar.id = 'pipBar';
+                    bar.className = 'pip-action-bar';
+                    bar.innerHTML = `
+                        <div class="pip-btn-round" onclick="window.toggleMiniPlayPause(event)">
+                            <i class="fa fa-pause" id="pipIconState"></i>
+                        </div>
+                        <div class="pip-btn-round" onclick="window.exitMiniPlayer(event)">
+                            <i class="fa fa-times"></i>
+                        </div>
+                    `;
+                    playerWrapper.appendChild(bar);
+                }
+
+                // Chote dibbe se faltu native controls (seek bar wagera) hatao
+                if (vid) vid.removeAttribute('controls');
+
+                // Player ko videoPage ke kaale parde se nikaal kar body mein float karo
+                document.body.appendChild(playerWrapper);
+                playerWrapper.classList.add('pip-active');
+                playerWrapper.style.transform = 'translate(0px, 0px)';
+                window.pipX = 0;
+                window.pipY = 0;
+
+                // Video Page ko mukammal band karo taake Home Page 100% saaf dikhe!
+                if (videoPage) videoPage.style.display = 'none';
+
+                // Video chalti rahe
+                if (vid && vid.paused) vid.play().catch(() => {});
+                return;
+            }
+
+            // Normal Complete Close
+            if (videoPage) videoPage.style.display = 'none';
+            window.exitMiniPlayer();
+            if (fromUserBtn && window.history.state?.page === 'moviePlayer') window.history.back();
         };
+
+        // 2. TAP TO EXPAND (Dobara Poori Screen Par Khulna)
+        document.addEventListener('click', (e) => {
+            const playerWrapper = document.getElementById('moviePlayerWrapper');
+            if (isPipMode && playerWrapper && playerWrapper.contains(e.target)) {
+                if (e.target.closest('.pip-btn-round')) return;
+                
+                isPipMode = false;
+                const videoPage = document.getElementById('videoPage');
+                const detailsArea = document.getElementById('movieDetailsArea');
+                const vid = playerWrapper.querySelector('video');
+
+                // Player ko wapas videoPage ke andar shift karo
+                playerWrapper.classList.remove('pip-active');
+                playerWrapper.style.transform = 'none';
+                playerWrapper.style.width = '100%';
+                playerWrapper.style.height = '';
+                if (vid) vid.setAttribute('controls', '');
+
+                const bar = document.getElementById('pipBar');
+                if (bar) bar.remove();
+
+                if (videoPage && detailsArea) {
+                    videoPage.insertBefore(playerWrapper, detailsArea);
+                    videoPage.style.display = 'block';
+                }
+
+                // 🚫 Faltu Episode bar ko band hi rakhein
+                const tabs = document.getElementById('tamashaTabsArea');
+                if (tabs) tabs.style.display = 'none';
+            }
+        });
+
+        // 3. PLAY / PAUSE BUTTON
+        window.toggleMiniPlayPause = (e) => {
+            if (e) e.stopPropagation();
+            const vid = document.querySelector('#moviePlayerWrapper video');
+            const icon = document.getElementById('pipIconState');
+            if (vid) {
+                if (vid.paused) {
+                    vid.play();
+                    if (icon) icon.className = 'fa fa-pause';
+                } else {
+                    vid.pause();
+                    if (icon) icon.className = 'fa fa-play';
+                }
+            }
+        };
+
+        // 4. CLOSE (❌) BUTTON
+        window.exitMiniPlayer = (e) => {
+            if (e) e.stopPropagation();
+            const playerWrapper = document.getElementById('moviePlayerWrapper');
+            const videoPage = document.getElementById('videoPage');
+            const detailsArea = document.getElementById('movieDetailsArea');
+            const bar = document.getElementById('pipBar');
+            if (bar) bar.remove();
+
+            if (playerWrapper) {
+                playerWrapper.classList.remove('pip-active');
+                playerWrapper.style.transform = 'none';
+                playerWrapper.innerHTML = '';
+                // Wapas videoPage mein shift karein
+                if (videoPage && detailsArea) {
+                    videoPage.insertBefore(playerWrapper, detailsArea);
+                }
+            }
+            cleanupPlayer();
+
+            if (videoPage) videoPage.style.display = 'none';
+            const tabs = document.getElementById('tamashaTabsArea');
+            if (tabs) tabs.style.display = 'none';
+            isPipMode = false;
+        };
+
+        // 5. 👆 DRAG & PINCH RESIZE
+        (function setupContinuousTouch() {
+            const playerWrapper = document.getElementById('moviePlayerWrapper');
+            if (!playerWrapper) return;
+
+            window.pipX = 0;
+            window.pipY = 0;
+            let startX = 0, startY = 0;
+            let initialW = 195, initialDist = 0;
+
+            playerWrapper.addEventListener('touchstart', (e) => {
+                if (!isPipMode || e.target.closest('.pip-btn-round')) return;
+
+                if (e.touches.length === 2) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    initialDist = Math.hypot(dx, dy);
+                    initialW = playerWrapper.offsetWidth;
+                    return;
+                }
+
+                if (e.touches.length === 1) {
+                    startX = e.touches[0].clientX - window.pipX;
+                    startY = e.touches[0].clientY - window.pipY;
+                }
+            }, { passive: true });
+
+            playerWrapper.addEventListener('touchmove', (e) => {
+                if (!isPipMode || e.target.closest('.pip-btn-round')) return;
+
+                if (e.touches.length === 2 && initialDist > 0) {
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const newDist = Math.hypot(dx, dy);
+                    const scale = newDist / initialDist;
+
+                    let newW = Math.min(Math.max(initialW * scale, 130), window.innerWidth * 0.9);
+                    let newH = newW * (9 / 16);
+                    playerWrapper.style.width = newW + 'px';
+                    playerWrapper.style.height = newH + 'px';
+                    return;
+                }
+
+                if (e.touches.length === 1) {
+                    window.pipX = e.touches[0].clientX - startX;
+                    window.pipY = e.touches[0].clientY - startY;
+                    playerWrapper.style.transform = `translate(${window.pipX}px, ${window.pipY}px)`;
+                }
+            }, { passive: true });
+        })();
 
         window.backToHome = () => window.history.back();
 
@@ -5709,8 +6273,25 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                 let iconWrapBorder = '#00f2fe';
                 let titleColor = '#00f2fe';
 
-                // 📥 1. Download Link Copy Case (Sabse Professional 2026 Checkmark)
-                if (msg.includes('Snaptube') || msg.includes('Copy') || msg.includes('Download') || customType === 'download') {
+                // 🎙️ 0. Voice Search Notification Case (Mic Active Hote Hi Sahi Toast)
+                if (customType === 'voice' || msg.includes('Mic') || msg.includes('Awaaz') || msg.includes('Dhoond')) {
+                    titleText = 'VOICE SEARCH';
+                    descText = msg;
+                    titleColor = '#00f2fe';
+                    borderColor = 'rgba(0, 242, 254, 0.55)';
+                    glowColor = 'rgba(0, 242, 254, 0.4)';
+                    iconWrapBorder = '#00f2fe';
+                    iconWrapBg = 'linear-gradient(135deg, rgba(0, 242, 254, 0.3), rgba(0, 180, 216, 0.1))';
+                    iconSvg = `
+                        <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:none; stroke:#00f2fe; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; filter:drop-shadow(0 0 5px #00f2fe);">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                        </svg>
+                    `;
+                } 
+                // 📥 1. Download Link Copy Case (Sirf Link Copy Hone Par Dikhaye)
+                else if (customType === 'download' || msg.includes('Snaptube') || msg.includes('Vidmate')) {
                     titleText = 'LINK COPIED!';
                     descText = 'Snaptube ya Vidmate khol kar download karein';
                     titleColor = '#00f2fe';
@@ -5723,7 +6304,8 @@ const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id =
                             <polyline points="20 6 9 17 4 12"></polyline>
                         </svg>
                     `;
-                } 
+                }
+                
                 // ❌ 2. Error / Warning Case
                 else if (msg.includes('Galat') || msg.includes('error') || msg.includes('pehle') || msg.includes('Expired')) {
                     titleText = 'ACCESS ALERT';
