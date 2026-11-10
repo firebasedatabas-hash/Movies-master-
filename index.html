@@ -400,30 +400,30 @@ header {
     100% { background-position: 200% 0; }
 }
 
-/* 🎬 2026 EXACT TAMASHA APP SLIDER ENGINE (LOCKED & NO PAGE SHIFT) */
+/* 🎬 16:9 EXACT CINEMA THUMBNAIL SLIDER (ZERO CROPPING / NO ZOOM) */
 .slider-container { 
     width: 100%; 
-    height: 375px; 
+    height: calc((86vw * 9 / 16) + 10px) !important; /* 👈 Exact 16:9 mathematical height */
     margin-top: 10px;
     padding-top: 0;
     position: relative; 
-    overflow: hidden !important; /* 👈 100% LOCK! Page kabhi bhi side par nahi jayega */
+    overflow: hidden !important; 
     background: transparent !important; 
     border: none !important;
     touch-action: pan-y;
 }
 
-/* 🌈 FULL AMBIENT GLOW (HEADER + CATEGORIES + SLIDER) */
+/* 🌈 AMBIENT GLOW BACKDROP (LOCKED EXACTLY AT GREEN LINE) */
 .slider-backdrop {
     position: absolute;
-    top: -55px !important; /* 👈 Header aur Logo ke theek peechay */
+    top: -55px !important; 
     left: 0;
     right: 0;
     width: 100%;
-    height: 510px !important; /* 👈 Header se le kar Slider ke aakhir tak poora cover karega */
+    height: 325px !important; /* 👈 Green line par lock, channels ke upar bilkul nahi jayega */
     background-size: cover;
     background-position: center top;
-    filter: blur(55px) brightness(0.7) saturate(2);
+    filter: blur(45px) brightness(0.7) saturate(1.8);
     transition: background-image 0.5s ease-in-out;
     z-index: 0;
     pointer-events: none;
@@ -434,11 +434,11 @@ header {
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom, 
-        rgba(9, 10, 15, 0.85) 0%, 
-        rgba(9, 10, 15, 0.4) 15%, 
+        rgba(9, 10, 15, 0.75) 0%, 
+        rgba(9, 10, 15, 0.2) 15%, 
         transparent 35%, 
-        transparent 70%, 
-        #090a0f 100%
+        transparent 65%, 
+        #090a0f 100% /* 👈 Green line par aakar cleanly dissolve ho jayega */
     );
 }
 
@@ -451,10 +451,10 @@ header {
     width: 100%; 
 }
 
-/* 📱 SEEDHA MOBILE (TIKTOK / PORTRAIT SIZE - 74% WIDTH) */
+/* 🎬 86% WIDESCREEN POSTER (CLEAN NO-SHADOW EDGE) */
 .slide { 
-    min-width: 74% !important; 
-    width: 74% !important;
+    min-width: 86% !important; 
+    width: 86% !important; 
     height: 100% !important; 
     position: relative; 
     cursor: pointer; 
@@ -462,7 +462,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 6px 14px;
+    padding: 0 5px 8px; 
     box-sizing: border-box;
     opacity: 1 !important;
     transform: scale(1) !important;
@@ -474,14 +474,15 @@ header {
     transform: scale(1) !important;
 }
 
-/* 🎬 SLIDER POSTER CORNERS (MATCHING CATEGORY CARDS) */
 .slide img, .slide-main-img { 
     width: 100% !important;
     height: 100% !important; 
+    aspect-ratio: 16 / 9 !important; 
     object-fit: cover !important;
-    border-radius: 4px !important; /* 👈 Category cards jaisi matching 4px golayi */
-    border: 1px solid rgba(255, 255, 255, 0.15) !important; 
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.85); 
+    object-position: center !important;
+    border-radius: 12px !important; 
+    border: 1px solid rgba(255, 255, 255, 0.18) !important; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35); /* 👈 Kaala gehra shadow bilkul soft kar diya */
     position: relative;
     z-index: 2;
 }
@@ -520,11 +521,41 @@ header {
     box-shadow: 0 0 10px var(--primary); 
 }
 
-        /* SECTION HEADERS */
-        .section-header { display: flex; justify-content: space-between; align-items: center; padding: 0 16px; margin-top: 18px; margin-bottom: 4px; }
-        .section-title { font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.2px; margin: 0; }
-        .view-all-btn { font-size: 12px; color: #8b8f9e; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: transparent; }
-        .view-all-btn:active, .view-all-btn.active { color: var(--primary); }
+        /* 🌟 SECTION HEADERS (100% SHARP, BRIGHT & CLEAR) */
+        .section-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 16px; 
+            margin-top: 14px; 
+            margin-bottom: 6px; 
+            position: relative; 
+            z-index: 10; 
+        }
+        .section-title { 
+            font-size: 15px; 
+            font-weight: 800; 
+            color: #ffffff !important; 
+            letter-spacing: -0.2px; 
+            margin: 0; 
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95); /* 👈 Mota saaf white text */
+        }
+        .view-all-btn { 
+            font-size: 12px; 
+            color: #00f2fe !important; /* 👈 Chamakta hua Cyan View All button */
+            cursor: pointer; 
+            font-weight: 800; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+            border: none; 
+            background: transparent; 
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+        }
+        .view-all-btn:active { 
+            color: #ffffff !important; 
+        }
+        
         .movie-scroll { 
     display: flex; 
     gap: 12px; 
@@ -2938,88 +2969,6 @@ header {
         })();
     </script>
 
-<!-- 📶 ONLY WIFI SECURITY LOCK SCREEN -->
-    <div id="wifiLockScreen" style="display:none; position:fixed; inset:0; background:#090a0f; z-index:999999999; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; font-family:'Plus Jakarta Sans', sans-serif;">
-        <div style="width:72px; height:72px; border-radius:24px; background:rgba(0,180,216,0.12); border:1.5px solid var(--primary); display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:0 0 25px var(--primary-glow);">
-            <i class="fa fa-wifi" style="font-size:32px; color:var(--primary);"></i>
-        </div>
-        <h2 style="font-size:20px; font-weight:900; margin:0 0 8px; color:#ffffff; letter-spacing:0.5px;">WIFI REQUIRED</h2>
-        <p style="color:#8b8f9e; font-size:12.5px; max-width:290px; line-height:1.6; margin:0 0 18px;">
-            Yeh app sirf <b>Wi-Fi Internet</b> par chal sakti hai. Mobile SIM Data par iska istemal block hai.
-        </p>
-        <div style="font-size:11px; font-weight:700; color:#cbd5e1; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12); padding:8px 16px; border-radius:14px; margin-bottom:20px;">
-            Detected Network: <span id="wifiDetectedNetwork" style="color:#ff4757;">Mobile SIM Data</span>
-        </div>
-        <button onclick="window.recheckWifi()" style="background:linear-gradient(135deg, var(--primary), var(--primary-accent)); border:none; color:#fff; font-size:12px; font-weight:800; padding:11px 24px; border-radius:14px; cursor:pointer; box-shadow:0 6px 20px var(--primary-glow);">
-            <i class="fa fa-sync-alt" style="margin-right:6px;"></i> Wi-Fi Connect Kar Ke Check Karein
-        </button>
-    </div>
-
-    <!-- 🔍 DUAL WIFI DETECTION ENGINE (BROWSER SENSOR + SIM ISP) -->
-    <script>
-        (function setupWiFiGuard() {
-            function showLock(netName) {
-                const lock = document.getElementById('wifiLockScreen');
-                const label = document.getElementById('wifiDetectedNetwork');
-                if (label) label.innerText = netName || "Mobile Data (Blocked)";
-                if (lock) lock.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-
-            function removeLock() {
-                const lock = document.getElementById('wifiLockScreen');
-                if (lock) lock.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-
-            async function verifyWiFi() {
-                // 1. Android/Browser Hardware Sensor Check
-                const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-                if (conn && conn.type) {
-                    if (conn.type === 'cellular') {
-                        showLock("Mobile SIM Data (" + (conn.effectiveType || '4G').toUpperCase() + ")");
-                        return;
-                    }
-                    if (conn.type === 'wifi' || conn.type === 'ethernet') {
-                        removeLock();
-                        return;
-                    }
-                }
-
-                // 2. Pakistani Cellular SIM ISP Deep Check (Jazz, Zong, Telenor, Ufone)
-                try {
-                    const res = await fetch('https://ipwho.is/');
-                    const data = await res.json();
-                    const ispInfo = ((data.connection && data.connection.isp ? data.connection.isp : data.isp) || '').toLowerCase();
-                    const orgInfo = ((data.connection && data.connection.org ? data.connection.org : '') || '').toLowerCase();
-                    const fullNet = ispInfo + " " + orgInfo;
-
-                    // Pakistan ke tamam SIM networks
-                    const simKeywords = ['jazz', 'pmcl', 'mobilink', 'zong', 'cmpak', 'telenor', 'ufone', 'ptml'];
-                    const isSIMData = simKeywords.some(k => fullNet.includes(k));
-
-                    if (isSIMData) {
-                        showLock("SIM Internet (" + (data.connection?.isp || 'Cellular 4G') + ")");
-                    } else {
-                        // PTCL, Nayatel, StormFiber ya Local Wi-Fi Router
-                        removeLock();
-                    }
-                } catch(e) {
-                    console.warn("WiFi verify bypass:", e);
-                }
-            }
-
-            // Realtime Switch Listener (Agar user chaltay chaltay Wi-Fi band kare toh foran lock ho jaye)
-            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-            if (conn) {
-                conn.addEventListener('change', verifyWiFi);
-            }
-
-            verifyWiFi();
-            window.recheckWifi = verifyWiFi;
-        })();
-    </script>
-
 <!-- 📍 VEHARI EXCLUSIVE GPS LOCK OVERLAY (RESTORED CARD) -->
     <div id="vehariGpsLockScreen">
         <div class="gps-lock-card">
@@ -5048,105 +4997,68 @@ header {
             }, 200);
         };
 
-        // 🚀 REAL-TIME BUTTER-SMOOTH TOUCH GESTURE ENGINE (1:1 FINGER DRAG)
+        // 🎬 2026 INFINITE SEAMLESS LOOP SLIDER ENGINE (TAMASHA / NETFLIX STYLE)
+        let sliderCurrentIndex = 1;
+        let isSliderTransitioning = false;
         let isSliderTouching = false;
         let sliderDragStartX = 0;
         let sliderDragStartY = 0;
         let sliderCurrentDiffX = 0;
         window.isSliderDraggingAction = false;
 
+        function getSlideCardHTML(s, realIdx) {
+            if (!s) return '';
+            const sRawTitle = String(s.title || s.name || '').trim().toLowerCase();
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            const showSliderVip = !userHasVip && ((s.isVip === true) || /\b(vip)\b/i.test(sRawTitle));
+
+            return `
+                <div class="slide" onclick="window.handleSlideClick(${realIdx})">
+                    <img src="${s.img}">
+                    ${showSliderVip ? `
+                        <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
+                            <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
+                            <span class="vip-badge-text">VIP PASS</span>
+                        </div>
+                    ` : ''}
+                    <div class="slide-overlay"></div>
+                </div>`;
+        }
+
         function initSlider(force = false) {
             const track = document.getElementById('sliderTrack');
             const sliderArea = document.getElementById('sliderClickArea');
-            // 🚀 Instant Slider Unblock (Posters bina rukaawat ke foran load honge)
             if (!track || !window.sliders || !window.sliders.length) return;
 
-            // 🚀 PURANI STUCK MEMORY SAFF KAREIN
-            try { localStorage.removeItem('mm_known_vip_sliders'); } catch(e){}
+            const total = window.sliders.length;
 
-            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
-            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            // Agar sirf 1 poster ho toh normal dikhaye
+            if (total === 1) {
+                track.innerHTML = getSlideCardHTML(window.sliders[0], 0);
+                sliderCurrentIndex = 0;
+                updateSliderPosition(false);
+                return;
+            }
 
-            track.innerHTML = window.sliders.map((s, idx) => {
-                if (!s) return '';
-                const sUrl = String(s.url || '').trim();
-                const sRawTitle = String(s.title || s.name || '').trim().toLowerCase();
-                const sCleanTitle = sRawTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
-                const sImg = String(s.img || '').trim();
+            // 🔄 INFINITE LOOP CLONES: Aakhri poster ko shuru mein aur pehle poster ko aakhir mein lagana
+            const firstClone = getSlideCardHTML(window.sliders[0], 0);
+            const lastClone = getSlideCardHTML(window.sliders[total - 1], total - 1);
+            const realSlides = window.sliders.map((s, idx) => getSlideCardHTML(s, idx)).join('');
 
-                // 🔍 100% GUARANTEED SUPER-SMART SLIDER MATCH ENGINE
-                const matchedMovie = cachedMovies.find(m => {
-                    if (!m) return false;
-                    const mId = String(m.id || '').trim();
-                    const mUrl = String(m.url || '').trim();
-                    const mThumb = String(m.thumb || '').trim();
-                    const mTitle = String(m.title || m.name || '').toLowerCase().trim();
+            track.innerHTML = lastClone + realSlides + firstClone;
+            sliderCurrentIndex = 1; // Asli pehle poster par set karein
 
-                    // 1. Video Link Match (Direct ya Partial)
-                    const urlMatch = sUrl && (mId === sUrl || mUrl === sUrl || (mUrl.length > 8 && sUrl.includes(mUrl)) || (sUrl.length > 8 && mUrl.includes(sUrl)));
-                    
-                    // 2. Photo / Poster Match
-                    const imgMatch = sImg && mThumb && (sImg === mThumb || (sImg.length > 25 && mThumb.includes(sImg.substring(0, 50))));
-
-                    // 3. Title Match
-                    const titleMatch = sCleanTitle && mTitle && (sCleanTitle === mTitle || mTitle.includes(sCleanTitle) || sCleanTitle.includes(mTitle));
-
-                    return urlMatch || imgMatch || titleMatch;
-                });
-
-                const matchedChan = (window.allChannels || []).find(c => {
-                    if (!c) return false;
-                    const cUrl = String(c.url || '').trim();
-                    const cThumb = String(c.thumb || '').trim();
-                    const cTitle = String(c.title || c.name || '').toLowerCase().trim();
-                    return (sUrl && cUrl && sUrl === cUrl) || (sImg && cThumb && sImg === cThumb) || (sCleanTitle && cTitle && sCleanTitle === cTitle);
-                });
-
-                // 👑 REAL-TIME VIP BADGE LOCK:
-                let finalSliderIsVip = false;
-
-                if (matchedMovie) {
-                    const isChanVip = (window.allChannels || []).some(c => c && c.url && matchedMovie.url && String(c.url).trim() === String(matchedMovie.url).trim() && (c.isVip === true || /\b(vip)\b/i.test(c.title || '')));
-                    finalSliderIsVip = (matchedMovie.isVip === true) || matchedMovie.isVipSeries || isChanVip || /\b(vip)\b/i.test(matchedMovie.title || '');
-                } else if (matchedChan) {
-                    finalSliderIsVip = (matchedChan.isVip === true) || /\b(vip)\b/i.test(matchedChan.title || '');
-                } else {
-                    finalSliderIsVip = (s.isVip === true) || /\b(vip)\b/i.test(sRawTitle);
-                }
-
-                const showSliderVip = !userHasVip && finalSliderIsVip;
-
-                return `
-                    <div class="slide" onclick="window.handleSlideClick(${idx})">
-                        <img src="${s.img}">
-               
-                        <!-- 👑 Slider Design 1 Laser VIP Badge (Top-Right) -->
-                        ${showSliderVip ? `
-                            <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
-                                <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
-                                <span class="vip-badge-text">VIP PASS</span>
-                            </div>
-                        ` : ''}
-                        <div class="slide-overlay"></div>
-                    </div>
-                `;
-                        
-            }).join('');
-
-            // Memory mein save kar do
-            try { localStorage.setItem('mm_known_vip_sliders', JSON.stringify(knownVipSliders)); } catch(e){}
-
-            // 👆 UNGLI KE SATH SATH REAL-TIME CHALNE WALA TOUCH LISTENER
+            // 👆 TOUCH GESTURE
             if (sliderArea) {
                 sliderArea.ontouchstart = (e) => {
-                    if (!window.sliders || window.sliders.length <= 1) return;
-                    if (window.si) clearInterval(window.si); // Ungli lagate hi auto-slide pause
+                    if (isSliderTransitioning || total <= 1) return;
+                    if (window.si) clearInterval(window.si);
                     isSliderTouching = true;
                     window.isSliderDraggingAction = false;
                     sliderDragStartX = e.touches[0].clientX;
                     sliderDragStartY = e.touches[0].clientY;
                     sliderCurrentDiffX = 0;
-                    track.style.transition = 'none'; // Real-time follow ke liye transition zero
+                    track.style.transition = 'none';
                 };
 
                 sliderArea.ontouchmove = (e) => {
@@ -5156,15 +5068,16 @@ header {
                     const diffX = curX - sliderDragStartX;
                     const diffY = curY - sliderDragStartY;
 
-                    // Jab ungli side par ghoome toh poore page ko hilne se rokna
                     if (Math.abs(diffX) > Math.abs(diffY)) {
-                        if (e.cancelable) e.preventDefault(); // 👈 Page hilna 100% block!
+                        if (e.cancelable) e.preventDefault();
                         sliderCurrentDiffX = diffX;
-                        if (Math.abs(diffX) > 8) {
-                            window.isSliderDraggingAction = true;
-                        }
+                        if (Math.abs(diffX) > 8) window.isSliderDraggingAction = true;
+
                         const sWidth = sliderArea.clientWidth || window.innerWidth;
-                        const basePx = (sWidth * 0.13) - (activeSliderIndex * (sWidth * 0.74));
+                        const isLand = (window.innerWidth > window.innerHeight) && (window.innerWidth > 500);
+                        const slideW = isLand ? 0.32 : 0.86;
+                        const baseC = isLand ? 0.34 : 0.07;
+                        const basePx = (sWidth * baseC) - (sliderCurrentIndex * (sWidth * slideW));
                         track.style.transform = `translateX(${basePx + diffX}px)`;
                     }
                 };
@@ -5172,18 +5085,15 @@ header {
                 const endDrag = () => {
                     if (!isSliderTouching) return;
                     isSliderTouching = false;
-                    track.style.transition = 'transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1)'; // Smooth spring snap
 
-                    // 50px se zyada kheenchne par agla/pichla slide
-                    if (sliderCurrentDiffX < -50) {
-                        slideManual(1);
-                    } else if (sliderCurrentDiffX > 50) {
-                        slideManual(-1);
+                    if (sliderCurrentDiffX < -45) {
+                        slideNext();
+                    } else if (sliderCurrentDiffX > 45) {
+                        slidePrev();
                     } else {
-                        updateSliderPosition(); // Wapas usi slide par smooth snap
-                        startAutoSlider();
+                        updateSliderPosition(true);
                     }
-
+                    startAutoSlider();
                     setTimeout(() => { window.isSliderDraggingAction = false; }, 100);
                 };
 
@@ -5191,57 +5101,69 @@ header {
                 sliderArea.ontouchcancel = endDrag;
             }
 
-            activeSliderIndex = 0; 
-            updateSliderPosition();
-            startAutoSlider();
+            // 🌀 SEAMLESS TELEPORT (Jhatke ke baghair chupke se wapas loop karna)
+            track.ontransitionend = () => {
+                isSliderTransitioning = false;
+                if (sliderCurrentIndex === 0) {
+                    sliderCurrentIndex = total;
+                    updateSliderPosition(false);
+                } else if (sliderCurrentIndex === total + 1) {
+                    sliderCurrentIndex = 1;
+                    updateSliderPosition(false);
+                }
+            };
 
-            const sec = document.getElementById('homeSections');
-            if (sec && !sec.innerHTML.trim() && typeof window.renderHome === 'function') {
-                window.renderHome();
-            }
+            updateSliderPosition(false);
+            startAutoSlider();
         }
 
-        // 🔄 AUTO-DETECT SEEDHA (PORTRAIT) YA ROTATE (LANDSCAPE)
-        function updateSliderPosition() {
+        function updateSliderPosition(animate = true) {
             const track = document.getElementById('sliderTrack');
             if (!track || !window.sliders || !window.sliders.length) return;
 
-            // Strict check: Sirf tab true hoga jab mobile waqayi leta hua ho (Chou-da)
+            const total = window.sliders.length;
             const isLandscape = (window.innerWidth > window.innerHeight) && (window.innerWidth > 500);
-            const slideWidth = isLandscape ? 32 : 74;
-            const baseCenter = isLandscape ? 34 : 13;
+            const slideWidth = isLandscape ? 32 : 86;
+            const baseCenter = isLandscape ? 34 : 7;
 
-            track.style.transition = 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)';
-            track.style.transform = `translateX(calc(${baseCenter}% - ${activeSliderIndex * slideWidth}%))`;
-            document.querySelectorAll('.slide').forEach((s, i) => s.classList.toggle('active-slide', i === activeSliderIndex));
-            
+            track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+            track.style.transform = `translateX(calc(${baseCenter}% - ${sliderCurrentIndex * slideWidth}%))`;
+
+            // Active Class
+            const slides = track.querySelectorAll('.slide');
+            slides.forEach((s, idx) => s.classList.toggle('active-slide', idx === sliderCurrentIndex));
+
+            // Ambient Glow Backdrop Update
             const backdrop = document.getElementById('sliderBackdrop');
-            if (backdrop && window.sliders[activeSliderIndex]) {
-                backdrop.style.backgroundImage = `url('${window.sliders[activeSliderIndex].img}')`;
+            if (backdrop && total > 0) {
+                let realIdx = sliderCurrentIndex - 1;
+                if (realIdx < 0) realIdx = total - 1;
+                if (realIdx >= total) realIdx = 0;
+                if (window.sliders[realIdx]) {
+                    backdrop.style.backgroundImage = `url('${window.sliders[realIdx].img}')`;
+                }
             }
         }
 
-        // Mobile rotate hote hi foran slider update ho
-        window.addEventListener('resize', () => {
-            if (typeof updateSliderPosition === 'function') updateSliderPosition();
-        });
-        window.addEventListener('orientationchange', () => {
-            setTimeout(() => { if (typeof updateSliderPosition === 'function') updateSliderPosition(); }, 150);
-        });
+        function slideNext() {
+            if (isSliderTransitioning || !window.sliders || window.sliders.length <= 1) return;
+            isSliderTransitioning = true;
+            sliderCurrentIndex++;
+            updateSliderPosition(true);
+        }
 
-        function slideManual(direction) {
-            if (!window.sliders || !window.sliders.length) return;
-            activeSliderIndex = (activeSliderIndex + direction + window.sliders.length) % window.sliders.length;
-            updateSliderPosition();
-            startAutoSlider();
+        function slidePrev() {
+            if (isSliderTransitioning || !window.sliders || window.sliders.length <= 1) return;
+            isSliderTransitioning = true;
+            sliderCurrentIndex--;
+            updateSliderPosition(true);
         }
 
         function startAutoSlider() {
             if (window.si) clearInterval(window.si);
             window.si = setInterval(() => {
-                if (!window.sliders || !window.sliders.length || isSliderTouching) return;
-                activeSliderIndex = (activeSliderIndex + 1) % window.sliders.length;
-                updateSliderPosition();
+                if (!window.sliders || window.sliders.length <= 1 || isSliderTouching) return;
+                slideNext();
             }, 4000);
         }
 
