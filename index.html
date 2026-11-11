@@ -4997,7 +4997,7 @@ header {
             }, 200);
         };
 
-        // 🎬 2026 INFINITE SEAMLESS LOOP SLIDER ENGINE (TAMASHA / NETFLIX STYLE)
+        // 🎬 2026 NON-STOP ANTI-FREEZE & TRUE VIP INFINITE SLIDER ENGINE
         let sliderCurrentIndex = 1;
         let isSliderTransitioning = false;
         let isSliderTouching = false;
@@ -5005,17 +5005,41 @@ header {
         let sliderDragStartY = 0;
         let sliderCurrentDiffX = 0;
         window.isSliderDraggingAction = false;
+        let sliderTransitionTimeout = null;
+
+        // 👑 SUPER-SMART SLIDER VIP CHECKER (DATABASE MATCH)
+        function checkSliderIsVip(s) {
+            if (!s) return false;
+            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
+            if (userHasVip) return false;
+
+            const sUrl = String(s.url || '').trim();
+            const sTitle = String(s.title || s.name || '').trim().toLowerCase();
+            const cleanTitle = sTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
+
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+            const matchedMovie = cachedMovies.find(m => {
+                if (!m) return false;
+                const mUrl = String(m.url || '').trim();
+                const mId = String(m.id || '').trim();
+                const mTitle = String(m.title || m.name || '').toLowerCase().trim();
+                return (sUrl && (mUrl === sUrl || mId === sUrl)) || (cleanTitle && (mTitle === cleanTitle || mTitle.includes(cleanTitle)));
+            });
+
+            if (matchedMovie) {
+                return (matchedMovie.isVip === true) || matchedMovie.isVipSeries === true || /\b(vip)\b/i.test(matchedMovie.title || '') || (matchedMovie.category || '').toLowerCase().includes('vip');
+            }
+            return (s.isVip === true) || /\b(vip)\b/i.test(sTitle);
+        }
 
         function getSlideCardHTML(s, realIdx) {
             if (!s) return '';
-            const sRawTitle = String(s.title || s.name || '').trim().toLowerCase();
-            const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
-            const showSliderVip = !userHasVip && ((s.isVip === true) || /\b(vip)\b/i.test(sRawTitle));
+            const isVip = checkSliderIsVip(s);
 
             return `
                 <div class="slide" onclick="window.handleSlideClick(${realIdx})">
                     <img src="${s.img}">
-                    ${showSliderVip ? `
+                    ${isVip ? `
                         <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
                             <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
                             <span class="vip-badge-text">VIP PASS</span>
@@ -5032,7 +5056,6 @@ header {
 
             const total = window.sliders.length;
 
-            // Agar sirf 1 poster ho toh normal dikhaye
             if (total === 1) {
                 track.innerHTML = getSlideCardHTML(window.sliders[0], 0);
                 sliderCurrentIndex = 0;
@@ -5040,20 +5063,21 @@ header {
                 return;
             }
 
-            // 🔄 INFINITE LOOP CLONES: Aakhri poster ko shuru mein aur pehle poster ko aakhir mein lagana
+            // 🔄 TRUE CLONES FOR SEAMLESS GLIDE
             const firstClone = getSlideCardHTML(window.sliders[0], 0);
             const lastClone = getSlideCardHTML(window.sliders[total - 1], total - 1);
             const realSlides = window.sliders.map((s, idx) => getSlideCardHTML(s, idx)).join('');
 
             track.innerHTML = lastClone + realSlides + firstClone;
-            sliderCurrentIndex = 1; // Asli pehle poster par set karein
+            sliderCurrentIndex = 1;
 
-            // 👆 TOUCH GESTURE
+            // 👆 SMOOTH TOUCH
             if (sliderArea) {
                 sliderArea.ontouchstart = (e) => {
-                    if (isSliderTransitioning || total <= 1) return;
+                    if (total <= 1) return;
                     if (window.si) clearInterval(window.si);
                     isSliderTouching = true;
+                    isSliderTransitioning = false;
                     window.isSliderDraggingAction = false;
                     sliderDragStartX = e.touches[0].clientX;
                     sliderDragStartY = e.touches[0].clientY;
@@ -5101,8 +5125,8 @@ header {
                 sliderArea.ontouchcancel = endDrag;
             }
 
-            // 🌀 SEAMLESS TELEPORT (Jhatke ke baghair chupke se wapas loop karna)
-            track.ontransitionend = () => {
+            // 🛡️ ANTI-FREEZE & SEAMLESS RE-POSITION
+            function handleLoopEnd() {
                 isSliderTransitioning = false;
                 if (sliderCurrentIndex === 0) {
                     sliderCurrentIndex = total;
@@ -5111,7 +5135,9 @@ header {
                     sliderCurrentIndex = 1;
                     updateSliderPosition(false);
                 }
-            };
+            }
+
+            track.ontransitionend = handleLoopEnd;
 
             updateSliderPosition(false);
             startAutoSlider();
@@ -5126,14 +5152,14 @@ header {
             const slideWidth = isLandscape ? 32 : 86;
             const baseCenter = isLandscape ? 34 : 7;
 
-            track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+            track.style.transition = animate ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
             track.style.transform = `translateX(calc(${baseCenter}% - ${sliderCurrentIndex * slideWidth}%))`;
 
             // Active Class
             const slides = track.querySelectorAll('.slide');
             slides.forEach((s, idx) => s.classList.toggle('active-slide', idx === sliderCurrentIndex));
 
-            // Ambient Glow Backdrop Update
+            // Ambient Glow Update
             const backdrop = document.getElementById('sliderBackdrop');
             if (backdrop && total > 0) {
                 let realIdx = sliderCurrentIndex - 1;
@@ -5142,6 +5168,24 @@ header {
                 if (window.sliders[realIdx]) {
                     backdrop.style.backgroundImage = `url('${window.sliders[realIdx].img}')`;
                 }
+            }
+
+            // 🛡️ ANTI-FREEZE SAFETY TIMER (Agar browser transition event bhool jaye toh khud unlock kare)
+            if (animate) {
+                if (sliderTransitionTimeout) clearTimeout(sliderTransitionTimeout);
+                sliderTransitionTimeout = setTimeout(() => {
+                    isSliderTransitioning = false;
+                    const totalReal = window.sliders ? window.sliders.length : 0;
+                    if (totalReal > 1) {
+                        if (sliderCurrentIndex === 0) {
+                            sliderCurrentIndex = totalReal;
+                            updateSliderPosition(false);
+                        } else if (sliderCurrentIndex === totalReal + 1) {
+                            sliderCurrentIndex = 1;
+                            updateSliderPosition(false);
+                        }
+                    }
+                }, 520);
             }
         }
 
