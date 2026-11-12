@@ -2930,6 +2930,184 @@ header {
                 padding-bottom: 40px !important;
             }
         }
+
+        /* 📱 MOBILE PAR DESKTOP MENU DEFAULT CHUPA RAHEGA */
+        .desktop-nav-menu { display: none; }
+
+        /* 💻 2026 ULTRA-PRO DESKTOP & LAPTOP CINEMA LAYOUT (NETFLIX STYLE) */
+        @media screen and (min-width: 992px) {
+            body {
+                padding-bottom: 30px !important;
+                background-color: #07080c !important;
+            }
+
+            /* 🌟 PC Par Tamam Pages Centered & Professional Cinema Box */
+            #homePage, #livePage, #searchPage, #favPage, #viewAllPage, #profilePage, #videoPage {
+                max-width: 1380px !important;
+                margin: 0 auto !important;
+            }
+
+            /* 🌟 Top Desktop Header (Netflix Style Sticky Glass) */
+            header {
+                height: 65px !important;
+                padding: 0 45px !important;
+                justify-content: space-between !important;
+                background: rgba(9, 10, 15, 0.88) !important;
+                backdrop-filter: blur(25px) !important;
+                -webkit-backdrop-filter: blur(25px) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 99999 !important;
+            }
+
+            /* Top Desktop Nav Links */
+            .desktop-nav-menu {
+                display: flex !important;
+                align-items: center;
+                gap: 32px;
+            }
+
+            .desktop-nav-link {
+                color: #8b8f9e;
+                font-size: 13.5px;
+                font-weight: 700;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 7px;
+                transition: color 0.2s, transform 0.2s;
+                letter-spacing: 0.3px;
+                user-select: none;
+            }
+
+            .desktop-nav-link svg {
+                width: 17px;
+                height: 17px;
+                stroke: currentColor;
+                fill: none;
+                stroke-width: 2.2;
+                transition: stroke 0.2s;
+            }
+
+            .desktop-nav-link:hover {
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+
+            .desktop-nav-link.active {
+                color: #ffffff !important;
+                font-weight: 900;
+            }
+
+            .desktop-nav-link.active svg {
+                stroke: var(--primary) !important;
+                filter: drop-shadow(0 0 8px var(--primary));
+            }
+
+            /* 🚫 Computer Par Neechay Wala Mobile Bar 100% Chup Jayega */
+            .bottom-nav-container {
+                display: none !important;
+            }
+
+            /* 🎬 Desktop Big 16:9 Cinema Slider */
+            .slider-container {
+                height: 420px !important;
+                max-width: 1280px !important;
+                margin: 18px auto 28px !important;
+            }
+
+            .slide {
+                min-width: 58% !important;
+                width: 58% !important;
+                padding: 0 14px 16px !important;
+            }
+
+            .slide img, .slide-main-img {
+                border-radius: 18px !important;
+                box-shadow: 0 16px 45px rgba(0, 0, 0, 0.85) !important;
+            }
+
+            /* PC Category Pills */
+            .home-cat-scroll, .live-cat-scroll {
+                padding: 12px 45px 16px !important;
+                gap: 12px !important;
+            }
+
+            .home-cat-pill, .live-cat-pill {
+                padding: 9px 20px !important;
+                font-size: 12px !important;
+                border-radius: 22px !important;
+            }
+
+            /* PC Section Titles */
+            .section-header {
+                padding: 0 45px !important;
+                margin-top: 24px !important;
+                margin-bottom: 12px !important;
+            }
+
+            .section-title {
+                font-size: 18px !important;
+                letter-spacing: 0.2px !important;
+            }
+
+            /* Movie Rails on PC */
+            .movie-scroll {
+                padding: 8px 45px 22px !important;
+                gap: 18px !important;
+            }
+
+            .card-rect {
+                min-width: 155px !important;
+                width: 155px !important;
+            }
+
+            .card-rect.is-landscape {
+                min-width: 250px !important;
+                width: 250px !important;
+            }
+
+            /* 🎬 PC 6-Columns Movie Grid (View All, Search, Favorites) */
+            .movie-grid {
+                grid-template-columns: repeat(6, 1fr) !important;
+                gap: 20px !important;
+                padding: 24px 45px 60px !important;
+            }
+
+            /* 📺 PC 8-Columns Live TV Channels Grid */
+            .live-grid-container-4 {
+                grid-template-columns: repeat(8, 1fr) !important;
+                gap: 24px 14px !important;
+                padding: 20px 45px !important;
+            }
+
+            .live-item {
+                width: 76px !important;
+                height: 76px !important;
+            }
+
+            .channel-title-text {
+                font-size: 11.5px !important;
+                margin-top: 8px !important;
+            }
+
+            /* 🎥 PC Video Player Cinema Theater Mode */
+            .native-chrome-player-box, .video-fixed-top {
+                max-width: 1050px !important;
+                margin: 0 auto !important;
+                border-radius: 16px !important;
+                overflow: hidden !important;
+                box-shadow: 0 24px 70px rgba(0, 0, 0, 0.95) !important;
+            }
+
+            #movieDetailsArea, #movieDescArea {
+                max-width: 1050px !important;
+                margin: 0 auto !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -3057,9 +3235,9 @@ header {
         })();
     </script>
 
-    <!-- HEADER (CENTERED LOGO + CONDITIONAL TOP-RIGHT AVATAR) -->
+    <!-- 💻 RESPONSIVE HEADER (MOBILE + DESKTOP CINEMA MENU) -->
     <header>
-        <div class="logo">
+        <div class="logo" onclick="window.showNav('homePage')">
             <!-- 🌟 CLEAN TEXT LOGO (NO ICON - RED MASTER) -->
             <svg style="height:34px; width:auto; overflow:visible;" viewBox="0 0 220 40" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -3080,10 +3258,32 @@ header {
             </svg>
         </div>
 
-        <!-- 👑 TOP RIGHT ROTATING PROFILE AVATAR (Sirf tab dikhega jab profile se photo set ho!) -->
-        <div class="header-avatar-wrap" id="headerAvatarBtn" onclick="window.showNav('profilePage')" title="My Profile">
-            <div class="header-avatar-inner">
-                <img id="headerAvatarImg" alt="Profile">
+        <!-- 🖥️ DESKTOP ONLY TOP NAV LINKS (MOBILE PAR KHUD CHUP JAYENGE) -->
+        <nav class="desktop-nav-menu">
+            <div class="desktop-nav-link active" id="deskNavHome" onclick="window.showNav('homePage')">
+                <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9.5z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Home</span>
+            </div>
+            <div class="desktop-nav-link" id="deskNavLive" onclick="window.showNav('livePage')">
+                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/></svg>
+                <span>Live TV</span>
+            </div>
+            <div class="desktop-nav-link" id="deskNavSearch" onclick="window.showNav('searchPage')">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+                <span>Search</span>
+            </div>
+            <div class="desktop-nav-link" id="deskNavFav" onclick="window.showNav('favPage')">
+                <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span>Favorites</span>
+            </div>
+        </nav>
+
+        <!-- Right Side Avatar & Profile -->
+        <div style="display:flex; align-items:center; gap:12px;">
+            <div class="header-avatar-wrap" id="headerAvatarBtn" onclick="window.showNav('profilePage')" title="My Profile">
+                <div class="header-avatar-inner">
+                    <img id="headerAvatarImg" alt="Profile">
+                </div>
             </div>
         </div>
     </header>
@@ -5319,12 +5519,22 @@ header {
             document.getElementById(id).style.display = id === 'livePage' ? 'flex' : 'block';
 
 const hdr = document.querySelector('header'); if (hdr) hdr.style.display = (id === 'homePage' || id === 'livePage') ? 'flex' : 'none';
-                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            if(el) {
-                el.classList.add('active');
-            } else {
-                const navIndex = id === 'homePage' ? 0 : id === 'livePage' ? 1 : id === 'searchPage' ? 2 : id === 'favPage' ? 3 : -1;
-                if(navIndex >= 0) document.querySelectorAll('.nav-item')[navIndex].classList.add('active');
+                    // 🔄 MOBILE + DESKTOP MENU ACTIVE SYNC
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.querySelectorAll('.desktop-nav-link').forEach(n => n.classList.remove('active'));
+
+            if (id === 'homePage') {
+                const m = document.querySelectorAll('.nav-item')[0]; if (m) m.classList.add('active');
+                const d = document.getElementById('deskNavHome'); if (d) d.classList.add('active');
+            } else if (id === 'livePage') {
+                const m = document.querySelectorAll('.nav-item')[1]; if (m) m.classList.add('active');
+                const d = document.getElementById('deskNavLive'); if (d) d.classList.add('active');
+            } else if (id === 'searchPage') {
+                const m = document.querySelectorAll('.nav-item')[2]; if (m) m.classList.add('active');
+                const d = document.getElementById('deskNavSearch'); if (d) d.classList.add('active');
+            } else if (id === 'favPage') {
+                const m = document.querySelectorAll('.nav-item')[3]; if (m) m.classList.add('active');
+                const d = document.getElementById('deskNavFav'); if (d) d.classList.add('active');
             }
 
             if (id === 'favPage') window.renderFavoritesPage();
