@@ -2931,11 +2931,69 @@ header {
             }
         }
 
-        /* 📱 MOBILE PAR DESKTOP MENU DEFAULT CHUPA RAHEGA */
+        /* 📱 MOBILE PAR DESKTOP ELEMENTS DEFAULT CHUPE RAHENGE */
         .desktop-nav-menu { display: none; }
+        .slider-pc-arrow { display: none; }
 
         /* 💻 2026 ULTRA-PRO DESKTOP & LAPTOP CINEMA LAYOUT (NETFLIX STYLE) */
         @media screen and (min-width: 992px) {
+            /* 🖱️ PC Slider Arrows on Hover */
+            .slider-container:hover .slider-pc-arrow {
+                opacity: 1;
+                visibility: visible;
+            }
+            .slider-pc-arrow {
+                display: flex !important;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 46px;
+                height: 46px;
+                border-radius: 50%;
+                background: rgba(14, 18, 28, 0.85);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+                color: #ffffff;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                z-index: 25;
+                font-size: 15px;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.25s ease;
+                box-shadow: 0 8px 25px rgba(0,0,0,0.85);
+                backdrop-filter: blur(10px);
+                outline: none;
+            }
+            .slider-pc-arrow:hover {
+                background: var(--primary) !important;
+                border-color: var(--primary) !important;
+                transform: translateY(-50%) scale(1.12);
+                box-shadow: 0 0 20px var(--primary-glow);
+            }
+            .slider-pc-arrow.arrow-prev { left: 24px; }
+            .slider-pc-arrow.arrow-next { right: 24px; }
+
+            /* ✨ PC Movie Cards Hover Lift & Glow */
+            .card-rect {
+                cursor: pointer;
+                transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s !important;
+            }
+            .card-rect:hover {
+                transform: translateY(-6px) scale(1.04) !important;
+                z-index: 10;
+            }
+            .card-rect:hover .card-img-wrap {
+                box-shadow: 0 14px 30px rgba(0, 0, 0, 0.85), 0 0 15px rgba(229, 9, 20, 0.35);
+                border-color: rgba(255,255,255,0.3) !important;
+            }
+
+            /* Live Channels Hover Ring */
+            .live-item:hover {
+                transform: scale(1.08);
+                box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+            }
+            
             body {
                 padding-bottom: 30px !important;
                 background-color: #07080c !important;
@@ -3305,7 +3363,10 @@ header {
             <div class="skeleton-shimmer" style="width:80px; height:28px; border-radius:20px; flex-shrink:0;"></div>
         </div>
         <div class="slider-container" id="sliderClickArea">
-            
+            <!-- 🖱️ PC MOUSE SLIDER ARROWS (NETFLIX STYLE) -->
+            <button class="slider-pc-arrow arrow-prev" onclick="window.slidePrevManual(event)" title="Previous Slide"><i class="fa fa-chevron-left"></i></button>
+            <button class="slider-pc-arrow arrow-next" onclick="window.slideNextManual(event)" title="Next Slide"><i class="fa fa-chevron-right"></i></button>
+  
             <!-- 🎬 Slider Shimmer Placeholder -->
             <div class="slider-track" id="sliderTrack">
                 <div class="slide active-slide">
@@ -5410,6 +5471,115 @@ header {
                 slideNext();
             }, 4000);
         }
+
+        // 🖱️ PC MOUSE ARROW CLICKS FOR SLIDER
+        window.slidePrevManual = (e) => {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            if (window.si) clearInterval(window.si);
+            slidePrev();
+            startAutoSlider();
+        };
+
+        window.slideNextManual = (e) => {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            if (window.si) clearInterval(window.si);
+            slideNext();
+            startAutoSlider();
+        };
+
+        // 🖱️ PC MOUSE WHEEL HORIZONTAL SCROLL (MOVIES PATTI KO CHALANE KE LIYE)
+        document.addEventListener('wheel', (e) => {
+            const scrollBox = e.target.closest('.movie-scroll, .home-cat-scroll, .live-cat-scroll, .wa-theme-scroll-row');
+            if (scrollBox && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                e.preventDefault();
+                scrollBox.scrollLeft += (e.deltaY * 1.5);
+            }
+        }, { passive: false });
+
+        // ⌨️ PC KEYBOARD SHORTCUTS (NETFLIX & YOUTUBE CONTROLS)
+        window.addEventListener('keydown', (e) => {
+            // Agar user search bar ya input mein likh raha ho to shortcuts na chalein
+            const activeTag = document.activeElement ? document.activeElement.tagName.toUpperCase() : '';
+            if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') return;
+
+            const videoPage = document.getElementById('videoPage');
+            const isPlaying = videoPage && videoPage.style.display === 'block';
+            const vid = document.querySelector('#moviePlayerWrapper video, #livePlayerWrapper video');
+
+            // 1. ESCAPE KEY (Video ya Modals Close Karna)
+            if (e.key === 'Escape') {
+                if (isPlaying) {
+                    window.closePlayer();
+                } else {
+                    const vipModal = document.getElementById('vipLockModal');
+                    if (vipModal && vipModal.style.display === 'flex') vipModal.style.display = 'none';
+                    else window.showNav('homePage');
+                }
+                return;
+            }
+
+            // 2. SPACEBAR (Play / Pause)
+            if (e.code === 'Space') {
+                if (isPlaying && vid) {
+                    e.preventDefault();
+                    if (vid.paused) vid.play();
+                    else vid.pause();
+                }
+                return;
+            }
+
+            // 3. RIGHT ARROW (10s Forward ya Slider Next)
+            if (e.key === 'ArrowRight') {
+                if (isPlaying && vid) {
+                    e.preventDefault();
+                    vid.currentTime = Math.min(vid.duration || vid.currentTime + 10, vid.currentTime + 10);
+                } else if (!isPlaying) {
+                    window.slideNextManual();
+                }
+                return;
+            }
+
+            // 4. LEFT ARROW (10s Rewind ya Slider Prev)
+            if (e.key === 'ArrowLeft') {
+                if (isPlaying && vid) {
+                    e.preventDefault();
+                    vid.currentTime = Math.max(0, vid.currentTime - 10);
+                } else if (!isPlaying) {
+                    window.slidePrevManual();
+                }
+                return;
+            }
+
+            // 5. UP ARROW (Volume Up)
+            if (e.key === 'ArrowUp' && isPlaying && vid) {
+                e.preventDefault();
+                vid.volume = Math.min(1, vid.volume + 0.1);
+                return;
+            }
+
+            // 6. DOWN ARROW (Volume Down)
+            if (e.key === 'ArrowDown' && isPlaying && vid) {
+                e.preventDefault();
+                vid.volume = Math.max(0, vid.volume - 0.1);
+                return;
+            }
+
+            // 7. F KEY (Toggle Fullscreen)
+            if ((e.key === 'f' || e.key === 'F') && isPlaying) {
+                e.preventDefault();
+                if (typeof window.toggleLandscapePlayer === 'function') {
+                    window.toggleLandscapePlayer();
+                }
+                return;
+            }
+
+            // 8. M KEY (Mute / Unmute)
+            if ((e.key === 'm' || e.key === 'M') && isPlaying && vid) {
+                e.preventDefault();
+                vid.muted = !vid.muted;
+                return;
+            }
+        });
 
         // 👑 100% STRICT VIP-LOCKED SLIDER CLICK ENGINE (NO LEAK - PURE SECURITY)
         window.handleSlideClick = (param) => {
