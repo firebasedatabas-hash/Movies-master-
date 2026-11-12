@@ -18,6 +18,69 @@
     <!-- LIGHTWEIGHT HLS STREAM ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
+    <!-- 🛡️ 2026 MILITARY-GRADE ANTI-INSPECT & CODE PROTECTION SHIELD -->
+    <script>
+        (function() {
+            // 1. Right Click (Inspect Element) Mukammal Block
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            }, true);
+
+            // 2. Keyboard Shortcuts Block (F12, View Source, Inspect, Save Page)
+            document.addEventListener('keydown', function(e) {
+                // F12 Button Block
+                if (e.keyCode === 123 || e.key === 'F12') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C (Inspect Console Block)
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl+U (View Source Code Block)
+                if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+
+                // Ctrl+S (Save Website Webpage Block)
+                if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return false;
+                }
+            }, true);
+
+            // 3. Selection & Drag Block (Koi Text Ya Image Chori Na Kar Sake)
+            document.addEventListener('selectstart', function(e) {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+                    e.preventDefault();
+                }
+            });
+
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+            });
+
+            // 4. 🛑 ANTI-DEVTOOLS FREEZE TRAP (Extension Se Inspect Kholne Par Browser Freeze Ho Jayega)
+            setInterval(function() {
+                const startTime = performance.now();
+                debugger;
+                const endTime = performance.now();
+                if (endTime - startTime > 100) {
+                    document.body.innerHTML = '<div style="background:#000;color:#ff4757;height:100vh;display:flex;align-items:center;justify-content:center;font-family:sans-serif;font-weight:900;font-size:18px;">⚠️ SECURITY ALERT: Developer Tools Are Blocked!</div>';
+                }
+            }, 1000);
+        })();
+    </script>
+
     <style>
         :root { 
             --primary: #e50914; 
