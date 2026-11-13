@@ -3473,19 +3473,19 @@ header {
         <div id="homeSections"></div>
     </div>
     
-    <!-- ⚡ 0ms GUARANTEED INSTANT DRAW ENGINE (TAMASHA / YOUTUBE) -->
+    <!-- ⚡ 2026 BULLETPROOF INSTANT DRAW ENGINE (ZERO CORRUPT CACHE) -->
     <script>
         (function() {
             try {
-                // 1. Categories bar foran bhar do
+                // 1. Categories bar restore
                 var cHtml = localStorage.getItem('mm_cached_categories_html');
                 var cBar = document.getElementById('homeCategoryBar');
                 if (cHtml && cBar) cBar.innerHTML = cHtml;
 
-                // 2. Movies screen par foran daalo (Khali kaala dabba foran khatam!)
-                var mHtml = localStorage.getItem('mm_instant_home_html') || localStorage.getItem('mm_cached_home_html');
+                // 2. Corrupt / Empty Cache ko filter kar ke sirf sahi data show karein
+                var mHtml = localStorage.getItem('mm_cached_home_html') || localStorage.getItem('mm_instant_home_html');
                 var hSec = document.getElementById('homeSections');
-                if (mHtml && hSec && mHtml.trim() !== '') {
+                if (mHtml && hSec && mHtml.indexOf('card-rect') !== -1) {
                     hSec.innerHTML = mHtml;
                 }
             } catch(e){}
@@ -4407,7 +4407,9 @@ header {
                     </div>`;
             }
 
-            // 🎬 2. MOVIES & CATEGORIES
+            // 🎬 2. MOVIES & CATEGORIES (CRASH-PROOF DATA LOADER)
+            const movieList = safeConvertList(window.allMovies);
+
             if (window.categories && window.categories.length > 0) {
                 window.categories.forEach(c => {
                     const cName = (typeof c === 'object' ? c.name : c) || '';
@@ -4415,10 +4417,10 @@ header {
                 });
             }
 
-            if (window.allMovies && window.allMovies.length > 0) {
-                window.allMovies.forEach(m => {
+            if (movieList.length > 0) {
+                movieList.forEach(m => {
                     if (!m) return;
-                    const cName = (m.category || 'Trending Movies').trim();
+                    const cName = (m.category || 'Trending Content').trim();
                     const cKey = cName.toLowerCase();
                     if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
                     catMap[cKey].movies.push(m);
@@ -4442,11 +4444,15 @@ header {
                 }
             });
 
-            if (!renderedAny && window.allMovies && window.allMovies.length > 0) {
+            // 🌟 AGAR CATEGORY MATCH NA BHI HO TO BHI MOVIES LAZMI SHOW HONGI (ZERO BLACK SCREEN)
+            if (!renderedAny && movieList.length > 0) {
+                const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(movieList) : movieList;
                 html += `
-                    <div class="home-movie-section" data-cat="Trending" style="display:block;">
-                        <div class="section-header"><div class="section-title">Trending Movies</div></div>
-                        <div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>
+                    <div class="home-movie-section" style="display:block;">
+                        <div class="section-header">
+                            <div class="section-title">Trending Content</div>
+                        </div>
+                        <div class="movie-scroll">${cleanList.map(m => window.renderMovieCard(m)).join('')}</div>
                     </div>`;
             }
 
@@ -4896,20 +4902,40 @@ header {
             }
         } catch(e){}
 
-        // ⚡ LIGHTNING-FAST 200ms PARALLEL REST ENGINE (TAMASHA STYLE)
+        // 🚀 100% CRASH-PROOF DATA SYNC (OBJECT YA ARRAY DONO KO HANDLE KAREGA)
+        const safeConvertList = (raw) => {
+            if (!raw) return [];
+            if (Array.isArray(raw)) return raw.filter(Boolean);
+            if (typeof raw === 'object') return Object.values(raw).filter(Boolean);
+            return [];
+        };
+
         const applyFreshMovies = (data) => {
             if (!data) return;
-            window.allMovies = Array.isArray(data) ? data : Object.values(data);
+            window.allMovies = safeConvertList(data);
             try {
                 localStorage.setItem('mm_cached_movies_list', JSON.stringify(window.allMovies));
             } catch(e){}
             saveFastCache();
-            window.renderHome();
-            window.renderFavoritesPage();
+            if (typeof window.renderHome === 'function') window.renderHome();
+            if (typeof window.renderFavoritesPage === 'function') window.renderFavoritesPage();
             if (window.sliders && window.sliders.length > 0 && typeof initSlider === 'function') {
                 initSlider(true);
             }
         };
+
+        // 🚀 1. Fast Direct HTTP Fetch
+        fetch('https://movies-master-59452-default-rtdb.firebaseio.com/movies.json')
+            .then(res => res.json())
+            .then(data => { if (data) applyFreshMovies(data); })
+            .catch(() => {});
+
+        // 🔥 2. Live Realtime Listener (Background Sync)
+        onValue(ref(db, 'movies'), (snap) => {
+            if (snap.exists()) applyFreshMovies(snap.val());
+        }, (error) => {
+            console.warn('Firebase sync retry...');
+        });
 
         // 🚀 1. Fast Direct HTTP Fetch (0.2 Second Mein Data Laane Ke Liye)
         fetch('https://movies-master-59452-default-rtdb.firebaseio.com/movies.json')
