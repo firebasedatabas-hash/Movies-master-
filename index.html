@@ -3478,65 +3478,9 @@ header {
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
-         <!-- ⚡ 2026 CLEAN HOME CONTAINER (ALL PAR CHANNELS + BAKI PAR SIRF MOVIES) -->
-        <div id="homeSections">
-            
-            <!-- 📺 1. LIVE CHANNELS RAIL (SIRF 'ALL' PAR DIKHEGI) -->
-            <div id="homeLiveChannelsSection" style="display:block;">
-                <!-- Channels Round Shimmer Circles -->
-                <div style="margin-bottom:14px;">
-                    <div class="section-header">
-                        <div class="skeleton-shimmer" style="width:130px; height:18px; border-radius:6px;"></div>
-                        <div class="skeleton-shimmer" style="width:70px; height:20px; border-radius:14px;"></div>
-                    </div>
-                    <div class="movie-scroll" style="gap:16px; padding-bottom:8px;">
-                        <div style="display:flex; flex-direction:column; align-items:center; width:64px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%;"></div>
-                            <div class="skeleton-shimmer" style="width:45px; height:8px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:center; width:64px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%;"></div>
-                            <div class="skeleton-shimmer" style="width:50px; height:8px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:center; width:64px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%;"></div>
-                            <div class="skeleton-shimmer" style="width:42px; height:8px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:center; width:64px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:58px; height:58px; border-radius:50%;"></div>
-                            <div class="skeleton-shimmer" style="width:48px; height:8px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 🎬 2. MOVIES CONTAINER (ALL AUR CATEGORIES KE LIYE) -->
-            <div id="homeMovieSections">
-                <!-- Movies Shimmer Cards -->
-                <div style="margin-bottom:14px;">
-                    <div class="section-header">
-                        <div class="skeleton-shimmer" style="width:140px; height:18px; border-radius:6px;"></div>
-                        <div class="skeleton-shimmer" style="width:70px; height:20px; border-radius:14px;"></div>
-                    </div>
-                    <div class="movie-scroll" style="gap:12px; padding-bottom:8px;">
-                        <div style="width:120px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:4px;"></div>
-                            <div class="skeleton-shimmer" style="width:85%; height:10px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                        <div style="width:120px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:4px;"></div>
-                            <div class="skeleton-shimmer" style="width:75%; height:10px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                        <div style="width:120px; flex-shrink:0;">
-                            <div class="skeleton-shimmer" style="width:100%; aspect-ratio:120/165; border-radius:4px;"></div>
-                            <div class="skeleton-shimmer" style="width:90%; height:10px; border-radius:4px; margin-top:6px;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div> <!-- 👈 Closes #homeSections -->
-    </div> <!-- 👈 Closes #homePage -->
+         <!-- ⚡ 2026 CRASH-PROOF HOME SECTIONS CONTAINER -->
+        <div id="homeSections"></div>
+    </div>
             
     <!-- ⚡ 0ms GUARANTEED INSTANT DRAW ENGINE (TAMASHA / YOUTUBE) -->
     <script>
@@ -4340,173 +4284,128 @@ header {
             return grouped;
         };
 
-        // ⚡ CRASH-PROOF RENDER HOME (MOVIES 100% WAPAS LAANE KE LIYE)
-        // 🌟 2026 SMART HOME CATEGORY FILTER ENGINE
         window.activeHomeCategory = 'all';
 
-        // 📺 1. LIVE CHANNELS RAIL ENGINE (KABHI GAYAB NAHI HOGA)
-        window.renderLiveChannelsRail = () => {
-            const chanSec = document.getElementById('homeLiveChannelsSection');
-            if (!chanSec) return;
-
-            if (window.allChannels && window.allChannels.length > 0) {
-                chanSec.innerHTML = `
-                    <div class="section-header">
-                        <div class="section-title" style="display:flex; align-items:center; gap:8px;">
-                            <div class="sec-icon-box">
-                                <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/></svg>
-                            </div>
-                            <span>Live TV Channels</span>
-                        </div>
-                        <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right"></i></div>
-                    </div>
-                    <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
-                        ${window.allChannels.slice(0, 15).map(c => window.renderChannelItem(c)).join('')}
-                    </div>`;
-                chanSec.style.display = 'block';
-            } else {
-                chanSec.style.display = 'none';
-            }
-        };
-
-        // 🎬 2. SMART CATEGORY FILTER (SIRF 'ALL' PAR CHANNELS, BAKI PAR CHUP JAYENGE)
+        // 🎬 1. SMART CATEGORY FILTER BUTTON TAP
         window.filterHomeCategory = (catName, btn) => {
             window.activeHomeCategory = catName;
             document.querySelectorAll('.home-cat-pill').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
+            window.renderHome();
+        };
 
-            const chanSec = document.getElementById('homeLiveChannelsSection');
-            const movieBox = document.getElementById('homeMovieSections');
-            const cleanTarget = String(catName || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+        // 🌟 2. MASTER CRASH-PROOF RENDER HOME (CHANNELS SIRF 'ALL' PAR, BAKI PAR SIRF MOVIES)
+        window.renderHome = () => {
+            const sec = document.getElementById('homeSections');
+            if (!sec) return;
 
-            // 🎯 AGAR 'ALL' HO TO CHANNELS DIKHAO, BAKI PAR CHUPA DO!
-            if (cleanTarget === 'all' || cleanTarget === '') {
-                if (chanSec) {
-                    chanSec.style.display = 'block';
-                    window.renderLiveChannelsRail();
-                }
-                window.renderHomeMovies();
-                return;
-            } else {
-                if (chanSec) {
-                    chanSec.innerHTML = '';
-                    chanSec.style.display = 'none'; // 👈 Baki tamam categories par channels 100% chup jayenge!
-                }
+            let html = '';
+            const isAll = (!window.activeHomeCategory || window.activeHomeCategory === 'all');
+
+            // 📺 A. LIVE TV CHANNELS (SIRF AUR SIRF 'ALL' CATEGORY PAR DIKHEGA)
+            if (isAll && window.allChannels && window.allChannels.length > 0) {
+                html += `
+                    <div id="homeLiveChannelsSection" style="display:block; margin-bottom:10px;">
+                        <div class="section-header">
+                            <div class="section-title" style="display:flex; align-items:center; gap:8px;">
+                                <div class="sec-icon-box">
+                                    <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2.5"/><polyline points="17 2 12 7 7 2"/></svg>
+                                </div>
+                                <span>Live TV Channels</span>
+                            </div>
+                            <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right"></i></div>
+                        </div>
+                        <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
+                            ${window.allChannels.slice(0, 15).map(c => window.renderChannelItem(c)).join('')}
+                        </div>
+                    </div>`;
             }
 
-            if (!movieBox) return;
-
+            // 🎬 B. MOVIES RENDERING
             const allM = (window.allMovies && window.allMovies.length > 0) 
                 ? window.allMovies 
                 : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
 
-            const filteredMovies = allM.filter(m => {
-                if (!m) return false;
-                const mCat = String(m.category || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
-                return (mCat === cleanTarget) || mCat.includes(cleanTarget) || cleanTarget.includes(mCat);
-            });
+            if (isAll) {
+                // 🌟 JAB USER 'ALL' PAR HO: SAARI CATEGORIES KI MOVIES LINE SE DIKHAO
+                let catMap = {};
 
-            const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
+                if (window.categories && window.categories.length > 0) {
+                    window.categories.forEach(c => {
+                        const cName = (typeof c === 'object' ? c.name : c) || '';
+                        if (cName.trim()) catMap[cName.trim().toLowerCase()] = { name: cName.trim(), limit: c.limit || window.globalLimit, movies: [] };
+                    });
+                }
 
-            if (cleanList.length > 0) {
-                movieBox.innerHTML = `
-                    <div class="home-movie-section" style="display:block;">
-                        <div class="section-header">
-                            <div class="section-title">${catName}</div>
-                            <div class="view-all-btn" onclick="window.openViewAll('${catName.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
-                        </div>
-                        <div class="movie-scroll" style="display:flex;">
-                            ${cleanList.map(m => window.renderMovieCard(m)).join('')}
-                        </div>
-                    </div>`;
+                if (allM.length > 0) {
+                    allM.forEach(m => {
+                        if (!m) return;
+                        const cName = (m.category || 'Trending Movies').trim();
+                        const cKey = cName.toLowerCase();
+                        if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
+                        catMap[cKey].movies.push(m);
+                    });
+                }
+
+                let renderedAny = false;
+                Object.values(catMap).forEach(cat => {
+                    if (cat.movies && cat.movies.length > 0) {
+                        const lim = parseInt(cat.limit) || window.globalLimit;
+                        const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
+                        html += `
+                            <div class="home-movie-section" style="display:block;">
+                                <div class="section-header">
+                                    <div class="section-title">${cat.name}</div>
+                                    <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
+                                </div>
+                                <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>
+                            </div>`;
+                        renderedAny = true;
+                    }
+                });
+
+                if (!renderedAny && allM.length > 0) {
+                    html += `
+                        <div class="home-movie-section" style="display:block;">
+                            <div class="section-header"><div class="section-title">Trending Content</div></div>
+                            <div class="movie-scroll">${allM.map(m => window.renderMovieCard(m)).join('')}</div>
+                        </div>`;
+                }
+
             } else {
-                movieBox.innerHTML = `
-                    <div style="text-align:center; padding:45px 15px; color:#8b8f9e;">
-                        <svg viewBox="0 0 24 24" style="width:36px; height:36px; fill:none; stroke:#555; stroke-width:1.8; margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
-                        <p style="margin:0; font-size:12px; font-weight:700; color:#888;">Is category mein jald naya content add hoga.</p>
-                    </div>`;
-            }
-        };
+                // 🎯 JAB USER KISI CATEGORY PAR CLICK KARE (CHANNELS GAYAB, SIRF US CATEGORY KI MOVIES):
+                const cleanTarget = String(window.activeHomeCategory || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
 
-        // 🍿 3. MOVIES RAIL RENDERER (ALL CATEGORIES)
-        window.renderHomeMovies = () => {
-            const movieBox = document.getElementById('homeMovieSections');
-            if (!movieBox) return;
-
-            let html = '';
-            let catMap = {};
-
-            if (window.categories && window.categories.length > 0) {
-                window.categories.forEach(c => {
-                    const cName = (typeof c === 'object' ? c.name : c) || '';
-                    if (cName.trim()) catMap[cName.trim().toLowerCase()] = { name: cName.trim(), limit: c.limit || window.globalLimit, movies: [] };
+                const filteredMovies = allM.filter(m => {
+                    if (!m) return false;
+                    const mCat = String(m.category || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return (mCat === cleanTarget) || mCat.includes(cleanTarget) || cleanTarget.includes(mCat);
                 });
-            }
 
-            if (window.allMovies && window.allMovies.length > 0) {
-                window.allMovies.forEach(m => {
-                    if (!m) return;
-                    const cName = (m.category || 'Trending Movies').trim();
-                    const cKey = cName.toLowerCase();
-                    if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
-                    catMap[cKey].movies.push(m);
-                });
-            }
+                const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
 
-            let renderedAny = false;
-            Object.values(catMap).forEach(cat => {
-                if (cat.movies && cat.movies.length > 0) {
-                    const lim = parseInt(cat.limit) || window.globalLimit;
-                    const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
+                if (cleanList.length > 0) {
                     html += `
                         <div class="home-movie-section" style="display:block;">
                             <div class="section-header">
-                                <div class="section-title">${cat.name}</div>
-                                <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
+                                <div class="section-title">${window.activeHomeCategory}</div>
+                                <div class="view-all-btn" onclick="window.openViewAll('${String(window.activeHomeCategory).replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
                             </div>
-                            <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>
+                            <div class="movie-scroll" style="display:flex;">
+                                ${cleanList.map(m => window.renderMovieCard(m)).join('')}
+                            </div>
                         </div>`;
-                    renderedAny = true;
+                } else {
+                    html += `
+                        <div style="text-align:center; padding:50px 15px; color:#8b8f9e;">
+                            <svg viewBox="0 0 24 24" style="width:38px; height:38px; fill:none; stroke:#555; stroke-width:1.8; margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+                            <p style="margin:0; font-size:12.5px; font-weight:700; color:#888;">Is category mein jald naya content add hoga.</p>
+                        </div>`;
                 }
-            });
-
-            if (!renderedAny && window.allMovies && window.allMovies.length > 0) {
-                html += `
-                    <div class="home-movie-section" style="display:block;">
-                        <div class="section-header"><div class="section-title">Trending Content</div></div>
-                        <div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>
-                    </div>`;
             }
 
-            if (html) {
-                movieBox.innerHTML = html;
-            }
-        };
-
-        // 🌟 4. MASTER RENDER HOME (TAMASHA TIMING + CLEAN SYNC)
-        window.shimmerDone = false;
-        setTimeout(() => {
-            window.shimmerDone = true;
-            if (typeof window.pendingHomeRender === 'function') {
-                window.pendingHomeRender();
-                window.pendingHomeRender = null;
-            }
-        }, 850);
-
-        window.renderHome = () => {
-            if (!window.shimmerDone) {
-                window.pendingHomeRender = () => { window.renderHome(); };
-                return;
-            }
-
-            // 🎯 Agar "All" par hon to Live Channels dikhayein, warna chupayein
-            if (!window.activeHomeCategory || window.activeHomeCategory === 'all') {
-                window.renderLiveChannelsRail();
-                window.renderHomeMovies();
-            } else {
-                const activePill = document.querySelector(`.home-cat-pill[onclick*="${window.activeHomeCategory}"]`);
-                window.filterHomeCategory(window.activeHomeCategory, activePill);
-            }
+            // HTML ko ek hi jhatkay mein render karein (Zero Crash / Zero Black Void)
+            sec.innerHTML = html;
 
             // Categories Bar Update
             const currentCatNames = (window.categories || []).map(c => typeof c === 'object' ? c.name : c).filter(Boolean);
