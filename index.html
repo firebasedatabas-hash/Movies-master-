@@ -4383,6 +4383,14 @@ header {
             } catch(e){}
         };
 
+        // 🚀 100% CRASH-PROOF DATA CONVERTER (GLOBAL)
+        window.safeConvertList = (raw) => {
+            if (!raw) return [];
+            if (Array.isArray(raw)) return raw.filter(Boolean);
+            if (typeof raw === 'object') return Object.values(raw).filter(Boolean);
+            return [];
+        };
+
         // 🚀 BULLETPROOF HOME RENDER (CHANNELS & MOVIES ASAL WORKING CODE)
         window.renderHome = () => {
             let html = '';
@@ -4408,7 +4416,7 @@ header {
             }
 
             // 🎬 2. MOVIES & CATEGORIES (CRASH-PROOF DATA LOADER)
-            const movieList = safeConvertList(window.allMovies);
+            const movieList = window.safeConvertList(window.allMovies);
 
             if (window.categories && window.categories.length > 0) {
                 window.categories.forEach(c => {
@@ -4558,8 +4566,8 @@ header {
         window.activeFavTab = 'all';
 
         window.updateProfileFavCounter = () => {
-            const favChannels = (window.allChannels || []).filter(c => window.isFav('channels', c.id));
-            const favMovies = (window.allMovies || []).filter(m => window.isFav('movies', m.id));
+            const favChannels = (window.allChannels || []).filter(c => c && window.isFav('channels', c.id));
+            const favMovies = (window.allMovies || []).filter(m => m && window.isFav('movies', m.id));
             const realTotal = favChannels.length + favMovies.length;
             const favCountText = document.getElementById('profileFavCount');
             if (favCountText) favCountText.innerText = `${realTotal} Saved`;
@@ -4870,23 +4878,20 @@ header {
         });
 
         onValue(ref(db, 'sliders'), (snap) => {
-            const data = snap.val();
-            window.sliders = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            window.sliders = window.safeConvertList(snap.val());
             saveFastCache();
             initSlider();
         });
 
         onValue(ref(db, 'categories'), (snap) => {
-            const data = snap.val();
-            const rawCats = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            const rawCats = window.safeConvertList(snap.val());
             window.categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
             saveFastCache();
             window.renderHome();
         });
 
         onValue(ref(db, 'channels'), (snap) => {
-            const data = snap.val();
-            window.allChannels = data ? (Array.isArray(data) ? data : Object.values(data)) : [];
+            window.allChannels = window.safeConvertList(snap.val());
             saveFastCache();
             window.initLiveChannels();
             window.renderFavoritesPage();
