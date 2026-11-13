@@ -3473,10 +3473,18 @@ header {
         <div id="homeSections"></div>
     </div>
     
-    <!-- ⚡ 2026 MOBILE MEMORY LOCK INSTANT DRAW ENGINE (0ms LOAD) -->
+    <!-- ⚡ 2026 CLEAN MEMORY LOCK INSTANT DRAW (ZERO STALE CACHE) -->
     <script>
         (function() {
             try {
+                // 🧹 Purana atka hua FREE cache sirf 1 dafa automatically saaf karein (Profile/Favorites/VIP Pass safe rahenge)
+                if (localStorage.getItem('mm_v3_clean') !== '1') {
+                    ['mm_fast_cache','mm_instant_home_html','mm_cached_home_html','mm_cached_movies_list','mm_cached_categories_html','mm_cached_slider_html','mm_cached_slider_transform','mm_cached_backdrop','mm_locked_movies','mm_locked_channels','mm_locked_sliders','mm_locked_categories'].forEach(function(k){
+                        localStorage.removeItem(k);
+                    });
+                    localStorage.setItem('mm_v3_clean', '1');
+                }
+
                 // 1. Slider & Backdrop Instant Restore
                 var sHtml = localStorage.getItem('mm_cached_slider_html');
                 var sTrans = localStorage.getItem('mm_cached_slider_transform');
@@ -3497,7 +3505,7 @@ header {
                 if (cHtml && cBar) cBar.innerHTML = cHtml;
 
                 // 3. Home Movies & Channels Restore
-                var mHtml = localStorage.getItem('mm_cached_home_html') || localStorage.getItem('mm_instant_home_html');
+                var mHtml = localStorage.getItem('mm_cached_home_html');
                 var hSec = document.getElementById('homeSections');
                 if (mHtml && hSec && mHtml.indexOf('card-rect') !== -1) {
                     hSec.innerHTML = mHtml;
@@ -4070,7 +4078,7 @@ header {
     
     <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE & ENGINE -->
     <script>
-        // 🔒 MOBILE MEMORY LOCK ENGINE (SAFE READ + ZERO CRASH)
+        // 🔒 CLEAN MOBILE MEMORY LOCK LOADER
         window.safeConvertList = (raw) => {
             if (!raw) return [];
             if (Array.isArray(raw)) return raw.filter(Boolean);
@@ -4083,12 +4091,11 @@ header {
                 return raw ? JSON.parse(raw) : fallback;
             } catch(e) { return fallback; }
         };
-        const _fastMem = window.safeJsonGet('mm_fast_cache', {}) || {};
-        window.allMovies = window.safeConvertList(window.safeJsonGet('mm_locked_movies') || window.safeJsonGet('mm_cached_movies_list') || _fastMem.movies || []);
-        window.allChannels = window.safeConvertList(window.safeJsonGet('mm_locked_channels') || _fastMem.channels || []);
-        window.sliders = window.safeConvertList(window.safeJsonGet('mm_locked_sliders') || _fastMem.sliders || []);
-        window.categories = window.safeConvertList(window.safeJsonGet('mm_locked_categories') || _fastMem.categories || []);
-        window.globalLimit = parseInt(localStorage.getItem('mm_locked_limit')) || _fastMem.limit || 10;
+        window.allMovies = window.safeConvertList(window.safeJsonGet('mm_locked_movies', []));
+        window.allChannels = window.safeConvertList(window.safeJsonGet('mm_locked_channels', []));
+        window.sliders = window.safeConvertList(window.safeJsonGet('mm_locked_sliders', []));
+        window.categories = window.safeConvertList(window.safeJsonGet('mm_locked_categories', []));
+        window.globalLimit = parseInt(localStorage.getItem('mm_locked_limit')) || 10;
 
             // 🏷️ SMART CLEAN TITLE ENGINE (Title se [VIP] aur [LIVE] dono ko screen se hide karega)
         window.cleanTitleName = (title) => {
@@ -4861,31 +4868,11 @@ header {
         // ⚡ PERMANENT OFFLINE MEMORY LOCK (MOVIES HAMESHA PHONE MEIN SAVE RAHENGI)
         function saveFastCache() {
             try {
-                const existing = window.safeJsonGet('mm_fast_cache', {}) || {};
-
-                const moviesToSave = (window.allMovies && window.allMovies.length > 0) ? window.allMovies : (existing.movies || []);
-                const channelsToSave = (window.allChannels && window.allChannels.length > 0) ? window.allChannels : (existing.channels || []);
-                const slidersToSave = (window.sliders && window.sliders.length > 0) ? window.sliders : (existing.sliders || []);
-                const categoriesToSave = (window.categories && window.categories.length > 0) ? window.categories : (existing.categories || []);
-
-                // 🔒 Har cheez ko alag-alag Mobile Memory mein Lock karein
-                if (moviesToSave.length > 0) {
-                    const mJson = JSON.stringify(moviesToSave);
-                    localStorage.setItem('mm_locked_movies', mJson);
-                    localStorage.setItem('mm_cached_movies_list', mJson);
-                }
-                if (channelsToSave.length > 0) localStorage.setItem('mm_locked_channels', JSON.stringify(channelsToSave));
-                if (slidersToSave.length > 0) localStorage.setItem('mm_locked_sliders', JSON.stringify(slidersToSave));
-                if (categoriesToSave.length > 0) localStorage.setItem('mm_locked_categories', JSON.stringify(categoriesToSave));
+                if (window.allMovies && window.allMovies.length > 0) localStorage.setItem('mm_locked_movies', JSON.stringify(window.allMovies));
+                if (window.allChannels && window.allChannels.length > 0) localStorage.setItem('mm_locked_channels', JSON.stringify(window.allChannels));
+                if (window.sliders && window.sliders.length > 0) localStorage.setItem('mm_locked_sliders', JSON.stringify(window.sliders));
+                if (window.categories && window.categories.length > 0) localStorage.setItem('mm_locked_categories', JSON.stringify(window.categories));
                 if (window.globalLimit) localStorage.setItem('mm_locked_limit', String(window.globalLimit));
-
-                localStorage.setItem('mm_fast_cache', JSON.stringify({
-                    movies: moviesToSave,
-                    channels: channelsToSave,
-                    sliders: slidersToSave,
-                    categories: categoriesToSave,
-                    limit: window.globalLimit || 10
-                }));
             } catch(e){}
         }
 
@@ -4949,14 +4936,9 @@ header {
             }
         });
 
-        // ⚡ 0-SECOND INSTANT MOVIES CACHE ENGINE
-        try {
-            const fastMovies = JSON.parse(localStorage.getItem('mm_cached_movies_list'));
-            if (fastMovies && fastMovies.length > 0) {
-                window.allMovies = fastMovies;
-                window.renderHome();
-            }
-        } catch(e){}
+        if (window.allChannels && window.allChannels.length > 0 && typeof window.initLiveChannels === 'function') {
+            window.initLiveChannels();
+        }
 
         // 🚀 100% CRASH-PROOF DATA SYNC (OBJECT YA ARRAY DONO KO HANDLE KAREGA)
         const safeConvertList = (raw) => {
