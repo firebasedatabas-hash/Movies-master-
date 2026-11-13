@@ -3473,16 +3473,30 @@ header {
         <div id="homeSections"></div>
     </div>
     
-    <!-- ⚡ 2026 BULLETPROOF INSTANT DRAW ENGINE (ZERO CORRUPT CACHE) -->
+    <!-- ⚡ 2026 MOBILE MEMORY LOCK INSTANT DRAW ENGINE (0ms LOAD) -->
     <script>
         (function() {
             try {
-                // 1. Categories bar restore
+                // 1. Slider & Backdrop Instant Restore
+                var sHtml = localStorage.getItem('mm_cached_slider_html');
+                var sTrans = localStorage.getItem('mm_cached_slider_transform');
+                var sBack = localStorage.getItem('mm_cached_backdrop');
+                var sTrack = document.getElementById('sliderTrack');
+                var sBackdrop = document.getElementById('sliderBackdrop');
+                if (sHtml && sTrack && sHtml.indexOf('slide') !== -1) {
+                    sTrack.innerHTML = sHtml;
+                    if (sTrans) sTrack.style.transform = sTrans;
+                }
+                if (sBack && sBackdrop) {
+                    sBackdrop.style.backgroundImage = "url('" + sBack + "')";
+                }
+
+                // 2. Categories Bar Restore
                 var cHtml = localStorage.getItem('mm_cached_categories_html');
                 var cBar = document.getElementById('homeCategoryBar');
                 if (cHtml && cBar) cBar.innerHTML = cHtml;
 
-                // 2. Corrupt / Empty Cache ko filter kar ke sirf sahi data show karein
+                // 3. Home Movies & Channels Restore
                 var mHtml = localStorage.getItem('mm_cached_home_html') || localStorage.getItem('mm_instant_home_html');
                 var hSec = document.getElementById('homeSections');
                 if (mHtml && hSec && mHtml.indexOf('card-rect') !== -1) {
@@ -4056,12 +4070,25 @@ header {
     
     <!-- ⚡ SYNCHRONOUS 0-MILLISECOND CACHE & ENGINE -->
     <script>
-        // 🚀 PERMANENT OFFLINE STORAGE ENGINE (TAMASHA / YOUTUBE ARCHITECTURE)
-        window.allMovies = JSON.parse(localStorage.getItem('mm_cached_movies_list')) || (JSON.parse(localStorage.getItem('mm_fast_cache'))?.movies) || [];
-        window.allChannels = JSON.parse(localStorage.getItem('mm_fast_cache'))?.channels || [];
-        window.sliders = JSON.parse(localStorage.getItem('mm_fast_cache'))?.sliders || [];
-        window.categories = JSON.parse(localStorage.getItem('mm_fast_cache'))?.categories || [];
-        window.globalLimit = 10;
+        // 🔒 MOBILE MEMORY LOCK ENGINE (SAFE READ + ZERO CRASH)
+        window.safeConvertList = (raw) => {
+            if (!raw) return [];
+            if (Array.isArray(raw)) return raw.filter(Boolean);
+            if (typeof raw === 'object') return Object.values(raw).filter(Boolean);
+            return [];
+        };
+        window.safeJsonGet = (key, fallback = null) => {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch(e) { return fallback; }
+        };
+        const _fastMem = window.safeJsonGet('mm_fast_cache', {}) || {};
+        window.allMovies = window.safeConvertList(window.safeJsonGet('mm_locked_movies') || window.safeJsonGet('mm_cached_movies_list') || _fastMem.movies || []);
+        window.allChannels = window.safeConvertList(window.safeJsonGet('mm_locked_channels') || _fastMem.channels || []);
+        window.sliders = window.safeConvertList(window.safeJsonGet('mm_locked_sliders') || _fastMem.sliders || []);
+        window.categories = window.safeConvertList(window.safeJsonGet('mm_locked_categories') || _fastMem.categories || []);
+        window.globalLimit = parseInt(localStorage.getItem('mm_locked_limit')) || _fastMem.limit || 10;
 
             // 🏷️ SMART CLEAN TITLE ENGINE (Title se [VIP] aur [LIVE] dono ko screen se hide karega)
         window.cleanTitleName = (title) => {
@@ -4834,14 +4861,24 @@ header {
         // ⚡ PERMANENT OFFLINE MEMORY LOCK (MOVIES HAMESHA PHONE MEIN SAVE RAHENGI)
         function saveFastCache() {
             try {
-                const existing = JSON.parse(localStorage.getItem('mm_fast_cache')) || {};
-                
+                const existing = window.safeJsonGet('mm_fast_cache', {}) || {};
+
                 const moviesToSave = (window.allMovies && window.allMovies.length > 0) ? window.allMovies : (existing.movies || []);
                 const channelsToSave = (window.allChannels && window.allChannels.length > 0) ? window.allChannels : (existing.channels || []);
                 const slidersToSave = (window.sliders && window.sliders.length > 0) ? window.sliders : (existing.sliders || []);
                 const categoriesToSave = (window.categories && window.categories.length > 0) ? window.categories : (existing.categories || []);
 
-                // 💾 1. Fast Cache Object Lock
+                // 🔒 Har cheez ko alag-alag Mobile Memory mein Lock karein
+                if (moviesToSave.length > 0) {
+                    const mJson = JSON.stringify(moviesToSave);
+                    localStorage.setItem('mm_locked_movies', mJson);
+                    localStorage.setItem('mm_cached_movies_list', mJson);
+                }
+                if (channelsToSave.length > 0) localStorage.setItem('mm_locked_channels', JSON.stringify(channelsToSave));
+                if (slidersToSave.length > 0) localStorage.setItem('mm_locked_sliders', JSON.stringify(slidersToSave));
+                if (categoriesToSave.length > 0) localStorage.setItem('mm_locked_categories', JSON.stringify(categoriesToSave));
+                if (window.globalLimit) localStorage.setItem('mm_locked_limit', String(window.globalLimit));
+
                 localStorage.setItem('mm_fast_cache', JSON.stringify({
                     movies: moviesToSave,
                     channels: channelsToSave,
@@ -4849,12 +4886,15 @@ header {
                     categories: categoriesToSave,
                     limit: window.globalLimit || 10
                 }));
-
-                // 💾 2. Direct Movies List Lock
-                if (moviesToSave.length > 0) {
-                    localStorage.setItem('mm_cached_movies_list', JSON.stringify(moviesToSave));
-                }
             } catch(e){}
+        }
+
+        // 🕵️ SILENT BACKGROUND CHECKER (Data same ho toh zero flicker, naya ho toh chupke se update!)
+        function hasDataChanged(memKey, freshList) {
+            try {
+                if (!freshList || freshList.length === 0) return false;
+                return JSON.stringify(freshList) !== localStorage.getItem(memKey);
+            } catch(e) { return true; }
         }
 
         // ⚡ FIREBASE SEPARATE FAST SYNC
@@ -4878,24 +4918,35 @@ header {
         });
 
         onValue(ref(db, 'sliders'), (snap) => {
-            window.sliders = window.safeConvertList(snap.val());
-            saveFastCache();
-            initSlider();
+            const freshSliders = window.safeConvertList(snap.val());
+            if (freshSliders.length > 0 && hasDataChanged('mm_locked_sliders', freshSliders)) {
+                window.sliders = freshSliders;
+                saveFastCache();
+                initSlider();
+            }
         });
 
         onValue(ref(db, 'categories'), (snap) => {
             const rawCats = window.safeConvertList(snap.val());
-            window.categories = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
-            saveFastCache();
-            window.renderHome();
+            if (rawCats.length > 0) {
+                const sortedCats = rawCats.sort((a, b) => (a.order !== undefined ? a.order : 999) - (b.order !== undefined ? b.order : 999));
+                if (hasDataChanged('mm_locked_categories', sortedCats)) {
+                    window.categories = sortedCats;
+                    saveFastCache();
+                    window.renderHome();
+                }
+            }
         });
 
         onValue(ref(db, 'channels'), (snap) => {
-            window.allChannels = window.safeConvertList(snap.val());
-            saveFastCache();
-            window.initLiveChannels();
-            window.renderFavoritesPage();
-            window.renderHome();
+            const freshChannels = window.safeConvertList(snap.val());
+            if (freshChannels.length > 0 && hasDataChanged('mm_locked_channels', freshChannels)) {
+                window.allChannels = freshChannels;
+                saveFastCache();
+                window.initLiveChannels();
+                window.renderFavoritesPage();
+                window.renderHome();
+            }
         });
 
         // ⚡ 0-SECOND INSTANT MOVIES CACHE ENGINE
@@ -4916,11 +4967,13 @@ header {
         };
 
         const applyFreshMovies = (data) => {
-            if (!data) return;
-            window.allMovies = safeConvertList(data);
-            try {
-                localStorage.setItem('mm_cached_movies_list', JSON.stringify(window.allMovies));
-            } catch(e){}
+            const freshMovies = window.safeConvertList(data);
+            if (freshMovies.length === 0) return;
+
+            // Agar memory mein pehle se bilkul yahi movies lock hain toh screen bilkul blink na kare!
+            if (!hasDataChanged('mm_locked_movies', freshMovies)) return;
+
+            window.allMovies = freshMovies;
             saveFastCache();
             if (typeof window.renderHome === 'function') window.renderHome();
             if (typeof window.renderFavoritesPage === 'function') window.renderFavoritesPage();
@@ -4929,31 +4982,15 @@ header {
             }
         };
 
-        // 🚀 1. Fast Direct HTTP Fetch
+        // 🕵️ Background Silent Fetch + Live Sync (Kisi ko pata nahi chalega)
         fetch('https://movies-master-59452-default-rtdb.firebaseio.com/movies.json')
             .then(res => res.json())
             .then(data => { if (data) applyFreshMovies(data); })
             .catch(() => {});
 
-        // 🔥 2. Live Realtime Listener (Background Sync)
         onValue(ref(db, 'movies'), (snap) => {
             if (snap.exists()) applyFreshMovies(snap.val());
-        }, (error) => {
-            console.warn('Firebase sync retry...');
-        });
-
-        // 🚀 1. Fast Direct HTTP Fetch (0.2 Second Mein Data Laane Ke Liye)
-        fetch('https://movies-master-59452-default-rtdb.firebaseio.com/movies.json')
-            .then(res => res.json())
-            .then(data => { applyFreshMovies(data); })
-            .catch(() => {});
-
-        // 🔥 2. Live Realtime Listener (Background Sync)
-        onValue(ref(db, 'movies'), (snap) => {
-            applyFreshMovies(snap.val());
-        }, (error) => {
-            console.warn('Firebase slow net retry...');
-        });
+        }, () => {});
 
         window.handleNativeSystemShare = async (url, title) => {
             const isYouTube = url && (url.includes('youtube.com') || url.includes('youtu.be'));
@@ -5530,6 +5567,13 @@ header {
             track.ontransitionend = handleLoopEnd;
 
             updateSliderPosition(false);
+            try {
+                localStorage.setItem('mm_cached_slider_html', track.innerHTML);
+                localStorage.setItem('mm_cached_slider_transform', track.style.transform);
+                if (window.sliders[0] && window.sliders[0].img) {
+                    localStorage.setItem('mm_cached_backdrop', window.sliders[0].img);
+                }
+            } catch(e){}
             startAutoSlider();
         }
 
