@@ -452,24 +452,15 @@ header {
     display: block !important; 
 }
 
-/* 🎬 2026 TAMASHA & NETFLIX ASLI SILVER LASER SHIMMER SYSTEM */
+/* 🎬 2026 TAMASHA SKELETON SHIMMER (PURANA NORMAL) */
 .skeleton-shimmer {
-    background: linear-gradient(90deg, 
-        rgba(255, 255, 255, 0.03) 0%, 
-        rgba(255, 255, 255, 0.03) 25%, 
-        rgba(255, 255, 255, 0.22) 50%, 
-        rgba(255, 255, 255, 0.03) 75%, 
-        rgba(255, 255, 255, 0.03) 100%) !important;
-    background-size: 250% 100% !important;
-    animation: tamashaSilverSweep 1.6s infinite linear !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0.03) 100%);
+    background-size: 200% 100%;
+    animation: tamashaShimmer 1.5s infinite linear;
 }
-
-@keyframes tamashaSilverSweep {
-    0% { background-position: 150% 0; }
-    100% { background-position: -150% 0; }
+@keyframes tamashaShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
 }
 
 /* 🎬 16:9 EXACT CINEMA THUMBNAIL SLIDER (ZERO CROPPING / NO ZOOM) */
@@ -3478,10 +3469,10 @@ header {
             <div class="slider-dots" id="sliderDots"></div>
         </div>
 
-         <!-- ⚡ 2026 CRASH-PROOF HOME SECTIONS CONTAINER -->
+         <!-- ⚡ 100% CLEAN HOME SECTIONS CONTAINER (PURANA CODE) -->
         <div id="homeSections"></div>
     </div>
-            
+    
     <!-- ⚡ 0ms GUARANTEED INSTANT DRAW ENGINE (TAMASHA / YOUTUBE) -->
     <script>
         (function() {
@@ -3491,8 +3482,12 @@ header {
                 var cBar = document.getElementById('homeCategoryBar');
                 if (cHtml && cBar) cBar.innerHTML = cHtml;
 
-                // 2. 🎬 SKELETON SHIMMER INITIALIZER (DATA KO WAIT KARWAYEGA)
-                // HTML mein jo Silver Shimmer bana hua hai pehle use chalne dein
+                // 2. Movies screen par foran daalo (Khali kaala dabba foran khatam!)
+                var mHtml = localStorage.getItem('mm_instant_home_html') || localStorage.getItem('mm_cached_home_html');
+                var hSec = document.getElementById('homeSections');
+                if (mHtml && hSec && mHtml.trim() !== '') {
+                    hSec.innerHTML = mHtml;
+                }
             } catch(e){}
         })();
     </script>
@@ -4284,28 +4279,119 @@ header {
             return grouped;
         };
 
+        // ⚡ CRASH-PROOF RENDER HOME (PURANA ASLI STABLE ENGINE)
         window.activeHomeCategory = 'all';
 
-        // 🎬 1. SMART CATEGORY FILTER BUTTON TAP
+        // 🎬 SMART CATEGORY FILTER (WITH ADMIN PANEL LIMIT APPLIED)
         window.filterHomeCategory = (catName, btn) => {
             window.activeHomeCategory = catName;
             document.querySelectorAll('.home-cat-pill').forEach(b => b.classList.remove('active'));
             if (btn) btn.classList.add('active');
-            window.renderHome();
-        };
 
-        // 🌟 2. MASTER CRASH-PROOF RENDER HOME (CHANNELS SIRF 'ALL' PAR, BAKI PAR SIRF MOVIES)
-        window.renderHome = () => {
             const sec = document.getElementById('homeSections');
             if (!sec) return;
 
-            let html = '';
-            const isAll = (!window.activeHomeCategory || window.activeHomeCategory === 'all');
+            const cleanTarget = String(catName || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
 
-            // 📺 A. LIVE TV CHANNELS (SIRF AUR SIRF 'ALL' CATEGORY PAR DIKHEGA)
-            if (isAll && window.allChannels && window.allChannels.length > 0) {
+            // 1. Agar 'All' select ho toh normal poora home page render karo
+            if (cleanTarget === 'all' || cleanTarget === '') {
+                window.renderHome();
+                return;
+            }
+
+            // 2. Category Filter
+            const allM = (window.allMovies && window.allMovies.length > 0) 
+                ? window.allMovies 
+                : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+
+            const filteredMovies = allM.filter(m => {
+                if (!m) return false;
+                const mCat = String(m.category || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                return (mCat === cleanTarget) || mCat.includes(cleanTarget) || cleanTarget.includes(mCat);
+            });
+
+            const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
+
+            let catLimit = window.globalLimit || 10;
+            if (window.categories && window.categories.length > 0) {
+                const targetCat = window.categories.find(c => {
+                    const cName = (typeof c === 'object' ? c.name : c) || '';
+                    const cClean = cName.toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return cClean === cleanTarget || cClean.includes(cleanTarget) || cleanTarget.includes(cClean);
+                });
+                if (targetCat && targetCat.limit) {
+                    catLimit = parseInt(targetCat.limit) || catLimit;
+                }
+            }
+
+            if (cleanList.length > 0) {
+                sec.innerHTML = `
+                    <div class="section-header">
+                        <div class="section-title">${catName}</div>
+                        <div class="view-all-btn" onclick="window.openViewAll('${catName.replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                    </div>
+                    <div class="movie-scroll" style="display:flex;">
+                        ${cleanList.slice(0, catLimit).map(m => window.renderMovieCard(m)).join('')}
+                    </div>`;
+            } else {
+                sec.innerHTML = `
+                    <div class="section-header">
+                        <div class="section-title">${catName}</div>
+                    </div>
+                    <div class="movie-scroll" style="display:flex;">
+                        ${allM.slice(0, catLimit).map(m => window.renderMovieCard(m)).join('')}
+                    </div>`;
+            }
+        };
+
+        // 🍏 SMART VECTOR CATEGORY BAR ENGINE
+        window.renderHomeCategoryBar = (categoriesList) => {
+            const bar = document.getElementById('homeCategoryBar');
+            if (!bar) return;
+
+            const getCatIconSvg = (name) => {
+                const n = (name || '').toLowerCase();
+                if (n.includes('trend')) {
+                    return `<svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`;
+                } else if (n.includes('sport') || n.includes('cricket')) {
+                    return `<svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34M7 4h10v6a5 5 0 0 1-10 0V4z"/></svg>`;
+                } else if (n.includes('anim')) {
+                    return `<svg viewBox="0 0 24 24"><polygon points="12 2 15 8 21 9 17 14 18 20 12 17 6 20 7 14 3 9 9 8 12 2"/></svg>`;
+                } else {
+                    return `<svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg>`;
+                }
+            };
+
+            let html = `
+                <div class="home-cat-pill ${window.activeHomeCategory === 'all' ? 'active' : ''}" onclick="window.filterHomeCategory('all', this)">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor"/></svg>
+                    <span>All</span>
+                </div>`;
+
+            categoriesList.forEach(cName => {
+                const isActive = (window.activeHomeCategory || '').toLowerCase() === cName.toLowerCase();
                 html += `
-                    <div id="homeLiveChannelsSection" style="display:block; margin-bottom:10px;">
+                    <div class="home-cat-pill ${isActive ? 'active' : ''}" onclick="window.filterHomeCategory('${cName.replace(/'/g, "\\'")}', this)">
+                        ${getCatIconSvg(cName)}
+                        <span>${cName}</span>
+                    </div>`;
+            });
+            bar.innerHTML = html;
+            try {
+                localStorage.setItem('mm_cached_categories_html', html);
+                localStorage.setItem('mm_cached_cat_names', JSON.stringify(categoriesList));
+            } catch(e){}
+        };
+
+        // 🚀 BULLETPROOF HOME RENDER (CHANNELS & MOVIES ASAL WORKING CODE)
+        window.renderHome = () => {
+            let html = '';
+            let catMap = {};
+            
+            // 📺 1. HOME PAGE LIVE CHANNELS RAIL
+            if (window.allChannels && window.allChannels.length > 0) {
+                html += `
+                    <div id="homeLiveChannelsSection" style="display:block;">
                         <div class="section-header">
                             <div class="section-title" style="display:flex; align-items:center; gap:8px;">
                                 <div class="sec-icon-box">
@@ -4313,104 +4399,74 @@ header {
                                 </div>
                                 <span>Live TV Channels</span>
                             </div>
-                            <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right"></i></div>
+                            <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
                         </div>
                         <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
-                            ${window.allChannels.slice(0, 15).map(c => window.renderChannelItem(c)).join('')}
+                            ${window.allChannels.slice(0, 10).map(c => window.renderChannelItem(c)).join('')}
                         </div>
                     </div>`;
             }
 
-            // 🎬 B. MOVIES RENDERING
-            const allM = (window.allMovies && window.allMovies.length > 0) 
-                ? window.allMovies 
-                : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
-
-            if (isAll) {
-                // 🌟 JAB USER 'ALL' PAR HO: SAARI CATEGORIES KI MOVIES LINE SE DIKHAO
-                let catMap = {};
-
-                if (window.categories && window.categories.length > 0) {
-                    window.categories.forEach(c => {
-                        const cName = (typeof c === 'object' ? c.name : c) || '';
-                        if (cName.trim()) catMap[cName.trim().toLowerCase()] = { name: cName.trim(), limit: c.limit || window.globalLimit, movies: [] };
-                    });
-                }
-
-                if (allM.length > 0) {
-                    allM.forEach(m => {
-                        if (!m) return;
-                        const cName = (m.category || 'Trending Movies').trim();
-                        const cKey = cName.toLowerCase();
-                        if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
-                        catMap[cKey].movies.push(m);
-                    });
-                }
-
-                let renderedAny = false;
-                Object.values(catMap).forEach(cat => {
-                    if (cat.movies && cat.movies.length > 0) {
-                        const lim = parseInt(cat.limit) || window.globalLimit;
-                        const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
-                        html += `
-                            <div class="home-movie-section" style="display:block;">
-                                <div class="section-header">
-                                    <div class="section-title">${cat.name}</div>
-                                    <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
-                                </div>
-                                <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>
-                            </div>`;
-                        renderedAny = true;
-                    }
+            // 🎬 2. MOVIES & CATEGORIES
+            if (window.categories && window.categories.length > 0) {
+                window.categories.forEach(c => {
+                    const cName = (typeof c === 'object' ? c.name : c) || '';
+                    if (cName.trim()) catMap[cName.trim().toLowerCase()] = { name: cName.trim(), limit: c.limit || window.globalLimit, movies: [] };
                 });
-
-                if (!renderedAny && allM.length > 0) {
-                    html += `
-                        <div class="home-movie-section" style="display:block;">
-                            <div class="section-header"><div class="section-title">Trending Content</div></div>
-                            <div class="movie-scroll">${allM.map(m => window.renderMovieCard(m)).join('')}</div>
-                        </div>`;
-                }
-
-            } else {
-                // 🎯 JAB USER KISI CATEGORY PAR CLICK KARE (CHANNELS GAYAB, SIRF US CATEGORY KI MOVIES):
-                const cleanTarget = String(window.activeHomeCategory || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
-
-                const filteredMovies = allM.filter(m => {
-                    if (!m) return false;
-                    const mCat = String(m.category || '').toLowerCase().trim().replace(/[^a-z0-9]/g, '');
-                    return (mCat === cleanTarget) || mCat.includes(cleanTarget) || cleanTarget.includes(mCat);
-                });
-
-                const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(filteredMovies) : filteredMovies;
-
-                if (cleanList.length > 0) {
-                    html += `
-                        <div class="home-movie-section" style="display:block;">
-                            <div class="section-header">
-                                <div class="section-title">${window.activeHomeCategory}</div>
-                                <div class="view-all-btn" onclick="window.openViewAll('${String(window.activeHomeCategory).replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right"></i></div>
-                            </div>
-                            <div class="movie-scroll" style="display:flex;">
-                                ${cleanList.map(m => window.renderMovieCard(m)).join('')}
-                            </div>
-                        </div>`;
-                } else {
-                    html += `
-                        <div style="text-align:center; padding:50px 15px; color:#8b8f9e;">
-                            <svg viewBox="0 0 24 24" style="width:38px; height:38px; fill:none; stroke:#555; stroke-width:1.8; margin-bottom:8px;"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
-                            <p style="margin:0; font-size:12.5px; font-weight:700; color:#888;">Is category mein jald naya content add hoga.</p>
-                        </div>`;
-                }
             }
 
-            // HTML ko ek hi jhatkay mein render karein (Zero Crash / Zero Black Void)
-            sec.innerHTML = html;
+            if (window.allMovies && window.allMovies.length > 0) {
+                window.allMovies.forEach(m => {
+                    if (!m) return;
+                    const cName = (m.category || 'Trending Movies').trim();
+                    const cKey = cName.toLowerCase();
+                    if (!catMap[cKey]) catMap[cKey] = { name: cName, limit: window.globalLimit, movies: [] };
+                    catMap[cKey].movies.push(m);
+                });
+            }
 
-            // Categories Bar Update
-            const currentCatNames = (window.categories || []).map(c => typeof c === 'object' ? c.name : c).filter(Boolean);
-            if (currentCatNames.length > 0 && typeof window.renderHomeCategoryBar === 'function') {
-                window.renderHomeCategoryBar(currentCatNames);
+            let renderedAny = false;
+            Object.values(catMap).forEach(cat => {
+                if (cat.movies && cat.movies.length > 0) {
+                    const lim = parseInt(cat.limit) || window.globalLimit;
+                    const cleanList = typeof window.groupMoviesBySeries === 'function' ? window.groupMoviesBySeries(cat.movies) : cat.movies;
+                    html += `
+                        <div class="home-movie-section" data-cat="${(cat.name || '').replace(/"/g, '&quot;')}" style="display:block;">
+                            <div class="section-header">
+                                <div class="section-title">${cat.name}</div>
+                                <div class="view-all-btn" onclick="window.openViewAll('${(cat.name || '').replace(/'/g, "\\'")}')">View More <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
+                            </div>
+                            <div class="movie-scroll">${cleanList.slice(0, lim).map(m => window.renderMovieCard(m)).join('')}</div>
+                        </div>`;
+                    renderedAny = true;
+                }
+            });
+
+            if (!renderedAny && window.allMovies && window.allMovies.length > 0) {
+                html += `
+                    <div class="home-movie-section" data-cat="Trending" style="display:block;">
+                        <div class="section-header"><div class="section-title">Trending Movies</div></div>
+                        <div class="movie-scroll">${window.allMovies.map(m => window.renderMovieCard(m)).join('')}</div>
+                    </div>`;
+            }
+
+            const sec = document.getElementById('homeSections');
+            if (sec && html) {
+                sec.innerHTML = html;
+                try {
+                    localStorage.setItem('mm_cached_home_html', html);
+                    localStorage.setItem('mm_instant_home_html', html);
+                } catch(e){}
+
+                const currentCatNames = Object.values(catMap).filter(cat => cat.movies && cat.movies.length > 0).map(cat => cat.name);
+                if (currentCatNames.length > 0 && typeof window.renderHomeCategoryBar === 'function') {
+                    window.renderHomeCategoryBar(currentCatNames);
+                }
+
+                if (window.activeHomeCategory && window.activeHomeCategory !== 'all') {
+                    const activePill = document.querySelector(`.home-cat-pill[onclick*="${window.activeHomeCategory}"]`);
+                    window.filterHomeCategory(window.activeHomeCategory, activePill);
+                }
             }
         };
         
