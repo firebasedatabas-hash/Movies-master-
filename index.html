@@ -5410,25 +5410,11 @@ header {
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
             if (userHasVip) return false;
 
-            const sUrl = String(targetUrl).trim();
-
-            // 📢 SPONSOR / WHATSAPP AD CLICK HANDLER
-            if (isSponsorAdUrl(sUrl)) {
-                const finalAdUrl = sUrl.startsWith('ad:') ? sUrl.slice(3).trim() : sUrl;
-                const adLink = document.createElement('a');
-                adLink.href = finalAdUrl;
-                adLink.target = '_blank';
-                adLink.rel = 'noopener noreferrer';
-                document.body.appendChild(adLink);
-                adLink.click();
-                adLink.remove();
-                return;
-            }
-            
+            const sUrl = String(s.url || '').trim();
             const sTitle = String(s.title || s.name || '').trim().toLowerCase();
             const cleanTitle = sTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
 
-            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : (JSON.parse(localStorage.getItem('mm_cached_movies_list')) || []);
+            const cachedMovies = (window.allMovies && window.allMovies.length) ? window.allMovies : window.safeJsonGet('mm_locked_movies', []);
             const matchedMovie = cachedMovies.find(m => {
                 if (!m) return false;
                 const mUrl = String(m.url || '').trim();
@@ -5787,6 +5773,20 @@ header {
             if (!targetUrl && !s) return;
 
             const sUrl = String(targetUrl).trim();
+
+            // 📢 SPONSOR / WHATSAPP AD CLICK HANDLER
+            if (isSponsorAdUrl(sUrl)) {
+                const finalAdUrl = sUrl.startsWith('ad:') ? sUrl.slice(3).trim() : sUrl;
+                const adLink = document.createElement('a');
+                adLink.href = finalAdUrl;
+                adLink.target = '_blank';
+                adLink.rel = 'noopener noreferrer';
+                document.body.appendChild(adLink);
+                adLink.click();
+                adLink.remove();
+                return;
+            }
+            
             const sTitle = String((s && (s.title || s.name)) || '').trim();
             const cleanSTitle = sTitle.toLowerCase().replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
 
