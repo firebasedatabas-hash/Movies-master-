@@ -3548,6 +3548,7 @@ header {
         </div>
 
         <div class="scrollable-content" id="liveScrollContainer">
+            <div id="liveBannerAdSlot"></div>
             <!-- 🌟 2026 NEXT-GEN LIVE TV CATEGORY CAPSULES -->
             <div class="live-cat-scroll">
                 <!-- 1. All (2026 LIVE SATELLITE RADAR BROADCAST) -->
@@ -4094,6 +4095,7 @@ header {
         window.allMovies = window.safeConvertList(window.safeJsonGet('mm_locked_movies', []));
         window.allChannels = window.safeConvertList(window.safeJsonGet('mm_locked_channels', []));
         window.sliders = window.safeConvertList(window.safeJsonGet('mm_locked_sliders', []));
+        window.allBannerAds = window.safeConvertList(window.safeJsonGet('mm_locked_banners', []));
         window.categories = window.safeConvertList(window.safeJsonGet('mm_locked_categories', []));
         window.globalLimit = parseInt(localStorage.getItem('mm_locked_limit')) || 10;
 
@@ -4443,10 +4445,12 @@ header {
                             </div>
                             <div class="view-all-btn" onclick="window.showNav('livePage')">View All <i class="fa fa-chevron-right" style="font-size:10px;"></i></div>
                         </div>
-                        <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
+                        
+                    <div class="movie-scroll" style="gap: 16px; padding-bottom: 12px;">
                             ${window.allChannels.slice(0, 10).map(c => window.renderChannelItem(c)).join('')}
                         </div>
-                    </div>`;
+                    </div>
+                    <div id="homeBannerAdSlot"></div>`;
             }
 
             // 🎬 2. MOVIES & CATEGORIES (CRASH-PROOF DATA LOADER)
@@ -4501,6 +4505,7 @@ header {
             const sec = document.getElementById('homeSections');
             if (sec && html) {
                 sec.innerHTML = html;
+                if (typeof window.renderBannerAds === 'function') window.renderBannerAds();
                 try {
                     localStorage.setItem('mm_cached_home_html', html);
                     localStorage.setItem('mm_instant_home_html', html);
@@ -4904,10 +4909,73 @@ header {
             if (maintOverlay) maintOverlay.style.display = data.maintenance ? 'flex' : 'none';
         });
 
+        let bannerRotateTimer = null;
+        let bannerCurrentIdx = 0;
+
+        window.openBannerAd = (idx) => {
+            const banners = window.allBannerAds || [];
+            const b = banners[idx];
+            if (!b || !b.url) return;
+            let u = String(b.url).trim();
+            if (u.toLowerCase().startsWith('banner:')) u = u.slice(7).trim();
+            if (!u || u === '#') return;
+            const link = document.createElement('a');
+            link.href = u;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+        };
+
+        window.renderBannerAds = () => {
+            const banners = window.allBannerAds || [];
+            const homeSlot = document.getElementById('homeBannerAdSlot');
+            const liveSlot = document.getElementById('liveBannerAdSlot');
+
+            if (!banners.length) {
+                if (homeSlot) homeSlot.innerHTML = '';
+                if (liveSlot) liveSlot.innerHTML = '';
+                if (bannerRotateTimer) { clearInterval(bannerRotateTimer); bannerRotateTimer = null; }
+                return;
+            }
+
+            const drawCurrentBanner = () => {
+                const idx = bannerCurrentIdx % banners.length;
+                const b = banners[idx];
+                const bannerHtml = `
+                    <div onclick="window.openBannerAd(${idx})" style="position:relative; width:calc(100% - 32px); max-width:540px; margin:8px auto 10px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.16); box-shadow:0 8px 24px rgba(0,0,0,0.65); cursor:pointer; background:#12141c; aspect-ratio:3.1 / 1; max-height:165px;">
+                        <img src="${b.img}" alt="Sponsored" style="width:100%; height:100%; object-fit:cover; display:block;">
+                        <div style="position:absolute; top:7px; left:9px; background:rgba(9,10,15,0.82); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:8px; font-weight:900; padding:2px 7px; border-radius:8px; letter-spacing:0.8px; backdrop-filter:blur(6px);">SPONSORED</div>
+                    </div>`;
+                if (homeSlot) homeSlot.innerHTML = bannerHtml;
+                if (liveSlot) liveSlot.innerHTML = bannerHtml;
+            };
+
+            drawCurrentBanner();
+            if (bannerRotateTimer) clearInterval(bannerRotateTimer);
+            if (banners.length > 1) {
+                bannerRotateTimer = setInterval(() => {
+                    bannerCurrentIdx = (bannerCurrentIdx + 1) % banners.length;
+                    drawCurrentBanner();
+                }, 5000);
+            }
+        };
+
+        window.renderBannerAds();
+
         onValue(ref(db, 'sliders'), (snap) => {
-            const freshSliders = window.safeConvertList(snap.val());
-            if (freshSliders.length > 0 && hasDataChanged('mm_locked_sliders', freshSliders)) {
-                window.sliders = freshSliders;
+            const allRawSliders = window.safeConvertList(snap.val());
+            const freshBanners = allRawSliders.filter(s => s && String(s.url || '').toLowerCase().trim().startsWith('banner:'));
+            const freshTopSliders = allRawSliders.filter(s => s && !String(s.url || '').toLowerCase().trim().startsWith('banner:'));
+
+            if (JSON.stringify(freshBanners) !== localStorage.getItem('mm_locked_banners')) {
+                window.allBannerAds = freshBanners;
+                try { localStorage.setItem('mm_locked_banners', JSON.stringify(freshBanners)); } catch(e){}
+                window.renderBannerAds();
+            }
+            if (freshTopSliders.length > 0 && hasDataChanged('mm_locked_sliders', freshTopSliders)) {
+                window.sliders = freshTopSliders;
                 saveFastCache();
                 initSlider();
             }
