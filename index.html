@@ -5049,7 +5049,7 @@ header {
             // 1. 📺 YOUTUBE & DAILYMOTION (FORBIDDEN-PROOF DUAL ENGINE)
             const isYt = url.includes('youtube.com') || url.includes('youtu.be');
             const isDm = url.includes('dailymotion.com') || url.includes('dai.ly');
-            const isWebEmbed = url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/');
+            const isWebEmbed = url.includes('bysewihe') || url.includes('byse.sx') || url.includes('/e/') || url.includes('mediadelivery.net');
 
             if (isYt || isDm || isWebEmbed) {
                 const iframe = document.createElement('iframe');
@@ -5410,7 +5410,21 @@ header {
             const userHasVip = typeof window.isUserVIPActive === 'function' && window.isUserVIPActive();
             if (userHasVip) return false;
 
-            const sUrl = String(s.url || '').trim();
+            const sUrl = String(targetUrl).trim();
+
+            // 📢 SPONSOR / WHATSAPP AD CLICK HANDLER
+            if (isSponsorAdUrl(sUrl)) {
+                const finalAdUrl = sUrl.startsWith('ad:') ? sUrl.slice(3).trim() : sUrl;
+                const adLink = document.createElement('a');
+                adLink.href = finalAdUrl;
+                adLink.target = '_blank';
+                adLink.rel = 'noopener noreferrer';
+                document.body.appendChild(adLink);
+                adLink.click();
+                adLink.remove();
+                return;
+            }
+            
             const sTitle = String(s.title || s.name || '').trim().toLowerCase();
             const cleanTitle = sTitle.replace(/[\-\_\(\[\{]*\s*vip\s*[\)\]\}]*/gi, '').trim();
 
@@ -5429,13 +5443,23 @@ header {
             return (s.isVip === true) || /\b(vip)\b/i.test(sTitle);
         }
 
+        function isSponsorAdUrl(url) {
+            const u = String(url || '').toLowerCase().trim();
+            if (!u) return false;
+            return u.includes('wa.me/') || u.includes('api.whatsapp.com') || u.includes('whatsapp.com') || u.includes('maps.app.goo.gl') || u.includes('google.com/maps') || u.includes('goo.gl/maps') || u.includes('facebook.com') || u.includes('instagram.com') || u.includes('tiktok.com') || u.startsWith('tel:') || u.startsWith('ad:');
+        }
+
         function getSlideCardHTML(s, realIdx) {
             if (!s) return '';
-            const isVip = checkSliderIsVip(s);
+            const isAd = isSponsorAdUrl(s.url);
+            const isVip = !isAd && checkSliderIsVip(s);
 
             return `
                 <div class="slide" onclick="window.handleSlideClick(${realIdx})">
                     <img src="${s.img}">
+                    ${isAd ? `
+                        <div style="position:absolute; top:12px; left:16px; z-index:15; background:rgba(10,12,18,0.85); border:1px solid rgba(255,255,255,0.3); color:#ffffff; font-size:8.5px; font-weight:900; padding:3px 9px; border-radius:10px; letter-spacing:0.8px; backdrop-filter:blur(8px); box-shadow:0 3px 10px rgba(0,0,0,0.7); pointer-events:none;">SPONSORED</div>
+                    ` : ''}
                     ${isVip ? `
                         <div class="card-vip-badge" style="top:14px !important; right:18px !important; z-index:15 !important;">
                             <svg viewBox="0 0 24 24" class="vip-badge-crown"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-1h14v1z"/></svg>
